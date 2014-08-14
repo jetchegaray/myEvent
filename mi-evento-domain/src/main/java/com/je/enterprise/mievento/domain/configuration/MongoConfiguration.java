@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.mongodb.MongoClient;
+import com.mongodb.WriteConcern;
 
 
 @Configuration
@@ -24,6 +25,7 @@ public class MongoConfiguration {
 			e.printStackTrace();
 		}
 		Datastore ds = new Morphia().createDatastore(client, DB_NAME);
+		ds.setDefaultWriteConcern(WriteConcern.FSYNCED);
 		return ds;
 		//mapPackage("at.ac.tuwien.ec.mongouk2011.entities")
 	}

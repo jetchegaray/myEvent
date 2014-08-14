@@ -1,4 +1,4 @@
-package com.je.enterprise.mievento.domain.login;
+package com.je.enterprise.mievento.domain.entity;
 
 import org.mongodb.morphia.annotations.Entity;
 
