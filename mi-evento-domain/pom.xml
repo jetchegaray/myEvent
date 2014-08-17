@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.je.enterprise</groupId>
+		<groupId>com.je.enterprise.mievento</groupId>
 		<artifactId>mi-evento</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
@@ -21,6 +21,13 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.je.enterprise.mievento</groupId>
+			<artifactId>mi-evento-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	
+	
 		<!-- Testing -->
 
 		<dependency>
@@ -68,6 +75,12 @@
 			<artifactId>morphia</artifactId>
 			<!-- See https://github.com/mongodb/morphia/releases for the latest version -->
 			<version>${morphia.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.2</version>
 		</dependency>
 
 	</dependencies>

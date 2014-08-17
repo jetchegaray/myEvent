@@ -1,21 +1,19 @@
-package com.je.enterprise.mievento.domain.entity;
+package com.je.enterprise.mievento.api.dto;
 
-import org.bson.types.ObjectId;
-import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Id;
 
-import com.je.enterprise.mievento.domain.dao.BaseEntity;
+public class User {
 
-@Entity
-public class UserEntity extends BaseEntity {
-
-	@Id
-	private ObjectId id;
 	private String mail;
 	private String nickName;
 	private String password;
 
-	public UserEntity() {
+	public User() {
+	}
+
+	public User(String mail, String nickName,String password) {
+		this.mail = mail;
+		this.nickName = nickName;
+		this.password = password;
 	}
 
 	public String getPassword() {
@@ -24,14 +22,6 @@ public class UserEntity extends BaseEntity {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public ObjectId getId() {
-		return id;
-	}
-
-	public void setId(ObjectId id) {
-		this.id = id;
 	}
 
 	public String getMail() {
