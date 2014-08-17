@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.je.enterprise</groupId>
+		<groupId>com.je.enterprise.mievento</groupId>
 		<artifactId>mi-evento</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
@@ -14,9 +14,20 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.je.enterprise</groupId>
+			<groupId>com.je.enterprise.mievento</groupId>
 			<artifactId>mi-evento-domain</artifactId>
 			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${servlet.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 	</dependencies>
 

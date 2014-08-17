@@ -1,0 +1,10 @@
+{
+  "name": "mi-evento",
+  "ignore": [
+  	"bower_components"
+  		]
+  "dependencies": {
+    "bootstrap": ">= 3.0.0",
+    "angularjs": "*"
+  }
+}
