@@ -20,7 +20,139 @@
 		<junit.version>4.11</junit.version>
 		<log4j.version>1.2.17</log4j.version>
 		<morphia.version>0.108</morphia.version>
+		<mongodb.version>2.11.2</mongodb.version>
 		<servlet.version>3.1.0</servlet.version>
 	</properties>
-	
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- Testing -->
+
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>de.flapdoodle.embed</groupId>
+				<artifactId>de.flapdoodle.embed.mongo</artifactId>
+				<version>1.45</version>
+				<scope>test</scope>
+			</dependency>
+
+			<!-- Logging -->
+
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+
+			<!-- Spring 3 dependencies -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<!-- mi evento -->
+			<dependency>
+				<groupId>com.je.enterprise.mievento</groupId>
+				<artifactId>mi-evento-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.je.enterprise.mievento</groupId>
+				<artifactId>mi-evento-domain</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<!-- JavaConfig need this library -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>${servlet.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>cglib</groupId>
+				<artifactId>cglib</artifactId>
+				<version>2.2.2</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.mongodb</groupId>
+				<artifactId>mongo-java-driver</artifactId>
+				<version>${mongodb.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.mongodb.morphia</groupId>
+				<artifactId>morphia</artifactId>
+				<!-- See https://github.com/mongodb/morphia/releases for the latest version -->
+				<version>${morphia.version}</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+	<!-- <profiles> -->
+	<!-- <profile> -->
+	<!-- <id>integration-test</id> -->
+	<!-- <activation> -->
+	<!-- <activeByDefault>true</activeByDefault> -->
+	<!-- <property> -->
+	<!-- <name>integration-test</name> -->
+	<!-- </property> -->
+	<!-- </activation> -->
+	<!-- <build> -->
+	<!-- <plugins> -->
+	<!-- <plugin> -->
+	<!-- <groupId>org.codehaus.mojo</groupId> -->
+	<!-- <artifactId>build-helper-maven-plugin</artifactId> -->
+	<!-- <version>1.8</version> -->
+	<!-- <executions> -->
+	<!-- <execution> -->
+	<!-- <id>add-test-source</id> -->
+	<!-- <phase>initialize</phase> -->
+	<!-- <goals> -->
+	<!-- <goal>add-test-source</goal> -->
+	<!-- </goals> -->
+	<!-- <configuration> -->
+	<!-- <sources> -->
+	<!-- <source>src/integration-test/java</source> -->
+	<!-- </sources> -->
+	<!-- </configuration> -->
+	<!-- </execution> -->
+	<!-- </executions> -->
+	<!-- </plugin> -->
+	<!-- </plugins> -->
+	<!-- </build> -->
+	<!-- </profile> -->
+	<!-- </profiles> -->
 </project>
