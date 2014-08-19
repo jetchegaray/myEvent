@@ -5,6 +5,7 @@ import org.mongodb.morphia.Morphia;
 
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
+import com.mongodb.WriteConcern;
 
 import de.flapdoodle.embed.mongo.MongodExecutable;
 import de.flapdoodle.embed.mongo.MongodProcess;
@@ -21,10 +22,10 @@ public class MongoClientUtilsTest {
 	private static Version DEFAULT_MONGO_VERSION = Version.V2_4_9;
 	private static String DEFAULT_MONGO_DB_NAME = "mi-evento-test";
 	private static String DEFAULT_MONGO_HOST = "127.0.0.1";
-	private static int DEFAULT_MONGO_PORT = 277119;
+	private static int DEFAULT_MONGO_PORT = 12345;
 	
-	protected MongoClient mongo;
-	protected MongodProcess mongoDaemon;
+	private MongoClient mongo;
+	private MongodProcess mongoDaemon;
 	
 	public Mongo startMongoDB() throws Exception{
 		MongodStarter runtime = MongodStarter.getDefaultInstance();
@@ -33,7 +34,7 @@ public class MongoClientUtilsTest {
 	
 		mongoDaemon = mongodExe.start();
 		mongo = new MongoClient(DEFAULT_MONGO_HOST,DEFAULT_MONGO_PORT);
-		
+		mongo.setWriteConcern(WriteConcern.FSYNC_SAFE);
 		return mongo;
 	}
 	
@@ -46,7 +47,6 @@ public class MongoClientUtilsTest {
 			mongoDaemon.stop();
 		}
 	}
-	
 	
 	public Datastore getDataStore(){
 		return new Morphia().createDatastore(mongo, DEFAULT_MONGO_DB_NAME);

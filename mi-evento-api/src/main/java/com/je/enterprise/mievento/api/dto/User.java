@@ -4,16 +4,24 @@ package com.je.enterprise.mievento.api.dto;
 public class User {
 
 	private String mail;
-	private String nickName;
 	private String password;
+	private Boolean activate;
 
 	public User() {
 	}
 
-	public User(String mail, String nickName,String password) {
+	public User(String mail,String password,Boolean activate) {
 		this.mail = mail;
-		this.nickName = nickName;
 		this.password = password;
+		this.activate = activate;
+	}
+
+	public Boolean getActivate() {
+		return activate;
+	}
+
+	public void setActivate(Boolean activate) {
+		this.activate = activate;
 	}
 
 	public String getPassword() {
@@ -32,12 +40,5 @@ public class User {
 		this.mail = mail;
 	}
 
-	public String getNickName() {
-		return nickName;
-	}
-
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
-	}
 
 }

@@ -1,19 +1,24 @@
 package com.je.enterprise.mievento.domain.entity;
 
-import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Indexed;
 
 import com.je.enterprise.mievento.domain.dao.BaseEntity;
 
-@Entity
+@Entity("Users")
 public class UserEntity extends BaseEntity {
 
-	@Id
-	private ObjectId id;
+	 @Indexed(dropDups = true, name = "userMailIndex", unique = true)
 	private String mail;
-	private String nickName;
 	private String password;
+	private boolean activate;
+	
+	
+	public UserEntity(String mail, String password, boolean activate) {
+		this.mail = mail;
+		this.password = password;
+		this.activate = activate;
+	}
 
 	public UserEntity() {
 	}
@@ -26,14 +31,6 @@ public class UserEntity extends BaseEntity {
 		this.password = password;
 	}
 
-	public ObjectId getId() {
-		return id;
-	}
-
-	public void setId(ObjectId id) {
-		this.id = id;
-	}
-
 	public String getMail() {
 		return mail;
 	}
@@ -42,12 +39,13 @@ public class UserEntity extends BaseEntity {
 		this.mail = mail;
 	}
 
-	public String getNickName() {
-		return nickName;
+	public boolean isActivate() {
+		return activate;
 	}
 
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
+	public void setActivate(boolean activate) {
+		this.activate = activate;
 	}
+
 
 }

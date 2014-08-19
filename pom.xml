@@ -20,7 +20,7 @@
 		<junit.version>4.11</junit.version>
 		<log4j.version>1.2.17</log4j.version>
 		<morphia.version>0.108</morphia.version>
-		<mongodb.version>2.11.2</mongodb.version>
+		<mongodb.version>2.12.1</mongodb.version>
 		<servlet.version>3.1.0</servlet.version>
 	</properties>
 
