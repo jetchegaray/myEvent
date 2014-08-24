@@ -36,6 +36,10 @@ public class UserService {
 		return crudHelper.getAll();
 	}
 	
+	public Boolean exists(String mail){
+		return (findByMail(mail) != null);
+	}
+	
 	public UserEntity findByMail(String mail){
 		UserDAO userDAO = (UserDAO) this.crudHelper.getDao();
 		return userDAO.findByMail(mail);

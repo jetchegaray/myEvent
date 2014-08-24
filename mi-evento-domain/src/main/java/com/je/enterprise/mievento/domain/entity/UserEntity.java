@@ -11,7 +11,7 @@ public class UserEntity extends BaseEntity {
 	 @Indexed(dropDups = true, name = "userMailIndex", unique = true)
 	private String mail;
 	private String password;
-	private boolean activate;
+	private Boolean activate;
 	
 	
 	public UserEntity(String mail, String password, boolean activate) {
@@ -39,13 +39,12 @@ public class UserEntity extends BaseEntity {
 		this.mail = mail;
 	}
 
-	public boolean isActivate() {
+	public Boolean getActivate() {
 		return activate;
 	}
 
-	public void setActivate(boolean activate) {
+	public void setActivate(Boolean activate) {
 		this.activate = activate;
 	}
-
 
 }

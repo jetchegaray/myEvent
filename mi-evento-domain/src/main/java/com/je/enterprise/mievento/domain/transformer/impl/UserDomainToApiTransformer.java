@@ -6,10 +6,11 @@ import com.je.enterprise.mievento.domain.transformer.DomainToApiTransformer;
 
 
 
-public class UserDomainToApiTransformer implements DomainToApiTransformer<UserEntity, User> {
+public class UserDomainToApiTransformer extends DomainToApiTransformer<UserEntity,User> {
 
+	@Override
 	public User transform(UserEntity userEntity) {
-		return new User(userEntity.getMail(),userEntity.getPassword(),userEntity.isActivate());
+		return new User(userEntity.getMail(),userEntity.getPassword(),true);
 	}
 	
 }
