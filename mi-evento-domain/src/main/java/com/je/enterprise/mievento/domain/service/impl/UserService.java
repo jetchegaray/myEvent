@@ -6,7 +6,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.je.enterprise.mievento.domain.dao.impl.UserDAO;
-import com.je.enterprise.mievento.domain.entity.UserEntity;
+import com.je.enterprise.mievento.domain.entity.common.UserEntity;
 import com.je.enterprise.mievento.domain.service.Service;
 import com.je.enterprise.mievento.domain.service.helper.CRUDHelper;
 

@@ -1,5 +1,8 @@
-package com.je.enterprise.mievento.domain.entity;
+package com.je.enterprise.mievento.domain.entity.common;
 
+import java.util.List;
+
+import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Indexed;
 
@@ -8,11 +11,12 @@ import com.je.enterprise.mievento.domain.dao.BaseEntity;
 @Entity("Users")
 public class UserEntity extends BaseEntity {
 
-	 @Indexed(dropDups = true, name = "userMailIndex", unique = true)
+	@Indexed(dropDups = true, name = "userMailIndex", unique = true)
 	private String mail;
 	private String password;
 	private Boolean activate;
-	
+	@Embedded
+	private List<Event> events;
 	
 	public UserEntity(String mail, String password, boolean activate) {
 		this.mail = mail;
@@ -45,6 +49,14 @@ public class UserEntity extends BaseEntity {
 
 	public void setActivate(Boolean activate) {
 		this.activate = activate;
+	}
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
 	}
 
 }
