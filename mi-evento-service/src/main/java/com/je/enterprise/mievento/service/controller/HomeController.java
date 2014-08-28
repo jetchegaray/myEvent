@@ -13,7 +13,7 @@ public class HomeController {
 
 	private static final Logger logger = Logger.getLogger(HomeController.class);
 	 
-	@RequestMapping(value= "/home",method = RequestMethod.GET)
+	@RequestMapping(value= "/",method = RequestMethod.GET)
 	public ModelAndView welcome(){
 		return new ModelAndView("index");
 	}

@@ -16,7 +16,7 @@ import org.junit.Test;
 import com.je.enterprise.mievento.domain.MongoClientUtilsTest;
 import com.je.enterprise.mievento.domain.dao.GenericDAO;
 import com.je.enterprise.mievento.domain.dao.impl.UserDAO;
-import com.je.enterprise.mievento.domain.entity.UserEntity;
+import com.je.enterprise.mievento.domain.entity.common.UserEntity;
 import com.je.enterprise.mievento.domain.service.helper.CRUDHelper;
 import com.je.enterprise.mievento.domain.service.impl.UserService;
 
@@ -55,8 +55,8 @@ public class UserServiceIntegrationTest {
 		
 		assertFalse(users.isEmpty());
 		assertEquals(2,users.size());
-		assertEquals("a@gmail.com",users.get(0).getMail());
-		assertEquals("b@gmail.com",users.get(1).getMail());
+		assertEquals("a@gmail.com",users.get(0).getEmail());
+		assertEquals("b@gmail.com",users.get(1).getEmail());
 	}
 	
 	
@@ -68,13 +68,13 @@ public class UserServiceIntegrationTest {
 		this.userService.create(user_1);
 		this.userService.create(user_2);
 		
-		UserEntity user_postStore1= this.userService.findByMail(user_1.getMail());
-		assertEquals("a@gmail.com",user_postStore1.getMail());
+		UserEntity user_postStore1= this.userService.findByMail(user_1.getEmail());
+		assertEquals("a@gmail.com",user_postStore1.getEmail());
 		assertEquals("pass1",user_postStore1.getPassword());
 		assertTrue(user_postStore1.getActivate());
 		
-		UserEntity user_postStore2= this.userService.findByMail(user_2.getMail());
-		assertEquals("b@gmail.com",user_postStore2.getMail());
+		UserEntity user_postStore2= this.userService.findByMail(user_2.getEmail());
+		assertEquals("b@gmail.com",user_postStore2.getEmail());
 		assertEquals("pass2",user_postStore2.getPassword());
 		assertFalse(user_postStore2.getActivate());
 	}

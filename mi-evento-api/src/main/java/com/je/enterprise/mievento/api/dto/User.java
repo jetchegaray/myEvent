@@ -3,15 +3,15 @@ package com.je.enterprise.mievento.api.dto;
 
 public class User {
 
-	private String mail;
+	private String email;
 	private String password;
 	private Boolean activate;
 
 	public User() {
 	}
 
-	public User(String mail,String password,Boolean activate) {
-		this.mail = mail;
+	public User(String email,String password,Boolean activate) {
+		this.email = email;
 		this.password = password;
 		this.activate = activate;
 	}
@@ -32,12 +32,12 @@ public class User {
 		this.password = password;
 	}
 
-	public String getMail() {
-		return mail;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setMail(String mail) {
-		this.mail = mail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 

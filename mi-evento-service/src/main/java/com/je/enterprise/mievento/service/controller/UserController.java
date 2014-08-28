@@ -1,8 +1,6 @@
 package com.je.enterprise.mievento.service.controller;
 
 
-import javax.management.RuntimeErrorException;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,10 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.je.enterprise.mievento.api.dto.User;
 import com.je.enterprise.mievento.domain.entity.common.UserEntity;
 import com.je.enterprise.mievento.domain.service.impl.UserService;
-import com.je.enterprise.mievento.domain.transformer.ApiToDomainTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.UserApiToDomainTransformer;
 
 @Controller
+@RequestMapping(value= "/user")
 public class UserController {
 	
 	
@@ -29,28 +27,38 @@ public class UserController {
 	@Autowired
 	private UserApiToDomainTransformer UserApiToDomainTransformer;
 	
-	@RequestMapping(value= "/login",method = RequestMethod.POST)
-	public @ResponseBody void login(@RequestBody User user){
-		
-		UserEntity entity = UserApiToDomainTransformer.transform(user);
-		
-		userService.create(entity);
-		logger.info("new User with mail"+entity.getMail());
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.PUT)
+	public String login(@RequestBody User user){
+	
+		logger.info("new User with mail"+user.getEmail());
+		UserEntity userLogin = userService.findByMail(user.getEmail());
+		return userLogin.getId().toString();
 	}
 	
-	
-	@RequestMapping(value= "/signUp",method = RequestMethod.POST)
-	public @ResponseBody void signUp(@RequestBody User user){
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.POST)
+	public void signUp(@RequestBody User user){
 		
-		if (!userService.exists(user.getMail())){
+		if (!userService.exists(user.getEmail())){
 
 			UserEntity entity = UserApiToDomainTransformer.transform(user);
 			userService.create(entity);
-			logger.info("new User with mail"+entity.getMail());
+			logger.info("new User with mail"+entity.getEmail());
 		}else{
 			throw new RuntimeException("El usuario existe");
 		}
 	}
 	
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.DELETE)
+	public void logout(String token){
+		
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public String login(){
+		return "aaa";
+	}
 	
 }
