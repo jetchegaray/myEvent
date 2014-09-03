@@ -30,35 +30,19 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.PUT)
 	public String login(@RequestBody User user){
-	
-		logger.info("new User with mail"+user.getEmail());
-		UserEntity userLogin = userService.findByMail(user.getEmail());
-		return userLogin.getId().toString();
+		return userService.login(user.getEmail(),user.getPassword());
 	}
 	
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST)
 	public void signUp(@RequestBody User user){
-		
-		if (!userService.exists(user.getEmail())){
-
-			UserEntity entity = UserApiToDomainTransformer.transform(user);
-			userService.create(entity);
-			logger.info("new User with mail"+entity.getEmail());
-		}else{
-			throw new RuntimeException("El usuario existe");
-		}
+		userService.signUp(user.getEmail(), user.getPassword());
 	}
 	
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.DELETE)
 	public void logout(String token){
 		
-	}
-	
-	@RequestMapping(method = RequestMethod.GET)
-	public String login(){
-		return "aaa";
 	}
 	
 }

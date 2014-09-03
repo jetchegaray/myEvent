@@ -17,10 +17,10 @@ public class UserDAO extends GenericDAO<UserEntity, ObjectId> {
 		super(UserEntity.class, ds);
 	}
 
-	public UserEntity findByMail(String mail) {
+	public UserEntity findByMail(String email) {
 		Query<UserEntity> query = this.createQuery().disableValidation();
 		
-		query.and(query.criteria("mail").equal(mail));
+		query.and(query.criteria("email").equal(email));
 		
 		return this.findOne(query);
 	}

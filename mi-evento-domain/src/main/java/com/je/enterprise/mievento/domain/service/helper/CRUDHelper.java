@@ -1,10 +1,8 @@
 package com.je.enterprise.mievento.domain.service.helper;
 
-import java.io.ObjectInputStream.GetField;
 import java.io.Serializable;
 import java.util.List;
 
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

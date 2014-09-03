@@ -45,11 +45,8 @@ public class UserServiceIntegrationTest {
 	
 	@Test
 	public void save(){
-		UserEntity user_1 = new UserEntity("a@gmail.com", "pass1", true);
-		UserEntity user_2 = new UserEntity("b@gmail.com", "pass2", false);
-		
-		this.userService.create(user_1);
-		this.userService.create(user_2);
+		this.userService.signUp("a@gmail.com", "pass1");
+		this.userService.signUp("b@gmail.com", "pass2");
 		
 		List<UserEntity> users = this.userService.getAll();
 		
@@ -62,18 +59,16 @@ public class UserServiceIntegrationTest {
 	
 	@Test
 	public void findByMail(){
-		UserEntity user_1 = new UserEntity("a@gmail.com", "pass1", true);
-		UserEntity user_2 = new UserEntity("b@gmail.com", "pass2", false);
 		
-		this.userService.create(user_1);
-		this.userService.create(user_2);
+		this.userService.signUp("a@gmail.com", "pass1");
+		this.userService.signUp("b@gmail.com", "pass2");
 		
-		UserEntity user_postStore1= this.userService.findByMail(user_1.getEmail());
+		UserEntity user_postStore1= this.userService.findByMail("a@gmail.com");
 		assertEquals("a@gmail.com",user_postStore1.getEmail());
 		assertEquals("pass1",user_postStore1.getPassword());
 		assertTrue(user_postStore1.getActivate());
 		
-		UserEntity user_postStore2= this.userService.findByMail(user_2.getEmail());
+		UserEntity user_postStore2= this.userService.findByMail("b@gmail.com");
 		assertEquals("b@gmail.com",user_postStore2.getEmail());
 		assertEquals("pass2",user_postStore2.getPassword());
 		assertFalse(user_postStore2.getActivate());
