@@ -2,6 +2,7 @@
 *.project
 *.orig
 *.iml
+*bower_component/
 .springBeans
 .settings/
 target/
