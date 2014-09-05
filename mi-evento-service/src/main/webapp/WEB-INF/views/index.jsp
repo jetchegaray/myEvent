@@ -10,9 +10,9 @@
 		<link rel="stylesheet" href="../css/app.css">
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
   		<script src="../bower_components/angular/angular.js"></script>
-		<script src="../bower_components/angular-resource/angular-resource.js"></script>
+  		<script src="../bower_components/angular-resource/angular-resource.js"></script>
 		<script src="../bower_components/angular-route/angular-route.js"></script>
-		<script src="../js/bootstrapApp.js"></script>
+		<script src="../bower_components/angular-cookies/angular-cookies.js"></script>
 		<script src="../js/app.js"></script>
 		<script src="../js/controllers.js"></script>
 		<script src="../js/services.js"></script>
@@ -52,10 +52,13 @@
                     </li>
                 </ul>
 	            <ul class="nav navbar-nav navbar-right">
-	            	<li id="nav-login-btn" class=""><a ng-href="http://localhost:8080/mievento/#/user/login">
-	            		<i class="glyphicon glyphicon-user"></i>Login</a>
+	            	<li id="nav-login-btn" ng-show="$root.logged_user == null"><a ng-href="http://localhost:8080/mievento/#/user/login">
+	            		Login<i class="glyphicon glyphicon-user"></i></a>
 	            	</li>
-         		</ul>
+	            	<li id="nav-login-btn" ng-show="$root.logged_user != null"><a ng-href="http://localhost:8080/mievento/#/user/login">
+	            		{{$root.logged_user}}<i class="glyphicon glyphicon-user"></i></a>
+	            	</li>
+	           </ul>
             </div>
          <!-- /.container -->
     </nav>

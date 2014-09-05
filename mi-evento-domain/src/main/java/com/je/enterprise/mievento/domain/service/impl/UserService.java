@@ -26,11 +26,11 @@ public class UserService {
 	public void signUp(String email, String password) {
 		if (findByMail(email) == null) {
 			crudHelper.create(new UserEntity(email, password, true));
+		} else {
+			throw new UserAlredyExistsException();
 		}
-		throw new UserAlredyExistsException();
 	}
 
-	
 	public String login(String mail, String password) {
 
 		UserEntity userEntity = this.findByMail(mail);
@@ -40,13 +40,12 @@ public class UserService {
 		} catch (NullPointerException ex) {
 			throw new InvalidCredentialException();
 		}
-		if (password.equalsIgnoreCase(userEntity.getPassword())){
+		if (!password.equalsIgnoreCase(userEntity.getPassword())) {
 			throw new InvalidPasswordException();
 		}
 		return userEntity.getId().toString();
 	}
 
-	
 	public UserEntity findByMail(String mail) {
 		UserDAO userDAO = (UserDAO) this.crudHelper.getDao();
 		return userDAO.findByMail(mail);
