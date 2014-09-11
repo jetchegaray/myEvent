@@ -1,14 +1,21 @@
-package com.je.enterprise.mievento.domain.entity.common;
+package com.je.enterprise.mievento.api.dto;
 
-import org.mongodb.morphia.annotations.Embedded;
 
 public class Location {
-
-	@Embedded
+	
 	private CountryCode countryCode;
 	private String province;
-	@Embedded
 	private StreetAddress streetAddress;
+	
+	public Location() {
+	}
+	
+	public Location(CountryCode countryCode, String province,
+			StreetAddress streetAddress) {
+		this.countryCode = countryCode;
+		this.province = province;
+		this.streetAddress = streetAddress;
+	}
 
 	public CountryCode getCountryCode() {
 		return countryCode;

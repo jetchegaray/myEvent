@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.je.enterprise.mievento.domain.dao.GenericDAO;
-import com.je.enterprise.mievento.domain.entity.common.UserEntity;
+import com.je.enterprise.mievento.domain.entity.common.event.UserEntity;
 
 @Repository
 public class UserDAO extends GenericDAO<UserEntity, ObjectId> {

@@ -1,4 +1,4 @@
-package com.je.enterprise.mievento.domain.entity.common;
+package com.je.enterprise.mievento.domain.entity.common.event;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class UserEntity extends BaseEntity {
 	private String password;
 	private Boolean activate;
 	@Embedded
-	private List<Event> events;
+	private List<EventEntity> events;
 	
 	public UserEntity(String email, String password, boolean activate) {
 		this.email = email;
@@ -51,11 +51,11 @@ public class UserEntity extends BaseEntity {
 		this.activate = activate;
 	}
 
-	public List<Event> getEvents() {
+	public List<EventEntity> getEvents() {
 		return events;
 	}
 
-	public void setEvents(List<Event> events) {
+	public void setEvents(List<EventEntity> events) {
 		this.events = events;
 	}
 

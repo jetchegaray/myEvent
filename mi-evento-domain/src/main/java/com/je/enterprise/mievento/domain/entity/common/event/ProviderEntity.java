@@ -1,24 +1,47 @@
-package com.je.enterprise.mievento.domain.entity.common;
+package com.je.enterprise.mievento.domain.entity.common.event;
 
 import java.math.BigDecimal;
 
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 
+import com.je.enterprise.mievento.api.dto.ProviderType;
 import com.je.enterprise.mievento.domain.dao.BaseEntity;
+import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
 
 @Entity("Providers")
-public class Provider extends BaseEntity {
+public class ProviderEntity extends BaseEntity {
 
 	private String businessName;
 	private String description;
 	@Embedded
-	private Location location;
+	private LocationEntity location;
 	private String email;
 	private String cellPhone;
 	private String phone;
 	private BigDecimal price;
 	private BigDecimal estimatedPrice;
+	private String picture;
+	private ProviderType providerType;
+	
+	public ProviderEntity() {
+	}
+
+	public ProviderEntity(String businessName, String description,
+			LocationEntity location, String email, String cellPhone, String phone,
+			BigDecimal price, BigDecimal estimatedPrice,String picture,ProviderType providerType) {
+		this.businessName = businessName;
+		this.description = description;
+		this.location = location;
+		this.email = email;
+		this.cellPhone = cellPhone;
+		this.phone = phone;
+		this.price = price;
+		this.estimatedPrice = estimatedPrice;
+		this.picture = picture;
+	}
+
+
 
 	public String getBusinessName() {
 		return businessName;
@@ -60,11 +83,11 @@ public class Provider extends BaseEntity {
 		this.phone = phone;
 	}
 
-	public Location getLocation() {
+	public LocationEntity getLocation() {
 		return location;
 	}
 
-	public void setLocation(Location location) {
+	public void setLocation(LocationEntity location) {
 		this.location = location;
 	}
 
@@ -82,6 +105,22 @@ public class Provider extends BaseEntity {
 
 	public void setEstimatedPrice(BigDecimal estimatedPrice) {
 		this.estimatedPrice = estimatedPrice;
+	}
+
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+
+	public ProviderType getProviderType() {
+		return providerType;
+	}
+
+	public void setProviderType(ProviderType providerType) {
+		this.providerType = providerType;
 	}
 
 }

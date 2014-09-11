@@ -3,10 +3,9 @@ package com.je.enterprise.mievento.domain.transformer;
 import java.util.List;
 
 import com.google.common.collect.Lists;
-import com.je.enterprise.mievento.domain.dao.BaseEntity;
 
 
-public abstract class DomainToApiTransformer<D extends BaseEntity, A> {
+public abstract class DomainToApiTransformer<D , A> {
 
 	abstract public A transform(D domainObject);
 	

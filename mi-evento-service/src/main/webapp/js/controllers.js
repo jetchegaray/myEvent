@@ -22,3 +22,28 @@ mieventoControllers.controller("signUpController", [ "$scope", "$routeParams","$
 				});
 			}
 		} ]);
+
+
+mieventoControllers.controller("providerController",["$scope","$routeParams","$location",
+         "providerService",function($scope,$routeParams,$location,providerService){
+			providerService.getAllTypes(function(data){
+				$scope.types = data;
+			});
+			
+			$scope.getProviderByType = function(type){
+				providerService.getByType({ pathParams: type },function(providers){
+					$scope.providers = providers
+					$location.path(PROVIDER_PATH);
+				})
+			};
+}]);
+
+
+mieventoControllers.controller("carouselCtrl",["$scope",function($scope) {
+	  $scope.interval = 5000;
+	  var slides = $scope.slides = [];
+	  for (var i=1; i<=5; i++) {
+		    slides.push({image : "../img/carusel_"+i+".jpg",
+		    text : "Cualquier Clase de Eventos Sociales"});
+	  }
+}]);

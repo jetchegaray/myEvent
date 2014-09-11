@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.je.enterprise.mievento.api.dto.User;
-import com.je.enterprise.mievento.domain.entity.common.UserEntity;
 import com.je.enterprise.mievento.domain.service.impl.UserService;
-import com.je.enterprise.mievento.domain.transformer.impl.UserApiToDomainTransformer;
 
 @Controller
 @RequestMapping(value= "/user")
@@ -23,9 +21,6 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
-	
-	@Autowired
-	private UserApiToDomainTransformer UserApiToDomainTransformer;
 	
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.PUT)

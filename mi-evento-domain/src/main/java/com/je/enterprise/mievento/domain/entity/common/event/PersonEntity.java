@@ -1,11 +1,21 @@
-package com.je.enterprise.mievento.domain.entity.common;
+package com.je.enterprise.mievento.domain.entity.common.event;
 
-public class Person {
+import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
+
+public class PersonEntity {
 
 	private String firstName;
 	private String lastName;
 	private String email;
-	private Location location;
+	private LocationEntity location;
+
+	public PersonEntity(String firstName, String lastName, String email,
+			LocationEntity location) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.location = location;
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -31,11 +41,11 @@ public class Person {
 		this.email = email;
 	}
 
-	public Location getLocation() {
+	public LocationEntity getLocation() {
 		return location;
 	}
 
-	public void setLocation(Location location) {
+	public void setLocation(LocationEntity location) {
 		this.location = location;
 	}
 

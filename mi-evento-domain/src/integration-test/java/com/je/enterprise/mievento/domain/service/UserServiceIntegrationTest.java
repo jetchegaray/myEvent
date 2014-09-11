@@ -16,7 +16,7 @@ import org.junit.Test;
 import com.je.enterprise.mievento.domain.MongoClientUtilsTest;
 import com.je.enterprise.mievento.domain.dao.GenericDAO;
 import com.je.enterprise.mievento.domain.dao.impl.UserDAO;
-import com.je.enterprise.mievento.domain.entity.common.UserEntity;
+import com.je.enterprise.mievento.domain.entity.common.event.UserEntity;
 import com.je.enterprise.mievento.domain.service.helper.CRUDHelper;
 import com.je.enterprise.mievento.domain.service.impl.UserService;
 
@@ -39,7 +39,7 @@ public class UserServiceIntegrationTest {
 	@Before
 	public void setUp() throws Exception{
 		mongoClientUtilsTest.getCleanMongoDB();
-		GenericDAO<UserEntity, ObjectId> userDAO = new UserDAO(mongoClientUtilsTest.getDataStore());
+		UserDAO userDAO = new UserDAO(mongoClientUtilsTest.getDataStore());
 		this.userService = new UserService(new CRUDHelper<UserEntity, ObjectId>(userDAO));
 	}
 	

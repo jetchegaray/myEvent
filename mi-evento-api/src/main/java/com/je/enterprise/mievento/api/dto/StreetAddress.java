@@ -1,4 +1,4 @@
-package com.je.enterprise.mievento.domain.entity.common;
+package com.je.enterprise.mievento.api.dto;
 
 public class StreetAddress {
 
@@ -6,6 +6,18 @@ public class StreetAddress {
 	private String number;
 	private String additionalInfo;
 	private String neighborhood;
+
+	
+	public StreetAddress() {
+	}
+	
+	public StreetAddress(String street, String number, String additionalInfo,
+			String neighborhood) {
+		this.street = street;
+		this.number = number;
+		this.additionalInfo = additionalInfo;
+		this.neighborhood = neighborhood;
+	}
 
 	public String getStreet() {
 		return street;

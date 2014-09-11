@@ -5,7 +5,7 @@ import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Version;
 
-public class BaseEntity {
+public class BaseEntity{
 	
 	@Id
     @Property("id")
