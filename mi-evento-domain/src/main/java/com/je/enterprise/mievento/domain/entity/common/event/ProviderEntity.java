@@ -5,11 +5,10 @@ import java.math.BigDecimal;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 
-import com.je.enterprise.mievento.api.dto.ProviderType;
 import com.je.enterprise.mievento.domain.dao.BaseEntity;
 import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
 
-@Entity("Providers")
+@Entity("providers")
 public class ProviderEntity extends BaseEntity {
 
 	private String businessName;
@@ -39,6 +38,7 @@ public class ProviderEntity extends BaseEntity {
 		this.price = price;
 		this.estimatedPrice = estimatedPrice;
 		this.picture = picture;
+		this.providerType = providerType;
 	}
 
 

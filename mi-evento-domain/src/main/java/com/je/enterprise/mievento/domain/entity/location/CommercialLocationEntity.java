@@ -10,9 +10,9 @@ public class CommercialLocationEntity extends LocationEntity{
 	public CommercialLocationEntity() {
 	}
 
-	public CommercialLocationEntity(String placeName,CountryCode countryCode, String province,
+	public CommercialLocationEntity(String placeName,CountryCode countryCode, String province,String city,
 			StreetAddressEntity streetAddress) {
-		super(countryCode, province, streetAddress);
+		super(countryCode, province,city, streetAddress);
 		this.placeName = placeName;
 	}
 

@@ -7,7 +7,6 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.je.enterprise.mievento.api.dto.ProviderType;
 import com.je.enterprise.mievento.domain.dao.impl.ProviderDAO;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
 import com.je.enterprise.mievento.domain.exception.NotExistanceProvidersException;
@@ -47,4 +46,5 @@ public class ProviderService {
 			throw new NotExistanceProvidersException();
 		}
 	}
+
 }

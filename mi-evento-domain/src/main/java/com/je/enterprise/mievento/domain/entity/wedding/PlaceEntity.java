@@ -2,8 +2,8 @@ package com.je.enterprise.mievento.domain.entity.wedding;
 
 import java.math.BigDecimal;
 
-import com.je.enterprise.mievento.api.dto.ProviderType;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
+import com.je.enterprise.mievento.domain.entity.common.event.ProviderType;
 import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
 
 public class PlaceEntity extends ProviderEntity {

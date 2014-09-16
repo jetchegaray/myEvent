@@ -2,12 +2,12 @@ package com.je.enterprise.mievento.domain.configuration;
 
 import java.net.UnknownHostException;
 
-
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.je.enterprise.mievento.domain.utils.BigDecimalConverter;
 import com.mongodb.MongoClient;
 import com.mongodb.WriteConcern;
 
@@ -25,7 +25,11 @@ public class MongoConfiguration {
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
-		Datastore ds = new Morphia().createDatastore(client, DB_NAME);
+		
+		Morphia morphia = new Morphia();
+		morphia.getMapper().getConverters().addConverter(BigDecimalConverter.class);
+		
+		Datastore ds = morphia.createDatastore(client, DB_NAME);
 		ds.setDefaultWriteConcern(WriteConcern.FSYNCED);
 		return ds;
 		//mapPackage("at.ac.tuwien.ec.mongouk2011.entities")

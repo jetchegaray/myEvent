@@ -40,7 +40,7 @@ public class UserServiceIntegrationTest {
 	public void setUp() throws Exception{
 		mongoClientUtilsTest.getCleanMongoDB();
 		UserDAO userDAO = new UserDAO(mongoClientUtilsTest.getDataStore());
-		this.userService = new UserService(new CRUDHelper<UserEntity, ObjectId>(userDAO));
+		this.userService = new UserService(new CRUDHelper<UserEntity, ObjectId>(userDAO),null);
 	}
 	
 	@Test

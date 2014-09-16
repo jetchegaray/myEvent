@@ -9,16 +9,18 @@ public class LocationEntity {
 	@Embedded
 	private CountryCode countryCode;
 	private String province;
+	private String city;
 	@Embedded
 	private StreetAddressEntity streetAddress;
 	
 	public LocationEntity() {
 	}
 	
-	public LocationEntity(CountryCode countryCode, String province,
+	public LocationEntity(CountryCode countryCode, String province,String city,
 			StreetAddressEntity streetAddress) {
 		this.countryCode = countryCode;
 		this.province = province;
+		this.city = city;
 		this.streetAddress = streetAddress;
 	}
 
@@ -44,6 +46,14 @@ public class LocationEntity {
 
 	public void setStreetAddress(StreetAddressEntity streetAddress) {
 		this.streetAddress = streetAddress;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 }

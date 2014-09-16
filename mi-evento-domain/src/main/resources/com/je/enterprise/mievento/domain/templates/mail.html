@@ -1,16 +1,22 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<html>
-
+<raw>
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title>Mi Evento</title>
+    <title th:remove="all">Template for HTML email with inline image</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   </head>
-	
   <body>
-  	
-  	<h2>Tu Nueva Clave es <p th:text="#{newPassword}"></p></h2>
+  	<p><span>Hola !</span></p>
   
+  	<p>Tu nueva clave es : <span th:text="${newPassword}">!</span></p>
+  
+  	<p>
+      <img src="sample.png" th:src="'cid:' + ${imageResourceName}" />
+    </p>
+    <p>
+      Saludos, <br />
+      <em>El Equipo de Mi-Evento</em>
+    </p>
   </body>
-
 </html>
+</raw>

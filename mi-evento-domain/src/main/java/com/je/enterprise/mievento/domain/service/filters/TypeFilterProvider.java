@@ -2,9 +2,9 @@ package com.je.enterprise.mievento.domain.service.filters;
 
 import org.mongodb.morphia.query.Query;
 
-import com.je.enterprise.mievento.api.dto.ProviderType;
 import com.je.enterprise.mievento.domain.dao.impl.ProviderDAO;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
+import com.je.enterprise.mievento.domain.entity.common.event.ProviderType;
 
 public class TypeFilterProvider implements CriteriaFilterProvider{
 	

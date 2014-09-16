@@ -16,12 +16,12 @@ import org.junit.Test;
 
 import com.google.common.collect.Lists;
 import com.je.enterprise.mievento.api.dto.CountryCode;
-import com.je.enterprise.mievento.api.dto.ProviderType;
 import com.je.enterprise.mievento.domain.MongoClientUtilsTest;
 import com.je.enterprise.mievento.domain.dao.impl.UserDAO;
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.PersonEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
+import com.je.enterprise.mievento.domain.entity.common.event.ProviderType;
 import com.je.enterprise.mievento.domain.entity.common.event.UserEntity;
 import com.je.enterprise.mievento.domain.entity.location.CommercialLocationEntity;
 import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
@@ -52,7 +52,7 @@ public class AllEntitiesServiceIntegrationTest {
 	public void setUp() throws Exception{
 		mongoClientUtilsTest.getCleanMongoDB();
 		UserDAO userDAO = new UserDAO(mongoClientUtilsTest.getDataStore());
-		this.userService = new UserService(new CRUDHelper<UserEntity, ObjectId>(userDAO));
+		this.userService = new UserService(new CRUDHelper<UserEntity, ObjectId>(userDAO),null);
 	}
 	
 	@Test
@@ -86,27 +86,27 @@ public class AllEntitiesServiceIntegrationTest {
 		wedding.setEventDate(DateTime.now().plusWeeks(20).toDate());
 		wedding.setBudget(BigDecimal.TEN);
 		
-		LocationEntity locationHusband = new LocationEntity(CountryCode.AR,"Bs As",new StreetAddressEntity("callea", "1", null, "Palermo"));
+		LocationEntity locationHusband = new LocationEntity(CountryCode.AR,"CABA","Bs As",new StreetAddressEntity("callea", "1", null, "Palermo"));
 		PersonEntity husband = new PersonEntity("JJ","HH","h@gmail.com",locationHusband);
 		PersonEntity wife = new PersonEntity("JJ","HH","h@gmail.com",locationHusband);
 	
 		wedding.setHusband(husband);
 		wedding.setWife(wife);
 		
-		LocationEntity locationWedding = new LocationEntity(CountryCode.AR,"Bs As",new StreetAddressEntity("calleZ", "14", null, "Recoleta"));
+		LocationEntity locationWedding = new LocationEntity(CountryCode.AR,"CABA","Bs As",new StreetAddressEntity("calleZ", "14", null, "Recoleta"));
 		wedding.setPlace(new PlaceEntity("Salon Pueyrredon", "El mejor salon de todos loco.Rompermos todo", locationWedding, "salonP@gmail.com", "156545787", "01144578954", BigDecimal.ONE, BigDecimal.TEN, BigDecimal.valueOf(250), BigDecimal.valueOf(19), BigDecimal.valueOf(75),"http://picture2",ProviderType.WEDDING_HALL));
 		wedding.setGuests(Lists.<PersonEntity>newArrayList(new PersonEntity("Guest","1","g1@gmail.com",locationHusband),new PersonEntity("Guest","2","g2@gmail.com",locationHusband)));
 		
-		wedding.setPresents(Lists.<PresentEntity>newArrayList(new PresentEntity("Vajilla", false,new CommercialLocationEntity("Falabella",CountryCode.AR,"Bs As",new StreetAddressEntity("callePresent", "14", null, "Recoleta")))));
+		wedding.setPresents(Lists.<PresentEntity>newArrayList(new PresentEntity("Vajilla", false,new CommercialLocationEntity("Falabella",CountryCode.AR,"CABA","Bs As",new StreetAddressEntity("callePresent", "14", null, "Recoleta")))));
 		wedding.setProviders(Lists.<ProviderEntity>newArrayList());
 		
-		LocationEntity locationFotografo = new LocationEntity(CountryCode.AR,"Bs As",new StreetAddressEntity("calleZ", "14", null, "Recoleta"));
+		LocationEntity locationFotografo = new LocationEntity(CountryCode.AR,"CABA","Bs As",new StreetAddressEntity("calleZ", "14", null, "Recoleta"));
 		wedding.getProviders().add(new ProviderEntity("Fotografo Carlitox", "Carlitox HOOO", locationFotografo, "Fc@gmail.com", "15548798","454879865", BigDecimal.ONE, BigDecimal.TEN,"http://image1",ProviderType.PHOTOGRAPHER));
 		
 		user.getEvents().add(wedding);
 		
 		
-		CommercialLocationEntity locationEntregaTPFinal = new CommercialLocationEntity("Facultad Ingenieria",CountryCode.AR,"Bs As",new StreetAddressEntity("Paseo Coloon", "750", "esquina Independencia", "San Telmo"));
+		CommercialLocationEntity locationEntregaTPFinal = new CommercialLocationEntity("Facultad Ingenieria",CountryCode.AR,"CABA","Bs As",new StreetAddressEntity("Paseo Coloon", "750", "esquina Independencia", "San Telmo"));
 		List<PersonEntity> guestsTP = Lists.<PersonEntity>newArrayList(new PersonEntity("mama","etche","mama@gmail.com",locationHusband),new PersonEntity("Abu","etche","abu@gmail.com",locationHusband));
 		EventEntity miJura = new EventEntity("Jura Ingeniero",DateTime.now().plusWeeks(10).toDate(),locationEntregaTPFinal,guestsTP);
 		
