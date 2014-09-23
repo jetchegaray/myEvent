@@ -5,15 +5,17 @@ public class Location {
 	
 	private CountryCode countryCode;
 	private String province;
+	private String city;
 	private StreetAddress streetAddress;
 	
 	public Location() {
 	}
 	
-	public Location(CountryCode countryCode, String province,
+	public Location(CountryCode countryCode, String province,String city,
 			StreetAddress streetAddress) {
 		this.countryCode = countryCode;
 		this.province = province;
+		this.city = city;
 		this.streetAddress = streetAddress;
 	}
 
@@ -39,6 +41,14 @@ public class Location {
 
 	public void setStreetAddress(StreetAddress streetAddress) {
 		this.streetAddress = streetAddress;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 }

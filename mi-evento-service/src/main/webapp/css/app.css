@@ -11,10 +11,14 @@
     }
 }
 
+.omb_login{
+	margin-bottom: 10%;
+}
+
 .omb_login .omb_authTitle {
     text-align: center;
 	line-height: 300%;
-	padding-top: 15%;
+	padding-top: 2%;
 }
 	
 .omb_login .omb_socialButtons a {
@@ -54,13 +58,15 @@
 	background-color: white;
 	width: 3em;
 	text-align: center;
+	padding-bottom: 2%;
 }			
 
 .omb_login .omb_loginForm .input-group.i {
 	width: 2em;
 }
-.omb_login .omb_loginForm  .help-block {
-    color: red;
+
+.omb_login .omb_loginForm .input-group {
+	margin-bottom: 2%;
 }
 
 	
@@ -104,4 +110,35 @@
   letter-spacing: -1px;
 }
 
+/** FOOTER */
 
+.line {
+	background-color: #cdcdcd;
+	height: 1px;
+	margin-top: 0px !important;
+	margin-bottom: 0px !important;
+}
+
+/** PROVIDERS **/
+
+.providerElement .container{
+	margin-bottom: 5%;
+}
+
+.providerElement .oneElement{
+	border:solid 2px #D4D8D1;
+	padding: 5px;
+	margin-bottom: 2%;
+}
+
+.providerElement .media-body{
+	margin-bottom: 5%;
+}
+
+.providerElement .media-body .description{
+	margin-top: 3%;
+}
+
+.providerElement .price{
+	border-right: 5px grey;
+}

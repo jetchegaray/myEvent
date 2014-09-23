@@ -3,6 +3,7 @@ package com.je.enterprise.mievento.service.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,7 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.PUT)
 	public String login(@RequestBody User user){
-		return userService.login(user.getEmail(),user.getPassword());
+			return userService.login(user.getEmail(),user.getPassword());
 	}
 	
 	@ResponseBody
@@ -38,6 +39,12 @@ public class UserController {
 	@RequestMapping(method = RequestMethod.DELETE)
 	public void logout(String token){
 		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/email",method = RequestMethod.PUT)
+	public void forgottenPassword(@RequestBody User user){
+		this.userService.sendMail(user.getEmail());
 	}
 	
 }

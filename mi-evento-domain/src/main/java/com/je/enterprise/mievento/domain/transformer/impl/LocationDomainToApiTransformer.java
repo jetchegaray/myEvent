@@ -21,7 +21,7 @@ public class LocationDomainToApiTransformer extends DomainToApiTransformer<Locat
 	@Override
 	public Location transform(LocationEntity domainObject) {
 		StreetAddress streetAddress = streetAddressDomainToApiTransformer.transform(domainObject.getStreetAddress());
-		return new Location(domainObject.getCountryCode(),domainObject.getProvince() , streetAddress);
+		return new Location(domainObject.getCountryCode(),domainObject.getProvince() ,domainObject.getCity(), streetAddress);
 	}
 	
 }

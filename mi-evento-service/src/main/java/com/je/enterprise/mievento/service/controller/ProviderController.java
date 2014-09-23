@@ -9,11 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.je.enterprise.mievento.api.dto.Provider;
-import com.je.enterprise.mievento.api.dto.ProviderType;
+import com.je.enterprise.mievento.domain.entity.common.event.ProviderType;
 import com.je.enterprise.mievento.domain.service.filters.TypeFilterProvider;
 import com.je.enterprise.mievento.domain.service.impl.ProviderService;
 import com.je.enterprise.mievento.domain.transformer.impl.ProviderDomainToApiTransformer;
@@ -47,7 +46,8 @@ public class ProviderController {
 	@RequestMapping(value={"/byType/{type}"},method = RequestMethod.GET)
 	public List<Provider> getByType(@PathVariable("type") String type){
 		ProviderType providerType = ProviderType.getByName(type);
-		return providerDomainToApiTransformer.transform(providerService.getBy(new TypeFilterProvider(providerType)));
+		List<Provider> providers = providerDomainToApiTransformer.transform(providerService.getBy(new TypeFilterProvider(providerType)));
+		return providers;
 	}
 	
 	

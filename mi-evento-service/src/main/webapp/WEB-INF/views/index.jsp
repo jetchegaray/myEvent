@@ -8,19 +8,36 @@
 <meta name="author" content="">
 
 <title>MiEvento</title>
+
+<!-- ********************** Styles ********************** -->
 <link rel="stylesheet"
 	href="../bower_components/bootstrap/dist/css/bootstrap.css">
 <link rel="stylesheet" href="../css/app.css">
 <link
 	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
 	rel="stylesheet">
+
+<!-- ********************** Components ********************** -->
 <script src="../bower_components/angular/angular.js"></script>
 <script src="../bower_components/angular-resource/angular-resource.js"></script>
 <script src="../bower_components/angular-route/angular-route.js"></script>
 <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
 <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
+<!-- ********************** angular app ********************** -->
+
 <script src="../js/app.js"></script>
-<script src="../js/controllers.js"></script>
+<script src="../js/routes.js"></script>
+
+<!-- ********************** controllers ********************** -->
+
+<script src="../js/controllers/providerControllers.js"></script>
+<script src="../js/controllers/userControllers.js"></script>
+
+
+
+
 <script src="../js/services.js"></script>
 <script src="../js/filters.js"></script>
 <script src="../js/directives.js"></script>
@@ -58,20 +75,18 @@
 					<li><a class="page-scroll" href="#about">Eventos</a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown">Servicios<span class="caret"></span></a>
-							
-							<ul class="dropdown-menu" role="menu" ng-controller="providerController">
-								<li ng-repeat="type in types | orderBy:+type">
-									<a href="#" ng-click="getProviderByType(type)">{{type}}</a>
-								</li>
-							</ul>		
-					</li>
+
+						<ul class="dropdown-menu" role="menu"
+							ng-controller="providerTypeController">
+							<li ng-repeat="type in types | orderBy:+type"><a
+								href ng-click="toProviderByType(type)">{{type}}</a></li>
+						</ul></li>
 					<li><a class="page-scroll" href="#contact">Contacto</a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">Nuevo<span class="caret"></span></a>
+						data-toggle="dropdown">Mira lo nuevo<span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">Casamientos</a></li>
-							<li><a href="#">Cumplea&ntilde;os</a></li>
-							<li><a href="#">Fiestas</a></li>
+							<li><a href="#eventTypes">Que Eventos puedo crear ?</a></li>
+							<li><a href="#features">Como organizar mis eventos ?</a></li>
 							<li class="divider"></li>
 							<li class="dropdown-header">Proximamente</li>
 							<li><a href="#">Recitales</a></li>
@@ -90,9 +105,15 @@
 			</div>
 			<!-- /.container -->
 		</nav>
+		<div class="container">
+			<div ng-show="$root.alert.show">
+				<alert type="$root.alert.type" close="$root.closeAlert()">{{$root.alert.msg}}</alert>
+			</div>
+		</div>
 		<div class="container" ng-view></div>
-			<!-- FOOTER -->
+		<!-- FOOTER -->
 		<footer class="container">
+			<div class="row omb_row-sm-offset-3 line"></div>
 			<p class="pull-right">
 				<a href="#">Back to top</a>
 			</p>

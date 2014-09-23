@@ -25,14 +25,14 @@ public class UserService {
 	private CRUDHelper<UserEntity, ObjectId> crudHelper;
 	private MailService mailService;
 	private static final Logger logger = Logger.getLogger(UserService.class);
-	
 
 	@Autowired
-	public UserService(CRUDHelper<UserEntity, ObjectId> crudHelperUser,MailService mailService) {
+	public UserService(CRUDHelper<UserEntity, ObjectId> crudHelperUser,
+			MailService mailService) {
 		this.crudHelper = crudHelperUser;
 		this.mailService = mailService;
 	}
-	
+
 	public void signUp(String email, String password) {
 		if (findByMail(email) == null) {
 			crudHelper.create(new UserEntity(email, password, true));
@@ -54,8 +54,7 @@ public class UserService {
 		}
 		return userEntity.getId().toString();
 	}
-	
-		
+
 	public UserEntity findByMail(String mail) {
 		UserDAO userDAO = (UserDAO) this.crudHelper.getDao();
 		return userDAO.findByMail(mail);
@@ -64,12 +63,12 @@ public class UserService {
 	public List<UserEntity> getAll() {
 		return crudHelper.getAll();
 	}
-	
-	public void update(UserEntity user){
+
+	public void update(UserEntity user) {
 		crudHelper.update(user);
 	}
-	
-	public void delete(UserEntity user){
+
+	public void delete(UserEntity user) {
 		UserEntity userEntity = this.findByMail(user.getEmail());
 		try {
 			Validate.notNull(userEntity);
@@ -80,23 +79,15 @@ public class UserService {
 		crudHelper.delete(userEntity.getId());
 	}
 
-	
 	public void sendMail(String email) {
 		UserEntity userEntity = this.findByMail(email);
-		
+
 		String newPassword = RandomStringUtils.randomAlphanumeric(12);
 		userEntity.setPassword(newPassword);
 		userEntity.setActivate(false);
 		this.update(userEntity);
-		
-		try {
-			this.mailService.send(userEntity);
-		} catch (MessagingException e) {
-			//TODO convertir a una exception propia.	
-			logger.info(e.getMessage());
-			
-		}
+
+		this.mailService.send(userEntity);
 	}
-	
 
 }
