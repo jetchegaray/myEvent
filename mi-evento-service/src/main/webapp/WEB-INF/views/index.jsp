@@ -72,7 +72,7 @@
 					<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
 					<li class="hidden"><a class="page-scroll" href="#page-top"></a>
 					</li>
-					<li><a class="page-scroll" href="#about">Eventos</a></li>
+					<li><a class="page-scroll" href="">Eventos</a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown">Servicios<span class="caret"></span></a>
 

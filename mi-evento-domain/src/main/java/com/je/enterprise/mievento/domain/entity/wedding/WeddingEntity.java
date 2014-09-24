@@ -1,6 +1,7 @@
 package com.je.enterprise.mievento.domain.entity.wedding;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 import org.mongodb.morphia.annotations.Reference;
@@ -8,6 +9,7 @@ import org.mongodb.morphia.annotations.Reference;
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.PersonEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
+import com.je.enterprise.mievento.domain.entity.location.CommercialLocationEntity;
 
 public class WeddingEntity extends EventEntity {
 
@@ -20,6 +22,24 @@ public class WeddingEntity extends EventEntity {
 	@Reference
 	private List<ProviderEntity> providers;
 
+	public WeddingEntity(){
+	}
+	
+	public WeddingEntity(String name, Date eventDate,
+			CommercialLocationEntity eventLocation, List<PersonEntity> guests,PersonEntity husband, PersonEntity wife,
+			List<PresentEntity> presents, PlaceEntity place, BigDecimal budget,
+			BigDecimal finalPrice, List<ProviderEntity> providers) {
+		super(name, eventDate, eventLocation, guests);
+		this.husband = husband;
+		this.wife = wife;
+		this.presents = presents;
+		this.place = place;
+		this.budget = budget;
+		this.finalPrice = finalPrice;
+		this.providers = providers;
+	}
+
+	
 	public PersonEntity getHusband() {
 		return husband;
 	}

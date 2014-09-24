@@ -1,17 +1,17 @@
-package com.je.enterprise.mievento.domain.entity.location;
+package com.je.enterprise.mievento.api.dto.location;
 
 import com.je.enterprise.mievento.api.dto.location.CountryCode;
 
 
-public class CommercialLocationEntity extends LocationEntity{
+public class CommercialLocation extends Location{
 
 	private String placeName;
 
-	public CommercialLocationEntity() {
+	public CommercialLocation() {
 	}
 
-	public CommercialLocationEntity(String placeName,CountryCode countryCode, String province,String city,
-			StreetAddressEntity streetAddress) {
+	public CommercialLocation(String placeName,CountryCode countryCode, String province,String city,
+			StreetAddress streetAddress) {
 		super(countryCode, province,city, streetAddress);
 		this.placeName = placeName;
 	}

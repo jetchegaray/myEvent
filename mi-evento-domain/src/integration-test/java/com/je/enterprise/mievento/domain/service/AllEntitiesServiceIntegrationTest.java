@@ -15,13 +15,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
-import com.je.enterprise.mievento.api.dto.CountryCode;
+import com.je.enterprise.mievento.api.dto.location.CountryCode;
+import com.je.enterprise.mievento.api.dto.provider.ProviderType;
 import com.je.enterprise.mievento.domain.MongoClientUtilsTest;
 import com.je.enterprise.mievento.domain.dao.impl.UserDAO;
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.PersonEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
-import com.je.enterprise.mievento.domain.entity.common.event.ProviderType;
 import com.je.enterprise.mievento.domain.entity.common.event.UserEntity;
 import com.je.enterprise.mievento.domain.entity.location.CommercialLocationEntity;
 import com.je.enterprise.mievento.domain.entity.location.LocationEntity;

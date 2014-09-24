@@ -1,6 +1,8 @@
-package com.je.enterprise.mievento.api.dto;
+package com.je.enterprise.mievento.api.dto.provider;
 
 import java.math.BigDecimal;
+
+import com.je.enterprise.mievento.api.dto.location.Location;
 
 public class Provider {
 
@@ -13,13 +15,11 @@ public class Provider {
 	private BigDecimal price;
 	private BigDecimal estimatedPrice;
 	private String picture;
-	
-	public Provider() {
-	}
+	private ProviderType providerType;
 
 	public Provider(String businessName, String description,
 			Location location, String email, String cellPhone, String phone,
-			BigDecimal price, BigDecimal estimatedPrice,String picture) {
+			BigDecimal price, BigDecimal estimatedPrice,String picture, ProviderType providerType) {
 		this.businessName = businessName;
 		this.description = description;
 		this.location = location;
@@ -103,6 +103,18 @@ public class Provider {
 
 	public void setPicture(String picture) {
 		this.picture = picture;
+	}
+
+
+
+	public ProviderType getProviderType() {
+		return providerType;
+	}
+
+
+
+	public void setProviderType(ProviderType providerType) {
+		this.providerType = providerType;
 	}
 
 }

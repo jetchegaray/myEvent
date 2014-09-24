@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.je.enterprise.mievento.api.dto.Provider;
-import com.je.enterprise.mievento.domain.entity.common.event.ProviderType;
+import com.je.enterprise.mievento.api.dto.provider.Provider;
+import com.je.enterprise.mievento.api.dto.provider.ProviderType;
 import com.je.enterprise.mievento.domain.service.filters.TypeFilterProvider;
 import com.je.enterprise.mievento.domain.service.impl.ProviderService;
 import com.je.enterprise.mievento.domain.transformer.impl.ProviderDomainToApiTransformer;

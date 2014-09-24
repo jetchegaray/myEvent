@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 
+import com.je.enterprise.mievento.api.dto.provider.ProviderType;
 import com.je.enterprise.mievento.domain.dao.BaseEntity;
 import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
 

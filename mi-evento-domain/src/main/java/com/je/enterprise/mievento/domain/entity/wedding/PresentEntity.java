@@ -1,7 +1,6 @@
 package com.je.enterprise.mievento.domain.entity.wedding;
 
 import com.je.enterprise.mievento.domain.entity.location.CommercialLocationEntity;
-import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
 
 public class PresentEntity {
 
@@ -31,7 +30,7 @@ public class PresentEntity {
 		this.credit = credit;
 	}
 
-	public LocationEntity getLocationCredit() {
+	public CommercialLocationEntity getLocationCredit() {
 		return locationCredit;
 	}
 

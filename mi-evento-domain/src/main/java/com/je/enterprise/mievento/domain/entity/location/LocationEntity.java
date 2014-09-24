@@ -2,7 +2,7 @@ package com.je.enterprise.mievento.domain.entity.location;
 
 import org.mongodb.morphia.annotations.Embedded;
 
-import com.je.enterprise.mievento.api.dto.CountryCode;
+import com.je.enterprise.mievento.api.dto.location.CountryCode;
 
 public class LocationEntity {
 

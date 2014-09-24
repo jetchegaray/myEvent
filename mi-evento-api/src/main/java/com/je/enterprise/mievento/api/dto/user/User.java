@@ -1,4 +1,8 @@
-package com.je.enterprise.mievento.api.dto;
+package com.je.enterprise.mievento.api.dto.user;
+
+import java.util.List;
+
+import com.je.enterprise.mievento.api.dto.event.Event;
 
 
 public class User {
@@ -6,14 +10,16 @@ public class User {
 	private String email;
 	private String password;
 	private Boolean activate;
-
+	private List<Event> events;
+	
 	public User() {
 	}
 
-	public User(String email,String password,Boolean activate) {
+	public User(String email,String password,Boolean activate,List<Event> events) {
 		this.email = email;
 		this.password = password;
 		this.activate = activate;
+		this.events = events;
 	}
 
 	public Boolean getActivate() {
@@ -38,6 +44,14 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
 	}
 
 

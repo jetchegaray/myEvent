@@ -1,4 +1,4 @@
-package com.je.enterprise.mievento.api.dto;
+package com.je.enterprise.mievento.api.dto.location;
 
 public class StreetAddress {
 

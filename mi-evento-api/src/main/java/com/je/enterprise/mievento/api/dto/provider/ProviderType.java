@@ -1,4 +1,4 @@
-package com.je.enterprise.mievento.domain.entity.common.event;
+package com.je.enterprise.mievento.api.dto.provider;
 
 import java.util.List;
 
