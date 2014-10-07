@@ -10,7 +10,7 @@ import com.je.enterprise.mievento.domain.entity.wedding.PlaceEntity;
 import com.je.enterprise.mievento.domain.transformer.Transformer;
 
 @Component
-public class PlaceTransformer implements Transformer<PlaceEntity, Place>{
+public class PlaceTransformer extends Transformer<PlaceEntity, Place>{
 
 	private LocationTransformer locationTransformer;
 	
@@ -23,13 +23,13 @@ public class PlaceTransformer implements Transformer<PlaceEntity, Place>{
 
 	@Override
 	public Place transformDomainToApi(PlaceEntity domainObject) {
-		Location location = locationTransformer.transformDomainToApi(domainObject.getLocation());
+		Location location = locationTransformer.transformAndValidateDomainToApi(domainObject.getLocation());
 		return new Place(domainObject.getBusinessName(), domainObject.getDescription(), location, domainObject.getEmail(), domainObject.getCellPhone(), domainObject.getPhone(), domainObject.getPrice(), domainObject.getEstimatedPrice(), domainObject.getM2(), domainObject.getEstimatedQuantityTables(), domainObject.getEstimatedQuantityPerson(), domainObject.getPicture(), domainObject.getProviderType());
 	}
 
 	@Override
 	public PlaceEntity transformApiToDomain(Place apiObject) {
-		LocationEntity locationEntity = locationTransformer.transformApiToDomain(apiObject.getLocation());
+		LocationEntity locationEntity = locationTransformer.transformAndValidateApiToDomain(apiObject.getLocation());
 		return new PlaceEntity(apiObject.getBusinessName(), apiObject.getDescription(), locationEntity, apiObject.getEmail(), apiObject.getCellPhone(), apiObject.getPhone(), apiObject.getPrice(), apiObject.getEstimatedPrice(), apiObject.getM2(), apiObject.getEstimatedQuantityTables(), apiObject.getEstimatedQuantityPerson(), apiObject.getPicture(), apiObject.getProviderType());
 	}
 

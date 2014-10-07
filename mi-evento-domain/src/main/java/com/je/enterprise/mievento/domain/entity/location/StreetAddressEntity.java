@@ -1,10 +1,12 @@
 package com.je.enterprise.mievento.domain.entity.location;
 
+import java.math.BigDecimal;
+
 
 public class StreetAddressEntity {
 
 	private String street;
-	private String number;
+	private BigDecimal number;
 	private String additionalInfo;
 	private String neighborhood;
 
@@ -12,7 +14,7 @@ public class StreetAddressEntity {
 	public StreetAddressEntity() {
 	}
 	
-	public StreetAddressEntity(String street, String number, String additionalInfo,
+	public StreetAddressEntity(String street, BigDecimal number, String additionalInfo,
 			String neighborhood) {
 		this.street = street;
 		this.number = number;
@@ -28,11 +30,11 @@ public class StreetAddressEntity {
 		this.street = street;
 	}
 
-	public String getNumber() {
+	public BigDecimal getNumber() {
 		return number;
 	}
 
-	public void setNumber(String number) {
+	public void setNumber(BigDecimal number) {
 		this.number = number;
 	}
 

@@ -10,7 +10,7 @@ import com.je.enterprise.mievento.domain.entity.wedding.PresentEntity;
 import com.je.enterprise.mievento.domain.transformer.Transformer;
 
 @Component
-public class PresentTransformer implements Transformer<PresentEntity, Present>{
+public class PresentTransformer extends Transformer<PresentEntity, Present>{
 
 	private CommercialLocationTransformer commercialLocationTransformer;
 
@@ -22,13 +22,13 @@ public class PresentTransformer implements Transformer<PresentEntity, Present>{
 
 	@Override
 	public Present transformDomainToApi(PresentEntity domainObject) {
-		CommercialLocation locationCredit = commercialLocationTransformer.transformDomainToApi(domainObject.getLocationCredit());	
+		CommercialLocation locationCredit = commercialLocationTransformer.transformAndValidateDomainToApi(domainObject.getLocationCredit());	
 		return new Present(domainObject.getType(), domainObject.getCredit(), locationCredit);
 	}
 
 	@Override
 	public PresentEntity transformApiToDomain(Present apiObject) {
-		CommercialLocationEntity locationCredit = commercialLocationTransformer.transformApiToDomain(apiObject.getLocationCredit());	
+		CommercialLocationEntity locationCredit = commercialLocationTransformer.transformAndValidateApiToDomain(apiObject.getLocationCredit());	
 		return new PresentEntity(apiObject.getType(), apiObject.getCredit(), locationCredit);
 	}
 	

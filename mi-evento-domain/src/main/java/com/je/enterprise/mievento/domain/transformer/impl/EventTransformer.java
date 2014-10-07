@@ -15,7 +15,7 @@ import com.je.enterprise.mievento.domain.transformer.Transformer;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
 
 
-public class EventTransformer implements Transformer<EventEntity, Event>{
+public class EventTransformer extends Transformer<EventEntity, Event>{
 
 	
 	private CommercialLocationTransformer commercialLocationTransformer;
@@ -31,7 +31,7 @@ public class EventTransformer implements Transformer<EventEntity, Event>{
 
 	@Override
 	public Event transformDomainToApi(EventEntity domainObject) {
-		CommercialLocation eventLocation = this.commercialLocationTransformer.transformDomainToApi(domainObject.getEventLocation());
+		CommercialLocation eventLocation = this.commercialLocationTransformer.transformAndValidateDomainToApi(domainObject.getEventLocation());
 		List<Person> guests = this.personTransformerList.transformDomainToApi(domainObject.getGuests());
 		return new Event(domainObject.getName(), domainObject.getEventDate(), eventLocation, guests);
 	}
@@ -39,9 +39,7 @@ public class EventTransformer implements Transformer<EventEntity, Event>{
 	@Override
 	public EventEntity transformApiToDomain(Event apiObject) {
 		CommercialLocationEntity eventLocationEntity = null;
-		if (apiObject.getEventLocation() != null){
-			eventLocationEntity = this.commercialLocationTransformer.transformApiToDomain(apiObject.getEventLocation());
-		}
+		eventLocationEntity = this.commercialLocationTransformer.transformAndValidateApiToDomain(apiObject.getEventLocation());
 		List<PersonEntity> guestsEntities = this.personTransformerList.transformApiToDomain(apiObject.getGuests());
 		return new EventEntity(apiObject.getName(), apiObject.getEventDate(), eventLocationEntity, guestsEntities);
 	}

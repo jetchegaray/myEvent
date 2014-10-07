@@ -9,7 +9,7 @@ import com.je.enterprise.mievento.domain.entity.location.StreetAddressEntity;
 import com.je.enterprise.mievento.domain.transformer.Transformer;
 
 @Component
-public class StreetAddressTransformer implements Transformer<StreetAddressEntity,StreetAddress> {
+public class StreetAddressTransformer extends Transformer<StreetAddressEntity,StreetAddress> {
 
 	@Override
 	public StreetAddress transformDomainToApi(StreetAddressEntity domainObject) {

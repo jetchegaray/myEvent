@@ -8,6 +8,9 @@ public class Person {
 	private String lastName;
 	private String email;
 	private Location location;
+	
+	public Person() {
+	}
 
 	public Person(String firstName, String lastName, String email,
 			Location location) {

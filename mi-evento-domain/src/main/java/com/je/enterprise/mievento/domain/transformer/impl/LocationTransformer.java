@@ -10,7 +10,7 @@ import com.je.enterprise.mievento.domain.entity.location.StreetAddressEntity;
 import com.je.enterprise.mievento.domain.transformer.Transformer;
 
 @Component
-public class LocationTransformer implements Transformer<LocationEntity,Location> {
+public class LocationTransformer extends Transformer<LocationEntity,Location> {
 
 	private StreetAddressTransformer streetAddressTransformer;
 	
@@ -21,13 +21,13 @@ public class LocationTransformer implements Transformer<LocationEntity,Location>
 	
 	@Override
 	public Location transformDomainToApi(LocationEntity domainObject) {
-		StreetAddress streetAddress = streetAddressTransformer.transformDomainToApi(domainObject.getStreetAddress());
+		StreetAddress streetAddress = streetAddressTransformer.transformAndValidateDomainToApi(domainObject.getStreetAddress());
 		return new Location(domainObject.getCountryCode(),domainObject.getProvince() ,domainObject.getCity(), streetAddress);
 	}
 
 	@Override
 	public LocationEntity transformApiToDomain(Location apiObject) {
-		StreetAddressEntity streetAddressEntity = streetAddressTransformer.transformApiToDomain(apiObject.getStreetAddress());
+		StreetAddressEntity streetAddressEntity = streetAddressTransformer.transformAndValidateApiToDomain(apiObject.getStreetAddress());
 		return new LocationEntity(apiObject.getCountryCode(),apiObject.getProvince() ,apiObject.getCity(), streetAddressEntity);
 	}
 	

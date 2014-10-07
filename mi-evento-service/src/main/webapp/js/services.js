@@ -3,11 +3,11 @@ var mieventoServices = angular.module("mieventoServices",["ngResource"]);
 mieventoServices.factory("userService",["$resource",function($resource){
 		return $resource("/mievento/user/:requestMapping",{},
 				{
-					signUp : {method: "POST"},
-					login : {method : "PUT"},
+					signUp : {method: "POST", headers: {'Content-Type': 'application/json'}},
+					login : {method : "PUT", headers: {'Content-Type': 'application/json'}},
 					logout: {method : "DELETE"},
 					forgottenPassword: {method : "PUT",params: {requestMapping : "email"}},
-					update : {method : "POST", params : {requestMapping : "update"}}
+					update : {method : "POST", params : {requestMapping : "update"}, headers: {'Content-Type': 'application/json'}}
 				})
 		}
 ]);

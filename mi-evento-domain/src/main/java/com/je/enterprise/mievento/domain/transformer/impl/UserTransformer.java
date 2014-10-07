@@ -13,7 +13,7 @@ import com.je.enterprise.mievento.domain.transformer.Transformer;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
 
 @Component
-public class UserTransformer implements Transformer<UserEntity,User> {
+public class UserTransformer extends Transformer<UserEntity,User> {
 
 	private TransformerList<EventEntity, Event> eventTransformerList;
 	

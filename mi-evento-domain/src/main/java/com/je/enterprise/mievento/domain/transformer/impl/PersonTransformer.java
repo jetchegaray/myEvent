@@ -10,7 +10,7 @@ import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
 import com.je.enterprise.mievento.domain.transformer.Transformer;
 
 @Component
-public class PersonTransformer implements Transformer<PersonEntity, Person>{
+public class PersonTransformer extends Transformer<PersonEntity, Person>{
 
 	
 	private LocationTransformer locationTransformer;
@@ -22,13 +22,13 @@ public class PersonTransformer implements Transformer<PersonEntity, Person>{
 
 	@Override
 	public Person transformDomainToApi(PersonEntity domainObject) {
-		Location  location = locationTransformer.transformDomainToApi(domainObject.getLocation()); 
+		Location  location = locationTransformer.transformAndValidateDomainToApi(domainObject.getLocation()); 
 		return new Person(domainObject.getFirstName(),domainObject.getLastName(), domainObject.getEmail(), location);
 	}
 
 	@Override
 	public PersonEntity transformApiToDomain(Person apiObject) {
-		LocationEntity  locationEntity = locationTransformer.transformApiToDomain(apiObject.getLocation()); 
+		LocationEntity  locationEntity = locationTransformer.transformAndValidateApiToDomain(apiObject.getLocation()); 
 		return new PersonEntity(apiObject.getFirstName(),apiObject.getLastName(), apiObject.getEmail(), locationEntity);
 	}
 

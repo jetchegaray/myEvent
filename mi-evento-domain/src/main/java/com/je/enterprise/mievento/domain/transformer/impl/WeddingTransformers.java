@@ -21,7 +21,7 @@ import com.je.enterprise.mievento.domain.transformer.Transformer;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
 
 @Component
-public class WeddingTransformers implements Transformer<WeddingEntity, Wedding> {
+public class WeddingTransformers extends Transformer<WeddingEntity, Wedding> {
 
 	private CommercialLocationTransformer commercialLocationTransformer;
 	private PersonTransformer personTransformer;
@@ -52,18 +52,18 @@ public class WeddingTransformers implements Transformer<WeddingEntity, Wedding> 
 	public Wedding transformDomainToApi(WeddingEntity domainObject) {
 
 		CommercialLocation eventLocation = this.commercialLocationTransformer
-				.transformDomainToApi(domainObject.getEventLocation());
+				.transformAndValidateDomainToApi(domainObject.getEventLocation());
 		List<Person> guests = this.personTransformerList
 				.transformDomainToApi(domainObject.getGuests());
 		List<Provider> providers = this.providerTransformerList
 				.transformDomainToApi(domainObject.getProviders());
 		List<Present> presents = this.presentTransformerList
 				.transformDomainToApi(domainObject.getPresents());
-		Person wife = this.personTransformer.transformDomainToApi(domainObject
+		Person wife = this.personTransformer.transformAndValidateDomainToApi(domainObject
 				.getWife());
 		Person husband = this.personTransformer
-				.transformDomainToApi(domainObject.getHusband());
-		Place place = this.placeTransformer.transformDomainToApi(domainObject
+				.transformAndValidateDomainToApi(domainObject.getHusband());
+		Place place = this.placeTransformer.transformAndValidateDomainToApi(domainObject
 				.getPlace());
 
 		return new Wedding(domainObject.getName(), domainObject.getEventDate(),
@@ -75,18 +75,18 @@ public class WeddingTransformers implements Transformer<WeddingEntity, Wedding> 
 	@Override
 	public WeddingEntity transformApiToDomain(Wedding apiObject) {
 		CommercialLocationEntity eventLocationEntity = this.commercialLocationTransformer
-				.transformApiToDomain(apiObject.getEventLocation());
+				.transformAndValidateApiToDomain(apiObject.getEventLocation());
 		List<PersonEntity> guestsEntities = this.personTransformerList
 				.transformApiToDomain(apiObject.getGuests());
 		List<ProviderEntity> providersEntities = this.providerTransformerList
 				.transformApiToDomain(apiObject.getProviders());
 		List<PresentEntity> presentsEntities = this.presentTransformerList
 				.transformApiToDomain(apiObject.getPresents());
-		PersonEntity wifeEntity = this.personTransformer.transformApiToDomain(apiObject
+		PersonEntity wifeEntity = this.personTransformer.transformAndValidateApiToDomain(apiObject
 				.getWife());
 		PersonEntity husbandEntity = this.personTransformer
-				.transformApiToDomain(apiObject.getHusband());
-		PlaceEntity placeEntity = this.placeTransformer.transformApiToDomain(apiObject
+				.transformAndValidateApiToDomain(apiObject.getHusband());
+		PlaceEntity placeEntity = this.placeTransformer.transformAndValidateApiToDomain(apiObject
 				.getPlace());
 
 		return new WeddingEntity(apiObject.getName(), apiObject.getEventDate(),
