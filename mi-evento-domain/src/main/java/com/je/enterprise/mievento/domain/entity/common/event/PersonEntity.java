@@ -1,5 +1,7 @@
 package com.je.enterprise.mievento.domain.entity.common.event;
 
+import org.mongodb.morphia.annotations.Embedded;
+
 import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
 
 public class PersonEntity {
@@ -7,7 +9,11 @@ public class PersonEntity {
 	private String firstName;
 	private String lastName;
 	private String email;
+	@Embedded
 	private LocationEntity location;
+	
+	public PersonEntity() {
+	}
 
 	public PersonEntity(String firstName, String lastName, String email,
 			LocationEntity location) {

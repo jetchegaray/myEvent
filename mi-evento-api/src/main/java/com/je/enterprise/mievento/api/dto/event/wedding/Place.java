@@ -11,6 +11,10 @@ public class Place extends Provider {
 	private BigDecimal m2;
 	private BigDecimal estimatedQuantityTables;
 	private BigDecimal estimatedQuantityPerson;
+	
+	public Place() {
+		super();
+	}
 
 	public Place(String businessName, String description, Location location,
 			String email, String cellPhone, String phone, BigDecimal price,

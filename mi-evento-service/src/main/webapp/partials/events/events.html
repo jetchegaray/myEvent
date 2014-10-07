@@ -1,10 +1,104 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 
-</body>
-</html>
+<div class="row">
+	<div class="col-sm-3 col-md-3">
+		<accordion close-others="true" class="panel">
+			<accordion-group is-open="true">
+				<accordion-heading>
+					<span class="glyphicon glyphicon-folder-close panel-info"> </span>Organize</a>
+				</accordion-heading>
+				<div class="panel-body">
+					<table class="table">
+						<tr>
+							<td><span class="glyphicon glyphicon-envelope text-primary"></span><a
+								ui-sref="eventState.guests">Invite</a></td>
+						</tr>
+						<tr>
+							<td><span class="glyphicon glyphicon-home text-success"></span><a
+								href>Place</a></td>
+						</tr>
+						<tr>
+							<td><span class="glyphicon glyphicon-gift text-success"></span><a
+								href>Gifts</a></td>
+						</tr>
+						<tr>
+							<td><span class="glyphicon glyphicon-usd text-success"></span><a
+								href>Budget</a> <span class="badge">42</span></td>
+						</tr>
+					</table>
+				</div>
+			</accordion-group>
+			<accordion-group>
+				<accordion-heading>
+					<span class="glyphicon glyphicon-pushpin panel-info"> </span>Tasks</a>
+				</accordion-heading>
+				<div class="panel-body">
+					<table class="table">
+						<tr>
+							<td><span class="glyphicon glyphicon-calendar text-success"></span><a
+								href>Calendar</a></td>
+						</tr>
+						<tr>
+							<td><span class="glyphicon glyphicon-file text-success"></span><a
+								href>Notes</a></td>
+						</tr>
+						<tr>
+							<td><span class="glyphicon glyphicon-time text-success"></span><a
+								href>Diary</a></td>
+						</tr>
+					</table>
+				</div>
+			</accordion-group> 
+			<accordion-group>
+				<accordion-heading>
+					<span class="glyphicon glyphicon-asterisk"> </span>Providers</a>
+				</accordion-heading>
+				<div class="panel-body">
+					<table class="table">
+						<tr>
+							<td><span class="glyphicon glyphicon-usd"></span><a href>Fotographers</a>
+							</td>
+						</tr>
+						<tr>
+							<td><span class="glyphicon glyphicon-user"></span><a href>Videos</a>
+							</td>
+						</tr>
+						<tr>
+							<td><span class="glyphicon glyphicon-tasks"></span><a href>Music</a>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</accordion-group> 
+			<accordion-group>
+				<accordion-heading>
+					<span class="glyphicon glyphicon-user"> </span>Account</a>
+				</accordion-heading>
+				<div class="panel-body">
+					<table class="table">
+						<tr>
+							<td><a href>Change Password</a></td>
+						</tr>
+						<tr>
+							<td><a href>Notifications</a> <span
+								class="label label-info">5</span></td>
+						</tr>
+						<tr>
+							<td><a href>Import/Export</a></td>
+						</tr>
+						<tr>
+							<td><span class="glyphicon glyphicon-trash text-danger"></span><a
+								href class="text-danger"> Delete Account</a></td>
+						</tr>
+					</table>
+				</div>
+			</accordion-group> 
+		</accordion>	 
+	</div>
+	<div class="col-sm-9 col-md-9">
+		<div class="well">
+			<h1>Eventos</h1>
+		</div>
+		<div ui-view ng-animate="'animate'"></div>
+	</div>
+</div>
+

@@ -87,7 +87,7 @@
 								<executable>bower</executable>
 								<workingDirectory>${basedir}/mi-evento-service/src/main/webapp</workingDirectory>
 								<arguments>
-									<argument>update</argument>
+									<argument>install</argument>
 								</arguments>
 							</configuration>
 						</execution>

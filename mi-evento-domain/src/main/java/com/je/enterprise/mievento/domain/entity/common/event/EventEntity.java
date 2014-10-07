@@ -6,16 +6,17 @@ import java.util.List;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Reference;
 
+import com.google.common.collect.Lists;
 import com.je.enterprise.mievento.domain.entity.location.CommercialLocationEntity;
 
 public class EventEntity {
 
 	private String name;
 	private Date eventDate;
-	@Reference
+	@Embedded
 	private CommercialLocationEntity eventLocation;
 	@Embedded
-	private List<PersonEntity> guests;
+	private List<PersonEntity> guests = Lists.<PersonEntity>newArrayList();
 	
 	public EventEntity() {
 	}

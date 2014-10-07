@@ -1,11 +1,14 @@
 package com.je.enterprise.mievento.domain.entity.wedding;
 
+import org.mongodb.morphia.annotations.Embedded;
+
 import com.je.enterprise.mievento.domain.entity.location.CommercialLocationEntity;
 
 public class PresentEntity {
 
 	private String type;
 	private Boolean credit;
+	@Embedded
 	private CommercialLocationEntity locationCredit;
 
 	public PresentEntity(String type, Boolean credit, CommercialLocationEntity locationCredit) {

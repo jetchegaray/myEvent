@@ -1,0 +1,29 @@
+<div ng-controller="newGuestEventController">
+	<form id="guest-new-form" role="form">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group">
+					<input type="text" class="form-control" name="firstName"
+						placeholder="First Name" ng-model="person.firstName" required>
+				</div>
+			</div>	
+			<div class="col-md-4">	
+				<div class="form-group">
+					<input type="text" class="form-control" name="lastName"
+						placeholder="Last Name" ng-model="person.lastName">
+				</div>
+			</div>	
+			<div class="col-md-4">	
+				<div class="form-group">
+					<input type="email" class="form-control" name="email"
+						placeholder="Email" ng-model="person.email" required>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<button class="btn btn-primary btn-block" type="submit" ng-click="create()">Create</button>
+			</div>
+		</div>
+	</form>
+</div>

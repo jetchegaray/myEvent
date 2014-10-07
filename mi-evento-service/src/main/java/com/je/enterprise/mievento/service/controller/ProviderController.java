@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.je.enterprise.mievento.api.dto.provider.Provider;
 import com.je.enterprise.mievento.api.dto.provider.ProviderType;
+import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
 import com.je.enterprise.mievento.domain.service.filters.TypeFilterProvider;
 import com.je.enterprise.mievento.domain.service.impl.ProviderService;
-import com.je.enterprise.mievento.domain.transformer.impl.ProviderDomainToApiTransformer;
+import com.je.enterprise.mievento.domain.transformer.TransformerList;
+import com.je.enterprise.mievento.domain.transformer.impl.ProviderTransformer;
 
 @Controller
 @RequestMapping(value= "/provider")
@@ -28,12 +30,12 @@ public class ProviderController {
 	private ProviderService providerService;
 	
 	@Autowired
-	private ProviderDomainToApiTransformer providerDomainToApiTransformer;
+	private TransformerList<ProviderEntity, Provider> providerTransformerList;
 	
 	@ResponseBody
 	@RequestMapping(value={"/all"},method = RequestMethod.GET)
 	public List<Provider> getAll(){
-		return providerDomainToApiTransformer.transform(providerService.getAll());
+		return providerTransformerList.transformDomainToApi(providerService.getAll());
 	}
 	
 	@ResponseBody
@@ -46,7 +48,7 @@ public class ProviderController {
 	@RequestMapping(value={"/byType/{type}"},method = RequestMethod.GET)
 	public List<Provider> getByType(@PathVariable("type") String type){
 		ProviderType providerType = ProviderType.getByName(type);
-		List<Provider> providers = providerDomainToApiTransformer.transform(providerService.getBy(new TypeFilterProvider(providerType)));
+		List<Provider> providers = providerTransformerList.transformDomainToApi(providerService.getBy(new TypeFilterProvider(providerType)));
 		return providers;
 	}
 	

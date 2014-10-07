@@ -1,29 +1,36 @@
 var mieventoApp = angular.module("mieventoApp", [ "ngRoute", "ngCookies",
-		"ui.bootstrap", "mieventoControllers", "mieventoServices" ]);
+		"ui.bootstrap", "ngAnimate", "mgcrea.ngStrap", "ui.router", "mieventoControllers", "mieventoServices"]);
 
 var mieventoControllers = angular.module("mieventoControllers", []);
 
-mieventoApp.run([ "$rootScope", "$cookies", "$location",
-		function($rootScope, $cookies, $location) {
+mieventoApp.run([ "$rootScope", "$cookies", "$location","userService",
+		function($rootScope, $cookies, $location,userService) {
 
 			$rootScope.initialize = function() {
-				if ($cookies.token)
+				if ($cookies.token){
 					$rootScope.token = $cookies.token;
-				if ($cookies.logged_user)
-					$rootScope.logged_user = $cookies.logged_user;
+				}
+				//FIXME horroorrr !!
+				if ($rootScope.logged_user == null && $cookies.logged_email){
+					var user = {"email" : $cookies.logged_email,"password" : $cookies.logged_pass}
+					userService.login(user, function(data) {
+						$rootScope.login(data);
+					}, function(error) {
+						$rootScope.addAlert("danger","Error en el servidor.");
+						console.log(error);
+					});
+				}
 			};
 
-			$rootScope.login = function(token, email, remember) {
+			$rootScope.login = function(user) {
 
-				$rootScope.token = token;
-				$rootScope.logged_user = email;
-				alert($rootScope.logged_user);
-				if (remember) {
-					$cookies.token = $rootScope.token;
-					$cookies.logged_user = $rootScope.logged_user;
-				}
+				$rootScope.token = user.idSession;
+				$rootScope.logged_user = user;
+				$cookies.token = $rootScope.token;
+				$cookies.logged_email = $rootScope.logged_user.email;
+				$cookies.logged_pass = $rootScope.logged_user.password;
 
-				$location.path(BASE_PATH);
+				$location.path(EVENTS_PATH);
 			};
 
 			$rootScope.logout = function() {
@@ -31,18 +38,18 @@ mieventoApp.run([ "$rootScope", "$cookies", "$location",
 				$rootScope.logged_user = null;
 
 				delete $cookies.token;
-				delete $cookies.logged_user;
+				delete $cookies.logged_email;
 
 				$location.path(BASE_PATH);
 			}
 			
 			
-			$rootScope.addAlert = function(alertType, alertMsg, alertShow) {
+			$rootScope.addAlert = function(alertType, alertMsg) {
 			 var alert = 
 	        {
 	            "type": alertType,
 	            "msg": alertMsg,
-	            "show":alertShow,
+	            "show":true,
 	        };
 			 $rootScope.alert = alert;
 		}
@@ -51,14 +58,13 @@ mieventoApp.run([ "$rootScope", "$cookies", "$location",
 			$rootScope.alert = null;
 		};
 		
-		$rootScope.autohide =function(){
-	        $timeout(function() {
-	        	$rootScope.alert = null;
-	        }, 1000);
-		 }
-
-			$rootScope.initialize();
-		} ]);
+		
+		$rootScope.selectEvent = function(event){
+			$rootScope.selectedEvent = event;
+		}
+	
+		$rootScope.initialize();
+} ]);
 
 
 
@@ -69,4 +75,27 @@ mieventoControllers.controller("carouselCtrl",["$scope",function($scope) {
 		    slides.push({image : "../img/carusel_"+i+".jpg",
 		    text : "Cualquier Clase de Eventos Sociales"});
 	  }
+}]);
+
+mieventoControllers.controller("datepickerController",["$scope",function($scope) {
+	
+		  // Disable weekend selection
+	  $scope.disabled = function(date, mode) {
+	    return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+	  };
+
+	  $scope.open = function($event) {
+		    $event.preventDefault();
+		    $event.stopPropagation();
+
+		    $scope.opened = true;
+	  };
+	  
+	  $scope.dateOptions = { 
+	    formatYear: 'yy',
+	    showWeeks : "false"
+	  };
+	  $scope.minDate = new Date();
+	  $scope.maxDate = "22-06-2020";
+	  $scope.format="dd-MM-yyyy";	  
 }]);

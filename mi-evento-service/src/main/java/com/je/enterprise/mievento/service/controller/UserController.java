@@ -1,37 +1,45 @@
 package com.je.enterprise.mievento.service.controller;
 
 
+import org.apache.commons.lang3.Validate;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.common.base.Preconditions;
 import com.je.enterprise.mievento.api.dto.user.User;
+import com.je.enterprise.mievento.domain.entity.common.event.UserEntity;
+import com.je.enterprise.mievento.domain.exception.HttpEventException;
+import com.je.enterprise.mievento.domain.exception.UserDoesNotExistException;
 import com.je.enterprise.mievento.domain.service.impl.UserService;
+import com.je.enterprise.mievento.domain.transformer.impl.UserTransformer;
 
 @Controller
 @RequestMapping(value= "/user")
-public class UserController {
+public class UserController extends BasicController{
 	
 	
 	private static final Logger logger = Logger.getLogger(UserController.class);
 	
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private UserTransformer userTransformer;
+	
 	
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.PUT)
-	public String login(@RequestBody User user){
-			return userService.login(user.getEmail(),user.getPassword());
+		public User login(@RequestBody User user) throws HttpEventException{
+			return userTransformer.transformDomainToApi(userService.login(user.getEmail(),user.getPassword()));
 	}
 	
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST)
-	public void signUp(@RequestBody User user){
+	public void signUp(@RequestBody User user) throws HttpEventException{
 		userService.signUp(user.getEmail(), user.getPassword());
 	}
 	
@@ -43,8 +51,23 @@ public class UserController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/email",method = RequestMethod.PUT)
-	public void forgottenPassword(@RequestBody User user){
+	public void forgottenPassword(@RequestBody User user) throws HttpEventException{
 		this.userService.sendMail(user.getEmail());
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/update",method = RequestMethod.POST)
+	public void update(@RequestBody User user) throws HttpEventException{
+	
+		try{
+			 
+			Preconditions.checkNotNull(user);
+			this.userService.update(this.userTransformer.transformApiToDomain(user));
+			
+		}catch(Exception ex){
+			throw new UserDoesNotExistException();
+		}		
 	}
 	
 }

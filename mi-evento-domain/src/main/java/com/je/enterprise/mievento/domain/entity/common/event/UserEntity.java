@@ -6,6 +6,7 @@ import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Indexed;
 
+import com.google.common.collect.Lists;
 import com.je.enterprise.mievento.domain.dao.BaseEntity;
 
 @Entity("users")
@@ -16,15 +17,15 @@ public class UserEntity extends BaseEntity {
 	private String password;
 	private Boolean activate;
 	@Embedded
-	private List<EventEntity> events;
+	private List<EventEntity> events = Lists.<EventEntity>newArrayList();
+	
+	public UserEntity() {
+	}
 	
 	public UserEntity(String email, String password, boolean activate) {
 		this.email = email;
 		this.password = password;
 		this.activate = activate;
-	}
-
-	public UserEntity() {
 	}
 
 	public String getPassword() {

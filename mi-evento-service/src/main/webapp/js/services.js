@@ -6,7 +6,8 @@ mieventoServices.factory("userService",["$resource",function($resource){
 					signUp : {method: "POST"},
 					login : {method : "PUT"},
 					logout: {method : "DELETE"},
-					forgottenPassword: {method : "PUT",params: {requestMapping:"email"}}
+					forgottenPassword: {method : "PUT",params: {requestMapping : "email"}},
+					update : {method : "POST", params : {requestMapping : "update"}}
 				})
 		}
 ]);

@@ -14,7 +14,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.je.enterprise.mievento.domain.MongoClientUtilsTest;
-import com.je.enterprise.mievento.domain.dao.GenericDAO;
 import com.je.enterprise.mievento.domain.dao.impl.UserDAO;
 import com.je.enterprise.mievento.domain.entity.common.event.UserEntity;
 import com.je.enterprise.mievento.domain.service.helper.CRUDHelper;

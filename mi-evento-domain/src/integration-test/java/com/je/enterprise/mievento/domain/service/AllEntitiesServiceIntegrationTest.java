@@ -3,6 +3,8 @@ package com.je.enterprise.mievento.domain.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -56,7 +58,7 @@ public class AllEntitiesServiceIntegrationTest {
 	}
 	
 	@Test
-	public void save(){
+	public void save_user_ok(){
 
 		this.userService.signUp("a@a.com", "pass");
 		UserEntity user = createUserWithEvents();
@@ -71,9 +73,28 @@ public class AllEntitiesServiceIntegrationTest {
 		
 		assertEquals("a@a.com",userFromDB.getEmail());
 		assertEquals("pass",userFromDB.getPassword());
+		
 	}
 
-	
+
+	@Test
+	public void save_userWithEmptyEvents_ok(){
+
+		this.userService.signUp("z@a.com", "pass");
+		List<UserEntity> users = this.userService.getAll();
+		
+		assertFalse(users.isEmpty());
+		assertEquals(1,users.size());
+		
+		UserEntity userFromDB = users.get(0);
+		
+		assertEquals("z@a.com",userFromDB.getEmail());
+		assertEquals("pass",userFromDB.getPassword());
+		assertTrue(userFromDB.getActivate());
+		assertNotNull(userFromDB.getEvents());
+		assertTrue(userFromDB.getEvents().isEmpty());
+	}
+
 	
 	
 	private UserEntity createUserWithEvents() {
@@ -116,8 +137,5 @@ public class AllEntitiesServiceIntegrationTest {
 	}
 	
 	
-	
-	
-
 	
 }

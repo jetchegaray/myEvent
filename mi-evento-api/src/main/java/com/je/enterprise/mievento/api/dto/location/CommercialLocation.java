@@ -8,6 +8,7 @@ public class CommercialLocation extends Location{
 	private String placeName;
 
 	public CommercialLocation() {
+		super();
 	}
 
 	public CommercialLocation(String placeName,CountryCode countryCode, String province,String city,

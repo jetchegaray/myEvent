@@ -3,26 +3,61 @@ HOME_PATH = "/home"
 LOGIN_PATH = "/user/login";
 SIGNUP_PATH = "/user/signUp";
 PROVIDER_PATH = "/providers";
+EVENTS_PATH = "/events";
+EVENT_NEW_PATH = "/create";
+EVENT_GUESTS_PATH = "/guests";
+EVENT_NEW_GUESTS_PATH = "/guest/create"
+EVENT_PLACE_PATH = "/place";
 
-mieventoApp.config([ "$routeProvider", function($routeProvider) {
+mieventoApp.config([ "$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider){
 
-	$routeProvider.when(HOME_PATH, {
+//	$urlRouterProvider.otherwise(HOME_PATH);
+	 
+	$stateProvider
+	.state("homeState", {
+		url: HOME_PATH,
 		templateUrl : "../partials/home.html"
-	}).when(LOGIN_PATH, {
+	})
+	.state("loginState",{
+		url : LOGIN_PATH,
 		templateUrl : "../partials/login.html",
 		controller : "loginController"
-	}).when(SIGNUP_PATH, {
+	})
+	.state("signUpState",{
+		url : SIGNUP_PATH,
 		templateUrl : "../partials/signUp.html",
 		controller : "signUpController"
-	}).when(PROVIDER_PATH, {
+	})
+	.state("providerState",{
+		url : PROVIDER_PATH,
 		templateUrl : "../partials/providers.html",
 		controller : "providerListController"
-	}).when(BASE_PATH, {
-		redirectTo : HOME_PATH
-	}).otherwise({
-		redirectTo : BASE_PATH
-	});
-
+	})
+	.state("eventState",{
+		url : EVENTS_PATH,
+		templateUrl : "../partials/events/events.html",
+	})
+	.state("eventState.create",{
+		url : EVENT_NEW_PATH,
+		templateUrl : "../partials/events/newEvent.html",
+		controller : "newEventController"
+	})
+	.state("eventState.guests",{
+		url : EVENT_GUESTS_PATH,
+		templateUrl : "../partials/events/guests/guests.html",
+		controller : "guestsEventController"
+	})
+	.state("eventState.newGuest",{
+		url : EVENT_NEW_GUESTS_PATH,
+		templateUrl : "../partials/events/guests/newGuest.html",
+		controller : "newGuestEventController"
+	})
+	.state("eventState.place",{
+		url : EVENT_PLACE_PATH,
+		templateUrl : "../partials/events/place.html",
+		controller : "placeEventController"
+	})
+	
 } ]);
 
 

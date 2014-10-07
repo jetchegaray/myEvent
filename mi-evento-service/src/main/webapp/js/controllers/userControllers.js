@@ -1,8 +1,8 @@
 var mailPattern = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]+$/;
 
 mieventoControllers.controller("loginController", [ "$rootScope", "$scope",
-		"$routeParams", "userService",
-		function($rootScope, $scope, $routeParams, userService) {
+		"$state", "userService",
+		function($rootScope, $scope, $state, userService) {
 			
 			$scope.mailPattern = mailPattern;
 
@@ -11,15 +11,16 @@ mieventoControllers.controller("loginController", [ "$rootScope", "$scope",
 				if ($scope.loginForm.$invalid){
 					if ($scope.user.email != ""){
 						$scope.errorMailClass = "has-error";
-						$rootScope.addAlert("danger","El Mail ingresado debe ser de la forma example@mail.com",true);
+						$rootScope.addAlert("danger","El Mail ingresado debe ser de la forma example@mail.com");
 					}
 					return false;
 				}	
 				
 				userService.login($scope.user, function(data) {
-					$rootScope.login(data, $scope.user.email, $scope.remember);
+					$rootScope.login(data, $scope.remember);
 				}, function(error) {
-					alert("todo mal"+error);
+					$rootScope.addAlert("danger","Error en el servidor.");
+					console.log(error);
 				});
 			}
 			
@@ -31,10 +32,10 @@ mieventoControllers.controller("loginController", [ "$rootScope", "$scope",
 				}
 				
 				userService.forgottenPassword($scope.user,function(data){
-					$rootScope.addAlert("success","Revise tu Mail !! tu nueva password ya fue enviada... ",true);
-					$location.path(LOGIN_PATH);
+					$rootScope.addAlert("success","Revise tu Mail !! tu nueva password ya fue enviada... ");
+					$state.go("loginState");
 				},function(error){
-					alert("no funka el mail");
+					console.log(error);
 				})
 			};
 			
@@ -42,8 +43,8 @@ mieventoControllers.controller("loginController", [ "$rootScope", "$scope",
 
 
 
-mieventoControllers.controller("signUpController", ["$rootScope", "$scope", "$routeParams","$location",
-		"userService", function($rootScope,$scope, $routeParams,$location, userService) {
+mieventoControllers.controller("signUpController", ["$rootScope", "$scope", "$state",
+		"userService", function($rootScope,$scope, $state, userService) {
 			
 			$scope.mailPattern = mailPattern;
 	
@@ -52,15 +53,21 @@ mieventoControllers.controller("signUpController", ["$rootScope", "$scope", "$ro
 				if ($scope.siginUpForm.$invalid){
 					if ($scope.user.email != ""){
 						$scope.errorMailClass = "has-error";
-						$rootScope.addAlert("danger","El Mail ingresado debe ser de la forma example@mail.com",true);
+						$rootScope.addAlert("danger","El Mail ingresado debe ser de la forma example@mail.com");
 					}
 					return false;
-				}	
+				}
+				//FIXME mall !!
+				if (!angular.equals($scope.siginUpForm.passwordRepeat , $scope.siginUpForm.password)){
+					$scope.errorPasswordClass = "has-error";
+					$rootScope.addAlert("danger","Las Claves deben coincidir.");
+					return false;	
+				}
 				
 				userService.signUp($scope.user, function(data) {
-					$location.path(LOGIN_PATH);
-				}, function(data) {
-					alert("todo mal");
+					$state.go("loginState");
+				}, function(error) {
+					console.log(error);
 				});
 			}
 		} ]);

@@ -1,0 +1,36 @@
+<div ng-controller="guestsEventController">
+	<div class="row">
+		<div class="col-md-12">
+			<table id="guestsTable" class="table table-bordred table-striped" ng-show="$root.selectedEvent.guests != null && $root.selectedEvent.guests.length">
+				<thead>
+				  <tr>
+				  	 <th><input type="checkbox" id="checkall" /></th>
+		             <th>Name</th>
+		           	 <th>Send Invitation</th>
+					 <th>Status</th>
+				     <th>Edit</th>
+		             <th>Delete</th>
+				  </tr>
+				</thead>
+				<tbody>
+					<div ng-repeat="guest in $root.selectedEvent.guests">
+				        <tr class="active">
+				          <td><input type="checkbox" class="checkthis" /></td>
+				          <td>{{guest.firstName}} {{guest.lastName}}</td>
+				          <td>{{guest.email}}</td>
+				          <td>Sin Confirmar</td>
+				          <td><p><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+		    			  <td><p><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></button></p></td>
+		 		        </tr>
+				    </div>    
+		    	</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="line"></div>
+	<div class="row">
+			<button class="btn btn-primary pull-right" ng-click="goAddPerson()"><span class="glyphicon glyphicon-plus">Add Person</span></button>
+	</div>
+	
+		
+</div>

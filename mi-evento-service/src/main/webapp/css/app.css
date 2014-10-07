@@ -142,3 +142,11 @@
 .providerElement .price{
 	border-right: 5px grey;
 }
+
+
+/** EVENTS VIEW **/
+
+.glyphicon { margin-right:10px; margin-left:10px; }
+.panel-body { padding:0px; }
+.panel-body table tr td { padding-left: 35px }
+.panel-body .table {margin-bottom: 0px; }

@@ -1,7 +1,6 @@
 package com.je.enterprise.mievento.api.dto.event.wedding;
 
 import com.je.enterprise.mievento.api.dto.location.CommercialLocation;
-import com.je.enterprise.mievento.api.dto.location.Location;
 
 public class Present {
 
@@ -31,7 +30,7 @@ public class Present {
 		this.credit = credit;
 	}
 
-	public Location getLocationCredit() {
+	public CommercialLocation getLocationCredit() {
 		return locationCredit;
 	}
 

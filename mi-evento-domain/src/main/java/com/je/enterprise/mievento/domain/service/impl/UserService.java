@@ -2,8 +2,6 @@ package com.je.enterprise.mievento.domain.service.impl;
 
 import java.util.List;
 
-import javax.mail.MessagingException;
-
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.log4j.Logger;
@@ -16,7 +14,7 @@ import com.je.enterprise.mievento.domain.entity.common.event.UserEntity;
 import com.je.enterprise.mievento.domain.exception.InvalidCredentialException;
 import com.je.enterprise.mievento.domain.exception.InvalidPasswordException;
 import com.je.enterprise.mievento.domain.exception.UserAlredyExistsException;
-import com.je.enterprise.mievento.domain.exception.UserNotExistException;
+import com.je.enterprise.mievento.domain.exception.UserDoesNotExistException;
 import com.je.enterprise.mievento.domain.service.helper.CRUDHelper;
 
 @Service
@@ -41,7 +39,7 @@ public class UserService {
 		}
 	}
 
-	public String login(String mail, String password) {
+	public UserEntity login(String mail, String password) {
 		UserEntity userEntity = this.findByMail(mail);
 		try {
 			Validate.notNull(userEntity);
@@ -52,7 +50,7 @@ public class UserService {
 		if (!password.equalsIgnoreCase(userEntity.getPassword())) {
 			throw new InvalidPasswordException();
 		}
-		return userEntity.getId().toString();
+		return userEntity;
 	}
 
 	public UserEntity findByMail(String mail) {
@@ -65,18 +63,32 @@ public class UserService {
 	}
 
 	public void update(UserEntity user) {
-		crudHelper.update(user);
-	}
-
-	public void delete(UserEntity user) {
-		UserEntity userEntity = this.findByMail(user.getEmail());
+		
 		try {
+			
+			UserEntity userEntity = this.findByMail(user.getEmail());
 			Validate.notNull(userEntity);
-
+			userEntity.setEvents(user.getEvents());
+			crudHelper.update(userEntity);
+			
 		} catch (NullPointerException ex) {
-			throw new UserNotExistException();
+			throw new UserDoesNotExistException();
 		}
-		crudHelper.delete(userEntity.getId());
+		
+	}
+	
+	public void delete(UserEntity user) {
+		
+		try {
+			
+			UserEntity userEntity = this.findByMail(user.getEmail());
+			Validate.notNull(userEntity);
+			crudHelper.delete(userEntity.getId());
+			
+		} catch (NullPointerException ex) {
+			throw new UserDoesNotExistException();
+		}
+	
 	}
 
 	public void sendMail(String email) {

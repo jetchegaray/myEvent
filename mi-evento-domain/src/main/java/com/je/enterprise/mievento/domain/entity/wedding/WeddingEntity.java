@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Reference;
 
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
@@ -13,14 +14,18 @@ import com.je.enterprise.mievento.domain.entity.location.CommercialLocationEntit
 
 public class WeddingEntity extends EventEntity {
 
+	@Embedded
 	private PersonEntity husband;
+	@Embedded
 	private PersonEntity wife;
+	@Embedded
 	private List<PresentEntity> presents;
+	@Embedded
+	@Reference
+	private List<ProviderEntity> providers;
 	private PlaceEntity place;
 	private BigDecimal budget;
 	private BigDecimal finalPrice;
-	@Reference
-	private List<ProviderEntity> providers;
 
 	public WeddingEntity(){
 	}

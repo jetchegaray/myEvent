@@ -31,7 +31,9 @@ public class Provider {
 		this.picture = picture;
 	}
 
-
+	public Provider() {
+		super();
+	}
 
 	public String getBusinessName() {
 		return businessName;

@@ -7,6 +7,8 @@ import com.je.enterprise.mievento.api.dto.event.Event;
 
 public class User {
 
+	//FIXME deberia ir en un objeto diferente. con una base diferente
+	private String idSession;
 	private String email;
 	private String password;
 	private Boolean activate;
@@ -15,7 +17,8 @@ public class User {
 	public User() {
 	}
 
-	public User(String email,String password,Boolean activate,List<Event> events) {
+	public User(String idSession,String email,String password,Boolean activate,List<Event> events) {
+		this.idSession = idSession;
 		this.email = email;
 		this.password = password;
 		this.activate = activate;
@@ -52,6 +55,14 @@ public class User {
 
 	public void setEvents(List<Event> events) {
 		this.events = events;
+	}
+
+	public String getIdSession() {
+		return idSession;
+	}
+
+	public void setIdSession(String idSession) {
+		this.idSession = idSession;
 	}
 
 
