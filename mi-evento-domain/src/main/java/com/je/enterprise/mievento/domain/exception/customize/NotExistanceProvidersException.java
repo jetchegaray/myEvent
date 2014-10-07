@@ -1,4 +1,8 @@
-package com.je.enterprise.mievento.domain.exception;
+package com.je.enterprise.mievento.domain.exception.customize;
+
+import com.je.enterprise.mievento.domain.exception.HttpEventException;
+import com.je.enterprise.mievento.domain.exception.HttpEventExceptionCode;
+import com.je.enterprise.mievento.domain.exception.HttpEventExceptionHttpStatus;
 
 
 public class NotExistanceProvidersException extends HttpEventException {

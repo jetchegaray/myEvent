@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.je.enterprise.mievento.domain.dao.impl.ProviderDAO;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
-import com.je.enterprise.mievento.domain.exception.NotExistanceProvidersException;
+import com.je.enterprise.mievento.domain.exception.customize.NotExistanceProvidersException;
 import com.je.enterprise.mievento.domain.service.filters.CriteriaFilterProvider;
 import com.je.enterprise.mievento.domain.service.helper.CRUDHelper;
 

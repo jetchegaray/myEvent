@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 
 import com.je.enterprise.mievento.domain.dao.impl.UserDAO;
 import com.je.enterprise.mievento.domain.entity.common.event.UserEntity;
-import com.je.enterprise.mievento.domain.exception.InvalidCredentialException;
-import com.je.enterprise.mievento.domain.exception.InvalidPasswordException;
-import com.je.enterprise.mievento.domain.exception.UserAlredyExistsException;
-import com.je.enterprise.mievento.domain.exception.UserDoesNotExistException;
+import com.je.enterprise.mievento.domain.exception.customize.InvalidCredentialException;
+import com.je.enterprise.mievento.domain.exception.customize.InvalidPasswordException;
+import com.je.enterprise.mievento.domain.exception.customize.UserAlredyExistsException;
+import com.je.enterprise.mievento.domain.exception.customize.UserDoesNotExistException;
 import com.je.enterprise.mievento.domain.service.helper.CRUDHelper;
 
 @Service

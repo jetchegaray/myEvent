@@ -1,26 +1,29 @@
 package com.je.enterprise.mievento.service.controller;
 
 
-import org.apache.commons.lang3.Validate;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.base.Preconditions;
+import com.je.enterprise.mievento.api.dto.error.EventError;
 import com.je.enterprise.mievento.api.dto.user.User;
-import com.je.enterprise.mievento.domain.entity.common.event.UserEntity;
 import com.je.enterprise.mievento.domain.exception.HttpEventException;
-import com.je.enterprise.mievento.domain.exception.UserDoesNotExistException;
+import com.je.enterprise.mievento.domain.exception.customize.UserDoesNotExistException;
 import com.je.enterprise.mievento.domain.service.impl.UserService;
+import com.je.enterprise.mievento.domain.transformer.impl.EventErrorTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.UserTransformer;
 
 @Controller
 @RequestMapping(value= "/user")
-public class UserController extends BasicController{
+public class UserController{
 	
 	
 	private static final Logger logger = Logger.getLogger(UserController.class);
@@ -29,6 +32,8 @@ public class UserController extends BasicController{
 	private UserService userService;
 	@Autowired
 	private UserTransformer userTransformer;
+	@Autowired
+	private EventErrorTransformer eventErrorTransformer;
 	
 	
 	@ResponseBody
@@ -68,6 +73,16 @@ public class UserController extends BasicController{
 		}catch(Exception ex){
 			throw new UserDoesNotExistException();
 		}		
+	}
+	
+	
+	
+	@ExceptionHandler(HttpEventException.class)
+	@ResponseBody
+	public EventError handleException(HttpEventException exception, HttpServletResponse response) {
+		
+		EventError error = this.eventErrorTransformer.transformAndValidateDomainToApi(exception);
+       return error;
 	}
 	
 }

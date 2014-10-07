@@ -1,11 +1,15 @@
 package com.je.enterprise.mievento.service.controller;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.je.enterprise.mievento.api.dto.error.EventError;
 import com.je.enterprise.mievento.domain.exception.HttpEventException;
 
 public class BasicController {
@@ -22,5 +26,8 @@ public class BasicController {
 		}
 		return null;
 	}
+	
+	
+	
 
 }
