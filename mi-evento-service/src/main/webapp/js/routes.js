@@ -11,7 +11,7 @@ EVENT_PLACE_PATH = "/place";
 
 mieventoApp.config([ "$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider){
 
-//	$urlRouterProvider.otherwise(HOME_PATH);
+	$urlRouterProvider.otherwise(HOME_PATH);
 	 
 	$stateProvider
 	.state("homeState", {

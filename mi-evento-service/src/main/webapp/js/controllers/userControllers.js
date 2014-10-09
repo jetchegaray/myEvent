@@ -19,8 +19,8 @@ mieventoControllers.controller("loginController", [ "$rootScope", "$scope",
 				userService.login($scope.user, function(data) {
 					$rootScope.login(data, $scope.remember);
 				}, function(error) {
-					$rootScope.addAlert("danger","Error en el servidor.");
-					console.log(error);
+					$rootScope.addAlert("danger",error.data.description);
+					console.log(JSON.stringify(error));
 				});
 			}
 			

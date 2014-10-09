@@ -43,12 +43,12 @@
 	</bean>
 	
 	<!-- 	Configure Exception like JSON -->
-	<bean id="methodHandlerExceptionResolver" class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver">
-		<property name="messageConverters">
-			<list>
-				<ref bean="jsonMessageConverter"/>
-			</list>
-		</property>
-	</bean>
+<!-- 	<bean id="methodHandlerExceptionResolver" class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver"> -->
+<!-- 		<property name="messageConverters"> -->
+<!-- 			<list> -->
+<!-- 				<ref bean="jsonMessageConverter"/> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
 
 </beans>
