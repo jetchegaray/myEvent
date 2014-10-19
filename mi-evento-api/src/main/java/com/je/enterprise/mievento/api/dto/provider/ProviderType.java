@@ -1,5 +1,6 @@
 package com.je.enterprise.mievento.api.dto.provider;
 
+import java.util.Arrays;
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -43,6 +44,14 @@ public enum ProviderType {
 		return stringValues;
 	}
 	
+	public static List<String> stringValues(List<ProviderType> providerTypes){
+		List<String> stringValues = Lists.<String>newArrayList();
+		for(ProviderType type : providerTypes){
+			stringValues.add(type.getName());
+		}
+		return stringValues;
+	}
+	
 	public static ProviderType getByName(String name){
 		for(ProviderType type : values()){
 			if(type.getName().equals(name)){
@@ -55,6 +64,11 @@ public enum ProviderType {
 	@Override
 	public String toString() {
 		return getName();
+	}
+	
+	
+	public static List<ProviderType> getPlaceTypes(){
+		return Arrays.asList(ProviderType.WEDDING_HALL,ProviderType.BIRTHDAY_HALL,ProviderType.BAR_MITZVAH_HALL);
 	}
 
 	

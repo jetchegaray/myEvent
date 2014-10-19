@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html ng-app="mieventoApp">
 <head>
 
@@ -10,12 +11,11 @@
 <title>MiEvento</title>
 
 <!-- ********************** Styles ********************** -->
-<link rel="stylesheet"
-	href="../bower_components/bootstrap/dist/css/bootstrap.css">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/app.css">
-<link
-	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
-	rel="stylesheet">
+<link rel="stylesheet" href="../css/animate.css">
+
 
 <!-- ********************** Jquery ********************** -->
 <script src="../bower_components/jquery/dist/jquery.min.js"></script>
@@ -31,6 +31,7 @@
 <script src="../bower_components/angular-strap/dist/angular-strap.min.js"></script> 
 <script src="../bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
 <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="../bower_components/checklist-model/checklist-model.js"></script>
 
 <!-- ********************** angular app ********************** -->
 
@@ -44,6 +45,15 @@
 <script src="../js/controllers/providerControllers.js"></script>
 <script src="../js/controllers/userControllers.js"></script>
 <script src="../js/controllers/eventControllers.js"></script>
+<script src="../js/controllers/utilsControllers.js"></script>
+<script src="../js/controllers/exceptionControllers.js"></script>
+
+<!-- ********************** contexts ********************** -->
+<script src="../js/context/applicationContext.js"></script>
+<script src="../js/context/eventContext.js"></script>
+<script src="../js/context/exceptionContext.js"></script>
+<script src="../js/context/providerContext.js"></script>
+
 
 
 <script src="../js/services.js"></script>
@@ -95,7 +105,7 @@
 
 						<ul class="dropdown-menu" role="menu"
 							ng-controller="providerTypeController">
-							<li ng-repeat="type in types | orderBy:+type"><a href ng-click="toProviderByType(type)">{{type}}</a></li>
+							<li ng-repeat="type in types | orderBy:'toString()'"><a ui-sref="providerListState({providerType : type})">{{type}}</a></li>
 						</ul>
 					</li>
 					
@@ -114,19 +124,24 @@
 				</li>	
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li id="nav-login-btn" ng-show="$root.logged_user == null"><a
-						ui-sref="loginState"> Login<span class="glyphicon glyphicon-user text-primary"></span></a></li>
-					<li id="nav-login-btn" ng-show="$root.logged_user != null"><a
-						ui-sref="loginState">
-							{{$root.logged_user.email}} <i class="glyphicon glyphicon-user text-success"></i>
-					</a></li>
+					<li id="nav-login-btn" ng-show="$root.logged_user == null">
+						<a ui-sref="loginState"> Login<span class="fa fa-user text-primary glyphiconSpace"></span></a></li>
+					<li id="nav-login-btn" class="dropdown" ng-show="$root.logged_user != null">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							{{$root.logged_user.email}} <i class="fa fa-user text-success glyphiconSpace"></i>
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a ng-click="$root.logout()">Logout</a></li>
+						</ul>
+					</li>
 				</ul>
 			</div>
 			<!-- /.container -->
 		</nav>
-		<div class="container">
-			<div ng-show="$root.alert.show" >
-				<alert type="$root.alert.type" close="$root.closeAlert()">{{$root.alert.msg}}</alert>
+		<div class="container" ng-controller="exceptionController">
+			<div ng-show="alert.show" >
+				<alert type="alert.type" close="closeAlert()">{{alert.msg}}</alert>
 			</div>
 		</div>
 		<div class="container" ui-view></div>
@@ -142,6 +157,8 @@
 			</p>
 		</footer>
 	</div>
+	
+	
 </body>
 
 </html>

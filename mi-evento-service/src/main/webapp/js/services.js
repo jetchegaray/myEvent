@@ -1,4 +1,4 @@
-var mieventoServices = angular.module("mieventoServices",["ngResource"]);
+
 
 mieventoServices.factory("userService",["$resource",function($resource){
 		return $resource("/mievento/user/:requestMapping",{},
@@ -21,48 +21,8 @@ mieventoServices.factory("providerService",["$resource",function($resource){
         {
         	getAll : {method : "GET",params: {requestMapping: "all"},isArray:true},
         	getAllTypes : {method : "GET",params: {requestMapping: "types"},isArray:true},
-        	getByType : {method : "GET",params: {requestMapping: "byType"},isArray:true} 	
+        	getPlaceTypes : {method : "GET",params: {requestMapping: "placeTypes"},isArray:true},
+        	getByType : {method : "GET",params: {requestMapping: "byType"},isArray:true}
         });
        }                                     
 ]);
-
-
-mieventoApp.provider('providerContextService', function() {
-  
-    this.providerType = null;
- 
-    this.$get = function() {
-        return this.providerType;
-    };
- 
-    this.setProviderType = function(type) {
-        this.providerType = type;
-    };
-});
-
-
-mieventoServices.factory('handlerErrorService',["$rootScope", function($rootScope) {
-    var alertService = {};
-
-    $rootScope.alert = null;
-
-    alertService.addError = function(msg) {
-      $rootScope.alert = ({"type": "danger", "msg": msg});
-    };
-    
-    alertService.addWarning = function(msg) {
-        $rootScope.alert = ({"type": "warning", "msg": msg});
-     };
-     
-     alertService.addSuccess = function(msg) {
-         $rootScope.alert = ({"type": "success", "msg": msg,"show": true});
-     };
-
-    alertService.closeAlert = function(index) {
-      $rootScope.alert = null;
-    };
-    
-
-
-    return alertService;
-  }]);

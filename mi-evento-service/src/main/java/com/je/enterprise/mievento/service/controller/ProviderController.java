@@ -45,6 +45,12 @@ public class ProviderController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value={"/placeTypes"},method = RequestMethod.GET)
+	public List<String> getPlaceTypes(){
+		return ProviderType.stringValues(ProviderType.getPlaceTypes());
+	}
+	
+	@ResponseBody
 	@RequestMapping(value={"/byType/{type}"},method = RequestMethod.GET)
 	public List<Provider> getByType(@PathVariable("type") String type){
 		ProviderType providerType = ProviderType.getByName(type);

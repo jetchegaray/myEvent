@@ -3,6 +3,7 @@ package com.je.enterprise.mievento.api.dto.event;
 import java.util.Date;
 import java.util.List;
 
+import com.google.common.collect.Lists;
 import com.je.enterprise.mievento.api.dto.location.CommercialLocation;
 
 public class Event {
