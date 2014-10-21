@@ -78,8 +78,13 @@ mieventoApp.config([ "$stateProvider", "$urlRouterProvider", function($stateProv
 	})
 	.state("eventState.place",{
 		url : EVENT_PLACE_PATH,
-		templateUrl : "../partials/events/place.html",
+		templateUrl : "../partials/events/place/place.html",
 		controller : "placeEventController"
+	})
+	.state("eventState.choosePlace",{
+		url : EVENT_PLACE_PATH,
+		templateUrl : "../partials/events/place/choosePlace.html",
+		controller : "choosePlaceEventController"
 	})
 	
 	

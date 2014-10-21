@@ -1,0 +1,66 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+		<div class="panel panel-primary">
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-sm-2 col-lg-2"  style="margin-top: 20px;margin-left: 20px;">
+						<img class="img-circle" ng-src="../img/{{place.picture}}.jpg" style="width: 90px; height: 90px">
+					</div>
+					<div class=" col-md-9 col-lg-9 hidden-xs hidden-sm">
+						<strong><h3>{{place.businessName}}</h3></strong><br>
+						<table class="table">
+							<tbody>
+								<tr>
+									<td><h6><i class="fa fa-envelope glyphiconSpace"></i>{{place.email}}</h6></td>
+								</tr>
+								<tr>
+									<td><h6><i class="fa fa-map-marker glyphiconSpace"></i>
+											{{place.location.streetAddress.street}}
+											{{place.location.streetAddress.number}}
+											{{place.location.streetAddress.additionalInfo}}
+											{{place.location.streetAddress.neighborhood}}.
+											{{place.location.city}} ({{place.location.province}})
+										</h6>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<h6><i class="fa fa-money glyphiconSpace"></i>$ {{place.estimatedPrice}}</h6>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<h6><i class="fa fa-male glyphiconSpace"></i>{{place.providerType}}</h6>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<h6><i class="fa fa-mobile glyphiconSpace"></i>{{place.cellPhone}}</h6>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<h6><i class="fa fa-phone glyphiconSpace"></i>{{place.phone}}</h6>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="panel-footer">
+				<button class="btn btn-sm btn-primary" ng-click="goToDetail()">
+					<i class="fa fa-eye"></i>
+				</button>
+				<span class="pull-right">
+					<a class="btn btn-sm btn-warning" ui-sref="eventState.choosePlace">
+						<i class="fa fa-pencil"></i>
+					</a>
+					<button class="btn btn-sm btn-danger" ng-click="deletePlace()">
+						<i class="fa fa-trash"></i>
+					</button>
+				</span>
+			</div>
+		</div>
+	</div>
+</div>

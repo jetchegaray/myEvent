@@ -4,7 +4,7 @@
 		<accordion close-others="true" class="panel">
 			<accordion-group is-open="true">
 				<accordion-heading>
-					<span class="fa fa-folder-close text-warning  glyphiconSpace"> </span>Organize</a>
+					<span class="fa fa-folder-open text-warning  glyphiconSpace"> </span>Organize</a>
 				</accordion-heading>
 				<div class="panel-body">
 					<table class="table">
@@ -20,29 +20,15 @@
 							<td><span class="fa fa-usd text-primary glyphiconSpace"></span><a
 								href>Budget</a> <span class="badge">42</span></td>
 						</tr>
+						<tr>
+							<td><span class="fa fa-home text-primary glyphiconSpace"></span><a ui-sref="eventState.choosePlace">Place</a></td>
+						</tr>
 					</table>
 				</div>
 			</accordion-group>
 			<accordion-group>
 				<accordion-heading>
-					<span class="fa fa-home text-warning glyphiconSpace"> </span>Place</a>
-				</accordion-heading>
-				<div ng-controller="providerPlaceTypesController">
-					<div class="panel-body">
-						<table class="table">
-							<tr ng-repeat="place in placeTypes | orderBy:'toString()'">
-								<td>
-									<span class="fa fa-home text-success glyphiconSpace"></span>
-									<a ui-sref="providerListState({providerType : place})">{{place}}</a>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</div>
-			</accordion-group> 
-			<accordion-group>
-				<accordion-heading>
-					<span class="fa fa-pushpin text-warning glyphiconSpace"> </span>Tasks</a>
+					<span class="fa fa-tags text-warning glyphiconSpace"> </span>Tasks</a>
 				</accordion-heading>
 				<div class="panel-body">
 					<table class="table">

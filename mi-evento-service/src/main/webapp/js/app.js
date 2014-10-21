@@ -45,7 +45,7 @@ mieventoApp.run([ "$rootScope", "$cookies", "$state", "userService", "applicatio
 		}
 
 		$rootScope.selectEvent = function(event){
-			$rootScope.selectedEvent = event;
+			applicationContext.getEventContext().setSelectedEvent(event);
 			$state.go("eventState");
 		}
 	
@@ -53,7 +53,6 @@ mieventoApp.run([ "$rootScope", "$cookies", "$state", "userService", "applicatio
 		
 		 $rootScope.$on('$stateChangeSuccess', function(event, to, toParams, from, fromParams) {
 			 applicationContext.setPreviousState(from);
-			 console.log(from);
 	     });
 } ]);
 

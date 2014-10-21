@@ -1,17 +1,22 @@
-mieventoControllers.controller("providerTypeController",["$scope", "providerService", function($scope, providerService){
+mieventoControllers.controller("providerTypeController",["$scope", "providerService", 
+                                                         function($scope, providerService){
 			
 			providerService.getAllTypes(function(data){
 				$scope.types = data;
 			});
+			
 		
 }]);
 
 
-mieventoControllers.controller("providerPlaceTypesController",["$scope", "providerService",function($scope, providerService){
+mieventoControllers.controller("providerPlaceTypesController",["$scope", "providerService",
+                                                               function($scope, providerService){
 			
 			providerService.getPlaceTypes(function(data){
 				$scope.placeTypes = data;
 			});
+			
+			
 		
 }]);
 
@@ -30,17 +35,24 @@ mieventoControllers.controller("providerListController",["$rootScope", "$scope",
 					if ($rootScope.logged_user == null){
 						$state.go("loginState");
 					}else{
-						if ($rootScope.selectedEvent == null){
+						
+						var selectedEvent = applicationContext.getEventContext().getSelectedEvent();
+						
+						if (selectedEvent == null){
 							$state.go("eventState");
 						}
 						state = applicationContext.getPreviousState();
-						console.log(state);
-						if (angular.equals(state.name, "eventState.place")){
-							$rootScope.selectedEvent.place = provider;
-							console.log(angular.toJson($rootScope.selectedEvent));
-						}else if (angular.equals(state.name, "eventState.providers")){
-							$rootScope.selectedEvent.providers.push(provider); 
+						
+						if (angular.equals(state.name, "eventState.choosePlace")){
+						
+							applicationContext.getEventContext().setPlaceSelectedEvent(provider);
 							$state.go("eventState.place");
+							
+							//place doesnt know sizes or dimensions. 
+						}else if (angular.equals(state.name, "eventState.providers")){
+							
+							applicationContext.getEventContext().addProviderSelectedEvent(provider);
+							$state.go("eventState.providers");
 						}
 					}
 				}
