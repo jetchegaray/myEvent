@@ -2,7 +2,7 @@
 
 mieventoContext.service("eventContext",function(){
 	var editPerson = null;
-	var deletePerson = null;
+	var editProvider = null;
 	
 	var selectedEvent = null;
 	
@@ -32,6 +32,15 @@ mieventoContext.service("eventContext",function(){
 		this.selectedEvent.guests.push(guest);
 	}
 	
+	this.setEditPerson = function(person){
+		editPerson = person;
+	}
+	
+	this.getEditPerson = function(){
+		return editPerson;
+	}
+	
+	
 	//*********PLACE EVENT ************
 	
 	this.getPlaceSelectedEvent = function(){
@@ -55,25 +64,13 @@ mieventoContext.service("eventContext",function(){
 		this.selectedEvent.providers.push(provider);
 	}
 	
-	
-	
-	
-	//**********EDIT DELETE EVENT ********
-	
-	this.setEditPerson = function(person){
-		editPerson = person;
+	this.setEditProvider = function(provider){
+		editProvider = provider;
 	}
 	
-	this.getEditPerson = function(){
-		return deletePerson;
+	this.getEditProvider = function(){
+		return editProvider;
 	}
 	
-	this.setDeletePerson = function(person){
-		editPerson = person;
-	}
-	
-	this.getDeletePerson = function(){
-		return deletePerson;
-	}
 	
 });

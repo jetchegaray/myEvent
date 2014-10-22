@@ -1,0 +1,58 @@
+<div>
+	<div class="row">
+		<div class="col-md-12">
+			<table id="guestsTable" class="table table-hover" ng-show="providers != null && providers.length">
+				<thead>
+					<tr>
+						<th>Type</th>
+						<th>Name</th>
+						<th>Phone</th>
+						<th>Estimated Price</th>
+						<th>View</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="provider in providers">
+						<td>{{provider.providerType}}</td>
+						<td>{{provider.businessName}}</td>
+						<td>
+							<span ng-if="provider.cellPhone != null || provider.phone == null">{{provider.cellPhone}}</span>
+							<span ng-if="provider.cellPhone == null && provider.phone != null">{{provider.cellPhone}}</span>
+						</td>
+						<td><p>
+								<button class="btn btn-info btn-xs" ng-click="goToDetailProvider(provider)">
+									<span class="fa fa-eye"></span>
+								</button>
+							</p>
+						</td>
+						<td><p>
+								<button class="btn btn-primary btn-xs" ng-click="goToEditProvider(provider)">
+									<span class="fa fa-pencil"></span>
+								</button>
+							</p>
+						</td>
+						<td><div ng-controller="deleteConfirmationModalController">
+								<p>
+									<button class="btn btn-danger btn-xs" ng-click="openDeleteConfirmation(providers,provider)">
+										<span class="fa fa-trash"></span>
+									</button>
+								</p>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="line"></div>
+	<div class="btn-group">
+		<button class="btn btn-primary pull-right dropdown-toggle" data-toggle="dropdown">
+			<i class="fa fa-plus"></i>Add Provider<i class="fa caret-down"></i>
+		</button>
+		<ul class="dropdown-menu" role="menu" ng-controller="providerTypeController">
+			<li ng-repeat="type in types | orderBy:'toString()'"><a ui-sref="providerListState({providerType : type})">{{type}}</a></li>
+		</ul>
+	</div>
+</div>

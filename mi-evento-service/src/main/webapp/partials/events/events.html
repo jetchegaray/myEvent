@@ -9,8 +9,19 @@
 				<div class="panel-body">
 					<table class="table">
 						<tr>
-							<td><span class="fa fa-envelope text-primary glyphiconSpace"></span><a
-								ui-sref="eventState.guests">Invite</a></td>
+							<td>
+								<span class="fa fa-home text-primary glyphiconSpace"></span><a ui-sref="eventState.placeChoose">Place</a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span class="fa fa-envelope text-primary glyphiconSpace"></span><a ui-sref="eventState.guests">Invite</a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span class="fa fa-users text-primary glyphiconSpace"></span><a ui-sref="eventState.providers">Providers</a>
+							</td>
 						</tr>
 						<tr>
 							<td><span class="fa fa-gift text-primary glyphiconSpace"></span><a
@@ -20,9 +31,7 @@
 							<td><span class="fa fa-usd text-primary glyphiconSpace"></span><a
 								href>Budget</a> <span class="badge">42</span></td>
 						</tr>
-						<tr>
-							<td><span class="fa fa-home text-primary glyphiconSpace"></span><a ui-sref="eventState.choosePlace">Place</a></td>
-						</tr>
+						
 					</table>
 				</div>
 			</accordion-group>
@@ -45,23 +54,6 @@
 								href>Diary</a></td>
 						</tr>
 					</table>
-				</div>
-			</accordion-group> 
-			<accordion-group>
-				<accordion-heading>
-					<span class="fa fa-asterisk text-warning glyphiconSpace"> </span>Providers</a>
-				</accordion-heading>
-				<div ng-controller="providerTypeController">
-					<div class="panel-body">
-						<table class="table">
-							<tr ng-repeat="type in types | orderBy:'toString()'">
-								<td>
-									<span class="fa fa-pushpin text-success glyphiconSpace"></span>
-									<a ui-sref="providerListState({providerType : type})">{{type}}</a>
-								</td>
-							</tr>
-						</table>
-					</div>
 				</div>
 			</accordion-group> 
 			<accordion-group>
@@ -104,11 +96,11 @@
         		<h4 class="modal-title custom_align" id="Heading">Delete entry</h4>
       		</div>
         	<div class="modal-body">
-       			<div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign glyphiconSpace"></span> Are you sure you want to delete ?</div>
+       			<div class="alert alert-warning"><span class="fa fa-warning glyphiconSpace"></span> Are you sure you want to delete ?</div>
        		</div>
         	<div class="modal-footer ">
-        		<button type="button" class="btn btn-warning" ng-click="ok()"><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
-        		<button type="button" class="btn btn-warning" ng-click="cancel()"><span class="glyphicon glyphicon-remove"></span> No</button>
+        		<button type="button" class="btn btn-warning" ng-click="ok()"><span class="fa fa-check-cicle-o"></span> Yes</button>
+        		<button type="button" class="btn btn-warning" ng-click="cancel()"><span class="fa fa-close"></span> No</button>
       		</div>
     	</script>
 	</div>	

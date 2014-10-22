@@ -9,14 +9,15 @@ mieventoControllers.controller("carouselCtrl", [ "$scope", function($scope) {
 	}
 } ]);
 
-
-
-
 mieventoControllers.controller("deleteConfirmationModalController", [
-		"$rootScope", "$scope", "$modal", "userService", "applicationContext",
+		"$rootScope",
+		"$scope",
+		"$modal",
+		"userService",
+		"applicationContext",
 		function($rootScope, $scope, $modal, userService, applicationContext) {
 
-			$scope.openDeleteConfirmation = function(person) {
+			$scope.openDeleteConfirmation = function(list,element) {
 
 				var modalInstance = $modal.open({
 					templateUrl : 'deleteConfirmation.html',
@@ -24,11 +25,12 @@ mieventoControllers.controller("deleteConfirmationModalController", [
 				});
 
 				modalInstance.result.then(function() {
-					var index = $scope.guests.indexOf(person)
-					$scope.guests.splice(index, 1);
+					
+					var index = list.indexOf(element)
+					list.splice(index, 1);
 
 					userService.update($rootScope.logged_user, function() {
-						$state.go("eventState.guests");
+//						$state.go("eventState.guests");
 					}, function(error) {
 						applicationContext.getExceptionContext().setDanger(error.data);
 					})
@@ -37,12 +39,8 @@ mieventoControllers.controller("deleteConfirmationModalController", [
 
 		} ]);
 
-
-
-
 mieventoControllers.controller("deleteConfirmationInstanceController", [
-		"$scope", "$modalInstance",
-		function($scope, $modalInstance) {
+		"$scope", "$modalInstance", function($scope, $modalInstance) {
 
 			$scope.ok = function() {
 				$modalInstance.close();
@@ -52,10 +50,7 @@ mieventoControllers.controller("deleteConfirmationInstanceController", [
 				$modalInstance.dismiss('cancel');
 			}
 
-} ]);
-
-
-
+		} ]);
 
 mieventoControllers.controller("datepickerController",
 		[
@@ -83,6 +78,3 @@ mieventoControllers.controller("datepickerController",
 					$scope.maxDate = "22-06-2020";
 					$scope.format = "dd-MM-yyyy";
 				} ]);
-
-
-

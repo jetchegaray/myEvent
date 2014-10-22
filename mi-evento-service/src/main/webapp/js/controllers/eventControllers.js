@@ -9,7 +9,7 @@ mieventoControllers.controller("newEventController", [ "$rootScope", "$scope",
 					applicationContext.getEventContext().setSelectedEvent(event);
 				}, function(error) {
 					applicationContext.getExceptionContext().setDanger(error.data);
-				})
+				});
 			}
 
 } ]);
@@ -19,8 +19,7 @@ mieventoControllers.controller("guestsEventController", ["$scope", "$state", "$m
 		function($scope, $state, $modal, userService, applicationContext) {
 
 			$scope.guests = applicationContext.getEventContext().getGuestsSelectedEvent();
-			console.log(applicationContext.getEventContext().getSelectedEvent());
-			console.log($scope.guests);
+		
 			$scope.goAddPerson = function() {
 				$state.go("eventState.guestCreate");
 			};
@@ -33,18 +32,18 @@ mieventoControllers.controller("guestsEventController", ["$scope", "$state", "$m
 } ]);
 
 
-mieventoControllers.controller("newGuestEventController", ["$scope", "$state", "userService", "applicationContext", 
-             function( $scope, $state, userService, applicationContext) {
+mieventoControllers.controller("newGuestEventController", ["$rootScope", "$scope", "$state", "userService", "applicationContext", 
+             function($rootScope, $scope, $state, userService, applicationContext) {
 			
 			$scope.save = function() {
-				applicationContext.getEventContext().addGuestSelectedEvent($scope.person).guests.push($scope.person);
+				applicationContext.getEventContext().addGuestSelectedEvent($scope.person);
 
 				userService.update($rootScope.logged_user, function() {
 					$state.go("eventState.guests");
 				}, function(error) {
 					applicationContext.getExceptionContext().setDanger(error.data);
 				})
-			}
+			};
 
 } ]);
 
@@ -52,20 +51,20 @@ mieventoControllers.controller("newGuestEventController", ["$scope", "$state", "
 mieventoControllers.controller("editGuestEventController", [ "$rootScope",
 		"$scope", "$state", "userService", "applicationContext", function($rootScope, $scope, $state, userService, applicationContext) {
 			
-			$scope.person = eventContext.getEditPerson();
+			$scope.person = applicationContext.getEventContext().getEditPerson();
 			
 			$scope.save = function() {
 				userService.update($rootScope.logged_user, function() {
 					$state.go("eventState.guests");
 				}, function(error) {
 					applicationContext.getExceptionContext().setDanger(error.data);
-				})
+				});
 			}
 
-} ]);
+}]);
 
 
-mieventoControllers.controller("choosePlaceEventController", [ "$scope","$state", "applicationContext", function($scope, $state, applicationContext) {
+mieventoControllers.controller("detailPlaceEventController", [ "$scope","$state", "applicationContext", function($scope, $state, applicationContext) {
 
 		$scope.place = applicationContext.getEventContext().getPlaceSelectedEvent();
 	
@@ -86,14 +85,14 @@ mieventoControllers.controller("placeEventController", [ "$scope","$state", "app
 		var placeSelected = applicationContext.getEventContext().getPlaceSelectedEvent();
 	
 		if (placeSelected == null){
-			$state.go("eventState.choosePlace");
+			$state.go("eventState.placeChoose");
 		}else{
 			$scope.place = placeSelected;
 		}
 		
 		$scope.deletePlace = function(){
 			applicationContext.getEventContext().deselectedEvent();
-			$state.go("eventState.choosePlace");
+			$state.go("eventState.placeChoose");
 		}
 		
 		$scope.goToDetail = function(){
@@ -104,10 +103,37 @@ mieventoControllers.controller("placeEventController", [ "$scope","$state", "app
 }]);
 
 
-mieventoControllers.controller("providerEventController", [ "$rootScope", "$scope","$state",
-                function($rootScope, $scope,$state) {
+mieventoControllers.controller("providersEventController", ["$scope", "$state", "applicationContext",
+                function($scope, $statem, applicationContext) {
 
-				
- 		
+		$scope.providers = applicationContext.getEventContext().getProvidersSelectedEvent();
+		
+		$scope.goToDetailProvider = function(provider){
+			applicationContext.getProviderContext().setDetailProvider(provider);
+			$state.go("providerDetailState");
+		}
+		
+		$scope.goToEditProvider = function(provider){
+			applicationContext.getProviderContext().setEditProvider(provider);
+			$state.go("eventState.providerEdit");
+		}
+	
  } ]);
+
+
+mieventoControllers.controller("editProviderEventController", [ "$rootScope",
+ 			"$scope", "$state", "userService", "applicationContext", 
+ 			function($rootScope, $scope, $state, userService, applicationContext) {
+ 			
+ 			$scope.person = applicationContext.getEventContext().getEditṔrovider();
+ 			
+ 			$scope.save = function() {
+ 				userService.update($rootScope.logged_user, function() {
+ 					$state.go("eventState.providers");
+ 				}, function(error) {
+ 					applicationContext.getExceptionContext().setDanger(error.data);
+ 				});
+ 			}
+
+ }]);
 

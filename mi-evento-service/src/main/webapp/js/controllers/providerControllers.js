@@ -47,12 +47,12 @@ mieventoControllers.controller("providerListController",["$rootScope", "$scope",
 						
 							applicationContext.getEventContext().setPlaceSelectedEvent(provider);
 							$state.go("eventState.place");
-							
-							//place doesnt know sizes or dimensions. 
+							//TODO save
 						}else if (angular.equals(state.name, "eventState.providers")){
 							
 							applicationContext.getEventContext().addProviderSelectedEvent(provider);
 							$state.go("eventState.providers");
+							//TODO save
 						}
 					}
 				}

@@ -1,4 +1,4 @@
-<div ng-controller="guestsEventController">
+<div>
 	<div class="row" >
 		<div class="col-md-12">
 			<table id="guestsTable" class="table table-hover" ng-show="guests != null && guests.length">
@@ -13,20 +13,22 @@
 				</thead>
 				<tbody>
 			        <tr ng-repeat="guest in guests">
-			          <td>{{guest.firstName}} {{guest.lastName}}</td>
-			          <td>{{guest.email}}</td>
-			          <td>Sin Confirmar</td>
-			          <td><p><button class="btn btn-primary btn-xs" ng-click="goToEditPerson(guest)"><span class="fa fa-pencil"></span></button></p></td>
-	    			  <td><div ng-controller="deleteConfirmationModalController">
-	    			  	  	<p><button class="btn btn-danger btn-xs" ng-click="openDeleteConfirmation(guest)"><span class="fa fa-trash"></span></button></p></td>
-	 		        	  </div>	
+			          	<td>{{guest.firstName}} {{guest.lastName}}</td>
+			          	<td>{{guest.email}}</td>
+			          	<td>Sin Confirmar</td>
+			          	<td><p><button class="btn btn-primary btn-xs" ng-click="goToEditPerson(guest)"><span class="fa fa-pencil"></span></button></p></td>
+	    			  	<td>
+	    			  		<div ng-controller="deleteConfirmationModalController">
+	    			  	  		<p><button class="btn btn-danger btn-xs" ng-click="openDeleteConfirmation(guests,guest)"><span class="fa fa-trash"></span></button></p>
+	 		        	  	</div>
+	 		        	</td>	
 	 		        </tr>
 		    	</tbody>
 			</table>
 		</div>
 	</div>
 	<div class="line"></div>
-	<button class="btn btn-primary pull-right" ng-click="goAddPerson()"><span class="fa fa-plus">Add Person</span></button>
+	<button class="btn btn-primary pull-right" ng-click="goAddPerson()"><i class="fa fa-plus"></i>Add Person</button>
 	   
 		
 </div>

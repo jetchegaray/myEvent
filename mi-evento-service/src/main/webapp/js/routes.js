@@ -10,17 +10,9 @@ EVENT_GUESTS_PATH = "/guests";
 EVENT_NEW_GUESTS_PATH = "/guest/create";
 EVENT_EDIT_GUESTS_PATH="/guest/edit";
 EVENT_PLACE_PATH = "/place";
-
-//STATE_HOME="homeState";
-//STATE_LOGIN="loginState";
-//STATE_SIGNINUP="signUpState";	
-//STATE_PROVIDER="providerState";	
-//STATE_EVENT="eventState";
-//STATE_EVENT_CREATE="eventState.create";
-//STATE_EVENT_GUEST="eventState.guests";
-//STATE_EVENT_GUEST_CREATE="eventState.guest.create";
-//STATE_EVENT_PLACE="eventState.place";
-
+EVENT_PLACE_CHOOSE_PATH = "/place/choose";
+EVENT_PROVIDERS_PATH = "/providers";
+EVENT_PROVIDER_EDIT_PATH = "/provider/edit";
 
 
 mieventoApp.config([ "$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider){
@@ -81,11 +73,22 @@ mieventoApp.config([ "$stateProvider", "$urlRouterProvider", function($stateProv
 		templateUrl : "../partials/events/place/place.html",
 		controller : "placeEventController"
 	})
-	.state("eventState.choosePlace",{
-		url : EVENT_PLACE_PATH,
-		templateUrl : "../partials/events/place/choosePlace.html",
-		controller : "choosePlaceEventController"
+	.state("eventState.placeChoose",{
+		url : EVENT_PLACE_CHOOSE_PATH,
+		templateUrl : "../partials/events/place/detailPlace.html",
+		controller : "detailPlaceEventController"
 	})
+	.state("eventState.providers",{
+		url : EVENT_PROVIDERS_PATH,
+		templateUrl : "../partials/events/providers/providers.html",
+		controller : "providersEventController"
+	})
+	.state("eventState.providerEdit",{
+		url : EVENT_PROVIDER_EDIT_PATH,
+		templateUrl : "../partials/events/place/detailProviders.html",
+		controller : "editProviderEventController"
+	})
+	
 	
 	
 } ]);
