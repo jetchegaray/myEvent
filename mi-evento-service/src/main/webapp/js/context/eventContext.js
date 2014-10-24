@@ -61,6 +61,9 @@ mieventoContext.service("eventContext",function(){
 	}
 	
 	this.addProviderSelectedEvent = function(provider){
+		if (this.selectedEvent.providers == null){
+			this.selectedEvent.providers = [];
+		}
 		this.selectedEvent.providers.push(provider);
 	}
 	

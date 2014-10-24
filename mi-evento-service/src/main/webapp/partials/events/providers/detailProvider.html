@@ -4,68 +4,13 @@
 			<div class="col-md-4">
 				<div class="form-group">
 					<input type="text" class="form-control" name="placeName"
-						placeholder="Nombre Del Lugar"
-						ng-model="place.businessName" required>
+						placeholder="Price"
+						ng-model="place.price" required>
+				</div>
+				<div class="col-md-4">
+					<button class="btn btn-primary btn-block" type="submit" ng-click="save()">Save</button>
 				</div>
 			</div>	
 		</div>		
-		<div ng-show="!showMoreInfo" ng-animate="animate">
-			<a class="btn btn-primary pull-right" ng-click="goMoreInfo()"><span class="fa fa-plus">Info</span></a>
-		</div>
-		
-		<div class="more-info" ng-show="showMoreInfo">
-			<div class="row">
-				<div class="col-md-4">
-					<div class="form-group">
-						<input type="text" class="form-control" name="name"
-							placeholder="Country" ng-model="place.location.countryCode">
-					</div>
-				</div>	
-				<div class="col-md-4">	
-					<div class="form-group">
-						<input type="text" class="form-control" name="province"
-							placeholder="State or Province" ng-model="place.location.province">
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-						<input type="email" class="form-control" name="city"
-							placeholder="city" ng-model="place.location.city" required>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">
-					<div class="form-group">
-						<input type="text" class="form-control" name="name"
-							placeholder="Street" ng-model="place.location.streetAddress.street">
-					</div>
-				</div>	
-				<div class="col-md-4">	
-					<div class="form-group">
-						<input type="text" class="form-control" name="province"
-							placeholder="Number" ng-model="place.location.streetAddress.number">
-					</div>
-				</div>	
-				<div class="col-md-4">	
-					<div class="form-group">
-						<input type="text" class="form-control" name="city"
-							placeholder="neighborhood" ng-model="place.location.streetAddress.neighborhood" required>
-					</div>
-				</div>	
-				<div class="col-md-4">	
-					<div class="form-group">
-						<input type="text" class="form-control" name="city"
-							placeholder="Additional Info" ng-model="place.location.streetAddress.additionalInfo" required>
-					</div>
-				</div>
-			</div>
-		</div>
-			
-			<div class="col-md-4">
-				<div class="form-group">
-					<button type="button" class="btn btn-primary" ng-click="goToListProvider()"><span class="fa fa-plus"></span>Choose Place</button>
-				</div>
-			</div>
 	</form>
 </div>

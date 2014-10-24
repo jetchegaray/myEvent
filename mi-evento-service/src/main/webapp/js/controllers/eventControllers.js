@@ -104,7 +104,7 @@ mieventoControllers.controller("placeEventController", [ "$scope","$state", "app
 
 
 mieventoControllers.controller("providersEventController", ["$scope", "$state", "applicationContext",
-                function($scope, $statem, applicationContext) {
+                function($scope, $state, applicationContext) {
 
 		$scope.providers = applicationContext.getEventContext().getProvidersSelectedEvent();
 		
@@ -114,7 +114,7 @@ mieventoControllers.controller("providersEventController", ["$scope", "$state", 
 		}
 		
 		$scope.goToEditProvider = function(provider){
-			applicationContext.getProviderContext().setEditProvider(provider);
+			applicationContext.getEventContext().setEditProvider(provider);
 			$state.go("eventState.providerEdit");
 		}
 	

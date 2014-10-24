@@ -1,6 +1,6 @@
 <div>
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-12">	
 			<table id="guestsTable" class="table table-hover" ng-show="providers != null && providers.length">
 				<thead>
 					<tr>
@@ -15,12 +15,13 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="provider in providers">
-						<td>{{provider.providerType}}</td>
+						<td>{{provider.nameProviderType}}</td>
 						<td>{{provider.businessName}}</td>
 						<td>
 							<span ng-if="provider.cellPhone != null || provider.phone == null">{{provider.cellPhone}}</span>
-							<span ng-if="provider.cellPhone == null && provider.phone != null">{{provider.cellPhone}}</span>
+							<span ng-if="provider.cellPhone == null && provider.phone != null">{{provider.phone}}</span>
 						</td>
+						<td>{{provider.estimatedPrice}}</td>
 						<td><p>
 								<button class="btn btn-info btn-xs" ng-click="goToDetailProvider(provider)">
 									<span class="fa fa-eye"></span>

@@ -85,7 +85,7 @@ mieventoApp.config([ "$stateProvider", "$urlRouterProvider", function($stateProv
 	})
 	.state("eventState.providerEdit",{
 		url : EVENT_PROVIDER_EDIT_PATH,
-		templateUrl : "../partials/events/place/detailProviders.html",
+		templateUrl : "../partials/events/providers/detailProvider.html",
 		controller : "editProviderEventController"
 	})
 	

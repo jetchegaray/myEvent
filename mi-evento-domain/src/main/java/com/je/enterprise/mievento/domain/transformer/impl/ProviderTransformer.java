@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.je.enterprise.mievento.api.dto.location.Location;
 import com.je.enterprise.mievento.api.dto.provider.Provider;
+import com.je.enterprise.mievento.api.dto.provider.ProviderType;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
 import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
 import com.je.enterprise.mievento.domain.transformer.Transformer;
@@ -30,7 +31,7 @@ public class ProviderTransformer extends
 				domainObject.getEmail(), domainObject.getCellPhone(),
 				domainObject.getPhone(), domainObject.getPrice(),
 				domainObject.getEstimatedPrice(), domainObject.getPicture(),
-				domainObject.getProviderType());
+				domainObject.getProviderType().getName());
 	}
 
 	@Override
@@ -43,7 +44,7 @@ public class ProviderTransformer extends
 				apiObject.getEmail(), apiObject.getCellPhone(),
 				apiObject.getPhone(), apiObject.getPrice(),
 				apiObject.getEstimatedPrice(), apiObject.getPicture(),
-				apiObject.getProviderType());
+				ProviderType.getByName(apiObject.getNameProviderType()));
 	}
 
 }
