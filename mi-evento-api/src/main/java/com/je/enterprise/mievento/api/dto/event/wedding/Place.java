@@ -20,9 +20,9 @@ public class Place extends Provider {
 			String email, String cellPhone, String phone, BigDecimal price,
 			BigDecimal estimatedPrice, BigDecimal m2,
 			BigDecimal estimatedQuantityTables,
-			BigDecimal estimatedQuantityPerson,String picture,String nameProviderType) {
+			BigDecimal estimatedQuantityPerson,String picture,ProviderType providerType) {
 		super(businessName, description, location, email, cellPhone, phone,
-				price, estimatedPrice,picture,nameProviderType);
+				price, estimatedPrice,picture,providerType);
 		this.m2 = m2;
 		this.estimatedQuantityTables = estimatedQuantityTables;
 		this.estimatedQuantityPerson = estimatedQuantityPerson;

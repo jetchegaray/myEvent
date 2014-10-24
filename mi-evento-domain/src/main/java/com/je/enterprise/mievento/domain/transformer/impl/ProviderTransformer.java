@@ -31,7 +31,7 @@ public class ProviderTransformer extends
 				domainObject.getEmail(), domainObject.getCellPhone(),
 				domainObject.getPhone(), domainObject.getPrice(),
 				domainObject.getEstimatedPrice(), domainObject.getPicture(),
-				domainObject.getProviderType().getName());
+				domainObject.getProviderType());
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class ProviderTransformer extends
 				apiObject.getEmail(), apiObject.getCellPhone(),
 				apiObject.getPhone(), apiObject.getPrice(),
 				apiObject.getEstimatedPrice(), apiObject.getPicture(),
-				ProviderType.getByName(apiObject.getNameProviderType()));
+				apiObject.getProviderType());
 	}
 
 }

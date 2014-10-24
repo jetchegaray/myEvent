@@ -3,6 +3,8 @@ package com.je.enterprise.mievento.api.dto.provider;
 import java.util.Arrays;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.google.common.collect.Lists;
 
 public enum ProviderType {
@@ -27,6 +29,7 @@ public enum ProviderType {
 		this.name = name;
 	}
 	
+	@JsonValue
 	public String getName() {
 		return name;
 	}
@@ -52,6 +55,7 @@ public enum ProviderType {
 		return stringValues;
 	}
 	
+	@JsonCreator
 	public static ProviderType getByName(String name){
 		for(ProviderType type : values()){
 			if(type.getName().equals(name)){

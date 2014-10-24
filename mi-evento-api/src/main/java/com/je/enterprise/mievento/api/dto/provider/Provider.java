@@ -15,11 +15,11 @@ public class Provider {
 	private BigDecimal price;
 	private BigDecimal estimatedPrice;
 	private String picture;
-	private String nameProviderType;
+	private ProviderType providerType;
 
 	public Provider(String businessName, String description,
 			Location location, String email, String cellPhone, String phone,
-			BigDecimal price, BigDecimal estimatedPrice,String picture, String nameProviderType) {
+			BigDecimal price, BigDecimal estimatedPrice,String picture, ProviderType providerType) {
 		this.businessName = businessName;
 		this.description = description;
 		this.location = location;
@@ -29,7 +29,7 @@ public class Provider {
 		this.price = price;
 		this.estimatedPrice = estimatedPrice;
 		this.picture = picture;
-		this.nameProviderType = nameProviderType;
+		this.providerType = providerType;
 	}
 
 	public Provider() {
@@ -110,14 +110,14 @@ public class Provider {
 
 
 
-	public String getNameProviderType() {
-		return nameProviderType;
+	public ProviderType getProviderType() {
+		return providerType;
 	}
 
 
 
-	public void setNameProviderType(String nameProviderType) {
-		this.nameProviderType = nameProviderType;
+	public void setProviderType(ProviderType providerType) {
+		this.providerType = providerType;
 	}
 
 }
