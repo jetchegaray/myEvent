@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html ng-app="mieventoApp">
 <head>
@@ -15,7 +16,7 @@
 <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/app.css">
 <link rel="stylesheet" href="../css/animate.css">
-
+<link rel="stylesheet" href="../bower_components/angular-ui-select/dist/select.min.css">
 
 <!-- ********************** Jquery ********************** -->
 <script src="../bower_components/jquery/dist/jquery.min.js"></script>
@@ -31,7 +32,8 @@
 <script src="../bower_components/angular-strap/dist/angular-strap.min.js"></script> 
 <script src="../bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
 <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-<script src="../bower_components/checklist-model/checklist-model.js"></script>
+<script src="../bower_components/angular-ui-select/dist/select.min.js"></script>
+
 
 <!-- ********************** angular app ********************** -->
 
@@ -41,7 +43,7 @@
 
 
 <!-- ********************** controllers ********************** -->
-
+<script src="../js/controllers/homeControllers.js"></script>
 <script src="../js/controllers/providerControllers.js"></script>
 <script src="../js/controllers/userControllers.js"></script>
 <script src="../js/controllers/eventControllers.js"></script>
@@ -50,6 +52,7 @@
 
 <!-- ********************** contexts ********************** -->
 <script src="../js/context/applicationContext.js"></script>
+<script src="../js/context/userContext.js"></script>
 <script src="../js/context/eventContext.js"></script>
 <script src="../js/context/exceptionContext.js"></script>
 <script src="../js/context/providerContext.js"></script>
@@ -93,9 +96,9 @@
 						data-toggle="dropdown">Eventos<span class="caret"></span></a>
 
 						<ul class="dropdown-menu" role="menu">
-							<li ng-repeat="event in $root.logged_user.events | orderBy:+name">
-								<a href ng-click="$root.selectEvent(event)">{{event.name}}</a></li>
-							<li class="divider" ng-show="$root.logged_user.events != null && $root.logged_user.events.length"></li>
+							<li ng-repeat="event in events | orderBy:+name">
+								<a href ng-click="selectEvent(event)">{{event.name}}</a></li>
+							<li class="divider" ng-show="events != null && events.length"></li>
 							<li><a ui-sref="eventState.create">Crear Nuevo Evento</a></li>
 						</ul>
 					</li>
@@ -126,9 +129,9 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li id="nav-login-btn" ng-show="$root.logged_user == null">
 						<a ui-sref="loginState"> Login<span class="fa fa-user text-primary glyphiconSpace"></span></a></li>
-					<li id="nav-login-btn" class="dropdown" ng-show="$root.logged_user != null">
+					<li id="nav-login-btn" class="dropdown" ng-show="loggedUser != null">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							{{$root.logged_user.email}} <i class="fa fa-user text-success glyphiconSpace"></i>
+							{{loggedUser.email}} <i class="fa fa-user text-success glyphiconSpace"></i>
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu" role="menu">

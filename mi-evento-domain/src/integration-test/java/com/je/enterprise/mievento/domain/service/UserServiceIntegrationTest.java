@@ -70,7 +70,7 @@ public class UserServiceIntegrationTest {
 		UserEntity user_postStore2= this.userService.findByMail("b@gmail.com");
 		assertEquals("b@gmail.com",user_postStore2.getEmail());
 		assertEquals("pass2",user_postStore2.getPassword());
-		assertFalse(user_postStore2.getActivate());
+		assertTrue(user_postStore2.getActivate());
 	}
 	
 

@@ -3,33 +3,33 @@ package com.je.enterprise.mievento.domain.transformer.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.je.enterprise.mievento.api.dto.event.Person;
+import com.je.enterprise.mievento.api.dto.event.Guest;
 import com.je.enterprise.mievento.api.dto.location.Location;
+import com.je.enterprise.mievento.domain.entity.common.event.GuestEntity;
 import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
-import com.je.enterprise.mievento.domain.entity.wedding.PersonEntity;
 import com.je.enterprise.mievento.domain.transformer.Transformer;
 
 @Component
-public class PersonTransformer extends Transformer<PersonEntity, Person>{
+public class GuestTransformer extends Transformer<GuestEntity, Guest>{
 
 	
 	private LocationTransformer locationTransformer;
 	
 	@Autowired
-	public PersonTransformer(LocationTransformer locationTransformer) {
+	public GuestTransformer(LocationTransformer locationTransformer) {
 		this.locationTransformer = locationTransformer;
 	}
 
 	@Override
-	public Person transformDomainToApi(PersonEntity domainObject) {
+	public Guest transformDomainToApi(GuestEntity domainObject) {
 		Location  location = locationTransformer.transformAndValidateDomainToApi(domainObject.getLocation()); 
-		return new Person(domainObject.getFirstName(),domainObject.getLastName(), domainObject.getEmail(), location);
+		return new Guest(domainObject.getFirstName(),domainObject.getLastName(), domainObject.getEmail(), location,domainObject.getInvitationStatus());
 	}
 
 	@Override
-	public PersonEntity transformApiToDomain(Person apiObject) {
+	public GuestEntity transformApiToDomain(Guest apiObject) {
 		LocationEntity  locationEntity = locationTransformer.transformAndValidateApiToDomain(apiObject.getLocation()); 
-		return new PersonEntity(apiObject.getFirstName(),apiObject.getLastName(), apiObject.getEmail(), locationEntity);
+		return new GuestEntity(apiObject.getFirstName(),apiObject.getLastName(), apiObject.getEmail(), locationEntity,apiObject.getInvitationStatus());
 	}
 
 }

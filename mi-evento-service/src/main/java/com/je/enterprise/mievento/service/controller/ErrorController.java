@@ -14,7 +14,7 @@ import com.je.enterprise.mievento.domain.exception.HttpEventException;
 import com.je.enterprise.mievento.domain.transformer.impl.EventErrorTransformer;
 
 @ControllerAdvice
-public class BasicController {
+public class ErrorController {
 	
 	@Autowired
 	private EventErrorTransformer eventErrorTransformer;

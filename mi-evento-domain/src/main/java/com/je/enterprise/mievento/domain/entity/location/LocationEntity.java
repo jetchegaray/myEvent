@@ -7,11 +7,11 @@ import com.je.enterprise.mievento.api.dto.location.CountryCode;
 public class LocationEntity {
 
 	@Embedded
-	private CountryCode countryCode;
-	private String province;
-	private String city;
+	protected CountryCode countryCode;
+	protected String province;
+	protected String city;
 	@Embedded
-	private StreetAddressEntity streetAddress;
+	protected StreetAddressEntity streetAddress;
 	
 	public LocationEntity() {
 	}

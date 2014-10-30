@@ -2,6 +2,7 @@ package com.je.enterprise.mievento.domain.service.impl;
 
 import java.util.List;
 
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.log4j.Logger;
@@ -99,7 +100,7 @@ public class UserService {
 		userEntity.setActivate(false);
 		this.update(userEntity);
 
-		this.mailService.send(userEntity);
+		this.mailService.sendPassword(userEntity);
 	}
 
 }

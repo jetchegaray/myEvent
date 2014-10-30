@@ -1,13 +1,14 @@
 
 
-mieventoContext.service("applicationContext", ["eventContext", "exceptionContext", "providerContext" ,
-                                               function(eventContext, exceptionContext, providerContext){
+mieventoContext.service("applicationContext", ["userContext", "eventContext", "exceptionContext", "providerContext" ,
+                                               function(userContext, eventContext, exceptionContext, providerContext){
 	var previousState = null;
 	var eventContext = eventContext;
 	var exceptionContext = exceptionContext;
 	var providerContext = providerContext;
-	
-	
+	var userContext = userContext;
+
+
 	this.setPreviousState = function(state){
 		previousState = state;
 	}
@@ -31,6 +32,9 @@ mieventoContext.service("applicationContext", ["eventContext", "exceptionContext
 		return providerContext;
 	}
 	
+	this.getUserContext = function(){
+		return userContext;
+	}
 	
 	
 	

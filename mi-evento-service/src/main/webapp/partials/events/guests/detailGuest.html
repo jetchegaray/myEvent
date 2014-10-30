@@ -4,21 +4,54 @@
 			<div class="col-md-4">
 				<div class="form-group">
 					<input type="text" class="form-control" name="firstName"
-						placeholder="First Name" ng-model="person.firstName" required>
+						placeholder="First Name" ng-model="guest.firstName" required>
 				</div>
 			</div>	
 			<div class="col-md-4">	
 				<div class="form-group">
 					<input type="text" class="form-control" name="lastName"
-						placeholder="Last Name" ng-model="person.lastName">
+						placeholder="Last Name" ng-model="guest.lastName">
 				</div>
 			</div>	
 			<div class="col-md-4">	
 				<div class="form-group">
 					<input type="email" class="form-control" name="email"
-						placeholder="Email" ng-model="person.email" required>
+						placeholder="Email" ng-model="guest.email" required>
 				</div>
 			</div>
+			
+			<div class="col-md-4">	
+				<div class="form-group">
+					<input type="email" class="form-control" name="email"
+						placeholder="Email" ng-model="guest.email" required>
+				</div>
+			</div>
+			<div class="col-md-4">	
+				 <ui-select ng-model="guest.invitationStatus.right">
+				    <ui-select-match placeholder="Invitation Status">{{$select.selected.name}}</ui-select-match>
+				    <ui-select-choices repeat="statusType in statusTypes">
+				      <span ng-bind-html="statusType"></span>
+				    </ui-select-choices>
+				 </ui-select>
+			 </div>
+  
+			<div class="col-md-4">	
+				<div ng-controller="datepickerController">
+					<div class="col-md-4">
+						<p class="input-group">
+							<input type="text" class="form-control"
+								datepicker-popup="{{format}}" placeholder="Date"
+								ng-model="guest.invitationStatus.left" is-open="opened" min-date="minDate"
+								max-date="maxDate" datepicker-popup="dd-MM-yyyy"
+								datepicker-options="dateOptions" ng-required close-text="Close"
+								class="well well-sm" />
+							</span>
+						</p>
+					</div>
+				</div>
+			</div>
+			
+			
 		</div>
 		<div class="row">
 			<div class="col-md-4">

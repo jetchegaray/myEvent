@@ -11,13 +11,13 @@ public class Event {
 	private String name;
 	private Date eventDate;
 	private CommercialLocation eventLocation;
-	private List<Person> guests;
+	private List<Guest> guests;
 	
 	public Event() {
 	}
 	
 	public Event(String name, Date eventDate, CommercialLocation eventLocation,
-			List<Person> guests) {
+			List<Guest> guests) {
 		this.name = name;
 		this.eventDate = eventDate;
 		this.eventLocation = eventLocation;
@@ -40,11 +40,11 @@ public class Event {
 		this.eventLocation = eventLocation;
 	}
 
-	public List<Person> getGuests() {
+	public List<Guest> getGuests() {
 		return guests;
 	}
 
-	public void setGuests(List<Person> guests) {
+	public void setGuests(List<Guest> guests) {
 		this.guests = guests;
 	}
 

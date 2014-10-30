@@ -4,10 +4,12 @@ import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 
 import javax.mail.MessagingException;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -20,7 +22,11 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.resourceresolver.ClassLoaderResourceResolver;
 import org.thymeleaf.util.ClassLoaderUtils;
 
+import com.je.enterprise.mievento.api.dto.location.CountryCode;
+import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.UserEntity;
+import com.je.enterprise.mievento.domain.entity.location.CommercialLocationEntity;
+import com.je.enterprise.mievento.domain.entity.location.StreetAddressEntity;
 import com.je.enterprise.mievento.domain.service.impl.MailService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -42,7 +48,13 @@ public class MailServiceIntegrationTest {
 	
 	@Test
 	public void sendMail_testOk(){
-		mailService.send(new UserEntity("etchegarayjavier@live.com.ar", RandomStringUtils.randomAlphanumeric(12), true));
+		mailService.sendPassword(new UserEntity("etchegarayjavier@live.com.ar", RandomStringUtils.randomAlphanumeric(12), true));
+	}
+	
+	@Test
+	public void sendInvitation_testOk(){
+		EventEntity eventEntity = new EventEntity("EventoTest",DateTime.now().toDate(),new CommercialLocationEntity("placeTest", CountryCode.AR, "Bs As", "CABA", new StreetAddressEntity("streetTest", BigDecimal.TEN, null, "Villa lugano")),null);
+		mailService.sendInvitation(eventEntity, "aa@gmail.com", "etchegarayjavier@gmail.com");
 	}
 	
 	@Ignore

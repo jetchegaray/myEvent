@@ -1,7 +1,7 @@
 
 
 mieventoContext.service("eventContext",function(){
-	var editPerson = null;
+	var editGuest = null;
 	var editProvider = null;
 	
 	var selectedEvent = null;
@@ -32,12 +32,12 @@ mieventoContext.service("eventContext",function(){
 		this.selectedEvent.guests.push(guest);
 	}
 	
-	this.setEditPerson = function(person){
-		editPerson = person;
+	this.setEditGuest = function(guest){
+		editGuest = guest;
 	}
 	
-	this.getEditPerson = function(){
-		return editPerson;
+	this.getEditGuest = function(){
+		return editGuest;
 	}
 	
 	

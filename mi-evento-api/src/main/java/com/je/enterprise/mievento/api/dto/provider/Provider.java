@@ -1,6 +1,7 @@
 package com.je.enterprise.mievento.api.dto.provider;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import com.je.enterprise.mievento.api.dto.location.Location;
 
@@ -16,6 +17,7 @@ public class Provider {
 	private BigDecimal estimatedPrice;
 	private String picture;
 	private ProviderType providerType;
+
 
 	public Provider(String businessName, String description,
 			Location location, String email, String cellPhone, String phone,

@@ -6,5 +6,7 @@ public interface HttpEventExceptionCode {
 	static final Long PROVIDERS_DONT_EXISTS = 5001l;
 	static final Long USER_NOT_EXISTS = 4001l;
 	static final Long USER_ALREDY_EXISTS = 4002l;
+	static final Long FAIL_MAIL = 5002l;
+	
 	
 }

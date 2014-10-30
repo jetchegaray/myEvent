@@ -8,7 +8,7 @@ import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Reference;
 
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
-import com.je.enterprise.mievento.domain.entity.common.event.PersonEntity;
+import com.je.enterprise.mievento.domain.entity.common.event.GuestEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
 import com.je.enterprise.mievento.domain.entity.location.CommercialLocationEntity;
 
@@ -31,7 +31,7 @@ public class WeddingEntity extends EventEntity {
 	}
 	
 	public WeddingEntity(String name, Date eventDate,
-			CommercialLocationEntity eventLocation, List<PersonEntity> guests,PersonEntity husband, PersonEntity wife,
+			CommercialLocationEntity eventLocation, List<GuestEntity> guests,PersonEntity husband, PersonEntity wife,
 			List<PresentEntity> presents, PlaceEntity place, BigDecimal budget,
 			BigDecimal finalPrice, List<ProviderEntity> providers) {
 		super(name, eventDate, eventLocation, guests);

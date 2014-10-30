@@ -20,9 +20,9 @@ mieventoControllers.controller("providerPlaceTypesController",["$scope", "provid
 		
 }]);
 
-mieventoControllers.controller("providerListController",["$rootScope", "$scope", "$state", "$stateParams", 
+mieventoControllers.controller("providerListController",["$scope", "$state", "$stateParams", 
          "providerService", "applicationContext", 
-         function($rootScope, $scope, $state, $stateParams, providerService, applicationContext){
+         function( $scope, $state, $stateParams, providerService, applicationContext){
 	
 				providerService.getByType({ pathParams: $stateParams.providerType },function(data){
 					$scope.providers = data;
@@ -32,7 +32,9 @@ mieventoControllers.controller("providerListController",["$rootScope", "$scope",
 				
 				
 				$scope.addProvider = function(provider){
-					if ($rootScope.logged_user == null){
+					var logged_user = applicationContext.getUserContext().getLoggedUser();
+					
+					if (logged_user == null){
 						$state.go("loginState");
 					}else{
 						

@@ -26,3 +26,13 @@ mieventoServices.factory("providerService",["$resource",function($resource){
         });
        }                                     
 ]);
+
+
+mieventoServices.factory("eventGuestService",["$resource", function($resource){
+		return $resource("/mievento/guest/:requestMapping",{
+			requestMapping : "@requestMapping"},
+			{
+				getAllStatusTypes : {method : "GET",params : { requestMapping : "statusTypes"}, isArray : true},
+				sendInvitation : {method : "PUT", params : {requestMapping : "sendInvitation"}}
+			});	
+}])

@@ -22,12 +22,13 @@ import com.je.enterprise.mievento.api.dto.provider.ProviderType;
 import com.je.enterprise.mievento.domain.MongoClientUtilsTest;
 import com.je.enterprise.mievento.domain.dao.impl.UserDAO;
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
-import com.je.enterprise.mievento.domain.entity.common.event.PersonEntity;
+import com.je.enterprise.mievento.domain.entity.common.event.GuestEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.UserEntity;
 import com.je.enterprise.mievento.domain.entity.location.CommercialLocationEntity;
 import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
 import com.je.enterprise.mievento.domain.entity.location.StreetAddressEntity;
+import com.je.enterprise.mievento.domain.entity.wedding.PersonEntity;
 import com.je.enterprise.mievento.domain.entity.wedding.PlaceEntity;
 import com.je.enterprise.mievento.domain.entity.wedding.PresentEntity;
 import com.je.enterprise.mievento.domain.entity.wedding.WeddingEntity;
@@ -73,7 +74,6 @@ public class AllEntitiesServiceIntegrationTest {
 		
 		assertEquals("a@a.com",userFromDB.getEmail());
 		assertEquals("pass",userFromDB.getPassword());
-		
 	}
 
 
@@ -116,7 +116,7 @@ public class AllEntitiesServiceIntegrationTest {
 		
 		LocationEntity locationWedding = new LocationEntity(CountryCode.AR,"CABA","Bs As",new StreetAddressEntity("calleZ", BigDecimal.ONE, null, "Recoleta"));
 		wedding.setPlace(new PlaceEntity("Salon Pueyrredon", "El mejor salon de todos loco.Rompermos todo", locationWedding, "salonP@gmail.com", "156545787", "01144578954", BigDecimal.ONE, BigDecimal.TEN, BigDecimal.valueOf(250), BigDecimal.valueOf(19), BigDecimal.valueOf(75),"http://picture2",ProviderType.WEDDING_HALL));
-		wedding.setGuests(Lists.<PersonEntity>newArrayList(new PersonEntity("Guest","1","g1@gmail.com",locationHusband),new PersonEntity("Guest","2","g2@gmail.com",locationHusband)));
+		wedding.setGuests(Lists.<GuestEntity>newArrayList(new GuestEntity("Guest","1","g1@gmail.com",locationHusband),new GuestEntity("Guest","2","g2@gmail.com",locationHusband)));
 		
 		wedding.setPresents(Lists.<PresentEntity>newArrayList(new PresentEntity("Vajilla", false,new CommercialLocationEntity("Falabella",CountryCode.AR,"CABA","Bs As",new StreetAddressEntity("callePresent", BigDecimal.ONE, null, "Recoleta")))));
 		wedding.setProviders(Lists.<ProviderEntity>newArrayList());
@@ -128,7 +128,7 @@ public class AllEntitiesServiceIntegrationTest {
 		
 		
 		CommercialLocationEntity locationEntregaTPFinal = new CommercialLocationEntity("Facultad Ingenieria",CountryCode.AR,"CABA","Bs As",new StreetAddressEntity("Paseo Coloon", BigDecimal.valueOf(750), "esquina Independencia", "San Telmo"));
-		List<PersonEntity> guestsTP = Lists.<PersonEntity>newArrayList(new PersonEntity("mama","etche","mama@gmail.com",locationHusband),new PersonEntity("Abu","etche","abu@gmail.com",locationHusband));
+		List<GuestEntity> guestsTP = Lists.<GuestEntity>newArrayList(new GuestEntity("mama","etche","mama@gmail.com",locationHusband),new GuestEntity("Abu","etche","abu@gmail.com",locationHusband));
 		EventEntity miJura = new EventEntity("Jura Ingeniero",DateTime.now().plusWeeks(10).toDate(),locationEntregaTPFinal,guestsTP);
 		
 		user.getEvents().add(miJura);

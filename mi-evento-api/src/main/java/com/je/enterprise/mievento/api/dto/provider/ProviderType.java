@@ -22,9 +22,6 @@ public enum ProviderType {
 	
 	private String name;
 	
-	private ProviderType() {
-	}
-	
 	private ProviderType(String name) {
 		this.name = name;
 	}
@@ -33,11 +30,6 @@ public enum ProviderType {
 	public String getName() {
 		return name;
 	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
 	
 	public static List<String> stringValues(){
 		List<String> stringValues = Lists.<String>newArrayList();

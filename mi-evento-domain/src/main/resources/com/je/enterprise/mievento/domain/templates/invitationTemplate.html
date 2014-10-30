@@ -1,0 +1,36 @@
+
+<raw>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title th:remove="all">Template for HTML email with inline image</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+  <body>
+  	<p><span>Hola !</span></p>
+  
+  	<p>
+  		Estas invitado al Evento  : <strong><span th:text="${eventName}"></span></strong>,el dia <strong><span th:text="${eventDate}"></span></strong>.
+  
+  	</p>
+	<p>
+	
+		El lugar es <strong><span th:text="${placeName}"></span></strong>
+		en <strong><span th:text="${placeAddress}"></span></strong>.
+		
+  	</p>
+  	<p>
+  		
+  		Para confirmar sus asitencia responder al mail. <strong><span th:text="${userEmail}"></span></strong>.
+		
+  	</p>	
+		  
+<!--   	<p> -->
+<!--       <img src="sample.png" th:src="'cid:' + ${imageResourceName}" /> -->
+<!--     </p> -->
+    <p>
+      Saludos, <br />
+      <em>El Equipo de Mi-Evento</em>
+    </p>
+  </body>
+</html>
+</raw>

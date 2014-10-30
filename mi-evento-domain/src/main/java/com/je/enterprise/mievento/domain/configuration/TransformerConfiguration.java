@@ -5,17 +5,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.je.enterprise.mievento.api.dto.event.Event;
-import com.je.enterprise.mievento.api.dto.event.Person;
+import com.je.enterprise.mievento.api.dto.event.Guest;
 import com.je.enterprise.mievento.api.dto.event.wedding.Present;
 import com.je.enterprise.mievento.api.dto.provider.Provider;
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
-import com.je.enterprise.mievento.domain.entity.common.event.PersonEntity;
+import com.je.enterprise.mievento.domain.entity.common.event.GuestEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
 import com.je.enterprise.mievento.domain.entity.wedding.PresentEntity;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
 import com.je.enterprise.mievento.domain.transformer.impl.CommercialLocationTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.EventTransformer;
-import com.je.enterprise.mievento.domain.transformer.impl.PersonTransformer;
+import com.je.enterprise.mievento.domain.transformer.impl.GuestTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.PresentTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.ProviderTransformer;
 
@@ -23,7 +23,7 @@ import com.je.enterprise.mievento.domain.transformer.impl.ProviderTransformer;
 public class TransformerConfiguration {
 
 	@Autowired
-	private PersonTransformer personTransformer;
+	private GuestTransformer guestTransformer;
 	@Autowired
 	private ProviderTransformer providerTransformer;
 	@Autowired
@@ -32,9 +32,9 @@ public class TransformerConfiguration {
 	private CommercialLocationTransformer CommercialLocationTransformer;
 
 	
-	@Bean(name = "personTransformerList")
-	public TransformerList<PersonEntity, Person> personTransformerList(){
-		return new TransformerList<PersonEntity, Person>(this.personTransformer);
+	@Bean(name = "guestTransformerList")
+	public TransformerList<GuestEntity, Guest> guestTransformerList(){
+		return new TransformerList<GuestEntity, Guest>(this.guestTransformer);
 	}
 	
 	@Bean(name = "providerTransformerList")
@@ -49,7 +49,7 @@ public class TransformerConfiguration {
 
 	@Bean(name = "eventTransformer")
 	public EventTransformer eventTransformer(){
-		return new EventTransformer(this.CommercialLocationTransformer,this.personTransformerList());
+		return new EventTransformer(this.CommercialLocationTransformer,this.guestTransformerList());
 	}
 	
 	@Bean(name = "eventTransformerList")

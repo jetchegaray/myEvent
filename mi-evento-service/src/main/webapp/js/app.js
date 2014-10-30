@@ -1,5 +1,5 @@
 var mieventoApp = angular.module("mieventoApp", [ "ngRoute", "ngCookies",
-		"ui.bootstrap", "ngAnimate", "ui.router", "checklist-model", "mieventoControllers", "mieventoServices", "mieventoContext"]);
+		"ui.bootstrap", "ngAnimate", "ui.router", "ui.select", "mieventoControllers", "mieventoServices", "mieventoContext"]);
 
 var mieventoControllers = angular.module("mieventoControllers", []);
 var mieventoContext = angular.module("mieventoContext",[]);
@@ -13,8 +13,9 @@ mieventoApp.run([ "$rootScope", "$cookies", "$state", "userService", "applicatio
 			if ($cookies.token){
 				$rootScope.token = $cookies.token;
 			}
+			var logged_user = applicationContext.getUserContext().getLoggedUser();
 			//FIXME horroorrr !!
-			if ($rootScope.logged_user == null && $cookies.logged_email){
+			if (logged_user == null && $cookies.logged_email){
 				var user = {"email" : $cookies.logged_email,"password" : $cookies.logged_pass}
 				userService.login(user, function(data) {
 					$rootScope.login(data);
@@ -27,33 +28,31 @@ mieventoApp.run([ "$rootScope", "$cookies", "$state", "userService", "applicatio
 		$rootScope.login = function(user) {
 
 			$rootScope.token = user.idSession;
-			$rootScope.logged_user = user;
+			//FIXME eliminar token del rootScope.
 			$cookies.token = $rootScope.token;
-			$cookies.logged_email = $rootScope.logged_user.email;
-			$cookies.logged_pass = $rootScope.logged_user.password;
-
+			$cookies.logged_email = user.email;
+			$cookies.logged_pass = user.password;
+			applicationContext.getUserContext().setLoggedUser(user);
+			
 			$state.go("eventState");
 		};
 
 		$rootScope.logout = function() {
 			$rootScope.token = null;
-			$rootScope.logged_user = null;
+			applicationContext.getUserContext().setUnLoggedUser();
 
 			delete $cookies.token;
 			delete $cookies.logged_email;
 
 		}
 
-		$rootScope.selectEvent = function(event){
-			applicationContext.getEventContext().setSelectedEvent(event);
-			$state.go("eventState");
-		}
 	
-		$rootScope.initialize();
-		
+	
 		 $rootScope.$on('$stateChangeSuccess', function(event, to, toParams, from, fromParams) {
 			 applicationContext.setPreviousState(from);
 	     });
+		 
+		 $rootScope.initialize();
 } ]);
 
 

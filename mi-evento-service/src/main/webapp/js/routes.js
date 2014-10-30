@@ -22,7 +22,8 @@ mieventoApp.config([ "$stateProvider", "$urlRouterProvider", function($stateProv
 	$stateProvider
 	.state("homeState", {
 		url: HOME_PATH,
-		templateUrl : "../partials/home.html"
+		templateUrl : "../partials/home.html",
+		controller : "homeController"
 	})
 	.state("loginState",{
 		url : LOGIN_PATH,

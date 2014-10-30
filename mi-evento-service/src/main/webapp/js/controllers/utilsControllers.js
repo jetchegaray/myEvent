@@ -9,13 +9,8 @@ mieventoControllers.controller("carouselCtrl", [ "$scope", function($scope) {
 	}
 } ]);
 
-mieventoControllers.controller("deleteConfirmationModalController", [
-		"$rootScope",
-		"$scope",
-		"$modal",
-		"userService",
-		"applicationContext",
-		function($rootScope, $scope, $modal, userService, applicationContext) {
+mieventoControllers.controller("deleteConfirmationModalController", ["$scope","$modal","userService","applicationContext",
+		function($scope, $modal, userService, applicationContext) {
 
 			$scope.openDeleteConfirmation = function(list,element) {
 
@@ -28,8 +23,8 @@ mieventoControllers.controller("deleteConfirmationModalController", [
 					
 					var index = list.indexOf(element)
 					list.splice(index, 1);
-
-					userService.update($rootScope.logged_user, function() {
+					
+					userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
 //						$state.go("eventState.guests");
 					}, function(error) {
 						applicationContext.getExceptionContext().setDanger(error.data);

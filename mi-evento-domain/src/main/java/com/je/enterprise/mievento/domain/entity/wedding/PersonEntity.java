@@ -1,4 +1,4 @@
-package com.je.enterprise.mievento.domain.entity.common.event;
+package com.je.enterprise.mievento.domain.entity.wedding;
 
 import org.mongodb.morphia.annotations.Embedded;
 
