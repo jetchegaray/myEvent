@@ -3,9 +3,10 @@ package com.je.enterprise.mievento.api.dto.event;
 import java.util.Date;
 import java.util.List;
 
-import com.google.common.collect.Lists;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.je.enterprise.mievento.api.dto.location.CommercialLocation;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Event {
 
 	private String name;

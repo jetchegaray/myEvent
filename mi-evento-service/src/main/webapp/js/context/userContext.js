@@ -3,7 +3,6 @@ mieventoContext.service("userContext", function(){
 	
 	var loggedUser = null;
 	
-	
 	this.setLoggedUser = function(user){
 		loggedUser = user;
 	}
@@ -13,18 +12,18 @@ mieventoContext.service("userContext", function(){
 	}
 	
 	this.getLoggedUserEvents = function(){
-		if (this.loggedUser == null){
+		if (loggedUser == null){
 			return null;
 		}
-		return this.loggedUser.events;
+		return loggedUser.events;
 	}
 	
 	this.addUserSelectedEvent = function(event){
-		this.loggedUser.events.push(event);
+		loggedUser.events.push(event);
 	}
 	
 	this.setUnLoggedUser = function(){
-		this.loggedUser = null;
+		loggedUser = null;
 	}
 	
 });

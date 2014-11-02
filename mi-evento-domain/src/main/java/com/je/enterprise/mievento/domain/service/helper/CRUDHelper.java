@@ -3,9 +3,6 @@ package com.je.enterprise.mievento.domain.service.helper;
 import java.io.Serializable;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.je.enterprise.mievento.domain.dao.BaseEntity;
 import com.je.enterprise.mievento.domain.dao.GenericDAO;
 import com.mongodb.WriteConcern;

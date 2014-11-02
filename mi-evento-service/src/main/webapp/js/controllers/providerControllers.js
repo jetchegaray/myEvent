@@ -21,8 +21,8 @@ mieventoControllers.controller("providerPlaceTypesController",["$scope", "provid
 }]);
 
 mieventoControllers.controller("providerListController",["$scope", "$state", "$stateParams", 
-         "providerService", "applicationContext", 
-         function( $scope, $state, $stateParams, providerService, applicationContext){
+         "providerService", "userService", "applicationContext", 
+         function( $scope, $state, $stateParams, providerService, userService, applicationContext){
 	
 				providerService.getByType({ pathParams: $stateParams.providerType },function(data){
 					$scope.providers = data;
@@ -48,13 +48,26 @@ mieventoControllers.controller("providerListController",["$scope", "$state", "$s
 						if (angular.equals(state.name, "eventState.choosePlace")){
 						
 							applicationContext.getEventContext().setPlaceSelectedEvent(provider);
+							
+							userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
+								applicationContext.getEventContext().setSelectedEvent(event);
+							}, function(error) {
+								applicationContext.getExceptionContext().setDanger(error.data);
+							});
+							
 							$state.go("eventState.place");
-							//TODO save
+								
 						}else if (angular.equals(state.name, "eventState.providers")){
 							
 							applicationContext.getEventContext().addProviderSelectedEvent(provider);
+							
+							userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
+								applicationContext.getEventContext().setSelectedEvent(event);
+							}, function(error) {
+								applicationContext.getExceptionContext().setDanger(error.data);
+							});
+							
 							$state.go("eventState.providers");
-							//TODO save
 						}
 					}
 				}

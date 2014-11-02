@@ -17,7 +17,8 @@
 <link rel="stylesheet" href="../css/app.css">
 <link rel="stylesheet" href="../css/animate.css">
 <link rel="stylesheet" href="../bower_components/angular-ui-select/dist/select.min.css">
-
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
+  
 <!-- ********************** Jquery ********************** -->
 <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 
@@ -25,15 +26,17 @@
 
 <script src="../bower_components/angular/angular.js"></script>
 <script src="../bower_components/angular-resource/angular-resource.js"></script>
-<script src="../bower_components/angular-route/angular-route.js"></script>
 <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
-<script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="../bower_components/angular-animate/angular-animate.js"></script>
-<script src="../bower_components/angular-strap/dist/angular-strap.min.js"></script> 
-<script src="../bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
 <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="../bower_components/angular-ui-select/dist/select.min.js"></script>
+<script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
+<script type="text/javascript" src="../bower_components/jquery-ui/ui/jquery-ui.js"></script>
+<script type="text/javascript" src="../bower_components/angular/angular.js"></script>
+<script type="text/javascript" src="../bower_components/angular-ui-calendar/src/calendar.js"></script>
+<script type="text/javascript" src="../bower_components/fullcalendar/fullcalendar.js"></script>
+<script type="text/javascript" src="../bower_components/fullcalendar/gcal.js"></script>
 
 <!-- ********************** angular app ********************** -->
 
@@ -43,7 +46,7 @@
 
 
 <!-- ********************** controllers ********************** -->
-<script src="../js/controllers/homeControllers.js"></script>
+
 <script src="../js/controllers/providerControllers.js"></script>
 <script src="../js/controllers/userControllers.js"></script>
 <script src="../js/controllers/eventControllers.js"></script>
@@ -96,9 +99,9 @@
 						data-toggle="dropdown">Eventos<span class="caret"></span></a>
 
 						<ul class="dropdown-menu" role="menu">
-							<li ng-repeat="event in events | orderBy:+name">
-								<a href ng-click="selectEvent(event)">{{event.name}}</a></li>
-							<li class="divider" ng-show="events != null && events.length"></li>
+							<li ng-repeat="event in $root.loggedUser.events | orderBy:+name">
+								<a href ng-click="$root.selectEvent(event)">{{event.name}}</a></li>
+							<li class="divider" ng-show="$root.loggedUser.events != null && $root.loggedUser.events.length"></li>
 							<li><a ui-sref="eventState.create">Crear Nuevo Evento</a></li>
 						</ul>
 					</li>
@@ -127,15 +130,15 @@
 				</li>	
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li id="nav-login-btn" ng-show="$root.logged_user == null">
+					<li id="nav-login-btn" ng-show="$root.loggedUser == null">
 						<a ui-sref="loginState"> Login<span class="fa fa-user text-primary glyphiconSpace"></span></a></li>
-					<li id="nav-login-btn" class="dropdown" ng-show="loggedUser != null">
+					<li id="nav-login-btn" class="dropdown" ng-show="$root.loggedUser != null">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							{{loggedUser.email}} <i class="fa fa-user text-success glyphiconSpace"></i>
+							{{$root.loggedUser.email}} <i class="fa fa-user text-success glyphiconSpace"></i>
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a ng-click="$root.logout()">Logout</a></li>
+							<li><a href ng-click="$root.logout()">logout</a></li>
 						</ul>
 					</li>
 				</ul>

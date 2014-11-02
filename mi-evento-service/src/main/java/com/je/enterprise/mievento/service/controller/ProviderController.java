@@ -17,7 +17,6 @@ import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
 import com.je.enterprise.mievento.domain.service.filters.TypeFilterProvider;
 import com.je.enterprise.mievento.domain.service.impl.ProviderService;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
-import com.je.enterprise.mievento.domain.transformer.impl.ProviderTransformer;
 
 @Controller
 @RequestMapping(value= "/provider")

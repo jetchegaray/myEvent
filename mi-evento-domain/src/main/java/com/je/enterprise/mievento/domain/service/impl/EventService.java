@@ -1,9 +1,6 @@
 package com.je.enterprise.mievento.domain.service.impl;
 
-import java.util.Date;
-
 import org.apache.log4j.Logger;
-import org.apache.commons.lang3.tuple.Pair;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +10,7 @@ import com.google.common.collect.Iterables;
 import com.je.enterprise.mievento.api.dto.event.StatusType;
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.GuestEntity;
+import com.je.enterprise.mievento.domain.entity.common.event.InvitationStatusEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.UserEntity;
 import com.je.enterprise.mievento.domain.exception.HttpEventException;
 
@@ -63,7 +61,8 @@ public class EventService {
 			}
 		});
 		
-		guestEntity.setInvitationStatus(Pair.<StatusType,Date>of(StatusType.PENDING, DateTime.now().toDate()));
+		
+		guestEntity.setInvitationStatusEntity(new InvitationStatusEntity(StatusType.PENDING, DateTime.now().toDate()));
 		userService.update(userEntity);
 	}
 	

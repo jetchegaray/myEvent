@@ -1,61 +1,53 @@
 <div>
-	<form id="guest-new-form" role="form">
+	<form name="guestForm" role="form">
 		<div class="row">
 			<div class="col-md-4">
 				<div class="form-group">
 					<input type="text" class="form-control" name="firstName"
 						placeholder="First Name" ng-model="guest.firstName" required>
 				</div>
-			</div>	
-			<div class="col-md-4">	
+			</div>
+			<div class="col-md-4">
 				<div class="form-group">
 					<input type="text" class="form-control" name="lastName"
 						placeholder="Last Name" ng-model="guest.lastName">
 				</div>
-			</div>	
-			<div class="col-md-4">	
+			</div>
+			<div class="col-md-4">
 				<div class="form-group">
 					<input type="email" class="form-control" name="email"
 						placeholder="Email" ng-model="guest.email" required>
 				</div>
 			</div>
-			
-			<div class="col-md-4">	
-				<div class="form-group">
-					<input type="email" class="form-control" name="email"
-						placeholder="Email" ng-model="guest.email" required>
-				</div>
+
+			<div class="col-md-4">
+				<ui-select ng-model="guest.invitationStatus.status" theme="selectize">
+    				<ui-select-match placeholder="Invitation Status">{{$select.selected}}</ui-select-match>
+    				<ui-select-choices repeat="status in statusTypes">{{status}}</ui-select-choices>
+  				</ui-select>
 			</div>
-			<div class="col-md-4">	
-				 <ui-select ng-model="guest.invitationStatus.right">
-				    <ui-select-match placeholder="Invitation Status">{{$select.selected.name}}</ui-select-match>
-				    <ui-select-choices repeat="statusType in statusTypes">
-				      <span ng-bind-html="statusType"></span>
-				    </ui-select-choices>
-				 </ui-select>
-			 </div>
-  
-			<div class="col-md-4">	
-				<div ng-controller="datepickerController">
-					<div class="col-md-4">
-						<p class="input-group">
-							<input type="text" class="form-control"
-								datepicker-popup="{{format}}" placeholder="Date"
-								ng-model="guest.invitationStatus.left" is-open="opened" min-date="minDate"
-								max-date="maxDate" datepicker-popup="dd-MM-yyyy"
-								datepicker-options="dateOptions" ng-required close-text="Close"
-								class="well well-sm" />
+			<div ng-controller="datepickerController" ng-show="guest.invitationStatus.updateStatusDate != null || guest.invitationStatus.status == 'Confirma el dia'">
+				<div class="col-md-4">
+					<p class="input-group">
+						<input type="text" class="form-control"
+							datepicker-popup="{{format}}" placeholder="Confirmation Date"
+							ng-model="guest.invitationStatus.updateStatusDate" is-open="opened" min-date="minDate"
+							max-date="maxDate" datepickerOptions="dateOptions" ng-required close-text="Close"/>
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-default"
+									ng-click="open($event)"><i class="fa fa-calendar"></i>
+								</button>
 							</span>
-						</p>
-					</div>
+					</p>
 				</div>
 			</div>
-			
-			
+
+
 		</div>
 		<div class="row">
 			<div class="col-md-4">
-				<button class="btn btn-primary btn-block" type="submit" ng-click="save()">Save</button>
+				<button class="btn btn-primary btn-block" type="submit"
+					ng-click="save()">Save</button>
 			</div>
 		</div>
 	</form>

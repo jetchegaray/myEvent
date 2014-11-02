@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.je.enterprise.mievento.api.dto.event.Event;
 import com.je.enterprise.mievento.api.dto.event.StatusType;
+import com.je.enterprise.mievento.api.dto.wrapper.InvitationDTO;
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
 import com.je.enterprise.mievento.domain.exception.HttpEventException;
 import com.je.enterprise.mievento.domain.service.impl.EventService;
@@ -33,9 +34,9 @@ public class GuestController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/sendInvitation",method = RequestMethod.PUT)
-	public void sendInvitation(@RequestBody Event event,@RequestBody String userEmail,@RequestBody String guestEmail) throws HttpEventException{
-		EventEntity eventEntity = eventTransformer.transformAndValidateApiToDomain(event);
-		eventService.inviteToOf(eventEntity, userEmail, guestEmail);
+	public void sendInvitation(@RequestBody InvitationDTO invitationDTO) throws HttpEventException{
+		EventEntity eventEntity = eventTransformer.transformAndValidateApiToDomain(invitationDTO.getEvent());
+		eventService.inviteToOf(eventEntity, invitationDTO.getUserEmail(), invitationDTO.getGuestEmail());
 	}
 	
 }

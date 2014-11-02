@@ -13,6 +13,7 @@ EVENT_PLACE_PATH = "/place";
 EVENT_PLACE_CHOOSE_PATH = "/place/choose";
 EVENT_PROVIDERS_PATH = "/providers";
 EVENT_PROVIDER_EDIT_PATH = "/provider/edit";
+EVENT_CALENDAR_PATH = "/calendar";
 
 
 mieventoApp.config([ "$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider){
@@ -22,8 +23,7 @@ mieventoApp.config([ "$stateProvider", "$urlRouterProvider", function($stateProv
 	$stateProvider
 	.state("homeState", {
 		url: HOME_PATH,
-		templateUrl : "../partials/home.html",
-		controller : "homeController"
+		templateUrl : "../partials/home.html"
 	})
 	.state("loginState",{
 		url : LOGIN_PATH,
@@ -88,6 +88,11 @@ mieventoApp.config([ "$stateProvider", "$urlRouterProvider", function($stateProv
 		url : EVENT_PROVIDER_EDIT_PATH,
 		templateUrl : "../partials/events/providers/detailProvider.html",
 		controller : "editProviderEventController"
+	})
+	.state("eventState.calendar",{
+		url : EVENT_CALENDAR_PATH,
+		templateUrl : "../partials/events/calendar.html",
+		controller : "calendarEventController"
 	})
 	
 	

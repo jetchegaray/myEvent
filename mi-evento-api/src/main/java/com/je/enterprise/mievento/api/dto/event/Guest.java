@@ -1,29 +1,25 @@
 package com.je.enterprise.mievento.api.dto.event;
 
-import java.util.Date;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.je.enterprise.mievento.api.dto.location.Location;
 
 
 public class Guest extends Person {
 
-	Pair<StatusType, Date> invitationStatus;
+	InvitationStatus invitationStatus;
 
 	public Guest() {
 	}
 	
-	public Guest(String firstName,String lastName,String email,Location location,Pair<StatusType, Date> invitationStatus) {
+	public Guest(String firstName,String lastName,String email,Location location,InvitationStatus invitationStatus) {
 		super(firstName,lastName,email,location);
 		this.invitationStatus = invitationStatus;
 	}
 
-	public Pair<StatusType, Date> getInvitationStatus() {
+	public InvitationStatus getInvitationStatus() {
 		return invitationStatus;
 	}
 
-	public void setInvitationStatus(Pair<StatusType, Date> invitationStatus) {
+	public void setInvitationStatus(InvitationStatus invitationStatus) {
 		this.invitationStatus = invitationStatus;
 	}
 	

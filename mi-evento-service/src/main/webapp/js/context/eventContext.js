@@ -12,24 +12,24 @@ mieventoContext.service("eventContext",function(){
 		return selectedEvent;
 	}
 	
-	this.setSelectedEvent = function(selectedEvent){
-		this.selectedEvent = selectedEvent;
+	this.setSelectedEvent = function(event){
+		selectedEvent = event;
 	}
 	
 	this.deselectedEvent = function(){
-		this.selectedEvent = null;
+		selectedEvent = null;
 	}
 	//***********GUESTS EVENT **********
 	
 	this.getGuestsSelectedEvent = function(){
-		if (this.selectedEvent == null){
+		if (selectedEvent == null){
 			return null;
 		}
-		return this.selectedEvent.guests;
+		return selectedEvent.guests;
 	}
 	
 	this.addGuestSelectedEvent = function(guest){
-		this.selectedEvent.guests.push(guest);
+		selectedEvent.guests.push(guest);
 	}
 	
 	this.setEditGuest = function(guest){
@@ -44,27 +44,27 @@ mieventoContext.service("eventContext",function(){
 	//*********PLACE EVENT ************
 	
 	this.getPlaceSelectedEvent = function(){
-		if (this.selectedEvent == null){
+		if (selectedEvent == null){
 			return null;
 		}
-		return this.selectedEvent.place;
+		return selectedEvent.place;
 	}
 	
 	this.setPlaceSelectedEvent = function(place){
-		this.selectedEvent.place = place;
+		selectedEvent.place = place;
 	}
 	
 	//**********PROVIDERS EVENT ***********
 	
 	this.getProvidersSelectedEvent = function(){
-		return this.selectedEvent.providers;
+		return selectedEvent.providers;
 	}
 	
 	this.addProviderSelectedEvent = function(provider){
-		if (this.selectedEvent.providers == null){
-			this.selectedEvent.providers = [];
+		if (selectedEvent.providers == null){
+			selectedEvent.providers = [];
 		}
-		this.selectedEvent.providers.push(provider);
+		selectedEvent.providers.push(provider);
 	}
 	
 	this.setEditProvider = function(provider){

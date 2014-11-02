@@ -3,7 +3,7 @@
 		<div class="col-md-12">
 			<table id="guestsTable" class="table table-hover" ng-show="guests != null && guests.length">
 				<thead>
-				  <tr>
+				  <tr class="text-center">
 				     <th>Name</th>
 		           	 <th>Send Invitation</th>
 		           	 <th>Status</th>
@@ -14,8 +14,28 @@
 				<tbody>
 			        <tr ng-repeat="guest in guests">
 			          	<td>{{guest.firstName}} {{guest.lastName}}</td>
-			          	<td><span class="btn btn-link"><i class="fa fa-envelope glyphiconSpace"></i><a href ng-click="sendEmailToGuest(guest.email)"></a>{{guest.email}}</span></td>
-			          	<td>{{guest.invitationStatus.statusType.left}}</td>
+			          	<td><i class="text-info fa fa-envelope glyphiconSpace"></i><a href ng-click="sendEmailToGuest(guest)">{{guest.email}}</a></td>
+			          	<td>
+			          		<span ng-show="guest.invitationStatus.status == 'Confirmado'">
+			          			<i class="text-success fa fa-thumbs-o-up glyphiconSpace"></i>
+			          		</span>
+			          		<span  ng-show="guest.invitationStatus.status == 'Pendiente'">
+			          			<i class="text-info fa fa-bomb glyphiconSpace"></i>
+			          		</span>
+			          		<span  ng-show="guest.invitationStatus.status == 'Rechazo'">
+			          			<i class="text-danger fa fa-thumbs-o-down glyphiconSpace"></i>
+			          		</span>
+			          		<span ng-show="guest.invitationStatus.status == 'No invitado'">
+			          			<i class="text-warning fa fa-times-circle-o glyphiconSpace"></i>
+			          		</span>
+			          		<span ng-show="guest.invitationStatus.status == 'Confirma el dia'">
+			          			<i class="text-info fa fa-clock-o glyphiconSpace"></i>
+			          		</span>
+			          		{{guest.invitationStatus.status}}
+			          		<span ng-show="{guest.invitationStatus.updateStatusDate != null && guest.invitationStatus.status == 'Confirma el dia'">
+			          			- {{guest.invitationStatus.updateStatusDate  | date:'dd-MM-yyyy'}}
+			          		</span>
+			          	</td>
 			          	<td><p><button class="btn btn-primary btn-xs" ng-click="goToEditGuest(guest)"><span class="fa fa-pencil"></span></button></p></td>
 	    			  	<td>
 	    			  		<div ng-controller="deleteConfirmationModalController">

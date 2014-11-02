@@ -25,9 +25,14 @@
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 		<property name="messageConverters">
 			<list>
+				<ref bean="stringHttpMessageConverter"/>
 				<ref bean="jsonMessageConverter" />
 			</list>
 		</property>
+	</bean>
+	
+	<bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
+			<property name="supportedMediaTypes" value="text/plain" />
 	</bean>
 
 	<!-- Configure bean to convert JSON to POJO and vice versa -->
@@ -42,13 +47,20 @@
 		</property>
 	</bean>
 	
-	<!-- 	Configure Exception like JSON -->
-<!-- 	<bean id="methodHandlerExceptionResolver" class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver"> -->
-<!-- 		<property name="messageConverters"> -->
+     
+
+<!-- 	<bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper" /> -->
+<!-- 	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean"> -->
+<!-- 		<property name="targetObject" ref="jacksonObjectMapper" /> -->
+<!-- 		<property name="targetMethod" value="configure" /> -->
+<!-- 		<property name="arguments"> -->
 <!-- 			<list> -->
-<!-- 				<ref bean="jsonMessageConverter"/> -->
+<!-- 				<value type="com.fasterxml.jackson.databind.DeserializationFeature">FAIL_ON_UNKNOWN_PROPERTIES</value> -->
+<!-- 				<value>false</value> -->
 <!-- 			</list> -->
 <!-- 		</property> -->
 <!-- 	</bean> -->
+
+
 
 </beans>

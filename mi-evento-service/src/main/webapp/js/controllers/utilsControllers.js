@@ -23,9 +23,7 @@ mieventoControllers.controller("deleteConfirmationModalController", ["$scope","$
 					
 					var index = list.indexOf(element)
 					list.splice(index, 1);
-					
 					userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
-//						$state.go("eventState.guests");
 					}, function(error) {
 						applicationContext.getExceptionContext().setDanger(error.data);
 					})
@@ -33,6 +31,8 @@ mieventoControllers.controller("deleteConfirmationModalController", ["$scope","$
 			};
 
 		} ]);
+
+
 
 mieventoControllers.controller("deleteConfirmationInstanceController", [
 		"$scope", "$modalInstance", function($scope, $modalInstance) {
@@ -45,31 +45,28 @@ mieventoControllers.controller("deleteConfirmationInstanceController", [
 				$modalInstance.dismiss('cancel');
 			}
 
-		} ]);
+} ]);
 
-mieventoControllers.controller("datepickerController",
-		[
-				"$scope",
-				function($scope) {
 
-					// Disable weekend selection
-					$scope.disabled = function(date, mode) {
-						return (mode === 'day' && (date.getDay() === 0 || date
-								.getDay() === 6));
-					};
 
-					$scope.open = function($event) {
-						$event.preventDefault();
-						$event.stopPropagation();
+mieventoControllers.controller("datepickerController",["$scope",function($scope) {
 
-						$scope.opened = true;
-					};
+	
+		$scope.open = function($event) {
+			$event.preventDefault();
+			$event.stopPropagation();
 
-					$scope.dateOptions = {
-						formatYear : 'yy',
-						showWeeks : "false"
-					};
-					$scope.minDate = new Date();
-					$scope.maxDate = "22-06-2020";
-					$scope.format = "dd-MM-yyyy";
-				} ]);
+			$scope.opened = true;
+		};
+		
+		$scope.dateOptions = {
+			'year-format': "'yy'",
+			'starting-day': 1
+		};
+		
+		$scope.minDate = new Date();
+		$scope.maxDate = "22-06-2020";
+		$scope.format = "dd-MM-yyyy";
+		$scope.showWeeks = false;
+					
+}]);

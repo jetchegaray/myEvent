@@ -7,21 +7,19 @@
 						placeholder="Name" ng-model="event.name" required>
 				</div>
 			</div>
-
+			
 			<div ng-controller="datepickerController">
 				<div class="col-md-4">
 					<p class="input-group">
 						<input type="text" class="form-control"
-							datepicker-popup="{{format}}" placeholder="Date"
+							datepicker-popup="{{format}}" placeholder="Event Date"
 							ng-model="event.eventDate" is-open="opened" min-date="minDate"
-							max-date="maxDate" datepicker-popup="dd-MM-yyyy"
-							datepicker-options="dateOptions" ng-required close-text="Close"
-							class="well well-sm" />
-						<!-- 						<span class="input-group-btn"> -->
-						<!-- 							<button type="button" class="btn btn-default" -->
-						<!-- 								ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i> -->
-						<!-- 						</button> -->
-						</span>
+							max-date="maxDate" datepickerOptions="dateOptions" ng-required close-text="Close"/>
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-default"
+									ng-click="open($event)"><i class="fa fa-calendar"></i>
+								</button>
+							</span>
 					</p>
 				</div>
 			</div>

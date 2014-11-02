@@ -1,7 +1,7 @@
 package com.je.enterprise.mievento.domain.entity.common.event;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -10,7 +10,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.je.enterprise.mievento.api.dto.event.StatusType;
 
@@ -33,4 +32,6 @@ public class InvitationStatusTest {
 		writer.close();
 		
 	}
+	
+
 }

@@ -167,3 +167,7 @@
 }  
 
 .top-buffer { margin-top:40px; }
+
+input.ng-dirty.ng-invalid {
+  color: red
+}

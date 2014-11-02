@@ -2,7 +2,6 @@ package com.je.enterprise.mievento.domain.transformer.impl;
 
 import java.math.BigDecimal;
 
-import org.apache.commons.lang3.tuple.Pair;
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Before;
@@ -11,6 +10,7 @@ import org.junit.Test;
 import com.google.common.collect.Lists;
 import com.je.enterprise.mievento.api.dto.event.Event;
 import com.je.enterprise.mievento.api.dto.event.Guest;
+import com.je.enterprise.mievento.api.dto.event.InvitationStatus;
 import com.je.enterprise.mievento.api.dto.event.StatusType;
 import com.je.enterprise.mievento.api.dto.location.CommercialLocation;
 import com.je.enterprise.mievento.api.dto.location.CountryCode;
@@ -39,7 +39,7 @@ public class TransformersImplTest {
 		StreetAddressTransformer streetAddressTransformer = new StreetAddressTransformer();
 		this.commercialLocationTransformer = new CommercialLocationTransformer(streetAddressTransformer);
 		this.locationTransformer = new LocationTransformer(streetAddressTransformer);
-		this.guestTransformer = new GuestTransformer(locationTransformer);
+		this.guestTransformer = new GuestTransformer(locationTransformer,new InvitationStatusTransformer());
 		
 		TransformerList<GuestEntity, Guest> guestTransformerList = new TransformerList<GuestEntity, Guest>(guestTransformer);
 		this.eventTransformer = new EventTransformer(commercialLocationTransformer, guestTransformerList);
@@ -117,7 +117,7 @@ public class TransformersImplTest {
 		Assert.assertNull(this.guestTransformer.transformAndValidateApiToDomain(null));
 		
 		guest.setEmail("kshdf@mail.com");
-		guest.setInvitationStatus(Pair.of(StatusType.CONFIRMED, DateTime.now().toDate()));
+		guest.setInvitationStatus(new InvitationStatus(StatusType.CONFIRMED, DateTime.now().toDate()));
 		Assert.assertNotNull(this.guestTransformer.transformAndValidateApiToDomain(guest));
 		
 		guest.setLocation(location);
@@ -129,7 +129,7 @@ public class TransformersImplTest {
 		Assert.assertNull(this.guestTransformer.transformAndValidateDomainToApi(null));
 		
 		guestEntity.setEmail("kshdf@mail.com");
-		guestEntity.setInvitationStatus(Pair.of(StatusType.WAIT_TILL_DAY, DateTime.now().plusDays(7).toDate()));
+		guest.setInvitationStatus(new InvitationStatus(StatusType.WAIT_TILL_DAY, DateTime.now().plusDays(7).toDate()));
 		Assert.assertNotNull(this.guestTransformer.transformAndValidateDomainToApi(guestEntity));
 		
 		guestEntity.setLocation(locationEntity);

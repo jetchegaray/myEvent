@@ -30,15 +30,20 @@ mieventoControllers.controller("guestsEventController", ["$scope", "$state", "$m
 				$state.go("eventState.guestEdit");
 			};
 			
-			$scope.sendEmailToGuest = function(emailGuest){
+			$scope.sendEmailToGuest = function(guest){
 				var selectedEvent = applicationContext.getEventContext().getSelectedEvent();
-				var loggedUser = applicationContext.getLoggedUser();
+				var loggedUser = applicationContext.getUserContext().getLoggedUser();
 				
-				eventGuestService.sendInvitation(selectedEvent, emailGuest, loggedUser.email,
-				  function(data){
+				params = {
+					event : selectedEvent,
+					userEmail : loggedUser.email,
+					guestEmail : guest.email
+				}
+				
+				eventGuestService.sendInvitation(params,function(data){
 					
-					var info = applicationContext.getExceptionContext().getInfo();
-					info.description = "La Invitacion Fue enviada Correctamente";
+					var info = applicationContext.getExceptionContext().getError();
+					info.description = "La Invitacion fue enviada Correctamente";
 					applicationContext.getExceptionContext().setInfo(info);
 					
 				}, function(error){
@@ -50,19 +55,35 @@ mieventoControllers.controller("guestsEventController", ["$scope", "$state", "$m
 } ]);
 
 
-mieventoControllers.controller("newGuestEventController", ["$scope", "$state", "userService", "eventGuestService", "applicationContext", 
-             function($scope, $state, userService, eventGuestService, applicationContext) {
+mieventoControllers.controller("invitationsGuestEventController", ["$scope", "eventGuestService", "applicationContext", function($scope, eventGuestService, applicationContext) {
 			
-			//get all status type TODO podria ir en otro controller si lo necesito de otro lugar.
 			eventGuestService.getAllStatusTypes(function(data) {
 				$scope.statusTypes = data;
 			}, function(error) {
 				applicationContext.getExceptionContext().setDanger(error.data);
 			});
 	
+} ]);
+                                              			
+
+
+
+mieventoControllers.controller("newGuestEventController", ["$scope", "$state", "userService", "eventGuestService", "applicationContext", 
+             function($scope, $state, userService, eventGuestService, applicationContext) {
+			
+			//FIXME unificar en un solo lugar
+			eventGuestService.getAllStatusTypes(function(data) {
+				$scope.statusTypes = data;
+			}, function(error) {
+				applicationContext.getExceptionContext().setDanger(error.data);
+			});
+			
 			$scope.save = function() {
 				applicationContext.getEventContext().addGuestSelectedEvent($scope.guest);
-
+				
+				if ($scope.guestForm.$invalid){
+					return;
+				}
 				userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
 					$state.go("eventState.guests");
 				}, function(error) {
@@ -73,12 +94,23 @@ mieventoControllers.controller("newGuestEventController", ["$scope", "$state", "
 } ]);
 
 
-mieventoControllers.controller("editGuestEventController", ["$scope", "$state", "userService", "applicationContext", 
-                                function($scope, $state, userService, applicationContext) {
-			
+mieventoControllers.controller("editGuestEventController", ["$scope", "$state", "userService", "eventGuestService", "applicationContext", 
+                                function($scope, $state, userService, eventGuestService, applicationContext) {
+			//FIXME unificar en un solo lugar
+			eventGuestService.getAllStatusTypes(function(data) {
+				$scope.statusTypes = data;
+			}, function(error) {
+				applicationContext.getExceptionContext().setDanger(error.data);
+			});
+	
 			$scope.guest = applicationContext.getEventContext().getEditGuest();
 			
 			$scope.save = function() {
+			
+				if ($scope.guestForm.$invalid){
+					return;
+				}
+				
 				userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
 					$state.go("eventState.guests");
 				}, function(error) {
@@ -165,4 +197,14 @@ mieventoControllers.controller("editProviderEventController", ["$scope", "$state
  			}
 
  }]);
+
+
+
+mieventoControllers.controller("calendarEventController", ["$scope", "$state", "userService", "applicationContext", 
+					function($scope, $state, userService, applicationContext) {
+					
+		 	$scope.events = applicationContext.getUserContext().getLoggedUserEvents();
+					
+
+}]);
 
