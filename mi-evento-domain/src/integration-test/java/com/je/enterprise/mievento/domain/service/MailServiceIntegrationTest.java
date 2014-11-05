@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 
-import javax.mail.MessagingException;
-
 import org.apache.commons.lang3.RandomStringUtils;
 import org.joda.time.DateTime;
 import org.junit.Before;
@@ -53,7 +51,7 @@ public class MailServiceIntegrationTest {
 	
 	@Test
 	public void sendInvitation_testOk(){
-		EventEntity eventEntity = new EventEntity("EventoTest",DateTime.now().toDate(),new CommercialLocationEntity("placeTest", CountryCode.AR, "Bs As", "CABA", new StreetAddressEntity("streetTest", BigDecimal.TEN, null, "Villa lugano")),null);
+		EventEntity eventEntity = new EventEntity("EventoTest",DateTime.now().toDate(),new CommercialLocationEntity("placeTest", CountryCode.AR, "Bs As", "CABA", new StreetAddressEntity("streetTest", BigDecimal.TEN, null, "Villa lugano")),null,null);
 		mailService.sendInvitation(eventEntity, "aa@gmail.com", "etchegarayjavier@gmail.com");
 	}
 	

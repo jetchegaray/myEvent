@@ -10,6 +10,7 @@ import org.mongodb.morphia.annotations.Reference;
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.GuestEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
+import com.je.enterprise.mievento.domain.entity.common.event.TaskEntity;
 import com.je.enterprise.mievento.domain.entity.location.CommercialLocationEntity;
 
 public class WeddingEntity extends EventEntity {
@@ -31,10 +32,10 @@ public class WeddingEntity extends EventEntity {
 	}
 	
 	public WeddingEntity(String name, Date eventDate,
-			CommercialLocationEntity eventLocation, List<GuestEntity> guests,PersonEntity husband, PersonEntity wife,
+			CommercialLocationEntity eventLocation, List<GuestEntity> guests, List<TaskEntity> tasks, PersonEntity husband, PersonEntity wife,
 			List<PresentEntity> presents, PlaceEntity place, BigDecimal budget,
 			BigDecimal finalPrice, List<ProviderEntity> providers) {
-		super(name, eventDate, eventLocation, guests);
+		super(name, eventDate, eventLocation, guests, tasks);
 		this.husband = husband;
 		this.wife = wife;
 		this.presents = presents;

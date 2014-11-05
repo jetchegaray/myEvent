@@ -12,6 +12,7 @@ import com.je.enterprise.mievento.api.dto.event.Event;
 import com.je.enterprise.mievento.api.dto.event.Guest;
 import com.je.enterprise.mievento.api.dto.event.InvitationStatus;
 import com.je.enterprise.mievento.api.dto.event.StatusType;
+import com.je.enterprise.mievento.api.dto.event.Task;
 import com.je.enterprise.mievento.api.dto.location.CommercialLocation;
 import com.je.enterprise.mievento.api.dto.location.CountryCode;
 import com.je.enterprise.mievento.api.dto.location.Location;
@@ -19,6 +20,7 @@ import com.je.enterprise.mievento.api.dto.location.StreetAddress;
 import com.je.enterprise.mievento.api.dto.user.User;
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.GuestEntity;
+import com.je.enterprise.mievento.domain.entity.common.event.TaskEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.UserEntity;
 import com.je.enterprise.mievento.domain.entity.location.CommercialLocationEntity;
 import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
@@ -32,6 +34,7 @@ public class TransformersImplTest {
 	private CommercialLocationTransformer commercialLocationTransformer;
 	private GuestTransformer guestTransformer;
 	private EventTransformer eventTransformer;
+	private TaskTransformer taskTransformer;
 	
 	@Before
 	public void setUp(){
@@ -40,9 +43,9 @@ public class TransformersImplTest {
 		this.commercialLocationTransformer = new CommercialLocationTransformer(streetAddressTransformer);
 		this.locationTransformer = new LocationTransformer(streetAddressTransformer);
 		this.guestTransformer = new GuestTransformer(locationTransformer,new InvitationStatusTransformer());
-		
+		TransformerList<TaskEntity, Task> taskTransformerList = new TransformerList<TaskEntity, Task>(taskTransformer);
 		TransformerList<GuestEntity, Guest> guestTransformerList = new TransformerList<GuestEntity, Guest>(guestTransformer);
-		this.eventTransformer = new EventTransformer(commercialLocationTransformer, guestTransformerList);
+		this.eventTransformer = new EventTransformer(commercialLocationTransformer, guestTransformerList,taskTransformerList);
 		
 		userTransformer = new UserTransformer(new TransformerList<EventEntity, Event>(eventTransformer));
 	}

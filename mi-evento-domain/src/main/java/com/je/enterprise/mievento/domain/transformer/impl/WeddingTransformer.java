@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.je.enterprise.mievento.api.dto.event.Guest;
 import com.je.enterprise.mievento.api.dto.event.Person;
+import com.je.enterprise.mievento.api.dto.event.Task;
 import com.je.enterprise.mievento.api.dto.event.wedding.Place;
 import com.je.enterprise.mievento.api.dto.event.wedding.Present;
 import com.je.enterprise.mievento.api.dto.event.wedding.Wedding;
@@ -14,6 +15,7 @@ import com.je.enterprise.mievento.api.dto.location.CommercialLocation;
 import com.je.enterprise.mievento.api.dto.provider.Provider;
 import com.je.enterprise.mievento.domain.entity.common.event.GuestEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
+import com.je.enterprise.mievento.domain.entity.common.event.TaskEntity;
 import com.je.enterprise.mievento.domain.entity.location.CommercialLocationEntity;
 import com.je.enterprise.mievento.domain.entity.wedding.PersonEntity;
 import com.je.enterprise.mievento.domain.entity.wedding.PlaceEntity;
@@ -23,7 +25,7 @@ import com.je.enterprise.mievento.domain.transformer.Transformer;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
 
 @Component
-public class WeddingTransformers extends Transformer<WeddingEntity, Wedding> {
+public class WeddingTransformer extends Transformer<WeddingEntity, Wedding> {
 
 	private CommercialLocationTransformer commercialLocationTransformer;
 	private PersonTransformer personTransformer;
@@ -32,15 +34,16 @@ public class WeddingTransformers extends Transformer<WeddingEntity, Wedding> {
 	private TransformerList<GuestEntity, Guest> guestTransformerList;
 	private TransformerList<ProviderEntity, Provider> providerTransformerList;
 	private TransformerList<PresentEntity, Present> presentTransformerList;
+	private TransformerList<TaskEntity, Task> taskTransformerList;
 
 	@Autowired
-	public WeddingTransformers(
+	public WeddingTransformer(
 			CommercialLocationTransformer commercialLocationTransformer,
 			PersonTransformer personTransformer,
 			PlaceTransformer placeTransformer,
 			TransformerList<GuestEntity, Guest> guestTransformerList,
 			TransformerList<ProviderEntity, Provider> providerTransformerList,
-			TransformerList<PresentEntity, Present> presentTransformerList) {
+			TransformerList<PresentEntity, Present> presentTransformerList,TransformerList<TaskEntity, Task> taskTransformerList) {
 
 		this.commercialLocationTransformer = commercialLocationTransformer;
 		this.personTransformer = personTransformer;
@@ -48,6 +51,7 @@ public class WeddingTransformers extends Transformer<WeddingEntity, Wedding> {
 		this.providerTransformerList = providerTransformerList;
 		this.presentTransformerList = presentTransformerList;
 		this.placeTransformer = placeTransformer;
+		this.taskTransformerList = taskTransformerList;
 	}
 
 	@Override
@@ -78,6 +82,8 @@ public class WeddingTransformers extends Transformer<WeddingEntity, Wedding> {
 	public WeddingEntity transformApiToDomain(Wedding apiObject) {
 		CommercialLocationEntity eventLocationEntity = this.commercialLocationTransformer
 				.transformAndValidateApiToDomain(apiObject.getEventLocation());
+		List<TaskEntity> tasksEntities = this.taskTransformerList
+				.transformApiToDomain(apiObject.getTasks());
 		List<GuestEntity> guestsEntities = this.guestTransformerList
 				.transformApiToDomain(apiObject.getGuests());
 		List<ProviderEntity> providersEntities = this.providerTransformerList
@@ -92,7 +98,7 @@ public class WeddingTransformers extends Transformer<WeddingEntity, Wedding> {
 				.getPlace());
 
 		return new WeddingEntity(apiObject.getName(), apiObject.getEventDate(),
-				eventLocationEntity, guestsEntities, husbandEntity, wifeEntity, presentsEntities, placeEntity,
+				eventLocationEntity, guestsEntities, tasksEntities, husbandEntity, wifeEntity, presentsEntities, placeEntity,
 				apiObject.getBudget(), apiObject.getFinalPrice(),
 				providersEntities);
 	}

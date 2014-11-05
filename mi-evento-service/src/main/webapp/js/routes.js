@@ -81,12 +81,12 @@ mieventoApp.config([ "$stateProvider", "$urlRouterProvider", function($stateProv
 	})
 	.state("eventState.providers",{
 		url : EVENT_PROVIDERS_PATH,
-		templateUrl : "../partials/events/providers/providers.html",
+		templateUrl : "../partials/events/providers/eventProviders.html",
 		controller : "providersEventController"
 	})
 	.state("eventState.providerEdit",{
 		url : EVENT_PROVIDER_EDIT_PATH,
-		templateUrl : "../partials/events/providers/detailProvider.html",
+		templateUrl : "../partials/events/providers/detailEventProvider.html",
 		controller : "editProviderEventController"
 	})
 	.state("eventState.calendar",{

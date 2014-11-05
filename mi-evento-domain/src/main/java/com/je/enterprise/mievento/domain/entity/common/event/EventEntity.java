@@ -16,17 +16,19 @@ public class EventEntity {
 	private CommercialLocationEntity eventLocation;
 	@Embedded
 	private List<GuestEntity> guests = Lists.<GuestEntity>newArrayList();
-	
+	@Embedded
+	private List<TaskEntity> tasks = Lists.<TaskEntity>newArrayList();
 	
 	public EventEntity() {
 	}
 	
 	public EventEntity(String name, Date eventDate, CommercialLocationEntity eventLocation,
-			List<GuestEntity> guests) {
+			List<GuestEntity> guests, List<TaskEntity> tasks) {
 		this.name = name;
 		this.eventDate = eventDate;
 		this.eventLocation = eventLocation;
 		this.guests = guests;
+		this.tasks = tasks;
 	}
 
 	public Date getEventDate() {
@@ -59,6 +61,14 @@ public class EventEntity {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<TaskEntity> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(List<TaskEntity> tasks) {
+		this.tasks = tasks;
 	}
 	
 }

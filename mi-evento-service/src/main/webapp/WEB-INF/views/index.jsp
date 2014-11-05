@@ -18,9 +18,10 @@
 <link rel="stylesheet" href="../css/animate.css">
 <link rel="stylesheet" href="../bower_components/angular-ui-select/dist/select.min.css">
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
-  
+<link rel="stylesheet" href="../bower_components/fullcalendar/dist/fullcalendar.css">
 <!-- ********************** Jquery ********************** -->
 <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="../bower_components/jquery-ui/ui/jquery-ui.js"></script>
 
 <!-- ********************** Angularjs Components ********************** -->
 
@@ -31,12 +32,10 @@
 <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="../bower_components/angular-ui-select/dist/select.min.js"></script>
 <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-
-<script type="text/javascript" src="../bower_components/jquery-ui/ui/jquery-ui.js"></script>
-<script type="text/javascript" src="../bower_components/angular/angular.js"></script>
+<script src="../bower_components/moment/moment.js"></script>
 <script type="text/javascript" src="../bower_components/angular-ui-calendar/src/calendar.js"></script>
-<script type="text/javascript" src="../bower_components/fullcalendar/fullcalendar.js"></script>
-<script type="text/javascript" src="../bower_components/fullcalendar/gcal.js"></script>
+<script type="text/javascript" src="../bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+<script type="text/javascript" src="../bower_components/fullcalendar/dist/gcal.js"></script>
 
 <!-- ********************** angular app ********************** -->
 
@@ -50,6 +49,10 @@
 <script src="../js/controllers/providerControllers.js"></script>
 <script src="../js/controllers/userControllers.js"></script>
 <script src="../js/controllers/eventControllers.js"></script>
+<script src="../js/controllers/guestEventControllers.js"></script>
+<script src="../js/controllers/placeEventControllers.js"></script>
+<script src="../js/controllers/providerEventControllers.js"></script>
+<script src="../js/controllers/calendarEventControllers.js"></script>
 <script src="../js/controllers/utilsControllers.js"></script>
 <script src="../js/controllers/exceptionControllers.js"></script>
 
@@ -94,8 +97,7 @@
 				<ul class="nav navbar-nav">
 					<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
 					
-					</li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown">Eventos<span class="caret"></span></a>
 
 						<ul class="dropdown-menu" role="menu">

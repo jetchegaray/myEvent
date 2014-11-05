@@ -13,6 +13,7 @@ public class Event {
 	private Date eventDate;
 	private CommercialLocation eventLocation;
 	private List<Guest> guests;
+	private List<Task> tasks;
 	
 	public Event() {
 	}
@@ -55,6 +56,14 @@ public class Event {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(List<Task> tasks) {
+		this.tasks = tasks;
 	}
 
 }

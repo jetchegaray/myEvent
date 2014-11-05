@@ -1,7 +1,6 @@
 package com.je.enterprise.mievento.api.dto.provider;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import com.je.enterprise.mievento.api.dto.location.Location;
 

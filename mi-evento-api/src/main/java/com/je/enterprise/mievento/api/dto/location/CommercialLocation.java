@@ -1,6 +1,5 @@
 package com.je.enterprise.mievento.api.dto.location;
 
-import com.je.enterprise.mievento.api.dto.location.CountryCode;
 
 
 public class CommercialLocation extends Location{

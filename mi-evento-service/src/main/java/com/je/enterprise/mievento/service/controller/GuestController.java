@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.je.enterprise.mievento.api.dto.event.Event;
 import com.je.enterprise.mievento.api.dto.event.StatusType;
 import com.je.enterprise.mievento.api.dto.wrapper.InvitationDTO;
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
