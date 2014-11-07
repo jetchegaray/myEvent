@@ -193,111 +193,57 @@
 				<artifactId>mail</artifactId>
 				<version>${mail.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.github.jsimone</groupId>
+				<artifactId>webapp-runner</artifactId>
+				<version>7.0.34.0</version>
+				<scope>provided</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
 	<build>
 		<finalName>mievento</finalName>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.1</version>
-					<configuration>
-						<source>1.7</source>
-						<target>1.7</target>
-					</configuration>
-				</plugin>
-<!-- 				<plugin> -->
-<!-- 					<groupId>org.apache.maven.plugins</groupId> -->
-<!-- 					<artifactId>maven-war-plugin</artifactId> -->
-<!-- 					<version>2.1.1</version> -->
-<!-- 				</plugin> -->
-				<plugin>
-					<groupId>org.apache.tomcat.maven</groupId>
-					<artifactId>tomcat7-maven-plugin</artifactId>
-					<version>2.2</version>
-					<configuration>
-						<url>http://localhost:8080/manager/text</url>
-						<server>TomcatServer</server>
-						<path>/</path>
-						<update>true</update>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>exec-maven-plugin</artifactId>
-					<version>1.2.1</version>
-					<executions>
-						<execution>
-							<id>bower-components</id>
-							<phase>generate-sources</phase>
-							<goals>
-								<goal>exec</goal>
-							</goals>
-							<configuration>
-								<executable>bower</executable>
-								<workingDirectory>${basedir}/mi-evento-service/src/main/webapp</workingDirectory>
-								<arguments>
-									<argument>install</argument>
-								</arguments>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-dependency-plugin</artifactId>
-					<version>2.4</version>
-					<executions>
-						<execution>
-							<phase>package</phase>
-							<goals>
-								<goal>copy-dependencies</goal>
-							</goals>
-							<configuration>
-                            	<includeArtifactIds>webapp-runner</includeArtifactIds>
-                        	</configuration>
-						</execution>
-					</executions>
-				</plugin>
-			</plugins>
-		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>com.github.jsimone</groupId>
+									<artifactId>webapp-runner</artifactId>
+									<version>7.0.34.0</version>
+									<destFileName>webapp-runner.jar</destFileName>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 	</build>
 
 
-	<!-- <profiles> -->
-	<!-- <profile> -->
-	<!-- <id>integration-test</id> -->
-	<!-- <activation> -->
-	<!-- <activeByDefault>true</activeByDefault> -->
-	<!-- <property> -->
-	<!-- <name>integration-test</name> -->
-	<!-- </property> -->
-	<!-- </activation> -->
-	<!-- <build> -->
-	<!-- <plugins> -->
-	<!-- <plugin> -->
-	<!-- <groupId>org.codehaus.mojo</groupId> -->
-	<!-- <artifactId>build-helper-maven-plugin</artifactId> -->
-	<!-- <version>1.8</version> -->
-	<!-- <executions> -->
-	<!-- <execution> -->
-	<!-- <id>add-test-source</id> -->
-	<!-- <phase>initialize</phase> -->
-	<!-- <goals> -->
-	<!-- <goal>add-test-source</goal> -->
-	<!-- </goals> -->
-	<!-- <configuration> -->
-	<!-- <sources> -->
-	<!-- <source>src/integration-test/java</source> -->
-	<!-- </sources> -->
-	<!-- </configuration> -->
-	<!-- </execution> -->
-	<!-- </executions> -->
-	<!-- </plugin> -->
-	<!-- </plugins> -->
-	<!-- </build> -->
-	<!-- </profile> -->
-	<!-- </profiles> -->
 </project>

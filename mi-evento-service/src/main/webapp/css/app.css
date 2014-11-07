@@ -154,14 +154,27 @@
 
 /**/
 
-.more-info.ng-enter {
-    animation: fadeIn 1s;
-  }
-  
-.more-info.ng-leave {
-      animation: fadeOut 1s;
-  }
-  
+.animation {
+  -webkit-transition: 1s;
+}
+
+.animation.ng-enter {
+  opacity: 0;
+}
+
+.animation.ng-leave {
+  opacity: 1;
+}
+
+.animation.ng-enter.ng-enter-active {
+   animation: fadeIn 1s;
+}
+
+.animation.ng-leave.ng-leave-active {
+   animation: fadeOut 1s;
+ }
+
+ 
 .panel-body p {
 	margin : 15px; 
 }  

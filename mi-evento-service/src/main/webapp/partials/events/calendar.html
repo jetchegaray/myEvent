@@ -1,5 +1,5 @@
 
-<section id="directives-calendar" ng-controller="calendarEventController">
+<div id="directives-calendar" ng-controller="calendarEventController">
 	<div class="well">
 		<div class="row">
 <!-- 			<div class="col-md-2 col-sm-2"> -->
@@ -34,12 +34,25 @@
 								ng-click="changeView('month', myCalendar1)">Month</button>
 						</div>
 					</div>
-					<div class="calendar" ng-model="eventSources"
-						calendar="myCalendar1" config="uiConfig.calendar"
+					<div class="calendar" ng-model="eventSources" calendar="myCalendar1" config="uiConfig.calendar"
 						ui-calendar="uiConfig.calendar"></div>
-
 				</div>
 			</div>
 		</div>
 	</div>
-</section>
+	
+	<div ng-controller="deleteConfirmationModalController">
+		<script type="text/ng-template" id="deleteConfirmation.html">
+			<div class="modal-header">
+        		<h4 class="modal-title custom_align" id="Heading">Delete entry</h4>
+      		</div>
+        	<div class="modal-body">
+       			<div class="alert alert-warning"><span class="fa fa-warning glyphiconSpace"></span> Are you sure you want to delete ?</div>
+       		</div>
+        	<div class="modal-footer ">
+        		<button type="button" class="btn btn-warning" ng-click="ok()"><span class="fa fa-check-circle-o"></span> Yes</button>
+        		<button type="button" class="btn btn-warning" ng-click="cancel()"><span class="fa fa-close"></span> No</button>
+      		</div>
+    	</script>
+	</div>	
+</div>

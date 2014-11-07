@@ -2,7 +2,8 @@
 mieventoControllers.controller("calendarEventController", ["$scope", "$state", "userService", "applicationContext", 
 					function($scope, $state, userService, applicationContext) {
 					
-//		 	$scope.events = applicationContext.getUserContext().getLoggedUserEvents();
+		$scope.calendarEvents = calendarBuilder(applicationContext);
+		
 	  	var date = new Date();
 	    var d = date.getDate();
 	    var m = date.getMonth();
@@ -112,4 +113,38 @@ mieventoControllers.controller("calendarEventController", ["$scope", "$state", "
 	        });
 	    };
 	
+	    
+	    calendarEventBuilder = function(applicationContext){
+	    	calendarEvents = [];
+	    	
+	    	events = applicationContext.getUserContext().getLoggedUserEvents();
+	    	
+	    	angular.forEach(events,function(event){
+	    		calendarEvents.push(newCalendarEvent(event.name, new Date(event.eventDate).format("dd-mm-yyyy HH:MM"),
+	    			new Date(y, m, 29), 'openSesame'));
+	    		
+	    		angular.forEach(event.tasks,function(task){
+	    			calendarEvents.push(newCalendarEvent(task.name, new Date(task.initialDate).format("dd-mm-yyyy HH:MM"),
+	    					new Date(task.finalDate).format("dd-mm-yyyy HH:MM"), 'openSesame'));
+	    		});
+	    		
+	    		angular.forEach(event.guests,function(guest){
+	    			calendarEvents.push(newCalendarEvent(guest.firstName+" "+guest.lastName+" should confirm.", new Date(guest.invitationStatus.updateStatusDate).format("dd-mm-yyyy HH:MM"),
+	    					new Date(guest.invitationStatus.updateStatusDate).format("dd-mm-yyyy HH:MM"), 'openSesame'));
+	    		});
+	    	});
+	    		
+	    	newCalendarEvent = function(name, initialDate, finalDate, className){
+	    		return {
+	    	        title: name,
+	    	        start:  initialDate,
+	    	        end: finalDate,
+	    	        className: [className]
+	    	      }
+	    	}	
+	    	
+	    	
+
+	    } 
+	    
 }]);

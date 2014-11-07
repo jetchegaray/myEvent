@@ -57,11 +57,11 @@
 <script src="../js/controllers/exceptionControllers.js"></script>
 
 <!-- ********************** contexts ********************** -->
-<script src="../js/context/applicationContext.js"></script>
-<script src="../js/context/userContext.js"></script>
-<script src="../js/context/eventContext.js"></script>
-<script src="../js/context/exceptionContext.js"></script>
-<script src="../js/context/providerContext.js"></script>
+<script src="../js/contexts/applicationContext.js"></script>
+<script src="../js/contexts/userContext.js"></script>
+<script src="../js/contexts/eventContext.js"></script>
+<script src="../js/contexts/exceptionContext.js"></script>
+<script src="../js/contexts/providerContext.js"></script>
 
 
 
