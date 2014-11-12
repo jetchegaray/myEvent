@@ -21,11 +21,12 @@
 <link rel="stylesheet" href="../bower_components/fullcalendar/dist/fullcalendar.css">
 <!-- ********************** Jquery ********************** -->
 <script src="../bower_components/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" src="../bower_components/jquery-ui/ui/jquery-ui.js"></script>
+<script type="text/javascript" src="../bower_components/jquery-ui/jquery-ui.min.js"></script>
 
 <!-- ********************** Angularjs Components ********************** -->
 
 <script src="../bower_components/angular/angular.js"></script>
+<script src="../bower_components/angular-route/angular-route.js"></script>
 <script src="../bower_components/angular-resource/angular-resource.js"></script>
 <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
 <script src="../bower_components/angular-animate/angular-animate.js"></script>
@@ -104,15 +105,14 @@
 							<li ng-repeat="event in $root.loggedUser.events | orderBy:+name">
 								<a href ng-click="$root.selectEvent(event)">{{event.name}}</a></li>
 							<li class="divider" ng-show="$root.loggedUser.events != null && $root.loggedUser.events.length"></li>
-							<li><a ui-sref="eventState.create">Crear Nuevo Evento</a></li>
+							<li><a ui-sref="eventState.events">Crear Nuevo Evento</a></li>
 						</ul>
 					</li>
 					
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown">Servicios<span class="caret"></span></a>
 
-						<ul class="dropdown-menu" role="menu"
-							ng-controller="providerTypeController">
+						<ul class="dropdown-menu" role="menu" ng-controller="providerTypeController">
 							<li ng-repeat="type in types | orderBy:'toString()'"><a ui-sref="providerListState({providerType : type})">{{type}}</a></li>
 						</ul>
 					</li>
@@ -126,7 +126,8 @@
 							<li class="dropdown-header">Proximamente</li>
 							<li><a href="#">Recitales</a></li>
 							<li><a href="#">Encuentros</a></li>
-						</ul></li>
+						</ul>
+					</li>
 				
 				<li><a class="page-scroll" href="#contact">Contacto</a>
 				</li>	

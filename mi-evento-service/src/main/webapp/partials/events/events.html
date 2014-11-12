@@ -76,13 +76,19 @@
 			</accordion-group> 
 		</accordion>	 
 	</div>
-	<div class="col-sm-9">
-		<ol class="breadcrumb">
- 			<li><a href="#">Home</a></li>
-  			<li><a href="#">Library</a></li>
-  			<li class="active">Data</li>
-		</ol>
-		<div ui-view class="slide-animation"></div>
+	<div class="col-sm-9" >
+		<div ng-controller="selectedEventController">
+			<span ng-show="selectedEvent == null">
+				<ol class="breadcrumb text-center alert-danger">	
+					<strong>Please, selected an event to organize !</strong>
+				</ol>
+			</span>	
+			<span ng-show="selectedEvent != null">	
+				<ol class="breadcrumb text-center alert-success">	
+					<strong>Selected Event : {{selectedEvent.name}}</strong>
+				</ol>
+		</div>	
+		<div ui-view class="animation"></div>
 	</div>
 	
 	<div ng-controller="deleteConfirmationModalController">

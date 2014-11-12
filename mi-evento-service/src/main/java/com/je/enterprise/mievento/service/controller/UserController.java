@@ -31,7 +31,7 @@ public class UserController {
 	
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.PUT)
-		public User login(@RequestBody User user) {
+	public User login(@RequestBody User user) {
 			return userTransformer.transformDomainToApi(userService.login(user.getEmail(),user.getPassword()));
 	}
 	

@@ -2,38 +2,7 @@
 <div id="directives-calendar" ng-controller="calendarEventController">
 	<div class="well">
 		<div class="row">
-<!-- 			<div class="col-md-2 col-sm-2"> -->
-<!-- 					<button type="button" class="btn btn-primary" ng-click="addEvent()"> -->
-<!-- 						Add Event</button> -->
-			
-<!-- 				<ul class="unstyled"> -->
-<!-- 					<li ng-repeat="e in events"> -->
-<!-- 						<div class="alert alert-info"> -->
-<!-- 							<a class="close" ng-click="remove($index)"><i -->
-<!-- 								class="fa fa-times"></i></a> <b> <input ng-model="e.title"></b> -->
-<!-- 							{{e.start | date:"MMM dd"}} - {{e.end | date:"MMM dd"}} -->
-<!-- 						</div> -->
-<!-- 					</li> -->
-<!-- 				</ul> -->
-<!-- 			</div> -->
-
 			<div class="span6">
-				<div select="renderCalender(myCalendar1);">
-					<div class="alert-success calAlert"
-						ng-show="alertMessage != undefined && alertMessage != ''">
-						<h4>{{alertMessage}}</h4>
-					</div>
-					<div class="btn-toolbar">
-						<button type="button" class="btn btn-primary" ng-click="addEvent()">Add Event</button>
-						<div class="btn-group pull-right">
-							<button class="btn btn-success"
-								ng-click="changeView('agendaDay', myCalendar1)">AgendaDay</button>
-							<button class="btn btn-success"
-								ng-click="changeView('agendaWeek', myCalendar1)">AgendaWeek</button>
-							<button class="btn btn-success"
-								ng-click="changeView('month', myCalendar1)">Month</button>
-						</div>
-					</div>
 					<div class="calendar" ng-model="eventSources" calendar="myCalendar1" config="uiConfig.calendar"
 						ui-calendar="uiConfig.calendar"></div>
 				</div>
@@ -41,13 +10,13 @@
 		</div>
 	</div>
 	
-	<div ng-controller="deleteConfirmationModalController">
-		<script type="text/ng-template" id="deleteConfirmation.html">
+	<div>
+		<script type="text/ng-template" id="deleteCalendarEvent.html">
 			<div class="modal-header">
-        		<h4 class="modal-title custom_align" id="Heading">Delete entry</h4>
+        		<h4 class="modal-title custom_align" id="Heading">Delete Task</h4>
       		</div>
         	<div class="modal-body">
-       			<div class="alert alert-warning"><span class="fa fa-warning glyphiconSpace"></span> Are you sure you want to delete ?</div>
+       			<div class="alert alert-warning"><span class="fa fa-warning glyphiconSpace"></span> Are you sure you want to delete the task <strong>{{task.title}}</strong> ?</div>
        		</div>
         	<div class="modal-footer ">
         		<button type="button" class="btn btn-warning" ng-click="ok()"><span class="fa fa-check-circle-o"></span> Yes</button>
@@ -55,4 +24,64 @@
       		</div>
     	</script>
 	</div>	
+</div>
+
+
+<div>
+	<script type="text/ng-template" id="addCalendarEvent.html">
+		<div class="modal-header">
+        		<h4 class="modal-title custom_align" id="Heading">Add Task</h4>
+      		</div>
+        <div class="modal-body">
+			<div class="row">
+				<div class="col-md-4">
+					<ui-select ng-model="selectedEvent" theme="selectize">
+    					<ui-select-match placeholder="Select Event">{{$select.selected.title}}</ui-select-match>
+    					<ui-select-choices repeat="event in events">{{event.title}}</ui-select-choices>
+  					</ui-select>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<input type="text" class="form-control" name="name" placeholder="Task name" ng-model="task.name" required>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+					<div ng-controller="datepickerController">
+						<div class="col-sm-4">
+							<p class="input-group">
+								<input type="text" class="form-control"
+									datepicker-popup="{{format}}" placeholder="Event Date"
+									ng-model="task.initialDate" is-open="opened" min-date="minDate"
+									max-date="maxDate" datepickerOptions="dateOptions" ng-required close-text="Close"/>
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="open($event)"><i class="fa fa-calendar"></i>
+										</button>
+									</span>
+							</p>
+						</div>
+					</div>
+					<div ng-controller="datepickerController">
+						<div class="col-sm-4">
+							<p class="input-group">
+								<input type="text" class="form-control"
+									datepicker-popup="{{format}}" placeholder="Event Date"
+									ng-model="task.finalDate" is-open="opened" min-date="minDate"
+									max-date="maxDate" datepickerOptions="dateOptions" ng-required close-text="Close"/>
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-default" ng-click="open($event)"><i class="fa fa-calendar"></i>
+										</button>
+									</span>
+							</p>
+						</div>
+					</div>
+				</div>	
+       		</div>
+		</div>
+        <div class="modal-footer ">
+        	<button type="button" class="btn btn-warning" ng-click="ok()"><span class="fa fa-check-circle-o"></span> Yes</button>
+        	<button type="button" class="btn btn-warning" ng-click="cancel()"><span class="fa fa-close"></span> No</button>
+      	</div>
+	</script>
 </div>

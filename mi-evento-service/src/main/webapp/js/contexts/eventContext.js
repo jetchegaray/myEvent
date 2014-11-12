@@ -3,7 +3,7 @@
 mieventoContext.service("eventContext",function(){
 	var editGuest = null;
 	var editProvider = null;
-	
+	var editEvent = null;
 	var selectedEvent = null;
 	
 	//***********SELECTED EVENT **********
@@ -19,6 +19,16 @@ mieventoContext.service("eventContext",function(){
 	this.deselectedEvent = function(){
 		selectedEvent = null;
 	}
+	
+	this.setEditEvent = function(event){
+		editEvent = event;
+	}
+	
+	this.getEditEvent = function(){
+		return editEvent;
+	}
+	
+	
 	//***********GUESTS EVENT **********
 	
 	this.getGuestsSelectedEvent = function(){
@@ -74,6 +84,5 @@ mieventoContext.service("eventContext",function(){
 	this.getEditProvider = function(){
 		return editProvider;
 	}
-	
 	
 });

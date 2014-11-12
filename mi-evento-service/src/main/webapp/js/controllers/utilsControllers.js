@@ -30,8 +30,7 @@ mieventoControllers.controller("deleteConfirmationModalController", ["$scope","$
 				});
 			};
 
-		} ]);
-
+}]);
 
 
 mieventoControllers.controller("deleteConfirmationInstanceController", [

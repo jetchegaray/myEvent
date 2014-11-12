@@ -5,7 +5,9 @@ SIGNUP_PATH = "/user/signUp";
 PROVIDER_PATH = "/providers/:providerType";
 PROVIDER_DETAIL_PATH = "/provider/detail";
 EVENTS_PATH = "/events";
-EVENT_NEW_PATH = "/create";
+EVENTS_LIST_PATH = "/events/list";
+EVENT_NEW_PATH = "/event/create";
+EVENT_EDIT_PATH = "/event/edit";
 EVENT_GUESTS_PATH = "/guests";
 EVENT_NEW_GUESTS_PATH = "/guest/create";
 EVENT_EDIT_GUESTS_PATH="/guest/edit";
@@ -19,7 +21,7 @@ EVENT_CALENDAR_PATH = "/calendar";
 mieventoApp.config([ "$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider){
 
 	$urlRouterProvider.otherwise(HOME_PATH);
-	 
+	
 	$stateProvider
 	.state("homeState", {
 		url: HOME_PATH,
@@ -49,10 +51,20 @@ mieventoApp.config([ "$stateProvider", "$urlRouterProvider", function($stateProv
 		url : EVENTS_PATH,
 		templateUrl : "../partials/events/events.html",
 	})
-	.state("eventState.create",{
+	.state("eventState.events",{
+		url : EVENTS_LIST_PATH,
+		templateUrl : "../partials/events/listEvents.html",
+		controller : "eventListController"
+	})
+	.state("eventState.eventCreate",{
 		url : EVENT_NEW_PATH,
-		templateUrl : "../partials/events/newEvent.html",
+		templateUrl : "../partials/events/detailEvent.html",
 		controller : "newEventController"
+	})
+	.state("eventState.eventEdit",{
+		url : EVENT_EDIT_PATH,
+		templateUrl : "../partials/events/detailEvent.html",
+		controller : "editEventController"
 	})
 	.state("eventState.guests",{
 		url : EVENT_GUESTS_PATH,

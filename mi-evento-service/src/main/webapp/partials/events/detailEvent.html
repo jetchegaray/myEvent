@@ -1,10 +1,10 @@
 <div>
-	<form id="event-new-form" role="form">
+	<form name="eventForm" role="form">
 		<div class="row">
 			<div class="col-md-4">
 				<div class="form-group">
 					<input type="text" class="form-control" name="name"
-						placeholder="Name" ng-model="event.name" required>
+						placeholder="Name" ng-model="event.name" ng-required>
 				</div>
 			</div>
 			
@@ -25,7 +25,7 @@
 			</div>
 			<div class="col-sm-2">
 				<button class="btn btn-primary btn-block" type="submit"
-					ng-click="create(event)">Create</button>
+					ng-click="save()">Save</button>
 			</div>
 		</div>
 	</form>

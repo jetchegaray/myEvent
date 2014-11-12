@@ -5,9 +5,7 @@ mieventoControllers.controller("loginController", [ "$rootScope", "$scope",
 		function($rootScope, $scope, $state, userService, applicationContext) {
 			
 			$scope.mailPattern = mailPattern;
-
 			$scope.login = function() {
-				
 				if ($scope.loginForm.$invalid){
 					if ($scope.user.email != ""){
 						$scope.errorMailClass = "has-error";
@@ -16,8 +14,7 @@ mieventoControllers.controller("loginController", [ "$rootScope", "$scope",
 						applicationContext.getExceptionContext().setDanger(error);
 					}
 					return false;
-				}	
-				
+				}
 				userService.login($scope.user, function(data) {
 					$rootScope.login(data);
 				}, function(error) {
