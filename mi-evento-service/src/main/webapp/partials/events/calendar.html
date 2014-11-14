@@ -30,25 +30,19 @@
 <div>
 	<script type="text/ng-template" id="addCalendarEvent.html">
 		<div class="modal-header">
-        		<h4 class="modal-title custom_align" id="Heading">Add Task</h4>
+        		<h4 class="modal-title custom_align" id="Heading">New Task</h4>
       		</div>
         <div class="modal-body">
 			<div class="row">
-				<div class="col-md-4">
-					<ui-select ng-model="selectedEvent" theme="selectize">
-    					<ui-select-match placeholder="Select Event">{{$select.selected.title}}</ui-select-match>
-    					<ui-select-choices repeat="event in events">{{event.title}}</ui-select-choices>
-  					</ui-select>
-				</div>
-				<div class="col-md-4">
+				<div class="col-lg-12">
 					<div class="form-group">
-						<input type="text" class="form-control" name="name" placeholder="Task name" ng-model="task.name" required>
+						<textarea class="form-control" rows="2" placeholder="Note : " ng-model="task.name" required></textarea>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 					<div ng-controller="datepickerController">
-						<div class="col-sm-4">
+						<div class="col-lg-6">
 							<p class="input-group">
 								<input type="text" class="form-control"
 									datepicker-popup="{{format}}" placeholder="Event Date"
@@ -63,7 +57,7 @@
 						</div>
 					</div>
 					<div ng-controller="datepickerController">
-						<div class="col-sm-4">
+						<div class="col-lg-6">
 							<p class="input-group">
 								<input type="text" class="form-control"
 									datepicker-popup="{{format}}" placeholder="Event Date"

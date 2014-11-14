@@ -149,8 +149,8 @@
 			<!-- /.container -->
 		</nav>
 		<div class="container" ng-controller="exceptionController">
-			<div ng-show="alert.show" >
-				<alert type="alert.type" close="closeAlert()">{{alert.msg}}</alert>
+			<div ng-show="alert.show" class="text-center animated flipInY">
+				<alert type="{{alert.type}}" close="closeAlert()"><i class="fa fa-exclamation-circle fa-5 glyphiconSpace"></i><strong>{{alert.msg}}</strong></alert>
 			</div>
 		</div>
 		<div class="container" ui-view></div>

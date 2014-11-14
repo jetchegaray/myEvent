@@ -4,7 +4,7 @@
   	"bower_components"
   ],
   "dependencies": {
-    "bootstrap": "~3.3.0",
+    "bootstrap": "3.3.0",
     "angular": "~1.2.x",
     "angular-route": "~1.2.x",
     "angular-mocks": "~1.2.x",

@@ -1,12 +1,11 @@
-
 <div class="row">
-	<div class="col-sm-3 col-md-3">
-		<accordion close-others="true" class="panel">
-			<accordion-group is-open="true">
+	<div class="col-sm-3 col-md-3" ng-controller="accordionCtrl">
+		<accordion close-others="oneAtATime">
+			<accordion-group is-open="isFirstOpen">
 				<accordion-heading>
-					<span class="fa fa-folder-open text-warning  glyphiconSpace"> </span>Organize
+					<span class="fa fa-folder-open text-success  glyphiconSpace"> </span>Organize
 				</accordion-heading>
-				<div class="panel-body">
+				<div>
 					<table class="table">
 						<tr>
 							<td>
@@ -37,7 +36,7 @@
 			</accordion-group>
 			<accordion-group>
 				<accordion-heading>
-					<span class="fa fa-tags text-warning glyphiconSpace"> </span>Tasks
+					<span class="fa fa-tags text-success glyphiconSpace"> </span>Tasks
 				</accordion-heading>
 				<div class="panel-body">
 					<table class="table">
@@ -53,7 +52,7 @@
 			</accordion-group> 
 			<accordion-group>
 				<accordion-heading>
-					<span class="fa fa-user text-warning glyphiconSpace"> </span>Account
+					<span class="fa fa-user text-success glyphiconSpace"> </span>Account
 				</accordion-heading>
 				<div class="panel-body">
 					<table class="table">
@@ -88,7 +87,7 @@
 					<strong>Selected Event : {{selectedEvent.name}}</strong>
 				</ol>
 		</div>	
-		<div ui-view class="animation"></div>
+		<div ui-view class="animated fadeInRight"></div>
 	</div>
 	
 	<div ng-controller="deleteConfirmationModalController">

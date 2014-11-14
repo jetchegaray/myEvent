@@ -85,4 +85,19 @@ mieventoContext.service("eventContext",function(){
 		return editProvider;
 	}
 	
+	//**************TASKS EVENT *********************
+	
+	this.addTaskToEvent = function(task){
+		if (selectedEvent.tasks == null){
+			selectedEvent.tasks = [];
+		}
+		selectedEvent.tasks.push(task);	
+	}
+	
+	
+	this.deleteTaskFromEvent = function(task){
+		var index = selectedEvent.tasks.indexOf(task)
+		selectedEvent.tasks.splice(index, 1);
+	}
+	
 });

@@ -9,6 +9,13 @@ mieventoControllers.controller("carouselCtrl", [ "$scope", function($scope) {
 	}
 } ]);
 
+
+mieventoControllers.controller("accordionCtrl", ["$scope", function($scope){
+	$scope.oneAtATime = true;
+	$scope.isFirstOpen = true;
+}]);
+
+
 mieventoControllers.controller("deleteConfirmationModalController", ["$scope","$modal","userService","applicationContext",
 		function($scope, $modal, userService, applicationContext) {
 

@@ -26,33 +26,5 @@ mieventoContext.service("userContext", function(){
 		loggedUser = null;
 	}
 	
-	//private
-	getEventByName = function(name){
-		
-		var foundEvent = null;
-		angular.forEach(loggedUser.events, function(event){
-			if (angular.equals(event.name,name)){
-				foundEvent = event;
-			}
-		});
-		return foundEvent;
-	}
-	
-	this.addTaskToEvent = function(eventName, task){
-		
-		var event = getEventByName(eventName);
-		
-		if (event.tasks == null){
-			event.tasks = [];
-		}
-		event.tasks.push(task);	
-		console.log(angular.toJson(event));
-	}
-	
-	
-	this.deleteTask = function(event, task){
-		
-	}
-	
 	
 });

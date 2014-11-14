@@ -1,4 +1,4 @@
-mieventoControllers.controller("exceptionController", ["$scope", "applicationContext", function($scope, applicationContext){
+mieventoControllers.controller("exceptionController", ["$scope", "$timeout", "applicationContext", function($scope, $timeout, applicationContext){
 	
 	$scope.$on(TAG_ERROR_UPDATE, function() {
 		var exceptionContext = applicationContext.getExceptionContext();
@@ -10,11 +10,18 @@ mieventoControllers.controller("exceptionController", ["$scope", "applicationCon
 		       "msg": description,
 		       "show":true
 		   };
+		
+		$timeout(function(){
+			$scope.alert = null;
+		}, 3000); // maybe '}, 3000, false);' to avoid calling apply
+
 	 });
 	
 	$scope.closeAlert = function() {
 		$scope.alert = null;
 	};
+	
+	
 	
 }]);
 		

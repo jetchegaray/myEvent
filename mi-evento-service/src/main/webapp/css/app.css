@@ -150,21 +150,18 @@
 .panel-body { padding:0px; }
 .panel-body table tr td { padding-left: 35px }
 .panel-body .table {margin-bottom: 0px; }
-
-
-/**/
-
-
-.animation {
-    -webkit-transition: 0.5s linear all;
-    transition: 0.5s linear all;
-    opacity: 1;
+.panel-heading {
+   cursor: pointer;
 }
 
+/*ANIMATE*/
+
  
-.panel-body p {
-	margin : 15px; 
-}  
+ .animated {
+   -webkit-animation-duration: 4s; /* Chrome, Safari, Opera */
+    animation-duration: 4s;
+}
+
 
 .top-buffer { margin-top:40px; }
 

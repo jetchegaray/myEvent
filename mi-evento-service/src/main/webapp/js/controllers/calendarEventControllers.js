@@ -2,21 +2,25 @@
 mieventoControllers.controller("calendarEventController", ["$scope", "$state", "userService", "$modal", "applicationContext", 
 					function($scope, $state, userService, $modal, applicationContext) {
 					
-	  $scope.userEvents = applicationContext.getUserContext().getLoggedUserEvents();
+	  $scope.selectedEvent = applicationContext.getEventContext().getSelectedEvent();
 	  
-	  calendarEventBuilder = function(applicationContext){
+	  //FIXME UNIFICARRRRR
+	  if ($scope.selectedEvent == null){
+		  $state.go("eventState");
+	  }
+	  
+	  calendarEventBuilder = function(){
 	    	calendarEvents = [];
-	    	angular.forEach($scope.userEvents,function(event){
 	    		
-	    		calendarEvents.push(newCalendarEvent(event.name, new Date(event.eventDate),
-	    				new Date(event.eventDate), "Event to do.", 'openSesame'));
+	    		calendarEvents.push(newCalendarEvent( $scope.selectedEvent.name, new Date( $scope.selectedEvent.eventDate),
+	    				new Date( $scope.selectedEvent.eventDate), "Event to do.", 'openSesame'));
 	    
-	    		angular.forEach(event.tasks,function(task){
+	    		angular.forEach($scope.selectedEvent.tasks,function(task){
 	    			calendarEvents.push(newCalendarEvent(task.name, new Date(task.initialDate),
 	    					new Date(task.finalDate), "Task to do this day", 'openSesame'));
 	    		});
 	    	
-	    		angular.forEach(event.guests,function(guest){
+	    		angular.forEach($scope.selectedEvent.guests,function(guest){
 	    			var name = guest.firstName;
 	    			if (guest.lastName != null){
 	    				name += " "+guest.lastName;
@@ -24,7 +28,6 @@ mieventoControllers.controller("calendarEventController", ["$scope", "$state", "
 	    			calendarEvents.push(newCalendarEvent(name+" should confirm.", new Date(guest.invitationStatus.updateStatusDate),
 	    					new Date(guest.invitationStatus.updateStatusDate), "Guest Invited confirm this day", 'openSesame'));
 	    		});
-	    	});
 	    	
 	    	return calendarEvents;
 	 	}
@@ -44,33 +47,10 @@ mieventoControllers.controller("calendarEventController", ["$scope", "$state", "
     	}	
 
 	 	//init controller.
-		$scope.calendarEvents = calendarEventBuilder(applicationContext);
-		var date = new Date();
-	    var d = date.getDate();
-	    var m = date.getMonth();
-	    var y = date.getFullYear();
-	    
-	    /* event source that contains custom events on the scope */
-	    $scope.events = [
-	      {title: 'All Day Event',start: new Date(y, m, 1)},
-	      {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
-	      {id: 999,title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 0),allDay: false},
-	      {id: 999,title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
-	      {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
-	      {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
-	    ];
-	    
+		$scope.calendarEvents = calendarEventBuilder();
 
-	    $scope.calEventsExt = {
-	       color: '#f00',
-	       textColor: 'yellow',
-	       events: [ 
-	          {title: 'Lunch',start: new Date(y, m, d, 12, 0),end: new Date(y, m, d, 14, 0),allDay: false},
-	          {type:'party',title: 'Lunch 2',start: new Date(y, m, d, 12, 0),end: new Date(y, m, d, 14, 0),allDay: false},
-	          {type:'party',title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
-	        ]
-	    };
-//	    /* alert on eventClick */
+		
+	 //	    /* alert on eventClick */
 //	    $scope.onEventClick = function( event, allDay, jsEvent, view ){
 //	        $scope.alertMessage = (event.title + ' was clicked ');
 //	    };
@@ -110,29 +90,34 @@ mieventoControllers.controller("calendarEventController", ["$scope", "$state", "
 	            }
 	    	});
 	        
-	        modalInstance.result.then(function (task) {
-	        	applicationContext.getUserContext().deleteTaskToEvent(task);
+	        modalInstance.result.then(function (selectedTask) {
+	        	
+	        	applicationContext.getEventContext().deleteTaskFromEvent(selectedTask);
+	        	
+	        	var index =  $scope.calendarEvents.indexOf(newCalendarEvent(selectedTask.name, new Date(selectedTask.initialDate),
+    					new Date(selectedTask.finalDate), "Task to do this day", 'openSesame'));
+	        	 $scope.calendarEvents.splice(index, 1);
 	        });
 	    };
+	    
+	    
+	    
 	    /* Modal add event */
 	    $scope.showAddModal = function () {
 	    	var modalInstance = $modal.open({
 	            templateUrl : 'addCalendarEvent.html',
 				controller : "addEventInstanceController",
 	            resolve: {
-	            	events : function () {
-	            		return $scope.calendarEvents;
-	                },
 	                selectedDay : function(){
 	                	return $scope.selectedDay;
 	                }
 	            }
 	        });
 	        
-	        modalInstance.result.then(function (result) {
-	        	 applicationContext.getUserContext().addTaskToEvent(result.selectedEventName, result.selectedTask);
-	        	 $scope.calendarEvents.push(newCalendarEvent(result.selectedTask.name, new Date(result.selectedTask.initialDate),
-	    					new Date(result.selectedTask.finalDate), "Task to do this day", 'openSesame'));
+	        modalInstance.result.then(function (selectedTask) {
+	        	 applicationContext.getEventContext().addTaskToEvent($scope.selectedEvent, selectedTask);
+	        	 $scope.calendarEvents.push(newCalendarEvent(selectedTask.name, new Date(selectedTask.initialDate),
+	    					new Date(selectedTask.finalDate), "Task to do this day", 'openSesame'));
 	        });
 	    };
 	    
@@ -159,7 +144,6 @@ mieventoControllers.controller("calendarEventController", ["$scope", "$state", "
 	        
 	        dayClick: function(date, allDay, jsEvent, view){
 	        	$scope.selectedDay = date;
-
 	            $scope.$apply(function(){
 	              $scope.showAddModal();
 	            });
@@ -185,39 +169,32 @@ mieventoControllers.controller("calendarEventController", ["$scope", "$state", "
 
 
 
-
 mieventoControllers.controller("deleteCalendarEventInstanceController", ["$scope", "$modalInstance", "task", function($scope, $modalInstance, task) {
 
-			$scope.task = task;
-			$scope.ok = function() {
-				$modalInstance.close();
-			}
+		$scope.task = task;
+		$scope.ok = function() {
+			$modalInstance.close($scope.task);
+		}
 
-			$scope.cancel = function() {
-				$modalInstance.dismiss('cancel');
-			}
+		$scope.cancel = function() {
+			$modalInstance.dismiss('cancel');
+		}
 
 } ]);
 
-mieventoControllers.controller("addEventInstanceController", ["$scope", "$modalInstance", "events", "selectedDay", function($scope, $modalInstance, events, selectedDay) {
+mieventoControllers.controller("addEventInstanceController", ["$scope", "$modalInstance", "selectedDay", function($scope, $modalInstance, selectedDay) {
 	
-	$scope.events = events;
-	$scope.task = {
-			initialDate : selectedDay,
-			finalDate : selectedDay	
-	}
-	$scope.selectedEvent = events[0];
-	
-	$scope.ok = function() {
-		var result = {
-			selectedEventName : $scope.selectedEvent.title,
-			selectedTask : $scope.task
+		$scope.task = {
+				initialDate : selectedDay,
+				finalDate : selectedDay	
 		}
-		$modalInstance.close(result);
-	}
-
-	$scope.cancel = function() {
-		$modalInstance.dismiss('cancel');
-	}
+		
+		$scope.ok = function() {
+			$modalInstance.close($scope.task);
+		}
+	
+		$scope.cancel = function() {
+			$modalInstance.dismiss('cancel');
+		}
 
 } ]);
