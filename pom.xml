@@ -151,6 +151,9 @@
 				<artifactId>commons-lang3</artifactId>
 				<version>${commonLang.version}</version>
 			</dependency>
+			
+			<!-- 			DATABASE MONGO -->
+			
 			<dependency>
 				<groupId>org.mongodb</groupId>
 				<artifactId>mongo-java-driver</artifactId>
@@ -162,7 +165,7 @@
 				<!-- See https://github.com/mongodb/morphia/releases for the latest version -->
 				<version>${morphia.version}</version>
 			</dependency>
-
+			
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-mapper-asl</artifactId>

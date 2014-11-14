@@ -8,7 +8,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.je.enterprise.mievento.domain.utils.BigDecimalConverter;
+import com.mongodb.DB;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoException;
+import com.mongodb.MongoURI;
 import com.mongodb.WriteConcern;
 
 
@@ -16,6 +19,16 @@ import com.mongodb.WriteConcern;
 public class MongoConfiguration {
 
 	public static final String DB_NAME = "mi-evento";
+	
+	
+	 @Bean
+    public DB getDb() throws UnknownHostException, MongoException {
+        MongoURI mongoURI = new MongoURI(System.getenv("MONGOHQ_URL"));
+        DB db = mongoURI.connectDB();
+        db.authenticate(mongoURI.getUsername(), mongoURI.getPassword());
+
+        return db;
+    }
 
 	@Bean
 	public Datastore MongoConnectionManager() {
