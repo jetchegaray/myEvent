@@ -50,6 +50,11 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 		</dependency>
+		<!-- 		for rest servicies -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
 		<!-- JavaConfig need this library -->
 		<dependency>
 			<groupId>cglib</groupId>

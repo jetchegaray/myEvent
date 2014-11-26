@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Configuration;
 import com.je.enterprise.mievento.domain.utils.BigDecimalConverter;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import com.mongodb.MongoException;
-import com.mongodb.MongoURI;
 import com.mongodb.WriteConcern;
 
 
@@ -23,9 +23,10 @@ public class MongoConfiguration {
 	
 	 @Bean
     public DB getDb() throws UnknownHostException, MongoException {
-        MongoURI mongoURI = new MongoURI(System.getenv("MONGOHQ_URL"));
-        DB db = mongoURI.connectDB();
-        db.authenticate(mongoURI.getUsername(), mongoURI.getPassword());
+		 
+		 MongoClientURI uri  = new MongoClientURI("mongodb://javimetal:Dickis666@ds051740.mongolab.com:51740/heroku_app31605532"); 
+	     MongoClient client = new MongoClient(uri);
+	     DB db = client.getDB(uri.getDatabase());
 
         return db;
     }
@@ -33,8 +34,11 @@ public class MongoConfiguration {
 	@Bean
 	public Datastore MongoConnectionManager() {
 		MongoClient client = null;
+		MongoClientURI uri  = new MongoClientURI("mongodb://javimetal:Dickis666@ds051740.mongolab.com:51740/heroku_app31605532"); 
+			
 		try {
-			client = new MongoClient("localhost", 27017);
+		     client = new MongoClient(uri);
+//		   client = new MongoClient("localhost", 27017);
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
@@ -42,10 +46,13 @@ public class MongoConfiguration {
 		Morphia morphia = new Morphia();
 		morphia.getMapper().getConverters().addConverter(BigDecimalConverter.class);
 		
-		Datastore ds = morphia.createDatastore(client, DB_NAME);
+		Datastore ds = morphia.createDatastore(client, uri.getDatabase());
 		ds.setDefaultWriteConcern(WriteConcern.FSYNCED);
 		return ds;
-		//mapPackage("at.ac.tuwien.ec.mongouk2011.entities")
 	}
+	
+	
+
+	
 
 }

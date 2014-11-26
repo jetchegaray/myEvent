@@ -115,9 +115,10 @@
 .line {
 	background-color: #cdcdcd;
 	height: 1px;
-	margin-top: 0px !important;
-	margin-bottom: 0px !important;
+	margin-top: 10px !important;
+	margin-bottom: 10px !important;
 }
+
 
 /** PROVIDERS **/
 
@@ -146,7 +147,7 @@
 
 /** EVENTS VIEW **/
 
-.glyphiconSpace { margin-right:10px; margin-left:10px; }
+.glyphiconSpace { margin-right:10px; margin-left:2px; }
 .panel-body { padding:0px; }
 .panel-body table tr td { padding-left: 35px }
 .panel-body .table {margin-bottom: 0px; }
@@ -201,4 +202,13 @@ input.ng-dirty.ng-invalid {
 
 .calTools{
 	margin-bottom: 10px;
+}
+
+
+.empty-font {
+	font-family: monospace;
+	font-size: xx-large;
+	font: small-caps;
+	color: #bfbfbf;
+	text-align: center;
 }

@@ -21,7 +21,7 @@
 							<span ng-if="provider.cellPhone != null || provider.phone == null">{{provider.cellPhone}}</span>
 							<span ng-if="provider.cellPhone == null && provider.phone != null">{{provider.phone}}</span>
 						</td>
-						<td>{{provider.estimatedPrice}}</td>
+						<td>$ {{provider.estimatedPrice}}</td>
 						<td><p>
 								<button class="btn btn-info btn-xs" ng-click="goToDetailProvider(provider)">
 									<span class="fa fa-eye"></span>
@@ -36,7 +36,7 @@
 						</td>
 						<td><div ng-controller="deleteConfirmationModalController">
 								<p>
-									<button class="btn btn-danger btn-xs" ng-click="openDeleteConfirmation(providers,provider)">
+									<button class="btn btn-danger btn-xs" ng-click="openDeleteListConfirmation(providers,provider)">
 										<span class="fa fa-trash"></span>
 									</button>
 								</p>
@@ -48,9 +48,9 @@
 		</div>
 	</div>
 	<div class="line"></div>
-	<div class="btn-group">
-		<button class="btn btn-primary pull-right dropdown-toggle" data-toggle="dropdown">
-			<i class="fa fa-plus"></i>Add Provider<i class="fa caret-down"></i>
+	<div class="dropdown">
+		<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+			Add Provider<span class="caret glyphiconSpace"></span>
 		</button>
 		<ul class="dropdown-menu" role="menu" ng-controller="providerTypeController">
 			<li ng-repeat="type in types | orderBy:'toString()'"><a ui-sref="providerListState({providerType : type})">{{type}}</a></li>

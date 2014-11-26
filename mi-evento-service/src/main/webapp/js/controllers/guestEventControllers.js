@@ -3,6 +3,10 @@ mieventoControllers.controller("guestsEventController", ["$scope", "$state", "$m
 
 			$scope.guests = applicationContext.getEventContext().getGuestsSelectedEvent();
 			
+			if ($scope.guests == null || $scope.guests.length == 0){
+				$state.go("eventState.guestCreate");
+			}
+			
 			$scope.goAddGuest = function() {
 				$state.go("eventState.guestCreate");
 			};

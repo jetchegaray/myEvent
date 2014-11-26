@@ -13,13 +13,13 @@
 				</div>
 			
 				<div class="input-group" ng-class="errorPasswordClass">
-					<span class="input-group-addon"><i class="fa fa-lock"></i></span> <input
-						type="password" class="form-control" name="password"
+					<span class="input-group-addon"><i class="fa fa-lock"></i></span> 
+					<input type="password" class="form-control" name="password"
 						placeholder="Clave" ng-model="user.password" required> 
 					
 					<span class="input-group-addon"><i class="fa fa-lock"></i></span> 
 					<input type="password" class="form-control" name="passwordRepeat"
-						placeholder="Repetir Clave" required>
+						placeholder="Repetir Clave" ng-model="passwordRepeat" required>
 				</div>
 
 				<button class="btn btn-lg btn-primary btn-block" type="submit"

@@ -1,7 +1,7 @@
 <div>
 	<div class="row" >
 		<div class="col-md-12">
-			<table id="guestsTable" class="table table-hover" ng-show="guests != null && guests.length">
+			<table id="guestsTable" class="table table-hover">
 				<thead>
 				  <tr class="text-center">
 				     <th>Name</th>
@@ -39,7 +39,7 @@
 			          	<td><p><button class="btn btn-primary btn-xs" ng-click="goToEditGuest(guest)"><span class="fa fa-pencil"></span></button></p></td>
 	    			  	<td>
 	    			  		<div ng-controller="deleteConfirmationModalController">
-	    			  	  		<p><button class="btn btn-danger btn-xs" ng-click="openDeleteConfirmation(guests,guest)"><span class="fa fa-trash"></span></button></p>
+	    			  	  		<p><button class="btn btn-danger btn-xs" ng-click="openDeleteListConfirmation(guests,guest)"><span class="fa fa-trash"></span></button></p>
 	 		        	  	</div>
 	 		        	</td>	
 	 		        </tr>
@@ -47,8 +47,7 @@
 			</table>
 		</div>
 	</div>
-	<div class="line"></div>
-	<button class="btn btn-primary pull-right" ng-click="goAddGuest()"><i class="fa fa-plus"></i>Add Person</button>
+	<button class="btn btn-primary " ng-click="goAddGuest()"><i class="fa fa-plus"></i>Add Person</button>
 	   
 		
 </div>

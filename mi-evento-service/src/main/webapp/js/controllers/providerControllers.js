@@ -49,29 +49,29 @@ mieventoControllers.controller("providerListController",["$scope", "$state", "$s
 						}
 						state = applicationContext.getPreviousState();
 						
-						if (angular.equals(state.name, "eventState.choosePlace")){
+						if (angular.equals(state.name, "eventState.place")){
 						
 							applicationContext.getEventContext().setPlaceSelectedEvent(provider);
 							
 							userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
-								applicationContext.getEventContext().setSelectedEvent(event);
+//								applicationContext.getEventContext().setSelectedEvent(selectedEvent);
+								$state.go("eventState.place");
 							}, function(error) {
 								applicationContext.getExceptionContext().setDanger(error.data);
 							});
 							
-							$state.go("eventState.place");
+							
 								
 						}else if (angular.equals(state.name, "eventState.providers")){
 							
 							applicationContext.getEventContext().addProviderSelectedEvent(provider);
 							
 							userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
-								applicationContext.getEventContext().setSelectedEvent(event);
+								$state.go("eventState.providers");
+//								applicationContext.getEventContext().setSelectedEvent(selectedEvent);
 							}, function(error) {
 								applicationContext.getExceptionContext().setDanger(error.data);
 							});
-							
-							$state.go("eventState.providers");
 						}
 					}
 				}

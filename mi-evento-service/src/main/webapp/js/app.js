@@ -60,9 +60,9 @@ mieventoApp.run([ "$rootScope", "$cookies", "$state", "userService", "applicatio
 //			 var loggedUser = applicationContext.getUserContext().getLoggedUser();
 //			 console.log(loggedUser);
 //			 if (loggedUser == null){
-//				 from.name = "loginState";
+//				 $state.go('loginState');
 //			 }
-//			 from.name = "eventState.events";
+//			 $state.go('eventState.events');
 //		 }
      });
 		 

@@ -1,46 +1,49 @@
 <div class="row">
 	<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
-		<div class="panel panel-primary">
+		<div class="empty-font" ng-show="placeSelected == null">
+			<p>	No selected place  </p>
+		</div>	
+		<div class="panel panel-primary" ng-show="placeSelected != null">
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-sm-2 col-lg-2"  style="margin-top: 20px;margin-left: 20px;">
-						<img class="img-circle" ng-src="../img/{{place.picture}}.jpg" style="width: 90px; height: 90px">
+						<img class="img-circle" ng-src="../img/{{placeSelected.picture}}.jpg" style="width: 90px; height: 90px">
 					</div>
 					<div class=" col-md-9 col-lg-9 hidden-xs hidden-sm">
-						<h3><strong>{{place.businessName}}</strong></h3>
+						<h3><strong>{{placeSelected.businessName}}</strong></h3>
 						<table class="table">
 							<tbody>
 								<tr>
-									<td><h6><i class="fa fa-envelope glyphiconSpace"></i>{{place.email}}</h6></td>
+									<td><h6><i class="fa fa-envelope glyphiconSpace"></i>{{placeSelected.email}}</h6></td>
 								</tr>
 								<tr>
 									<td><h6><i class="fa fa-map-marker glyphiconSpace"></i>
-											{{place.location.streetAddress.street}}
-											{{place.location.streetAddress.number}}
-											{{place.location.streetAddress.additionalInfo}}
-											{{place.location.streetAddress.neighborhood}}.
-											{{place.location.city}} ({{place.location.province}})
+											{{placeSelected.location.streetAddress.street}}
+											{{placeSelected.location.streetAddress.number}}
+											{{placeSelected.location.streetAddress.additionalInfo}}
+											{{placeSelected.location.streetAddress.neighborhood}}.
+											{{placeSelected.location.city}} ({{placeSelected.location.province}})
 										</h6>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<h6><i class="fa fa-money glyphiconSpace"></i>$ {{place.estimatedPrice}}</h6>
+										<h6><i class="fa fa-money glyphiconSpace"></i>$ {{placeSelected.estimatedPrice}}</h6>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<h6><i class="fa fa-male glyphiconSpace"></i>{{place.providerType}}</h6>
+										<h6><i class="fa fa-male glyphiconSpace"></i>{{placeSelected.providerType}}</h6>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<h6><i class="fa fa-mobile glyphiconSpace"></i>{{place.cellPhone}}</h6>
+										<h6><i class="fa fa-mobile glyphiconSpace"></i>{{placeSelected.cellPhone}}</h6>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<h6><i class="fa fa-phone glyphiconSpace"></i>{{place.phone}}</h6>
+										<h6><i class="fa fa-phone glyphiconSpace"></i>{{placeSelected.phone}}</h6>
 									</td>
 								</tr>
 							</tbody>
@@ -56,11 +59,18 @@
 					<a class="btn btn-sm btn-warning" ui-sref="eventState.choosePlace">
 						<i class="fa fa-pencil"></i>
 					</a>
-					<button class="btn btn-sm btn-danger" ng-click="deletePlace()">
-						<i class="fa fa-trash"></i>
-					</button>
+					<span ng-controller="deleteConfirmationModalController">
+	    			  	 <button class="btn btn-sm btn-danger" ng-click="openDeleteElementConfirmation(placeSelected)"><span class="fa fa-trash"></span></button>
+	 		       	</span>
 				</span>
 			</div>
 		</div>
 	</div>
 </div>
+<div class="line"></div>
+<div class="row">
+	<div class="btn-group">
+		<button class="btn btn-primary" ng-click="goToAddLocation()"><i class="fa fa-plus glyphiconSpace"></i>My place</button>
+		<button type="button" class="btn btn-primary" ng-click="goToListProvider()"><i class="fa fa-search glyphiconSpace"></i>Provider</button>
+	</div>
+</div>	

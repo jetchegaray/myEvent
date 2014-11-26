@@ -19,7 +19,7 @@ mieventoControllers.controller("accordionCtrl", ["$scope", function($scope){
 mieventoControllers.controller("deleteConfirmationModalController", ["$scope","$modal","userService","applicationContext",
 		function($scope, $modal, userService, applicationContext) {
 
-			$scope.openDeleteConfirmation = function(list,element) {
+			$scope.openDeleteListConfirmation = function(list,element) {
 
 				var modalInstance = $modal.open({
 					templateUrl : 'deleteConfirmation.html',
@@ -30,6 +30,25 @@ mieventoControllers.controller("deleteConfirmationModalController", ["$scope","$
 					
 					var index = list.indexOf(element)
 					list.splice(index, 1);
+					userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
+					}, function(error) {
+						applicationContext.getExceptionContext().setDanger(error.data);
+					})
+				});
+			};
+			
+			
+			$scope.openDeleteElementConfirmation = function(element) {
+
+				var modalInstance = $modal.open({
+					templateUrl : 'deleteConfirmation.html',
+					controller : "deleteConfirmationInstanceController"
+				});
+
+				modalInstance.result.then(function() {
+					
+					applicationContext.getEventContext().setSelectedEvent(null);
+					
 					userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
 					}, function(error) {
 						applicationContext.getExceptionContext().setDanger(error.data);

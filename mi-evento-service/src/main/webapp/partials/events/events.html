@@ -9,7 +9,7 @@
 					<table class="table">
 						<tr>
 							<td>
-								<span class="fa fa-home text-primary glyphiconSpace"></span><a ui-sref="eventState.placeChoose">Place</a>
+								<span class="fa fa-home text-primary glyphiconSpace"></span><a ui-sref="eventState.place">Place</a>
 							</td>
 						</tr>
 						<tr>
@@ -77,7 +77,7 @@
 	</div>
 	<div class="col-sm-9" >
 		<div ng-controller="selectedEventController">
-			<span ng-show="selectedEvent == null">
+			<span ng-show="loggedUser != null && selectedEvent == null">
 				<ol class="breadcrumb text-center alert-danger">	
 					<strong>Please, selected an event to organize !</strong>
 				</ol>
@@ -87,7 +87,8 @@
 					<strong>Selected Event : {{selectedEvent.name}}</strong>
 				</ol>
 		</div>	
-		<div ui-view class="animated fadeInRight"></div>
+<!-- 		class="animated fadeInRight" -->
+		<div ui-view></div>
 	</div>
 	
 	<div ng-controller="deleteConfirmationModalController">

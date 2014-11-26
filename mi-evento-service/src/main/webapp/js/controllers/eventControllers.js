@@ -6,6 +6,7 @@ mieventoControllers.controller("eventListController", ["$rootScope", "$scope", "
 
 			$scope.events = applicationContext.getUserContext().getLoggedUserEvents();
 			$scope.selectedEvent = applicationContext.getEventContext().getSelectedEvent();
+			$scope.loggedUser = applicationContext.getUserContext().getLoggedUser();
 				
 			$scope.goAddEvent = function() {
 				$state.go("eventState.eventCreate");

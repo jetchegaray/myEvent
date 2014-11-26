@@ -34,7 +34,7 @@ mieventoControllers.controller("loginController", [ "$rootScope", "$scope",
 				userService.forgottenPassword($scope.user,function(data){
 					info.description = "Revise tu Mail !! tu nueva password ya fue enviada... ";
 					applicationContext.getExceptionContext().setInfo(info);
-					$state.go("eventState.login");
+					$state.go("loginState");
 				},function(error){
 					applicationContext.getExceptionContext().setDanger(error.data);
 				})
@@ -61,17 +61,21 @@ mieventoControllers.controller("signUpController", ["$scope", "$state",
 					return false;
 				}
 				//FIXME mall !!
-				if (!angular.equals($scope.siginUpForm.passwordRepeat , $scope.siginUpForm.password)){
+				console.log("$scope.siginUpForm.passwordRepeat "+$scope.passwordRepeat);
+				console.log("$scope.siginUpForm.password ", $scope.user.password);
+				console.log("angular.equals($scope.siginUpForm.passwordRepeat , $scope.siginUpForm.password) "+!angular.equals($scope.passwordRepeat , $scope.user.password));
+				
+				if (!angular.equals($scope.passwordRepeat , $scope.user.password)){
 					
 					$scope.errorPasswordClass = "has-error";
 					var error = applicationContext.getExceptionContext().getError();
 					error.description = "Las Claves deben coincidir.";
-					applicationContext.getEexceptionContext().setDanger(error);
+					applicationContext.getExceptionContext().setDanger(error);
 					return false;	
 				}
 				
 				userService.signUp($scope.user, function(data) {
-					$state.go("eventState.login");
+					$state.go("loginState");
 				}, function(error) {
 					applicationContext.getExceptionContext().setDanger(error.data);
 				});
