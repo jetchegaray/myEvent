@@ -60,10 +60,6 @@ mieventoControllers.controller("signUpController", ["$scope", "$state",
 					}
 					return false;
 				}
-				//FIXME mall !!
-				console.log("$scope.siginUpForm.passwordRepeat "+$scope.passwordRepeat);
-				console.log("$scope.siginUpForm.password ", $scope.user.password);
-				console.log("angular.equals($scope.siginUpForm.passwordRepeat , $scope.siginUpForm.password) "+!angular.equals($scope.passwordRepeat , $scope.user.password));
 				
 				if (!angular.equals($scope.passwordRepeat , $scope.user.password)){
 					
