@@ -258,6 +258,7 @@
 								<executable>npm</executable>
 								<arguments>
 									<argument>install</argument>
+									<argument>bower</argument>
 								</arguments>
 							</configuration>
 							<goals>
