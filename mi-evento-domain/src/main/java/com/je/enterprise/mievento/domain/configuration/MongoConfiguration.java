@@ -34,19 +34,19 @@ public class MongoConfiguration {
 	@Bean
 	public Datastore MongoConnectionManager() {
 		MongoClient client = null;
-		MongoClientURI uri  = new MongoClientURI("mongodb://javimetal:Dickis666@ds051740.mongolab.com:51740/heroku_app31605532"); 
+//		MongoClientURI uri  = new MongoClientURI("mongodb://javimetal:Dickis666@ds051740.mongolab.com:51740/heroku_app31605532"); 
 			
 		try {
-		     client = new MongoClient(uri);
-//		   client = new MongoClient("localhost", 27017);
+//		     client = new MongoClient(uri);
+		   client = new MongoClient("localhost", 27017);
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
 		
 		Morphia morphia = new Morphia();
 		morphia.getMapper().getConverters().addConverter(BigDecimalConverter.class);
-		
-		Datastore ds = morphia.createDatastore(client, uri.getDatabase());
+		Datastore ds = morphia.createDatastore(client, DB_NAME);
+//		Datastore ds = morphia.createDatastore(client, uri.getDatabase());
 		ds.setDefaultWriteConcern(WriteConcern.FSYNCED);
 		return ds;
 	}
