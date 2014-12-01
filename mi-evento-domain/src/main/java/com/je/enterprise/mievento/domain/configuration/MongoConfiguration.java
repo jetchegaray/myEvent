@@ -21,16 +21,6 @@ public class MongoConfiguration {
 	public static final String DB_NAME = "mi-evento";
 	
 	
-//	 @Bean
-//    public DB getDb() throws UnknownHostException, MongoException {
-//		 
-//		 MongoClientURI uri  = new MongoClientURI("mongodb://javimetal:Dickis666@ds051740.mongolab.com:51740/heroku_app31605532"); 
-//	     MongoClient client = new MongoClient(uri);
-//	     DB db = client.getDB(uri.getDatabase());
-//
-//        return db;
-//    }
-
 	@Bean
 	public Datastore MongoConnectionManager() {
 		MongoClient client = null;

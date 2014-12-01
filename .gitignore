@@ -6,6 +6,6 @@
 .settings/
 target/
 bin/
-mi-evento-service/src/main/webapp/bower_components/
+# mi-evento-service/src/main/webapp/bower_component
 mi-evento-service/src/main/webapp/npm-debug.log
 
