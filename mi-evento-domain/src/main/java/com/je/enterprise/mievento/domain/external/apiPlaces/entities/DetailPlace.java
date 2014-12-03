@@ -3,7 +3,9 @@ package com.je.enterprise.mievento.domain.external.apiPlaces.entities;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class DetailPlace {
 
 	String id;
