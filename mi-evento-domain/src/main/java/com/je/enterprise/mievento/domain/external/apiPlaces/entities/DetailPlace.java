@@ -2,31 +2,33 @@ package com.je.enterprise.mievento.domain.external.apiPlaces.entities;
 
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DetailPlace {
 
-	String id;
-	String reference;
-	String name;
+	private String id;
+	private String reference;
+	private String name;
 	
 	@JsonProperty("address_components")
-	List<AddressComponent> address;
+	private List<AddressComponent> address;
 	
 	@JsonProperty("formatted_phone_number")
-	String phone;
+	private String phone;
 	
 	@JsonProperty("international_phone_number")
-	String internationalPhone;
+	private String internationalPhone;
 	
-	List<Photo> photos;
-	List<String> types;	
+	private List<Photo> photos;
+	private List<String> types;	
 	
-	Geometry geometry;
-	Double rating;
-	List<Review> reviews;
+	private Geometry geometry;
+	private Double rating;
+	private List<Review> reviews;
 	
 	public DetailPlace() {
 	}
@@ -117,6 +119,15 @@ public class DetailPlace {
 
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
+	}
+	
+	public List<String> getPhotoReferences(){
+		return Lists.transform(this.photos, new Function<Photo, String>() {
+			@Override
+			public String apply(Photo input) {
+				return input.getReference();
+			}
+		});
 	}
 	
 	

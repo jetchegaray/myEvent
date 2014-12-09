@@ -1,13 +1,14 @@
 package com.je.enterprise.mievento.domain.external.apiPlaces.entities;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 public class GeoLocation {
 
 	@JsonProperty("lat")
-	Double latitude;
+	private Double latitude;
 	@JsonProperty("lng")
-	Double longitude;
+	private Double longitude;
 	
 	public GeoLocation() {
 	}
@@ -28,5 +29,9 @@ public class GeoLocation {
 		this.longitude = longitude;
 	}
 	
+	@Override
+	public String toString() {
+		return this.latitude+","+this.longitude;
+	}
 	
 }

@@ -12,6 +12,8 @@ public class LocationEntity {
 	protected String city;
 	@Embedded
 	protected StreetAddressEntity streetAddress;
+	private String lat;
+	private String lng;
 	
 	public LocationEntity() {
 	}
@@ -54,6 +56,22 @@ public class LocationEntity {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public String getLat() {
+		return lat;
+	}
+
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+
+	public String getLng() {
+		return lng;
+	}
+
+	public void setLng(String lng) {
+		this.lng = lng;
 	}
 
 }

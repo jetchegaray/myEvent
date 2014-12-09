@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SearchPlace {
 
-	String id;
-	String reference;
+	private String id;
+	private String reference;
 	
 	public SearchPlace() {
 	}

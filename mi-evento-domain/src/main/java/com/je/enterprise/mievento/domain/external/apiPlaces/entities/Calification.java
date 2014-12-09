@@ -2,8 +2,8 @@ package com.je.enterprise.mievento.domain.external.apiPlaces.entities;
 
 public class Calification {
 
-	Double rating;
-	String type;
+	private Double rating;
+	private String type;
 
 	public Calification() {
 	}

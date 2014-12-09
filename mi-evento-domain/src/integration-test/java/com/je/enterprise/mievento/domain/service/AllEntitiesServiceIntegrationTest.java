@@ -117,14 +117,14 @@ public class AllEntitiesServiceIntegrationTest {
 		wedding.setWife(wife);
 		
 		LocationEntity locationWedding = new LocationEntity(CountryCode.AR,"CABA","Bs As",new StreetAddressEntity("calleZ", BigDecimal.ONE, null, "Recoleta"));
-		wedding.setPlace(new PlaceEntity("Salon Pueyrredon", "El mejor salon de todos loco.Rompermos todo", locationWedding, "salonP@gmail.com", "156545787", "01144578954", BigDecimal.ONE, BigDecimal.TEN, BigDecimal.valueOf(250), BigDecimal.valueOf(19), BigDecimal.valueOf(75),"http://picture2",ProviderType.WEDDING_HALL));
+		wedding.setPlace(new PlaceEntity("Salon Pueyrredon", "El mejor salon de todos loco.Rompermos todo", locationWedding, "salonP@gmail.com", "156545787", "01144578954", BigDecimal.ONE, BigDecimal.TEN, BigDecimal.valueOf(250), BigDecimal.valueOf(19), BigDecimal.valueOf(75),Arrays.asList("http://picture2"),ProviderType.WEDDING_HALL));
 		wedding.setGuests(Lists.<GuestEntity>newArrayList(new GuestEntity("Guest","1","g1@gmail.com",locationHusband),new GuestEntity("Guest","2","g2@gmail.com",locationHusband)));
 		
 		wedding.setPresents(Lists.<PresentEntity>newArrayList(new PresentEntity("Vajilla", false,new CommercialLocationEntity("Falabella",CountryCode.AR,"CABA","Bs As",new StreetAddressEntity("callePresent", BigDecimal.ONE, null, "Recoleta")))));
 		wedding.setProviders(Lists.<ProviderEntity>newArrayList());
 		
 		LocationEntity locationFotografo = new LocationEntity(CountryCode.AR,"CABA","Bs As",new StreetAddressEntity("calleZ", BigDecimal.ONE, null, "Recoleta"));
-		wedding.getProviders().add(new ProviderEntity("Fotografo Carlitox", "Carlitox HOOO", locationFotografo, "Fc@gmail.com", "15548798","454879865", BigDecimal.ONE, BigDecimal.TEN,"http://image1",ProviderType.PHOTOGRAPHER));
+		wedding.getProviders().add(new ProviderEntity("Fotografo Carlitox", "Carlitox HOOO", locationFotografo, "Fc@gmail.com", "15548798","454879865", BigDecimal.ONE, BigDecimal.TEN,Arrays.asList("http://image1"),ProviderType.PHOTOGRAPHER));
 		
 		user.getEvents().add(wedding);
 		

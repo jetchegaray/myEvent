@@ -1,4 +1,4 @@
-package com.je.enterprise.mievento.domain.external.apiPlaces.entities;
+package com.je.enterprise.mievento.domain.external.apiPlaces.services;
 
 import java.util.List;
 
@@ -6,29 +6,24 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SearchPlaces {
+public class ResponseContainerObjects<Model> {
 
 	private String status;
 	@JsonProperty("results")
-	private List<SearchPlace> places;
-
-	public SearchPlaces() {
-	}
+	private List<Model> results;
 	
 	public String getStatus() {
-		return this.status;
+		return status;
 	}
-
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-	public List<SearchPlace> getPlaces() {
-		return places;
+	public List<Model> getData() {
+		return results;
 	}
-
-	public void setPlaces(List<SearchPlace> places) {
-		this.places = places;
+	public void setData(List<Model> data) {
+		this.results = data;
 	}
+	
 	
 }

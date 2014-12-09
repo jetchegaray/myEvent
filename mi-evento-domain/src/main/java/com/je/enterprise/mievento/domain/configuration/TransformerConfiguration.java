@@ -14,6 +14,8 @@ import com.je.enterprise.mievento.domain.entity.common.event.GuestEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.TaskEntity;
 import com.je.enterprise.mievento.domain.entity.wedding.PresentEntity;
+import com.je.enterprise.mievento.domain.external.apiPlaces.entities.DetailPlace;
+import com.je.enterprise.mievento.domain.transformer.Transformer;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
 import com.je.enterprise.mievento.domain.transformer.impl.CommercialLocationTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.EventTransformer;
@@ -35,6 +37,8 @@ public class TransformerConfiguration {
 	private PresentTransformer presentTransformer;
 	@Autowired
 	private CommercialLocationTransformer CommercialLocationTransformer;
+	@Autowired
+	private Transformer<ProviderEntity, DetailPlace> providerPlacesTransformer;
 
 	
 	@Bean(name = "guestTransformerList")
@@ -65,6 +69,11 @@ public class TransformerConfiguration {
 	@Bean(name = "eventTransformerList")
 	public TransformerList<EventEntity, Event> eventTransformerList(){
 		return new TransformerList<EventEntity, Event>(this.eventTransformer());
+	}
+	
+	@Bean(name = "providerPlacesTransformerList")
+	public TransformerList<ProviderEntity, DetailPlace> providerPlacesTransformerList(){
+		return new TransformerList<ProviderEntity, DetailPlace>(this.providerPlacesTransformer);
 	}
 
 	

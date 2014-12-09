@@ -2,15 +2,15 @@ package com.je.enterprise.mievento.domain.external.apiPlaces.entities;
 
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Review {
 
-	String text;
+	private String text;
 	@JsonProperty("author_name")
-	String author;
-	String time;
-	List<Calification> aspects;
+	private String author;
+	private String time;
+	private List<Calification> aspects;
 	
 	public Review() {
 	}

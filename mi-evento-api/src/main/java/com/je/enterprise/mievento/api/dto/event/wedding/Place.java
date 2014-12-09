@@ -1,6 +1,7 @@
 package com.je.enterprise.mievento.api.dto.event.wedding;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import com.je.enterprise.mievento.api.dto.location.Location;
 import com.je.enterprise.mievento.api.dto.provider.Provider;
@@ -20,9 +21,9 @@ public class Place extends Provider {
 			String email, String cellPhone, String phone, BigDecimal price,
 			BigDecimal estimatedPrice, BigDecimal m2,
 			BigDecimal estimatedQuantityTables,
-			BigDecimal estimatedQuantityPerson,String picture,ProviderType providerType) {
+			BigDecimal estimatedQuantityPerson,List<String> photos,ProviderType providerType) {
 		super(businessName, description, location, email, cellPhone, phone,
-				price, estimatedPrice,picture,providerType);
+				price, estimatedPrice,photos,providerType);
 		this.m2 = m2;
 		this.estimatedQuantityTables = estimatedQuantityTables;
 		this.estimatedQuantityPerson = estimatedQuantityPerson;

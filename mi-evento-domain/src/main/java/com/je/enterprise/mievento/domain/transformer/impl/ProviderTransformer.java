@@ -29,7 +29,7 @@ public class ProviderTransformer extends
 				domainObject.getDescription(), location,
 				domainObject.getEmail(), domainObject.getCellPhone(),
 				domainObject.getPhone(), domainObject.getPrice(),
-				domainObject.getEstimatedPrice(), domainObject.getPicture(),
+				domainObject.getEstimatedPrice(), domainObject.getPhotos(),
 				domainObject.getProviderType());
 	}
 

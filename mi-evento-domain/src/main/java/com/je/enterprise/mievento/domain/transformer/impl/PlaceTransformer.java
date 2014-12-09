@@ -24,7 +24,7 @@ public class PlaceTransformer extends Transformer<PlaceEntity, Place>{
 	@Override
 	public Place transformDomainToApi(PlaceEntity domainObject) {
 		Location location = locationTransformer.transformAndValidateDomainToApi(domainObject.getLocation());
-		return new Place(domainObject.getBusinessName(), domainObject.getDescription(), location, domainObject.getEmail(), domainObject.getCellPhone(), domainObject.getPhone(), domainObject.getPrice(), domainObject.getEstimatedPrice(), domainObject.getM2(), domainObject.getEstimatedQuantityTables(), domainObject.getEstimatedQuantityPerson(), domainObject.getPicture(), domainObject.getProviderType());
+		return new Place(domainObject.getBusinessName(), domainObject.getDescription(), location, domainObject.getEmail(), domainObject.getCellPhone(), domainObject.getPhone(), domainObject.getPrice(), domainObject.getEstimatedPrice(), domainObject.getM2(), domainObject.getEstimatedQuantityTables(), domainObject.getEstimatedQuantityPerson(), domainObject.getPhotos(), domainObject.getProviderType());
 	}
 
 	@Override

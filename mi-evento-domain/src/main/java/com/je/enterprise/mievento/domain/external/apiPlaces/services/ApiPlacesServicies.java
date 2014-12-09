@@ -1,19 +1,24 @@
 package com.je.enterprise.mievento.domain.external.apiPlaces.services;
 
+import java.util.List;
+
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.google.common.primitives.Bytes;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.DetailPlace;
-import com.je.enterprise.mievento.domain.external.apiPlaces.entities.SearchPlaces;
+import com.je.enterprise.mievento.domain.external.apiPlaces.entities.SearchPlace;
+import com.je.enterprise.mievento.domain.external.apiPlaces.entities.StatusResponse;
 
 @Component
 public class ApiPlacesServicies {
@@ -34,7 +39,8 @@ public class ApiPlacesServicies {
 		this.restTemplate = restTemplate;
 	}
 
-	public SearchPlaces getPlaces(String latAndLong, String keyWords) {
+	
+	public List<SearchPlace> getPlaces(String latAndLong, String keyWords) {
 
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("https://maps.googleapis.com/maps/api/place/nearbysearch/json?")
 				.queryParam("key", API_KEY)
@@ -44,18 +50,29 @@ public class ApiPlacesServicies {
 				.queryParam("name", keyWords);
 
 		HttpEntity<?> entity = new HttpEntity<>(this.getHeaders());
-
-		HttpEntity<SearchPlaces> response = restTemplate.exchange(builder.build().toUri(), HttpMethod.GET, entity, SearchPlaces.class);
+		ResponseEntity<ResponseContainerObjects<SearchPlace>> response = null;
 		
-		if (response.getBody().equals(HttpEntity.EMPTY)) {
-			logger.info("Status Response Api Google : "+response.getBody().getStatus());
-			logger.info(String.format("Response Empty when call connector searchPlaces"));
+		try {
+			response = restTemplate.exchange(builder.build().toUri(), HttpMethod.GET, entity, new ParameterizedTypeReference<ResponseContainerObjects<SearchPlace>>() {});
+	
+			if (response.getBody().equals(HttpEntity.EMPTY)) {
+				logger.info("Status Response Rest Template : "+response.getBody().getStatus());
+				return null;
+			}
+			ResponseContainerObjects<SearchPlace> places = response.getBody();
+			
+			if (! places.getStatus().equals(StatusResponse.OK)){
+				logger.info("Status Response Api Places : "+places.getStatus());
+			}
+			return places.getData();
+
+		} catch (Exception e) {
+			logger.info(e.getMessage());
 			return null;
 		}
-
-		return response.getBody();
 	}
 
+	
 	public DetailPlace getDetailPlace(String referencePlace) {
 
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("https://maps.googleapis.com/maps/api/place/details/json?")
@@ -64,21 +81,28 @@ public class ApiPlacesServicies {
 				.queryParam("reference", referencePlace);
 
 		HttpEntity<?> entity = new HttpEntity<>(this.getHeaders());
-
-		HttpEntity<DetailPlace> response = restTemplate.exchange(builder.build().toUri(), HttpMethod.GET, entity, DetailPlace.class);
-
-		if (response.getBody().equals(HttpEntity.EMPTY)) {
-			logger.info(String.format("Response Empty when call connector detailPlaces"));
+		ResponseEntity<ResponseContainerObject<DetailPlace>> response = null;
+		
+		try {
+			response = restTemplate.exchange(builder.build().toUri(), HttpMethod.GET, entity,new ParameterizedTypeReference<ResponseContainerObject<DetailPlace>>() {});
+			ResponseContainerObject<DetailPlace> place = response.getBody();
+			
+			if (! place.getStatus().equals(StatusResponse.OK)){
+				logger.info("Status Response Api Places : "+place.getStatus());
+			}
+			
+			return place.getData();
+		} catch (Exception e) {
+			logger.info(e.getMessage());
 			return null;
 		}
-		return response.getBody();
 	}
 	
 	
 	
 	public Bytes getPhoto(String referencePhoto) {
 
-		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("https://maps.googleapis.com/maps/api/place/details/json?")
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("https://maps.googleapis.com/maps/api/place/photo/json?")
 				.queryParam("key", API_KEY)
 				.queryParam("sensor", SENSOR)
 				.queryParam("photoreference", referencePhoto)
@@ -86,14 +110,16 @@ public class ApiPlacesServicies {
 				.queryParam("maxwidth", PHOTO_MAX_WIDTH);
 
 		HttpEntity<?> entity = new HttpEntity<>(this.getHeaders());
-
-		HttpEntity<Bytes> response = restTemplate.exchange(builder.build().toUri(), HttpMethod.GET, entity, Bytes.class);
-
-		if (response.getBody().equals(HttpEntity.EMPTY)) {
-			logger.info(String.format("Response Empty when call connector detailPlaces"));
+		HttpEntity<Bytes> response = null;
+		
+		try {
+			response = restTemplate.exchange(builder.build().toUri(), HttpMethod.GET, entity, Bytes.class);
+			
+			return response.getBody();
+		} catch (Exception e) {
+			logger.info(e.getMessage());
 			return null;
 		}
-		return response.getBody();
 	}
 	
 	
