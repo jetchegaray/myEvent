@@ -51,7 +51,7 @@ mieventoControllers.controller("providerListController",["$scope", "$state", "$s
 						
 						if (angular.equals(state.name, "eventState.place")){
 						
-							applicationContext.getEventContext().setPlaceSelectedEvent(provider);
+							applicationContext.getEventContext().setEventLocationSelectedEvent(provider);
 							
 							userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
 //								applicationContext.getEventContext().setSelectedEvent(selectedEvent);

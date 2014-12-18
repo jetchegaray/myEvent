@@ -32,7 +32,7 @@
 			          			<i class="text-info fa fa-clock-o glyphiconSpace"></i>
 			          		</span>
 			          		{{guest.invitationStatus.status}}
-			          		<span ng-show="{guest.invitationStatus.updateStatusDate != null && guest.invitationStatus.status == 'Confirma el dia'">
+			          		<span ng-show="guest.invitationStatus.updateStatusDate != null && guest.invitationStatus.status == 'Confirma el dia'">
 			          			- {{guest.invitationStatus.updateStatusDate  | date:'dd-MM-yyyy'}}
 			          		</span>
 			          	</td>

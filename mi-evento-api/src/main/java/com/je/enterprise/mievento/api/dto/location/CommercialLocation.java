@@ -24,4 +24,11 @@ public class CommercialLocation extends Location{
 		this.placeName = placeName;
 	}
 	
+	public void setLocation(Location location){
+		this.setCity(location.getCity());
+		this.setCountryCode(location.getCountryCode());
+		this.setProvince(location.getProvince());
+		this.setStreetAddress(location.getStreetAddress());
+	}
+	
 }

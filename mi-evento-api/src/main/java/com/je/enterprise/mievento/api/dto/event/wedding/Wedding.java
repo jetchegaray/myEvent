@@ -10,6 +10,7 @@ import com.je.enterprise.mievento.api.dto.event.Person;
 import com.je.enterprise.mievento.api.dto.location.CommercialLocation;
 import com.je.enterprise.mievento.api.dto.provider.Provider;
 
+
 public class Wedding extends Event {
 
 	private Person husband;
@@ -18,21 +19,23 @@ public class Wedding extends Event {
 	private Place place;
 	private BigDecimal budget;
 	private BigDecimal finalPrice;
-	private List<Provider> providers;
 
+	
+	public Wedding() {
+	}
+	
 	public Wedding(String name, Date eventDate,
 			CommercialLocation eventLocation, List<Guest> guests,Person husband, Person wife,
 			List<Present> presents, Place place, BigDecimal budget,
 			BigDecimal finalPrice, List<Provider> providers) {
 		
-		super(name, eventDate, eventLocation, guests);
+		super(name, eventDate, eventLocation, guests, providers);
 		this.husband = husband;
 		this.wife = wife;
 		this.presents = presents;
 		this.place = place;
 		this.budget = budget;
 		this.finalPrice = finalPrice;
-		this.providers = providers;
 	}
 	
 	public Person getHusband() {
@@ -83,12 +86,5 @@ public class Wedding extends Event {
 		this.finalPrice = finalPrice;
 	}
 
-	public List<Provider> getProviders() {
-		return providers;
-	}
-
-	public void setProviders(List<Provider> providers) {
-		this.providers = providers;
-	}
 
 }

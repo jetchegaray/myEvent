@@ -25,10 +25,10 @@ public class KeyWordsHandlerTest {
 		List<String> words = this.keyWordsHandler.getKeywords();
 		
 		assertFalse(words.isEmpty());
-		assertEquals("evento",words.get(0));
-		assertEquals("eventos",words.get(1));
-		assertEquals("fotografo",words.get(2));
-		assertEquals(9,words.size());
+		assertEquals("barman",words.get(0));
+		assertEquals("evento",words.get(1));
+		assertEquals("eventos",words.get(2));
+		assertEquals(10,words.size());
 			
 	}
 	

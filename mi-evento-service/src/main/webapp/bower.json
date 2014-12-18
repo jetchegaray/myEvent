@@ -1,7 +1,7 @@
 {
   "name": "mi-evento",
   "ignore": [
-  	"bower_components"
+    "bower_components"
   ],
   "dependencies": {
     "bootstrap": "3.3.0",
@@ -10,12 +10,12 @@
     "angular-mocks": "~1.2.x",
     "angular-resource": "~1.2.x",
     "angular-cookies": "~1.2.x",
-    "angular-bootstrap" : "*",
-    "angular-i18n" : "*",
+    "angular-i18n" : "~1.2.x",
     "angular-animate" : "~1.2.x",
-    "angular-ui-router": "*",
-    "animate.css" : "*",
-    "angular-ui-select" : "*",
+    "angular-bootstrap" : "0.11.0",
+    "angular-ui-router": "0.2.11",
+    "animate.css" : "3.2.0",
+    "angular-ui-select" : "0.8.3",
     "angular-ui-calendar": "0.9.0-beta.1",
     "jquery-ui" : "*",
     "moment" : "*"

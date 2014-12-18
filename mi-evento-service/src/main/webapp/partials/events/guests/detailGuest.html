@@ -26,7 +26,7 @@
     				<ui-select-choices repeat="status in statusTypes">{{status}}</ui-select-choices>
   				</ui-select>
 			</div>
-			<div ng-controller="datepickerController" ng-show="guest.invitationStatus.updateStatusDate != null || guest.invitationStatus.status == 'Confirma el dia'">
+			<div ng-controller="datepickerController" ng-show="guest.invitationStatus != null && guest.invitationStatus.updateStatusDate != null || guest.invitationStatus.status == 'Confirma el dia'">
 				<div class="col-md-4">
 					<p class="input-group">
 						<input type="text" class="form-control"

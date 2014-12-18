@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Reference;
 
 import com.google.common.collect.Lists;
 import com.je.enterprise.mievento.domain.entity.location.CommercialLocationEntity;
@@ -18,17 +19,21 @@ public class EventEntity {
 	private List<GuestEntity> guests = Lists.<GuestEntity>newArrayList();
 	@Embedded
 	private List<TaskEntity> tasks = Lists.<TaskEntity>newArrayList();
+	@Embedded
+	@Reference
+	private List<ProviderEntity> providers;
 	
 	public EventEntity() {
 	}
 	
 	public EventEntity(String name, Date eventDate, CommercialLocationEntity eventLocation,
-			List<GuestEntity> guests, List<TaskEntity> tasks) {
+			List<GuestEntity> guests, List<TaskEntity> tasks, List<ProviderEntity> providers) {
 		this.name = name;
 		this.eventDate = eventDate;
 		this.eventLocation = eventLocation;
 		this.guests = guests;
 		this.tasks = tasks;
+		this.providers = providers;
 	}
 
 	public Date getEventDate() {
@@ -70,5 +75,14 @@ public class EventEntity {
 	public void setTasks(List<TaskEntity> tasks) {
 		this.tasks = tasks;
 	}
+	
+	public List<ProviderEntity> getProviders() {
+		return providers;
+	}
+
+	public void setProviders(List<ProviderEntity> providers) {
+		this.providers = providers;
+	}
+
 	
 }

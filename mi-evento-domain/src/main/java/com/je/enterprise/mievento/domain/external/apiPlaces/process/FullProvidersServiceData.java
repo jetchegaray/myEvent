@@ -6,7 +6,6 @@ import java.util.Map;
 import org.apache.commons.lang3.Validate;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
@@ -42,7 +41,7 @@ public class FullProvidersServiceData {
 	}
 
 
-	@Scheduled(cron = "*/5 * * * *")
+//	@Scheduled(cron = "*/5 * * * *")
 	public void serviceProcessData() {
 		
 		List<DetailPlace> places = this.getData();

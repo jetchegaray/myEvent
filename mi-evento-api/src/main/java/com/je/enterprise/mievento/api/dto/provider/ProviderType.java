@@ -16,9 +16,10 @@ public enum ProviderType {
 	DJ("Dj"),
 	BIRTHDAY_HALL("Salon Para Cumpleaños o Fiestas"),
 	BAR_MITZVAH_HALL("Salon Bar Mitzvah"),
-	DRESSES_SUITS("dresses and suits"),
+	DRESSES_SUITS("Trajes y Vestidos"),
 	RINGS("Alianzas o Anillos De Compromiso"),
-	CAKES("Tortas");
+	CAKES("Tortas"),
+	BARMAN("Barman");
 	
 	private String name;
 	

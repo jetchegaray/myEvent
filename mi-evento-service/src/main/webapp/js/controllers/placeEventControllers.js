@@ -2,7 +2,7 @@
 mieventoControllers.controller("detailPlaceEventController", [ "$scope","$state", "userService", "applicationContext", 
                                        function($scope, $state, userService, applicationContext) {
 
-		$scope.place = applicationContext.getEventContext().getPlaceSelectedEvent();
+		$scope.place = applicationContext.getEventContext().getEventLocationSelectedEvent();
 		
 		$scope.goMoreInfo = function(){
 			$scope.showMoreInfo = true;
@@ -27,7 +27,7 @@ mieventoControllers.controller("detailPlaceEventController", [ "$scope","$state"
 mieventoControllers.controller("placeEventController", [ "$scope","$state", "applicationContext", 
                                 function($scope, $state, applicationContext) {
 		
-		$scope.placeSelected = applicationContext.getEventContext().getPlaceSelectedEvent();
+		$scope.placeSelected = applicationContext.getEventContext().getEventLocationSelectedEvent();
 
 		$scope.deletePlace = function(){
 			applicationContext.getEventContext().deselectedEvent();
@@ -40,6 +40,7 @@ mieventoControllers.controller("placeEventController", [ "$scope","$state", "app
 		}
 
 		$scope.goToListProvider = function(){
+			//FIXME cambiar poner algo como lugares.
 			$state.go("providerListState",{"providerType" : "fotografos"});
 		}
 		

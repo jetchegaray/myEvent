@@ -15,7 +15,7 @@
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/app.css">
-<link rel="stylesheet" href="../css/animate.css">
+<!-- <link rel="stylesheet" href="../css/animate.css"> -->
 <link rel="stylesheet" href="../bower_components/angular-ui-select/dist/select.min.css">
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
 <link rel="stylesheet" href="../bower_components/fullcalendar/dist/fullcalendar.css">

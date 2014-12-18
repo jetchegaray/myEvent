@@ -17,9 +17,11 @@ import com.je.enterprise.mievento.api.dto.location.CommercialLocation;
 import com.je.enterprise.mievento.api.dto.location.CountryCode;
 import com.je.enterprise.mievento.api.dto.location.Location;
 import com.je.enterprise.mievento.api.dto.location.StreetAddress;
+import com.je.enterprise.mievento.api.dto.provider.Provider;
 import com.je.enterprise.mievento.api.dto.user.User;
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.GuestEntity;
+import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.TaskEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.UserEntity;
 import com.je.enterprise.mievento.domain.entity.location.CommercialLocationEntity;
@@ -35,6 +37,7 @@ public class TransformersImplTest {
 	private GuestTransformer guestTransformer;
 	private EventTransformer eventTransformer;
 	private TaskTransformer taskTransformer;
+	private ProviderTransformer providerTransformer;
 	
 	@Before
 	public void setUp(){
@@ -45,7 +48,9 @@ public class TransformersImplTest {
 		this.guestTransformer = new GuestTransformer(locationTransformer,new InvitationStatusTransformer());
 		TransformerList<TaskEntity, Task> taskTransformerList = new TransformerList<TaskEntity, Task>(taskTransformer);
 		TransformerList<GuestEntity, Guest> guestTransformerList = new TransformerList<GuestEntity, Guest>(guestTransformer);
-		this.eventTransformer = new EventTransformer(commercialLocationTransformer, guestTransformerList,taskTransformerList);
+		TransformerList<ProviderEntity, Provider> providerTransformerList = new TransformerList<ProviderEntity, Provider>(providerTransformer);
+		
+		this.eventTransformer = new EventTransformer(commercialLocationTransformer, guestTransformerList,taskTransformerList,providerTransformerList);
 		
 		userTransformer = new UserTransformer(new TransformerList<EventEntity, Event>(eventTransformer));
 	}

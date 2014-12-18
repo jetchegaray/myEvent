@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.mongodb.morphia.annotations.Embedded;
-import org.mongodb.morphia.annotations.Reference;
 
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.GuestEntity;
@@ -21,9 +20,6 @@ public class WeddingEntity extends EventEntity {
 	private PersonEntity wife;
 	@Embedded
 	private List<PresentEntity> presents;
-	@Embedded
-	@Reference
-	private List<ProviderEntity> providers;
 	private PlaceEntity place;
 	private BigDecimal budget;
 	private BigDecimal finalPrice;
@@ -35,14 +31,14 @@ public class WeddingEntity extends EventEntity {
 			CommercialLocationEntity eventLocation, List<GuestEntity> guests, List<TaskEntity> tasks, PersonEntity husband, PersonEntity wife,
 			List<PresentEntity> presents, PlaceEntity place, BigDecimal budget,
 			BigDecimal finalPrice, List<ProviderEntity> providers) {
-		super(name, eventDate, eventLocation, guests, tasks);
+		super(name, eventDate, eventLocation, guests, tasks, providers);
 		this.husband = husband;
 		this.wife = wife;
 		this.presents = presents;
 		this.place = place;
 		this.budget = budget;
 		this.finalPrice = finalPrice;
-		this.providers = providers;
+		
 	}
 
 	
@@ -92,14 +88,6 @@ public class WeddingEntity extends EventEntity {
 
 	public void setFinalPrice(BigDecimal finalPrice) {
 		this.finalPrice = finalPrice;
-	}
-
-	public List<ProviderEntity> getProviders() {
-		return providers;
-	}
-
-	public void setProviders(List<ProviderEntity> providers) {
-		this.providers = providers;
 	}
 
 }

@@ -53,16 +53,33 @@ mieventoContext.service("eventContext",function(){
 	
 	//*********PLACE EVENT ************
 	
-	this.getPlaceSelectedEvent = function(){
+	
+	
+	this.getEventLocationSelectedEvent = function(){
 		if (selectedEvent == null){
 			return null;
 		}
-		return selectedEvent.place;
+		
+		return selectedEvent.eventLocation;
 	}
 	
-	this.setPlaceSelectedEvent = function(place){
-		selectedEvent.place = place;
+	this.setEventLocationSelectedEvent = function(place){
+		selectedEvent.eventLocation = toProviderPlaceToCommercialLocation(place);
 	}
+	
+	toProviderPlaceToCommercialLocation = function(place){
+		var eventLocation = {};
+		eventLocation.placeName = place.businessName;
+		eventLocation.location = place.location;
+//		eventLocation.city
+//		eventLocation.countryCode
+//		eventLocation.streetAddress.street
+//		eventLocation.streetAddress.number
+//		eventLocation.streetAddress.additionalInfo 
+//		eventLocation.streetAddress.neighborhood
+		return eventLocation;
+	}
+	
 	
 	//**********PROVIDERS EVENT ***********
 	
