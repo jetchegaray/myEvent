@@ -1,5 +1,5 @@
 //ngRoute if it doesnt use, promise and resolve object in response service.
-var mieventoApp = angular.module("mieventoApp", [ "ngCookies", "ngRoute", "ui.bootstrap", "ngAnimate", "ui.router", "ui.select", "ui.calendar","xeditable",
+var mieventoApp = angular.module("mieventoApp", [ "ngCookies", "ngRoute", "ui.bootstrap", "ngAnimate", "ui.router", "ui.select", "ui.calendar", "xeditable",
                                                   "mieventoControllers", "mieventoServices", "mieventoContext"]);
 
 var mieventoControllers = angular.module("mieventoControllers", []);
@@ -7,9 +7,12 @@ var mieventoContext = angular.module("mieventoContext",[]);
 var mieventoServices = angular.module("mieventoServices",["ngResource"]);
 
 
-mieventoApp.run([ "$rootScope", "$cookies", "$state", "userService", "applicationContext",
-		function($rootScope, $cookies, $state, userService, applicationContext) {
-
+mieventoApp.run([ "$rootScope", "$cookies", "$state", "editableOptions", "userService", "applicationContext",
+		function($rootScope, $cookies, $state, editableOptions, userService, applicationContext) {
+	
+//	x-editable
+	editableOptions.theme = 'bs3';
+	
 	if ($cookies.token){
 		$rootScope.token = $cookies.token;
 	}

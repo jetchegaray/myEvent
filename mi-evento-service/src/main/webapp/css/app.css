@@ -151,29 +151,14 @@
 .panel-body { padding:0px; }
 .panel-body table tr td { padding-left: 35px }
 .panel-body .table {margin-bottom: 0px; }
-.panel-heading {
-   cursor: pointer;
-}
 
-/*ANIMATE*/
-
- 
- .animated {
-   -webkit-animation-duration: 4s; /* Chrome, Safari, Opera */
-    animation-duration: 4s;
-}
-
+.nav, .pagination, .carousel, .panel-title, .panel-heading a { cursor: pointer; }
 
 .top-buffer { margin-top:40px; }
 
 input.ng-dirty.ng-invalid {
   color: red
 }
-
-
-
-
-
 
 
 /*** Calendar ***/

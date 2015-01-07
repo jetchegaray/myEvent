@@ -15,25 +15,18 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="provider in providers">
-					 <a href="#" editable-text="provider.estimatedPrice">{{ provider.estimatedPrice || '0' }}</a>
-						<td>{{provider.providerType}}</td>
+					 	<td>{{provider.providerType}}</td>
 						<td>{{provider.businessName}}</td>
 						<td>
 							<span ng-if="provider.cellPhone != null || provider.phone == null">{{provider.cellPhone}}</span>
 							<span ng-if="provider.cellPhone == null && provider.phone != null">{{provider.phone}}</span>
 						</td>
 						<td>
-							$ <a href="#" editable-text="provider.estimatedPrice" onbeforesave="save($data)">{{ provider.estimatedPrice || 'empty' }}</a>
+							$ <a href="#" editable-text="provider.estimatedPrice" onbeforesave="save($data)">{{ provider.estimatedPrice || '0' }}</a>
 						</td>
 						<td><p>
 								<button class="btn btn-info btn-xs" ng-click="goToDetailProvider(provider)">
 									<span class="fa fa-eye"></span>
-								</button>
-							</p>
-						</td>
-						<td><p>
-								<button class="btn btn-primary btn-xs" ng-click="goToEditProvider(provider)">
-									<span class="fa fa-pencil"></span>
 								</button>
 							</p>
 						</td>
