@@ -23,14 +23,14 @@
 							</td>
 						</tr>
 						<tr>
-							<td><span class="fa fa-gift text-primary glyphiconSpace"></span><a
-								href>Gifts</a></td>
+							<td><span class="fa fa-gift text-primary glyphiconSpace"></span><a href>Gifts</a></td>
 						</tr>
 						<tr>
-							<td><span class="fa fa-usd text-primary glyphiconSpace"></span><a
-								href>Budget</a> <span class="badge">42</span></td>
+							<td>
+								<span class="fa fa-money text-primary glyphiconSpace"></span><a ui-sref="eventState.budget">Budget</a> 
+							</td> 
 						</tr>
-						
+						<!-- 								<span class="badge"> -->
 					</table>
 				</div>
 			</accordion-group>
@@ -76,7 +76,7 @@
 		</accordion>	 
 	</div>
 	<div class="col-sm-9" >
-		<div ng-controller="selectedEventController">
+		<div ng-controller="SelectedEventController">
 			<span ng-show="loggedUser != null && selectedEvent == null">
 				<ol class="breadcrumb text-center alert-danger">	
 					<strong>Please, selected an event to organize !</strong>
@@ -91,7 +91,7 @@
 		<div ui-view></div>
 	</div>
 	
-	<div ng-controller="deleteConfirmationModalController">
+	<div ng-controller="DeleteConfirmationModalController">
 		<script type="text/ng-template" id="deleteConfirmation.html">
 			<div class="modal-header">
         		<h4 class="modal-title custom_align" id="Heading">Delete entry</h4>

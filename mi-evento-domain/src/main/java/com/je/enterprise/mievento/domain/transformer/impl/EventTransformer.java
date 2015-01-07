@@ -38,7 +38,7 @@ public class EventTransformer extends Transformer<EventEntity, Event>{
 		CommercialLocation eventLocation = this.commercialLocationTransformer.transformAndValidateDomainToApi(domainObject.getEventLocation());
 		List<Guest> guests = this.guestTransformerList.transformDomainToApi(domainObject.getGuests());
 		List<Provider> providers = this.providerTransformerList.transformDomainToApi(domainObject.getProviders());
-		return new Event(domainObject.getName(), domainObject.getEventDate(), eventLocation, guests, providers);
+		return new Event(domainObject.getName(), domainObject.getEventDate(), eventLocation, guests, providers, domainObject.getType());
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class EventTransformer extends Transformer<EventEntity, Event>{
 		List<GuestEntity> guestsEntities = this.guestTransformerList.transformApiToDomain(apiObject.getGuests());
 		List<TaskEntity> tasksEntities = this.taskTransformerList.transformApiToDomain(apiObject.getTasks());
 		List<ProviderEntity> providersEntities = this.providerTransformerList.transformApiToDomain(apiObject.getProviders());
-		return new EventEntity(apiObject.getName(), apiObject.getEventDate(), eventLocationEntity, guestsEntities, tasksEntities, providersEntities);
+		return new EventEntity(apiObject.getName(), apiObject.getEventDate(), eventLocationEntity, guestsEntities, tasksEntities, providersEntities, apiObject.getType());
 	}
 
 }

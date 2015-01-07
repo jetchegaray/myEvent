@@ -1,5 +1,5 @@
 
-mieventoControllers.controller("calendarEventController", ["$scope", "$state", "userService", "$modal", "applicationContext", 
+mieventoControllers.controller("CalendarEventController", ["$scope", "$state", "userService", "$modal", "applicationContext", 
 					function($scope, $state, userService, $modal, applicationContext) {
 					
 	  $scope.selectedEvent = applicationContext.getEventContext().getSelectedEvent();
@@ -16,7 +16,7 @@ mieventoControllers.controller("calendarEventController", ["$scope", "$state", "
 	    				new Date( $scope.selectedEvent.eventDate), "Event to do.", 'openSesame'));
 	    
 	    		angular.forEach($scope.selectedEvent.tasks,function(task){
-	    			calendarEvents.push(newCalendarEvent(task.name, new Date(task.initialDate),
+	    			calendarEvents.push(newTaskEvent(task.name, new Date(task.initialDate),
 	    					new Date(task.finalDate), "Task to do this day", 'openSesame'));
 	    		});
 	    	
@@ -25,7 +25,7 @@ mieventoControllers.controller("calendarEventController", ["$scope", "$state", "
 	    			if (guest.lastName != null){
 	    				name += " "+guest.lastName;
 	    			}
-	    			calendarEvents.push(newCalendarEvent(name+" should confirm.", new Date(guest.invitationStatus.updateStatusDate),
+	    			calendarEvents.push(newTaskEvent(name+" should confirm.", new Date(guest.invitationStatus.updateStatusDate),
 	    					new Date(guest.invitationStatus.updateStatusDate), "Guest Invited confirm this day", 'openSesame'));
 	    		});
 	    	
@@ -33,6 +33,20 @@ mieventoControllers.controller("calendarEventController", ["$scope", "$state", "
 	 	}
 
 	 	newCalendarEvent = function(name, initialDate, finalDate, description, className){
+    		return {
+    		    title: name,
+    	        start:  initialDate,
+    	        end: finalDate,
+    	        description : description,
+    	        className: [className],
+    	        allDay: false,
+    	        editable: true,
+    	        color: '#f00',
+    	        textColor: 'yellow',
+    	      }
+    	}	
+	 	
+	 	newTaskEvent = function(name, initialDate, finalDate, description, className){
     		return {
     		    title: name,
     	        start:  initialDate,
@@ -94,7 +108,7 @@ mieventoControllers.controller("calendarEventController", ["$scope", "$state", "
 	        	
 	        	applicationContext.getEventContext().deleteTaskFromEvent(selectedTask);
 	        	
-	        	var index =  $scope.calendarEvents.indexOf(newCalendarEvent(selectedTask.name, new Date(selectedTask.initialDate),
+	        	var index =  $scope.calendarEvents.indexOf(newTaskEvent(selectedTask.name, new Date(selectedTask.initialDate),
     					new Date(selectedTask.finalDate), "Task to do this day", 'openSesame'));
 	        	 $scope.calendarEvents.splice(index, 1);
 	        });
@@ -116,7 +130,7 @@ mieventoControllers.controller("calendarEventController", ["$scope", "$state", "
 	        
 	        modalInstance.result.then(function (selectedTask) {
 	        	 applicationContext.getEventContext().addTaskToEvent($scope.selectedEvent, selectedTask);
-	        	 $scope.calendarEvents.push(newCalendarEvent(selectedTask.name, new Date(selectedTask.initialDate),
+	        	 $scope.calendarEvents.push(newTaskEvent(selectedTask.name, new Date(selectedTask.initialDate),
 	    					new Date(selectedTask.finalDate), "Task to do this day", 'openSesame'));
 	        });
 	    };
@@ -126,12 +140,13 @@ mieventoControllers.controller("calendarEventController", ["$scope", "$state", "
 	    $scope.uiConfig = {
 	      calendar:{
 	        editable: true,
-	        disableResizing:false,
+	        disableResizing:false,	
 	        header:{
 	        	left: 'prev,next today',
 	        	center: 'title',
 	        	right: 'month,agendaWeek,agendaDay'
 	        },
+	        selectable: true,
 	        defaultView: 'month',
 	        eventClick: function(event, allDay, jsEvent, view){
 	        	$scope.selectedTask = event;
@@ -141,6 +156,10 @@ mieventoControllers.controller("calendarEventController", ["$scope", "$state", "
 	        },
 	        eventDrop: $scope.alertOnDrop,
 	        eventResize: $scope.alertOnResize,
+	        eventRender: function(event, element) {
+	            
+	        	angular.element(element).find('.fc-event-title').append("<br/>" + event.description); 
+	        },
 	        
 	        dayClick: function(date, allDay, jsEvent, view){
 	        	$scope.selectedDay = date;
@@ -169,7 +188,7 @@ mieventoControllers.controller("calendarEventController", ["$scope", "$state", "
 
 
 
-mieventoControllers.controller("deleteCalendarEventInstanceController", ["$scope", "$modalInstance", "task", function($scope, $modalInstance, task) {
+mieventoControllers.controller("DeleteCalendarEventInstanceController", ["$scope", "$modalInstance", "task", function($scope, $modalInstance, task) {
 
 		$scope.task = task;
 		$scope.ok = function() {
@@ -182,7 +201,7 @@ mieventoControllers.controller("deleteCalendarEventInstanceController", ["$scope
 
 } ]);
 
-mieventoControllers.controller("addEventInstanceController", ["$scope", "$modalInstance", "selectedDay", function($scope, $modalInstance, selectedDay) {
+mieventoControllers.controller("AddEventInstanceController", ["$scope", "$modalInstance", "selectedDay", function($scope, $modalInstance, selectedDay) {
 	
 		$scope.task = {
 				initialDate : selectedDay,

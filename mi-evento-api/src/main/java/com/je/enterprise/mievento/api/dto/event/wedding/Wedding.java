@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.je.enterprise.mievento.api.dto.event.Event;
+import com.je.enterprise.mievento.api.dto.event.EventType;
 import com.je.enterprise.mievento.api.dto.event.Guest;
 import com.je.enterprise.mievento.api.dto.event.Person;
 import com.je.enterprise.mievento.api.dto.location.CommercialLocation;
@@ -29,7 +30,7 @@ public class Wedding extends Event {
 			List<Present> presents, Place place, BigDecimal budget,
 			BigDecimal finalPrice, List<Provider> providers) {
 		
-		super(name, eventDate, eventLocation, guests, providers);
+		super(name, eventDate, eventLocation, guests, providers, EventType.WEDDING);
 		this.husband = husband;
 		this.wife = wife;
 		this.presents = presents;

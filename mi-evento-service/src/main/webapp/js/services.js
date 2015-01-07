@@ -22,7 +22,8 @@ mieventoServices.factory("providerService",["$resource",function($resource){
         	getAll : {method : "GET",params: {requestMapping: "all"},isArray:true},
         	getAllTypes : {method : "GET",params: {requestMapping: "types"},isArray:true},
         	getPlaceTypes : {method : "GET",params: {requestMapping: "placeTypes"},isArray:true},
-        	getByType : {method : "GET",params: {requestMapping: "byType"},isArray:true}
+        	getByType : {method : "GET",params: {requestMapping: "byType"},isArray:true},
+        	getMoreCheaperByCategory : {method : "GET", params : {requestMapping : "moreCheaperByCategory"}, isArray :true}
         });
        }                                     
 ]);
@@ -34,5 +35,13 @@ mieventoServices.factory("eventGuestService",["$resource", function($resource){
 			{
 				getAllStatusTypes : {method : "GET",params : { requestMapping : "statusTypes"}, isArray : true},
 				sendInvitation : {method : "PUT", params : {requestMapping : "sendInvitation"}}
+			});	
+}])
+
+
+mieventoServices.factory("eventService",["$resource", function($resource){
+		return $resource("/mievento/event/:requestMapping",{requestMapping : "@requestMapping"},
+			{
+				getAllEventTypes : {method : "GET",params : { requestMapping : "eventTypes"}, isArray : true}
 			});	
 }])

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.je.enterprise.mievento.api.dto.event.StatusType;
+import com.je.enterprise.mievento.api.dto.event.GuestStatusType;
 import com.je.enterprise.mievento.api.dto.wrapper.InvitationDTO;
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
 import com.je.enterprise.mievento.domain.exception.HttpEventException;
@@ -28,7 +28,7 @@ public class GuestController {
 	@ResponseBody
 	@RequestMapping(value={"/statusTypes"},method = RequestMethod.GET)
 	public List<String> getAllStatusTypes(){
-		return StatusType.stringValues();
+		return GuestStatusType.stringValues();
 	}
 	
 	@ResponseBody

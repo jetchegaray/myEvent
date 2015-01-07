@@ -1,4 +1,4 @@
-mieventoControllers.controller("exceptionController", ["$scope", "$timeout", "applicationContext", function($scope, $timeout, applicationContext){
+mieventoControllers.controller("ExceptionController", ["$scope", "$timeout", "applicationContext", function($scope, $timeout, applicationContext){
 	
 	$scope.$on(TAG_ERROR_UPDATE, function() {
 		var exceptionContext = applicationContext.getExceptionContext();

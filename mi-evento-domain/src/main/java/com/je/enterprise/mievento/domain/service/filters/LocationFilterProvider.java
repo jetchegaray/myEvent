@@ -16,7 +16,7 @@ public class LocationFilterProvider implements CriteriaFilterProvider{
 
 	@Override
 	public Query<ProviderEntity> buildQueryCriteria(ProviderDAO providerDAO){
-		Query<ProviderEntity> query = providerDAO.createQuery().disableValidation();
+		Query<ProviderEntity> query = providerDAO.createQuery().disableValidation().enableSnapshotMode();
 		
 		query.and(query.criteria("countryCode").equal(location.getCountryCode()));
 		query.and(query.criteria("province").equal(location.getProvince()));

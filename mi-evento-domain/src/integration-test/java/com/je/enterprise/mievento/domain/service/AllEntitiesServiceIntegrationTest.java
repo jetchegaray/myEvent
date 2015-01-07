@@ -18,6 +18,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
+import com.je.enterprise.mievento.api.dto.event.EventType;
 import com.je.enterprise.mievento.api.dto.location.CountryCode;
 import com.je.enterprise.mievento.api.dto.provider.ProviderType;
 import com.je.enterprise.mievento.domain.MongoClientUtilsTest;
@@ -132,7 +133,7 @@ public class AllEntitiesServiceIntegrationTest {
 		CommercialLocationEntity locationEntregaTPFinal = new CommercialLocationEntity("Facultad Ingenieria",CountryCode.AR,"CABA","Bs As",new StreetAddressEntity("Paseo Coloon", BigDecimal.valueOf(750), "esquina Independencia", "San Telmo"));
 		List<GuestEntity> guestsTP = Lists.<GuestEntity>newArrayList(new GuestEntity("mama","etche","mama@gmail.com",locationHusband),new GuestEntity("Abu","etche","abu@gmail.com",locationHusband));
 		List<TaskEntity> tasksTP = Arrays.asList(new TaskEntity("Conseguir libreta",DateTime.now().toDate(),DateTime.now().plusDays(10).toDate()),new TaskEntity("comprar traje",DateTime.now().plusDays(5).toDate(),DateTime.now().plusDays(15).toDate()));
-		EventEntity miJura = new EventEntity("Jura Ingeniero",DateTime.now().plusWeeks(10).toDate(),locationEntregaTPFinal,guestsTP,tasksTP,Lists.newArrayList(new ProviderEntity("Barman batman", "Carlitox HOOO", locationFotografo, "Fc@gmail.com", "15548798","454879865", BigDecimal.ONE, BigDecimal.TEN,Arrays.asList("http://image1"),ProviderType.PHOTOGRAPHER)));
+		EventEntity miJura = new EventEntity("Jura Ingeniero",DateTime.now().plusWeeks(10).toDate(),locationEntregaTPFinal,guestsTP,tasksTP,Lists.newArrayList(new ProviderEntity("Barman batman", "Carlitox HOOO", locationFotografo, "Fc@gmail.com", "15548798","454879865", BigDecimal.ONE, BigDecimal.TEN,Arrays.asList("http://image1"),ProviderType.PHOTOGRAPHER)),EventType.COMMON_EVENT);
 		
 		user.getEvents().add(miJura);
 		

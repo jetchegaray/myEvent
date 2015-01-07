@@ -102,6 +102,27 @@ mieventoContext.service("eventContext",function(){
 		return editProvider;
 	}
 	
+	//**********PROVIDERS TO COMPARE IN EVENT ***********
+	
+	this.getProvidersToCompareEvent = function(){
+		if (selectedEvent.providersToCompare == null){
+			return null;
+		}
+		return selectedEvent.providersToCompare;
+	}
+	
+	this.setProvidersToCompareEvent = function(providers){
+		selectedEvent.providersToCompare = providers;
+	}
+	
+	this.addProviderToCompareEvent  = function(provider){
+		if (selectedEvent.providersToCompare == null){
+			selectedEvent.providersToCompare = [];
+		}
+		selectedEvent.providersToCompare.push(provider);
+	}
+	
+	
 	//**************TASKS EVENT *********************
 	
 	this.addTaskToEvent = function(task){

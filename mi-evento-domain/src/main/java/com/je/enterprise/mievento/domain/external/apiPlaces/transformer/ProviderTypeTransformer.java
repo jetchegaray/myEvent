@@ -18,7 +18,7 @@ public class ProviderTypeTransformer {
 	public ProviderTypeTransformer(KeyWordsHandler keyWordsHandler) {
 		this.keyWordsHandler = keyWordsHandler;
 	}
-	
+	//TODO
 	
 //	public ProviderType getProviderType(String name,List<String> types){
 //		

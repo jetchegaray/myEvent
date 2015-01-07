@@ -2,13 +2,12 @@ package com.je.enterprise.mievento.api.dto.event;
 
 import java.util.Date;
 import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.je.enterprise.mievento.api.dto.location.CommercialLocation;
 import com.je.enterprise.mievento.api.dto.provider.Provider;
 
 
-@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="type")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Event {
 
@@ -18,17 +17,19 @@ public class Event {
 	private List<Guest> guests;
 	private List<Task> tasks;
 	private List<Provider> providers;
+	private EventType type;
 	
 	public Event() {
 	}
 	
 	public Event(String name, Date eventDate, CommercialLocation eventLocation,
-			List<Guest> guests,List<Provider> providers) {
+			List<Guest> guests,List<Provider> providers,EventType type) {
 		this.name = name;
 		this.eventDate = eventDate;
 		this.eventLocation = eventLocation;
 		this.guests = guests;
 		this.providers = providers;
+		this.type = type;
 	}
 
 	public Date getEventDate() {
@@ -77,6 +78,14 @@ public class Event {
 
 	public void setProviders(List<Provider> providers) {
 		this.providers = providers;
+	}
+
+	public EventType getType() {
+		return type;
+	}
+
+	public void setType(EventType type) {
+		this.type = type;
 	}
 
 }

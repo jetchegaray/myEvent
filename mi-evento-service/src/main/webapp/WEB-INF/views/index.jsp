@@ -15,13 +15,17 @@
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/app.css">
+<link href="../bower_components/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
 <!-- <link rel="stylesheet" href="../css/animate.css"> -->
 <link rel="stylesheet" href="../bower_components/angular-ui-select/dist/select.min.css">
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
 <link rel="stylesheet" href="../bower_components/fullcalendar/dist/fullcalendar.css">
+
+
 <!-- ********************** Jquery ********************** -->
 <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="../bower_components/jquery-ui/jquery-ui.min.js"></script>
+
 
 <!-- ********************** Angularjs Components ********************** -->
 
@@ -37,6 +41,7 @@
 <script type="text/javascript" src="../bower_components/angular-ui-calendar/src/calendar.js"></script>
 <script type="text/javascript" src="../bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 <script type="text/javascript" src="../bower_components/fullcalendar/dist/gcal.js"></script>
+<script src="../bower_components/angular-xeditable/dist/js/xeditable.js"></script>
 
 <!-- ********************** angular app ********************** -->
 
@@ -54,8 +59,11 @@
 <script src="../js/controllers/placeEventControllers.js"></script>
 <script src="../js/controllers/providerEventControllers.js"></script>
 <script src="../js/controllers/calendarEventControllers.js"></script>
+<script src="../js/controllers/budgetEventControllers.js"></script>
+
 <script src="../js/controllers/utilsControllers.js"></script>
 <script src="../js/controllers/exceptionControllers.js"></script>
+
 
 <!-- ********************** contexts ********************** -->
 <script src="../js/contexts/applicationContext.js"></script>
@@ -105,14 +113,14 @@
 							<li ng-repeat="event in $root.loggedUser.events | orderBy:+name">
 								<a href ng-click="$root.selectEvent(event)">{{event.name}}</a></li>
 							<li class="divider" ng-show="$root.loggedUser.events != null && $root.loggedUser.events.length"></li>
-							<li><a ui-sref="eventState.events">Crear Nuevo Evento</a></li>
+							<li><a ui-sref="eventState.eventCreate">Crear Nuevo Evento</a></li>
 						</ul>
 					</li>
 					
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown">Servicios<span class="caret"></span></a>
 
-						<ul class="dropdown-menu" role="menu" ng-controller="providerTypeController">
+						<ul class="dropdown-menu" role="menu" ng-controller="ProviderTypeController">
 							<li ng-repeat="type in types | orderBy:'toString()'"><a ui-sref="providerListState({providerType : type})">{{type}}</a></li>
 						</ul>
 					</li>
@@ -148,11 +156,12 @@
 			</div>
 			<!-- /.container -->
 		</nav>
-		<div class="container" ng-controller="exceptionController">
+		<div class="container" ng-controller="ExceptionController">
 			<div ng-show="alert.show" class="text-center animated flipInY">
 				<alert type="{{alert.type}}" close="closeAlert()"><i class="fa fa-exclamation-circle fa-5 glyphiconSpace"></i><strong>{{alert.msg}}</strong></alert>
 			</div>
 		</div>
+  </div>
 		<div class="container" ui-view></div>
 		<!-- FOOTER -->
 		<footer class="container">

@@ -7,7 +7,10 @@ import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Reference;
 
 import com.google.common.collect.Lists;
+import com.je.enterprise.mievento.api.dto.event.Event;
+import com.je.enterprise.mievento.api.dto.event.EventType;
 import com.je.enterprise.mievento.domain.entity.location.CommercialLocationEntity;
+import com.je.enterprise.mievento.domain.transformer.impl.events.VisitorTransformer;
 
 public class EventEntity {
 
@@ -22,18 +25,20 @@ public class EventEntity {
 	@Embedded
 	@Reference
 	private List<ProviderEntity> providers;
+	private EventType type;
 	
 	public EventEntity() {
 	}
 	
 	public EventEntity(String name, Date eventDate, CommercialLocationEntity eventLocation,
-			List<GuestEntity> guests, List<TaskEntity> tasks, List<ProviderEntity> providers) {
+			List<GuestEntity> guests, List<TaskEntity> tasks, List<ProviderEntity> providers, EventType type) {
 		this.name = name;
 		this.eventDate = eventDate;
 		this.eventLocation = eventLocation;
 		this.guests = guests;
 		this.tasks = tasks;
 		this.providers = providers;
+		this.type = type;
 	}
 
 	public Date getEventDate() {
@@ -84,5 +89,16 @@ public class EventEntity {
 		this.providers = providers;
 	}
 
+	public EventType getType() {
+		return type;
+	}
+
+	public void setType(EventType type) {
+		this.type = type;
+	}
 	
+	public Event accept(VisitorTransformer visitorTransformer){
+		return visitorTransformer.visitTransformer(this);
+	}
+
 }

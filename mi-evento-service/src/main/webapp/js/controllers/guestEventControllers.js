@@ -1,4 +1,4 @@
-mieventoControllers.controller("guestsEventController", ["$scope", "$state", "$modal", "eventGuestService", "applicationContext",
+mieventoControllers.controller("GuestsEventController", ["$scope", "$state", "$modal", "eventGuestService", "applicationContext",
 		function($scope, $state, $modal, eventGuestService, applicationContext) {
 
 			$scope.guests = applicationContext.getEventContext().getGuestsSelectedEvent();
@@ -41,7 +41,7 @@ mieventoControllers.controller("guestsEventController", ["$scope", "$state", "$m
 } ]);
 
 
-mieventoControllers.controller("invitationsGuestEventController", ["$scope", "eventGuestService", "applicationContext", function($scope, eventGuestService, applicationContext) {
+mieventoControllers.controller("InvitationsGuestEventController", ["$scope", "eventGuestService", "applicationContext", function($scope, eventGuestService, applicationContext) {
 			
 			eventGuestService.getAllStatusTypes(function(data) {
 				$scope.statusTypes = data;
@@ -54,7 +54,7 @@ mieventoControllers.controller("invitationsGuestEventController", ["$scope", "ev
 
 
 
-mieventoControllers.controller("newGuestEventController", ["$scope", "$state", "userService", "eventGuestService", "applicationContext", 
+mieventoControllers.controller("DetailGuestEventController", ["$scope", "$state", "userService", "eventGuestService", "applicationContext", 
              function($scope, $state, userService, eventGuestService, applicationContext) {
 			
 			//FIXME unificar en un solo lugar
@@ -80,7 +80,7 @@ mieventoControllers.controller("newGuestEventController", ["$scope", "$state", "
 } ]);
 
 
-mieventoControllers.controller("editGuestEventController", ["$scope", "$state", "userService", "eventGuestService", "applicationContext", 
+mieventoControllers.controller("EditGuestEventController", ["$scope", "$state", "userService", "eventGuestService", "applicationContext", 
                                 function($scope, $state, userService, eventGuestService, applicationContext) {
 			//FIXME unificar en un solo lugar
 			eventGuestService.getAllStatusTypes(function(data) {

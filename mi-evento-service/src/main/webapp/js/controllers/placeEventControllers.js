@@ -1,5 +1,5 @@
 
-mieventoControllers.controller("detailPlaceEventController", [ "$scope","$state", "userService", "applicationContext", 
+mieventoControllers.controller("DetailPlaceEventController", [ "$scope","$state", "userService", "applicationContext", 
                                        function($scope, $state, userService, applicationContext) {
 
 		$scope.place = applicationContext.getEventContext().getEventLocationSelectedEvent();
@@ -24,7 +24,7 @@ mieventoControllers.controller("detailPlaceEventController", [ "$scope","$state"
 
 
 
-mieventoControllers.controller("placeEventController", [ "$scope","$state", "applicationContext", 
+mieventoControllers.controller("PlaceEventController", [ "$scope","$state", "applicationContext", 
                                 function($scope, $state, applicationContext) {
 		
 		$scope.placeSelected = applicationContext.getEventContext().getEventLocationSelectedEvent();

@@ -32,13 +32,6 @@ public enum ProviderType {
 		return name;
 	}
 	
-	public static List<String> stringValues(){
-		List<String> stringValues = Lists.<String>newArrayList();
-		for(ProviderType type : values()){
-			stringValues.add(type.getName());
-		}
-		return stringValues;
-	}
 	
 	public static List<String> stringValues(List<ProviderType> providerTypes){
 		List<String> stringValues = Lists.<String>newArrayList();

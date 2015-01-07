@@ -1,12 +1,17 @@
 
 <div class="providerElement">
-	<div class="container" ng-controller="providerListController">
+	<div class="container" ng-controller="ProviderListController">
 		<div class="row oneElement" ng-repeat="provider in providers">
+		
 			<div class="media">
-				<a class="pull-left" href="#"> <img class="media-object"
-					alt="64x64" ng-src="../img/{{provider.picture}}.jpg"
-					style="width: 360px; height: 270px;">
-				</a>
+				<div ng-controller="providerCarouselCtrl">
+					<carousel interval="interval" class="pull-left" alt="64x64"> 
+						<slide ng-repeat="slide in slides" active="slide.active"> 
+							<img ng-src="{{slide.image}}"  style="width: 360px; height: 270px; margin: 0 auto">
+						</slide> 
+					</carousel>
+				</div>
+	
 				<div class="media-body">
 					<h4 class="media-heading">{{provider.businessName}}</h4>
 					<h6 class="media-heading">

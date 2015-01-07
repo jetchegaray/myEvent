@@ -23,6 +23,12 @@
 					</p>
 				</div>
 			</div>
+			<div class="col-md-4">
+				<ui-select ng-model="event.type" theme="selectize">
+    				<ui-select-match placeholder="Event type">{{$select.selected}}</ui-select-match>
+    				<ui-select-choices repeat="eventType in eventTypes">{{eventType}}</ui-select-choices>
+  				</ui-select>
+			</div>
 			<div class="col-sm-2">
 				<button class="btn btn-primary btn-block" type="submit"
 					ng-click="save()">Save</button>

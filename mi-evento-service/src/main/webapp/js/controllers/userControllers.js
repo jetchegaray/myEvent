@@ -1,6 +1,6 @@
 var mailPattern = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]+$/;
 
-mieventoControllers.controller("loginController", [ "$rootScope", "$scope",
+mieventoControllers.controller("LoginController", [ "$rootScope", "$scope",
 		"$state", "userService", "applicationContext", 
 		function($rootScope, $scope, $state, userService, applicationContext) {
 			
@@ -44,7 +44,7 @@ mieventoControllers.controller("loginController", [ "$rootScope", "$scope",
 
 
 
-mieventoControllers.controller("signUpController", ["$scope", "$state",
+mieventoControllers.controller("SignUpController", ["$scope", "$state",
 		"userService", "applicationContext", function($scope, $state, userService, applicationContext) {
 			
 			$scope.mailPattern = mailPattern;

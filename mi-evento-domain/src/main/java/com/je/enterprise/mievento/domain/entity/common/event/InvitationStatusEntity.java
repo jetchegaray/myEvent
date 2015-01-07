@@ -2,26 +2,26 @@ package com.je.enterprise.mievento.domain.entity.common.event;
 
 import java.util.Date;
 
-import com.je.enterprise.mievento.api.dto.event.StatusType;
+import com.je.enterprise.mievento.api.dto.event.GuestStatusType;
 
 public class InvitationStatusEntity {
 	
-	private StatusType status;
+	private GuestStatusType status;
 	private Date updateStatusDate;
 	
 	public InvitationStatusEntity() {
 	}
 	
-	public InvitationStatusEntity(StatusType status, Date updateStatusDate) {
+	public InvitationStatusEntity(GuestStatusType status, Date updateStatusDate) {
 		this.status = status;
 		this.updateStatusDate = updateStatusDate;
 	}
 
-	public StatusType getStatus() {
+	public GuestStatusType getStatus() {
 		return status;
 	}
 
-	public void setStatus(StatusType status) {
+	public void setStatus(GuestStatusType status) {
 		this.status = status;
 	}
 

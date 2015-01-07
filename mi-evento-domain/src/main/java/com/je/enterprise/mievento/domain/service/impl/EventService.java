@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.je.enterprise.mievento.api.dto.event.StatusType;
+import com.je.enterprise.mievento.api.dto.event.GuestStatusType;
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.GuestEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.InvitationStatusEntity;
@@ -62,7 +62,7 @@ public class EventService {
 		});
 		
 		
-		guestEntity.setInvitationStatusEntity(new InvitationStatusEntity(StatusType.PENDING, DateTime.now().toDate()));
+		guestEntity.setInvitationStatusEntity(new InvitationStatusEntity(GuestStatusType.PENDING, DateTime.now().toDate()));
 		userService.update(userEntity);
 	}
 	

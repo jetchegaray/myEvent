@@ -6,6 +6,7 @@
 				  <tr class="text-center">
 				     <th>Name</th>
 		           	 <th>Date</th>
+		           	 <th>Type</th>
 		           	 <th>Select</th>
 		         	 <th>Edit</th>
 		             <th>Delete</th>
@@ -16,6 +17,9 @@
 			          	<td>{{event.name}}</td>
 			          	<td>
 			          		{{event.eventDate | date:'dd-MM-yyyy , HH:mm'}}
+			          	</td>
+			          	<td>
+			          		{{event.type}}
 			          	</td>
 			          	<td>
 			          		<span ng-show="event.name == selectedEvent.name">
@@ -31,7 +35,7 @@
 			          	</td>
 			          	<td><p><button class="btn btn-primary btn-xs" ng-click="goToEditEvent(event)"><span class="fa fa-pencil"></span></button></p></td>
 	    			  	<td>
-	    			  		<div ng-controller="deleteConfirmationModalController">
+	    			  		<div ng-controller="DeleteConfirmationModalController">
 	    			  	  		<p><button class="btn btn-danger btn-xs" ng-click="openDeleteListConfirmation(events,event)"><span class="fa fa-trash"></span></button></p>
 	 		        	  	</div>
 	 		        	</td>	

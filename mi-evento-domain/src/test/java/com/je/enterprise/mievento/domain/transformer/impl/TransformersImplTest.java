@@ -11,7 +11,7 @@ import com.google.common.collect.Lists;
 import com.je.enterprise.mievento.api.dto.event.Event;
 import com.je.enterprise.mievento.api.dto.event.Guest;
 import com.je.enterprise.mievento.api.dto.event.InvitationStatus;
-import com.je.enterprise.mievento.api.dto.event.StatusType;
+import com.je.enterprise.mievento.api.dto.event.GuestStatusType;
 import com.je.enterprise.mievento.api.dto.event.Task;
 import com.je.enterprise.mievento.api.dto.location.CommercialLocation;
 import com.je.enterprise.mievento.api.dto.location.CountryCode;
@@ -125,7 +125,7 @@ public class TransformersImplTest {
 		Assert.assertNull(this.guestTransformer.transformAndValidateApiToDomain(null));
 		
 		guest.setEmail("kshdf@mail.com");
-		guest.setInvitationStatus(new InvitationStatus(StatusType.CONFIRMED, DateTime.now().toDate()));
+		guest.setInvitationStatus(new InvitationStatus(GuestStatusType.CONFIRMED, DateTime.now().toDate()));
 		Assert.assertNotNull(this.guestTransformer.transformAndValidateApiToDomain(guest));
 		
 		guest.setLocation(location);
@@ -137,7 +137,7 @@ public class TransformersImplTest {
 		Assert.assertNull(this.guestTransformer.transformAndValidateDomainToApi(null));
 		
 		guestEntity.setEmail("kshdf@mail.com");
-		guest.setInvitationStatus(new InvitationStatus(StatusType.WAIT_TILL_DAY, DateTime.now().plusDays(7).toDate()));
+		guest.setInvitationStatus(new InvitationStatus(GuestStatusType.WAIT_TILL_DAY, DateTime.now().plusDays(7).toDate()));
 		Assert.assertNotNull(this.guestTransformer.transformAndValidateDomainToApi(guestEntity));
 		
 		guestEntity.setLocation(locationEntity);

@@ -1,4 +1,4 @@
-mieventoControllers.controller("providerTypeController",["$scope", "providerService", function($scope, providerService){
+mieventoControllers.controller("ProviderTypeController",["$scope", "providerService", function($scope, providerService){
 			
 			providerService.getAllTypes(function(data){
 				$scope.types = data;
@@ -7,7 +7,7 @@ mieventoControllers.controller("providerTypeController",["$scope", "providerServ
 }]);
 
 
-mieventoControllers.controller("providerPlaceTypesController",["$scope", "providerService",function($scope, providerService){
+mieventoControllers.controller("ProviderPlaceTypesController",["$scope", "providerService",function($scope, providerService){
 			
 			providerService.getPlaceTypes(function(data){
 				$scope.placeTypes = data;
@@ -16,7 +16,7 @@ mieventoControllers.controller("providerPlaceTypesController",["$scope", "provid
 }]);
 
 
-mieventoControllers.controller("providerDetailController",["$scope","applicationContext",function($scope, applicationContext){
+mieventoControllers.controller("ProviderDetailController",["$scope","applicationContext",function($scope, applicationContext){
 		
 		$scope.provider = applicationContext.getProviderContext().getDetailProvider();
 		
@@ -24,7 +24,7 @@ mieventoControllers.controller("providerDetailController",["$scope","application
 
 
 
-mieventoControllers.controller("providerListController",["$scope", "$state", "$stateParams", 
+mieventoControllers.controller("ProviderListController",["$scope", "$state", "$stateParams", 
          "providerService", "userService", "applicationContext", 
          function( $scope, $state, $stateParams, providerService, userService, applicationContext){
 	
@@ -54,12 +54,10 @@ mieventoControllers.controller("providerListController",["$scope", "$state", "$s
 							applicationContext.getEventContext().setEventLocationSelectedEvent(provider);
 							
 							userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
-//								applicationContext.getEventContext().setSelectedEvent(selectedEvent);
-								$state.go("eventState.place");
+								//forward state
 							}, function(error) {
 								applicationContext.getExceptionContext().setDanger(error.data);
 							});
-							
 							
 								
 						}else if (angular.equals(state.name, "eventState.providers")){
@@ -67,12 +65,16 @@ mieventoControllers.controller("providerListController",["$scope", "$state", "$s
 							applicationContext.getEventContext().addProviderSelectedEvent(provider);
 							
 							userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
-								$state.go("eventState.providers");
-//								applicationContext.getEventContext().setSelectedEvent(selectedEvent);
+								//forward state
 							}, function(error) {
 								applicationContext.getExceptionContext().setDanger(error.data);
 							});
+						}else if (angular.equals(state.name, "eventState.budget")){
+							
+							applicationContext.getEventContext().addProviderToCompareEvent(provider);
 						}
+				
+						$state.go(state.name);
 					}
 				}
 				

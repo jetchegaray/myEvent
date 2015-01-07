@@ -1,0 +1,62 @@
+<div>
+	<div class="row">
+		<div class="col-md-12">	
+			<table id="guestsTable" class="table table-hover" ng-show="providers != null && providers.length">
+				<thead>
+					<tr>
+						<th>Type</th>
+						<th>Name</th>
+						<th>Estimated Price</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="provider in providers">
+						<div class="col-md-6">	
+							<td>{{provider.providerType}}</td>
+						</div>	
+						<td><p>
+								<a ng-click="goToDetailProvider(provider)">
+									{{provider.businessName}}
+								</a>
+							</p>
+						</td>
+						<tr>
+						<td><p>
+								<a ng-click="goToDetailProvider(provider)">
+									{{provider.businessName}}
+								</a>
+							</p>
+						</td>
+						</tr>
+						<td>$ {{provider.estimatedPrice}}</td>
+						<td><p>
+								<button class="btn btn-primary btn-xs" ng-click="goToEditProvider(provider)">
+									<span class="fa fa-pencil"></span>
+								</button>
+							</p>
+						</td>
+						<td>
+							<button class="btn btn-primary btn-xs" ng-click="goToSearchAnotherProvider(provider)">
+									<span class="fa fa-columns"></span>
+							</button>
+						</td>
+						<td>
+							<button class="btn btn-primary btn-xs" ng-click="goToMoreCheaper(provider)">
+									<span class="fa fa-usd fa-angle-double-down"></span>
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="line"></div>
+	<div class="dropdown">
+		<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+			Add Provider<span class="caret glyphiconSpace"></span>
+		</button>
+		<ul class="dropdown-menu" role="menu" ng-controller="ProviderTypeController">
+			<li ng-repeat="type in types | orderBy:'toString()'"><a ui-sref="providerListState({providerType : type})">{{type}}</a></li>
+		</ul>
+	</div>
+</div>

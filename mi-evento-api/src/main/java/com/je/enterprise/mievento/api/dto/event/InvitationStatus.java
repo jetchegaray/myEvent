@@ -4,22 +4,22 @@ import java.util.Date;
 
 public class InvitationStatus {
 
-	private StatusType status;
+	private GuestStatusType status;
 	private Date updateStatusDate;
 	
 	public InvitationStatus() {
 	}
 	
-	public InvitationStatus(StatusType status, Date updateStatusDate) {
+	public InvitationStatus(GuestStatusType status, Date updateStatusDate) {
 		this.status = status;
 		this.updateStatusDate = updateStatusDate;
 	}
 
-	public StatusType getStatus() {
+	public GuestStatusType getStatus() {
 		return status;
 	}
 
-	public void setStatus(StatusType status) {
+	public void setStatus(GuestStatusType status) {
 		this.status = status;
 	}
 

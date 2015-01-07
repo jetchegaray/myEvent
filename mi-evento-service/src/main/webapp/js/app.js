@@ -1,5 +1,5 @@
 //ngRoute if it doesnt use, promise and resolve object in response service.
-var mieventoApp = angular.module("mieventoApp", [ "ngCookies", "ngRoute", "ui.bootstrap", "ngAnimate", "ui.router", "ui.select", "ui.calendar",
+var mieventoApp = angular.module("mieventoApp", [ "ngCookies", "ngRoute", "ui.bootstrap", "ngAnimate", "ui.router", "ui.select", "ui.calendar","xeditable",
                                                   "mieventoControllers", "mieventoServices", "mieventoContext"]);
 
 var mieventoControllers = angular.module("mieventoControllers", []);

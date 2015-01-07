@@ -1,4 +1,5 @@
-mieventoControllers.controller("carouselCtrl", [ "$scope", function($scope) {
+/* Los watchers en ui-boostrap estan definidos sobre este nombre carouselCtrl => NO CAMBIAR*/
+mieventoControllers.controller("CarouselCtrl", [ "$scope", function($scope) {
 	$scope.interval = 5000;
 	var slides = $scope.slides = [];
 	for (var i = 1; i <= 5; i++) {
@@ -10,20 +11,52 @@ mieventoControllers.controller("carouselCtrl", [ "$scope", function($scope) {
 } ]);
 
 
+angular.module('ui.bootstrap.setNgAnimate', ['ngAnimate'])
+.directive('setNgAnimate', ['$animate', function ($animate) {
+    return {
+        link: function ($scope, $element, $attrs) { 
+          
+            $scope.$watch( function() { 
+                    return $scope.$eval($attrs.setNgAnimate, $scope); 
+                }, function(valnew, valold){
+                    $animate.enabled(!!valnew, $element);
+            });  
+            
+            
+        }
+    };
+}]);
+
+
+mieventoControllers.controller("providerCarouselCtrl", [ "$scope", function($scope) {
+	
+	// providers -> photos
+	$scope.interval = 5000;
+	var slides = $scope.slides = [];
+	for (var i = 1; i <= 5; i++) {
+		slides.push({
+			image : "../img/carusel_" + i + ".jpg",
+			text : "Cualquier Clase de Eventos Sociales"
+		});
+	}
+} ]);
+
+
+/* Los watchers en ui-boostrap estan definidos sobre este nombre accordionCtrl => NO CAMBIAR*/
 mieventoControllers.controller("accordionCtrl", ["$scope", function($scope){
 	$scope.oneAtATime = true;
 	$scope.isFirstOpen = true;
 }]);
 
 
-mieventoControllers.controller("deleteConfirmationModalController", ["$scope","$modal","userService","applicationContext",
+mieventoControllers.controller("DeleteConfirmationModalController", ["$scope","$modal","userService","applicationContext",
 		function($scope, $modal, userService, applicationContext) {
 
 			$scope.openDeleteListConfirmation = function(list,element) {
 
 				var modalInstance = $modal.open({
 					templateUrl : 'deleteConfirmation.html',
-					controller : "deleteConfirmationInstanceController"
+					controller : "DeleteConfirmationInstanceController"
 				});
 
 				modalInstance.result.then(function() {
@@ -59,7 +92,7 @@ mieventoControllers.controller("deleteConfirmationModalController", ["$scope","$
 }]);
 
 
-mieventoControllers.controller("deleteConfirmationInstanceController", [
+mieventoControllers.controller("DeleteConfirmationInstanceController", [
 		"$scope", "$modalInstance", function($scope, $modalInstance) {
 
 			$scope.ok = function() {

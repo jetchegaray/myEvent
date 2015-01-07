@@ -20,6 +20,7 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.resourceresolver.ClassLoaderResourceResolver;
 import org.thymeleaf.util.ClassLoaderUtils;
 
+import com.je.enterprise.mievento.api.dto.event.EventType;
 import com.je.enterprise.mievento.api.dto.location.CountryCode;
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.UserEntity;
@@ -51,7 +52,7 @@ public class MailServiceIntegrationTest {
 	
 	@Test
 	public void sendInvitation_testOk(){
-		EventEntity eventEntity = new EventEntity("EventoTest",DateTime.now().toDate(),new CommercialLocationEntity("placeTest", CountryCode.AR, "Bs As", "CABA", new StreetAddressEntity("streetTest", BigDecimal.TEN, null, "Villa lugano")),null,null,null);
+		EventEntity eventEntity = new EventEntity("EventoTest",DateTime.now().toDate(),new CommercialLocationEntity("placeTest", CountryCode.AR, "Bs As", "CABA", new StreetAddressEntity("streetTest", BigDecimal.TEN, null, "Villa lugano")),null,null,null,EventType.COMMON_EVENT);
 		mailService.sendInvitation(eventEntity, "aa@gmail.com", "etchegarayjavier@gmail.com");
 	}
 	

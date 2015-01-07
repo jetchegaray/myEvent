@@ -16,7 +16,7 @@ public class TypeFilterProvider implements CriteriaFilterProvider{
 
 	@Override
 	public Query<ProviderEntity> buildQueryCriteria(ProviderDAO providerDAO){
-		Query<ProviderEntity> query = providerDAO.createQuery().disableValidation();
+		Query<ProviderEntity> query = providerDAO.createQuery().disableValidation().enableSnapshotMode();
 		
 		query.and(query.criteria("providerType").equal(type));
 		return query;
