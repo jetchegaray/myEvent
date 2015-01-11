@@ -8,11 +8,12 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.beust.jcommander.internal.Lists;
+import com.google.common.collect.Lists;
 import com.je.enterprise.mievento.api.dto.provider.Provider;
 import com.je.enterprise.mievento.api.dto.provider.ProviderType;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
@@ -21,6 +22,7 @@ import com.je.enterprise.mievento.domain.service.filters.TypeFilterProvider;
 import com.je.enterprise.mievento.domain.service.impl.ProviderService;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
 import com.je.enterprise.mievento.domain.transformer.impl.ProviderTransformer;
+import com.je.enterprise.mievento.service.request.ProviderTypesRequest;
 
 @Controller
 @RequestMapping(value= "/provider")
@@ -66,12 +68,15 @@ public class ProviderController {
 	
 	
 	@ResponseBody
-	@RequestMapping(value={"/moreCheaperByCategory/{type}"},method = RequestMethod.GET)
-	public List<Provider> mostCheaperByCategory(List<ProviderType> providerTypes){
+	@RequestMapping(value={"/moreCheaperByCategory"},method = RequestMethod.POST)
+	public List<Provider> mostCheaperByCategory(@RequestBody ProviderTypesRequest types){
+		logger.info(String.format("params, list of types %s",types));
+		
 		//TODO improve the query.
 		List<Provider> providers = Lists.<Provider>newArrayList();
-		for (ProviderType providerType : providerTypes) {
-			Provider provider = providerTransformer.transformDomainToApi(providerService.getMostOfAllBy(new CheaperFilterProvider(providerType)));
+		for (ProviderType type : types.getTypes()) {
+//			ProviderType providerType = ProviderType.getByName(type);
+			Provider provider = providerTransformer.transformDomainToApi(providerService.getMostOfAllBy(new CheaperFilterProvider(type)));
 			providers.add(provider);
 		}
 		return providers;

@@ -4,12 +4,14 @@
 		<div class="row oneElement" ng-repeat="provider in providers">
 		
 			<div class="media">
+			  <div  class="media-object" style="width: 360px; height: 270px; margin: 0 auto;">
 				<div ng-controller="providerCarouselCtrl">
-					<carousel interval="interval" class="pull-left" alt="64x64"> 
+					<carousel interval="interval" disable-animation="true"> 
 						<slide ng-repeat="slide in slides" active="slide.active"> 
-							<img ng-src="{{slide.image}}"  style="width: 360px; height: 270px; margin: 0 auto">
+							<img ng-src="{{slide.image}}"  >
 						</slide> 
 					</carousel>
+				</div>
 				</div>
 	
 				<div class="media-body">

@@ -23,7 +23,7 @@ mieventoServices.factory("providerService",["$resource",function($resource){
         	getAllTypes : {method : "GET",params: {requestMapping: "types"},isArray:true},
         	getPlaceTypes : {method : "GET",params: {requestMapping: "placeTypes"},isArray:true},
         	getByType : {method : "GET",params: {requestMapping: "byType"},isArray:true},
-        	getMoreCheaperByCategory : {method : "GET", params : {requestMapping : "moreCheaperByCategory"}, isArray :true}
+        	getMoreCheaperByCategory : {method : "POST", params : {requestMapping : "moreCheaperByCategory"}, isArray :true}
         });
        }                                     
 ]);

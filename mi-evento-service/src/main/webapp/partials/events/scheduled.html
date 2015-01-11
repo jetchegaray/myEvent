@@ -1,0 +1,32 @@
+<div class="agenda">
+     <div class="table-responsive">
+         <table class="table table-condensed table-bordered">
+             <thead>
+                 <tr>
+                     <th>Date</th>
+                     <th>Time</th>
+                     <th>Event or Task</th>
+                 </tr>
+             </thead>
+             <tbody>
+                 <!-- Single event in a single day -->
+                 <tr ng-repeat="item in items">
+                     <td class="agenda-date" class="active" rowspan="item.names.lenght">
+                         <div class="dayofmonth">{{item.date | date:'dd'}}</div>
+                         <div class="dayofweek">{{item.date | date:'EEEE'}}</div>
+                         <div class="shortdate text-muted">{{item.date | date:'MMMM,yyyy '}}</div>
+                     </td>
+                     <td ng-repeat="hour in item.hours" class="agenda-time">
+                         {{hour | date:'h:mm a'}}
+                     </td>
+                     <td ng-repeat="name in item.names" class="agenda-events">
+                         <div class="agenda-event">
+                             <i class="fa fa-tasks text-muted"></i> 
+                             {{name}}
+                         </div>
+                     </td>
+                 </tr>
+                </tbody>
+            </table>
+        </div>
+</div>

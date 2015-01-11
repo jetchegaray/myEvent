@@ -13,10 +13,13 @@ EVENT_NEW_GUESTS_PATH = "/guest/create";
 EVENT_EDIT_GUESTS_PATH="/guest/edit";
 EVENT_PLACE_PATH = "/place";
 EVENT_PLACE_CHOOSE_PATH = "/place/choose";
+EVENT_PLACE_ADMIN_PATH = "/placeAdmin"	
 EVENT_PROVIDERS_PATH = "/providers";
 EVENT_PROVIDER_EDIT_PATH = "/provider/edit";
 EVENT_CALENDAR_PATH = "/calendar";
+EVENT_SCHEDULED_PATH = "/scheduled"
 EVENT_BUDGET_PATH = "/budget"
+	
 
 mieventoApp.config([ "$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider){
 
@@ -91,6 +94,11 @@ mieventoApp.config([ "$stateProvider", "$urlRouterProvider", function($stateProv
 		templateUrl : "../partials/events/place/detailPlace.html",
 		controller : "DetailPlaceEventController"
 	})
+	.state("eventState.placeAdmin",{
+		url : EVENT_PLACE_ADMIN_PATH,
+		templateUrl : "../partials/events/place/administratorPlace.html",
+		controller : "PlaceAdministratorController"
+	})
 	.state("eventState.providers",{
 		url : EVENT_PROVIDERS_PATH,
 		templateUrl : "../partials/events/providers/eventProviders.html",
@@ -105,6 +113,11 @@ mieventoApp.config([ "$stateProvider", "$urlRouterProvider", function($stateProv
 		url : EVENT_CALENDAR_PATH,
 		templateUrl : "../partials/events/calendar.html",
 		controller : "CalendarEventController"
+	})
+	.state("eventState.scheduled",{
+		url : EVENT_SCHEDULED_PATH,
+		templateUrl : "../partials/events/scheduled.html",
+		controller : "ScheduledEventController"
 	})
 	.state("eventState.budget", {
 		url : EVENT_BUDGET_PATH,

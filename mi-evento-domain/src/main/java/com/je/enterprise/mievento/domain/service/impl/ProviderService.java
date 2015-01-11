@@ -50,7 +50,7 @@ public class ProviderService {
 	
 	public ProviderEntity getMostOfAllBy(CriteriaFilterProvider criteriaFilterProvider){
 		List<ProviderEntity> providers = this.getBy(criteriaFilterProvider);
-		if (providers.isEmpty()){
+		if (!providers.isEmpty()){
 			return providers.get(0);
 		}
 		

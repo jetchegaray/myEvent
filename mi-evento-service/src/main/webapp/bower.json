@@ -19,6 +19,7 @@
     "angular-ui-calendar": "0.9.0-beta.1",
     "jquery-ui" : "*",
     "moment" : "*",
-    "angular-xeditable": "0.1.8"
+    "angular-xeditable": "0.1.8",
+    "underscore" : "1.7.0"
   }
 }

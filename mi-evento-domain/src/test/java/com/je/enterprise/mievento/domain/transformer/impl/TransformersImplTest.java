@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import com.je.enterprise.mievento.api.dto.event.Event;
 import com.je.enterprise.mievento.api.dto.event.Guest;
@@ -210,4 +211,5 @@ public class TransformersImplTest {
 		userEntity.setEvents(Lists.<EventEntity>newArrayList(eventEntity));
 		Assert.assertNotNull(this.userTransformer.transformAndValidateDomainToApi(userEntity));
 	}
+		
 }

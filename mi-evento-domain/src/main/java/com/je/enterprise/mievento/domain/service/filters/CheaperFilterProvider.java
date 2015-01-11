@@ -16,7 +16,7 @@ public class CheaperFilterProvider implements CriteriaFilterProvider{
 
 	@Override
 	public Query<ProviderEntity> buildQueryCriteria(ProviderDAO providerDAO){
-		Query<ProviderEntity> query = providerDAO.createQuery().disableValidation().enableSnapshotMode();
+		Query<ProviderEntity> query = providerDAO.createQuery().disableValidation();
 		
 		query.and(query.criteria("providerType").equal(type));
 		query.order("price");

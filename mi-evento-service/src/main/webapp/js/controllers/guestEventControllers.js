@@ -2,7 +2,7 @@ mieventoControllers.controller("GuestsEventController", ["$scope", "$state", "$m
 		function($scope, $state, $modal, eventGuestService, applicationContext) {
 
 			$scope.guests = applicationContext.getEventContext().getGuestsSelectedEvent();
-			
+//			console.log(angular.toJson($scope.guests));
 			if ($scope.guests == null || $scope.guests.length == 0){
 				$state.go("eventState.guestCreate");
 			}

@@ -87,6 +87,10 @@ mieventoContext.service("eventContext",function(){
 		return selectedEvent.providers;
 	}
 	
+	this.setProvidersSelectedEvent = function(providers){
+		selectedEvent.providers = providers;
+	}
+	
 	this.addProviderSelectedEvent = function(provider){
 		if (selectedEvent.providers == null){
 			selectedEvent.providers = [];
@@ -105,9 +109,6 @@ mieventoContext.service("eventContext",function(){
 	//**********PROVIDERS TO COMPARE IN EVENT ***********
 	
 	this.getProvidersToCompareEvent = function(){
-		if (selectedEvent.providersToCompare == null){
-			return null;
-		}
 		return selectedEvent.providersToCompare;
 	}
 	

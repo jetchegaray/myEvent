@@ -1,62 +1,95 @@
 <div>
 	<div class="row">
-		<div class="col-md-12">	
-			<table id="guestsTable" class="table table-hover" ng-show="providers != null && providers.length">
-				<thead>
-					<tr>
-						<th>Type</th>
-						<th>Name</th>
-						<th>Estimated Price</th>
-					</tr>
-				</thead>
+		<div class="col-md-12">
+			<!-- 			<table id="budgetTable" class="table table-hover" ng-show="providers != null && providers.length"> -->
+			<table class="table table-bordered"
+				style="width: 90%; margin-left: 10px; margin-top: 10px">
+				<tr class="active">
+					<th>Type</th>
+					<th>Name</th>
+					<th>Phone</th>
+					<th>Estimated Price</th>
+					<th>View</th>
+					<th>Delete</th>
+					<th>Compare To</th>
+					<th>More Cheaper</th>
+					<th>Selected</th>
+				</tr>
 				<tbody>
-					<tr ng-repeat="provider in providers">
-						<div class="col-md-6">	
-							<td>{{provider.providerType}}</td>
-						</div>	
-						<td><p>
-								<a ng-click="goToDetailProvider(provider)">
-									{{provider.businessName}}
-								</a>
-							</p>
+					<tr ng-repeat-start="item in items">
+						<td colspan="8" ng-click="order.collapseRows = !order.collapseRows" class="collapsible-row">
+							{{item.providerType}} 
+							<span ng-class="{'caret':!order.collapseRows, 'right-caret':order.collapseRows}"></span>
 						</td>
-						<tr>
-						<td><p>
-								<a ng-click="goToDetailProvider(provider)">
-									{{provider.businessName}}
-								</a>
-							</p>
+					</tr>
+					<tr ng-repeat-end ng-repeat="provider in item.providers" ng-hide="order.collapseRows">
+						<td rowspan="{{item.providers.length}}" ng-if="$first"></td>
+						<td>{{provider.businessName}}</td>
+						<td>
+							<span ng-if="provider.cellPhone != null || provider.phone == null">{{provider.cellPhone}}</span>
+							<span ng-if="provider.cellPhone == null && provider.phone != null">{{provider.phone}}</span>
 						</td>
-						</tr>
-						<td>$ {{provider.estimatedPrice}}</td>
-						<td><p>
-								<button class="btn btn-primary btn-xs" ng-click="goToEditProvider(provider)">
-									<span class="fa fa-pencil"></span>
+						<td >
+							$ <a href="#" ng-style={{provider.ngStyle}} style="font-weight: bold;" editable-text="provider.estimatedPrice" onbeforesave="checkNumber($data)" onafterSave="save($data,provider)">{{  provider.estimatedPrice || '0'}}</a>
+						</td>
+						<td>
+							<p>
+								<button class="btn btn-info btn-xs"
+									ng-click="goToDetailProvider(provider)">
+									<span class="fa fa-eye"></span>
 								</button>
 							</p>
 						</td>
 						<td>
-							<button class="btn btn-primary btn-xs" ng-click="goToSearchAnotherProvider(provider)">
-									<span class="fa fa-columns"></span>
-							</button>
+							<div ng-controller="DeleteConfirmationModalNotPersistenceController">
+								<p>
+									<button class="btn btn-danger btn-xs" ng-click="openDeleteListConfirmation(item.providers,provider)">
+										<span class="fa fa-trash"></span>
+									</button>
+								</p>
+							</div>
+						</td>
+						<td ng-if="$first">
+							<p>
+								<button class="btn btn-info btn-xs" ng-click="goToSearchAnotherProvider(provider)">
+									<span class="fa fa-search"></span>
+								</button>
+							</p>
+						</td>
+						<td ng-if="$first"><p>
+								<button class="btn btn-info btn-xs" ng-click="goToMoreCheaper(provider)">
+									<span class="fa fa-angle-double-down"></span><span class="fa fa-dollar"></span>
+								</button>
+							</p>
 						</td>
 						<td>
-							<button class="btn btn-primary btn-xs" ng-click="goToMoreCheaper(provider)">
-									<span class="fa fa-usd fa-angle-double-down"></span>
-							</button>
-						</td>
+			          		<span ng-show="provider.selected">
+			          			<p><button class="badge btn  progress-bar-success btn-xs" ng-click="setSelectProvider(provider)">
+			          				<i class="fa fa fa-check glyphiconSpace"></i>
+			          			</button></p>	
+			          		</span>	
+			          		<span ng-show="!provider.selected">
+			          			<p><button class="btn btn-xs badge" ng-click="setSelectProvider(provider)">
+			          				<i class="fa fa fa-check glyphiconSpace"></i>
+			          			</button></p>	
+			          		</span>	
+			          	</td>
 					</tr>
+					<tr ng-repeat-end></tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
 	<div class="line"></div>
 	<div class="dropdown">
-		<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+		<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+			aria-expanded="true">
 			Add Provider<span class="caret glyphiconSpace"></span>
 		</button>
-		<ul class="dropdown-menu" role="menu" ng-controller="ProviderTypeController">
-			<li ng-repeat="type in types | orderBy:'toString()'"><a ui-sref="providerListState({providerType : type})">{{type}}</a></li>
+		<ul class="dropdown-menu" role="menu"
+			ng-controller="ProviderTypeController">
+			<li ng-repeat="type in types | orderBy:'toString()'"><a
+				ui-sref="providerListState({providerType : type})">{{type}}</a></li>
 		</ul>
 	</div>
 </div>

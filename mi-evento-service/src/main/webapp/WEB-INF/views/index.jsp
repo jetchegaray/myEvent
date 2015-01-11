@@ -30,14 +30,16 @@
 <!-- ********************** Angularjs Components ********************** -->
 
 <script src="../bower_components/angular/angular.js"></script>
+<script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="../bower_components/angular-route/angular-route.js"></script>
 <script src="../bower_components/angular-resource/angular-resource.js"></script>
 <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
 <script src="../bower_components/angular-animate/angular-animate.js"></script>
 <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="../bower_components/angular-ui-select/dist/select.min.js"></script>
-<script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="../bower_components/moment/moment.js"></script>
+<script src="../bower_components/underscore/underscore.js"></script>
+
 <script type="text/javascript" src="../bower_components/angular-ui-calendar/src/calendar.js"></script>
 <script type="text/javascript" src="../bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 <script type="text/javascript" src="../bower_components/fullcalendar/dist/gcal.js"></script>
@@ -59,7 +61,9 @@
 <script src="../js/controllers/placeEventControllers.js"></script>
 <script src="../js/controllers/providerEventControllers.js"></script>
 <script src="../js/controllers/calendarEventControllers.js"></script>
+<script src="../js/controllers/scheduledEventControllers.js"></script>
 <script src="../js/controllers/budgetEventControllers.js"></script>
+<script src="../js/controllers/placeAdministratorControllers.js"></script>
 
 <script src="../js/controllers/utilsControllers.js"></script>
 <script src="../js/controllers/exceptionControllers.js"></script>

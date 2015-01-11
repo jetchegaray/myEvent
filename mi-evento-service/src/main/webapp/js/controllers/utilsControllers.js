@@ -1,4 +1,3 @@
-/* Los watchers en ui-boostrap estan definidos sobre este nombre carouselCtrl => NO CAMBIAR*/
 mieventoControllers.controller("CarouselCtrl", [ "$scope", function($scope) {
 	$scope.interval = 5000;
 	var slides = $scope.slides = [];
@@ -10,22 +9,6 @@ mieventoControllers.controller("CarouselCtrl", [ "$scope", function($scope) {
 	}
 } ]);
 
-
-angular.module('ui.bootstrap.setNgAnimate', ['ngAnimate'])
-.directive('setNgAnimate', ['$animate', function ($animate) {
-    return {
-        link: function ($scope, $element, $attrs) { 
-          
-            $scope.$watch( function() { 
-                    return $scope.$eval($attrs.setNgAnimate, $scope); 
-                }, function(valnew, valold){
-                    $animate.enabled(!!valnew, $element);
-            });  
-            
-            
-        }
-    };
-}]);
 
 
 mieventoControllers.controller("providerCarouselCtrl", [ "$scope", function($scope) {
@@ -104,6 +87,26 @@ mieventoControllers.controller("DeleteConfirmationInstanceController", [
 			}
 
 } ]);
+
+
+
+mieventoControllers.controller("DeleteConfirmationModalNotPersistenceController", ["$scope","$modal","userService","applicationContext",
+ 		function($scope, $modal, userService, applicationContext) {
+
+ 			$scope.openDeleteListConfirmation = function(list,element) {
+ 				
+ 				var modalInstance = $modal.open({
+ 					templateUrl : 'deleteConfirmation.html',
+ 					controller : "DeleteConfirmationInstanceController"
+ 				});
+
+ 				modalInstance.result.then(function() {
+ 					console.log("DeleteConfirmationModalNotPersistenceController");
+ 					var index = list.indexOf(element)
+ 					list.splice(index, 1);
+ 				});
+ 			};
+ }]);
 
 
 
