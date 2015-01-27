@@ -85,6 +85,7 @@
 			</accordion-group> 
 		</accordion>	 
 	</div>
+	
 	<div class="col-sm-9" >
 		<div ng-controller="SelectedEventController">
 			<span ng-show="loggedUser != null && selectedEvent == null">
@@ -100,8 +101,29 @@
 <!-- 		class="animated fadeInRight" -->
 		<div ui-view></div>
 	</div>
-	
-	<div ng-controller="DeleteConfirmationModalController">
+<!-- 	<div ui-view="dragAndDropView"></div>	 -->
+</div>
+<div class="row">	
+	<div class="col-sm-3">
+   		<div class="list-group">
+         <div class="list-group-item">
+             <h3 class="pull-right">
+                 <i class="fa fa-eye"></i>
+             </h3>
+             <h4 class="list-group-item-heading count">MiEvento1</h4>
+             <p class="list-group-item-text">Selected Event</p>
+         </div>
+         <div class="list-group-item">
+             <h3 class="pull-right">
+                 <i class="fa fa-dollar"></i>
+             </h3>
+             <h4 class="list-group-item-heading count">$ 1000</h4>
+             <p class="list-group-item-text">Total Budget</p>
+         </div>
+   		</div>
+	</div>	
+</div>   		
+<div ng-controller="DeleteConfirmationModalController">
 		<script type="text/ng-template" id="deleteConfirmation.html">
 			<div class="modal-header">
         		<h4 class="modal-title custom_align" id="Heading">Delete entry</h4>
@@ -114,6 +136,6 @@
         		<button type="button" class="btn btn-warning" ng-click="cancel()"><span class="fa fa-close"></span> No</button>
       		</div>
     	</script>
-	</div>	
-</div>
+</div>	
+
 

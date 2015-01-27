@@ -15,7 +15,8 @@ import com.je.enterprise.mievento.domain.transformer.impl.events.VisitorTransfor
 public class EventEntity {
 
 	private String name;
-	private Date eventDate;
+	private Date initialDate;
+	private Date finalDate;
 	@Embedded
 	private CommercialLocationEntity eventLocation;
 	@Embedded
@@ -30,23 +31,16 @@ public class EventEntity {
 	public EventEntity() {
 	}
 	
-	public EventEntity(String name, Date eventDate, CommercialLocationEntity eventLocation,
+	public EventEntity(String name, Date initialDate,Date finalDate, CommercialLocationEntity eventLocation,
 			List<GuestEntity> guests, List<TaskEntity> tasks, List<ProviderEntity> providers, EventType type) {
 		this.name = name;
-		this.eventDate = eventDate;
+		this.initialDate = initialDate;
+		this.finalDate = finalDate;
 		this.eventLocation = eventLocation;
 		this.guests = guests;
 		this.tasks = tasks;
 		this.providers = providers;
 		this.type = type;
-	}
-
-	public Date getEventDate() {
-		return eventDate;
-	}
-
-	public void setEventDate(Date eventDate) {
-		this.eventDate = eventDate;
 	}
 
 	public CommercialLocationEntity getEventLocation() {
@@ -99,6 +93,22 @@ public class EventEntity {
 	
 	public Event accept(VisitorTransformer visitorTransformer){
 		return visitorTransformer.visitTransformer(this);
+	}
+
+	public Date getInitialDate() {
+		return initialDate;
+	}
+
+	public void setInitialDate(Date initialDate) {
+		this.initialDate = initialDate;
+	}
+
+	public Date getFinalDate() {
+		return finalDate;
+	}
+
+	public void setFinalDate(Date finalDate) {
+		this.finalDate = finalDate;
 	}
 
 }

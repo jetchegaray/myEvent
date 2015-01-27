@@ -7,7 +7,7 @@ mieventoControllers.controller("ScheduledEventController", ["$scope", "applicati
 	  var collectItems = [];
 	  angular.forEach(events, function(event){
 		  item = {
-					date : event.eventDate,
+					date : event.initialDate,
 					name : event.name
 		  };
 		  collectItems.push(item);

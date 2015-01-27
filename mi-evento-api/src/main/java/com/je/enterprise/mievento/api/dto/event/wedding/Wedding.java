@@ -9,6 +9,7 @@ import com.je.enterprise.mievento.api.dto.event.EventType;
 import com.je.enterprise.mievento.api.dto.event.Guest;
 import com.je.enterprise.mievento.api.dto.event.Person;
 import com.je.enterprise.mievento.api.dto.location.CommercialLocation;
+import com.je.enterprise.mievento.api.dto.place.Place;
 import com.je.enterprise.mievento.api.dto.provider.Provider;
 
 
@@ -25,12 +26,12 @@ public class Wedding extends Event {
 	public Wedding() {
 	}
 	
-	public Wedding(String name, Date eventDate,
+	public Wedding(String name, Date initialDate,Date finalDate,
 			CommercialLocation eventLocation, List<Guest> guests,Person husband, Person wife,
 			List<Present> presents, Place place, BigDecimal budget,
 			BigDecimal finalPrice, List<Provider> providers) {
 		
-		super(name, eventDate, eventLocation, guests, providers, EventType.WEDDING);
+		super(name, initialDate, finalDate, eventLocation, guests, providers, EventType.WEDDING);
 		this.husband = husband;
 		this.wife = wife;
 		this.presents = presents;

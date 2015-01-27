@@ -3,10 +3,10 @@ package com.je.enterprise.mievento.domain.transformer.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.je.enterprise.mievento.api.dto.event.wedding.Place;
 import com.je.enterprise.mievento.api.dto.location.Location;
+import com.je.enterprise.mievento.api.dto.place.Place;
 import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
-import com.je.enterprise.mievento.domain.entity.wedding.PlaceEntity;
+import com.je.enterprise.mievento.domain.entity.place.PlaceEntity;
 import com.je.enterprise.mievento.domain.transformer.Transformer;
 
 @Component

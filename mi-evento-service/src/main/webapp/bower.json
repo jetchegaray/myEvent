@@ -20,6 +20,7 @@
     "jquery-ui" : "*",
     "moment" : "*",
     "angular-xeditable": "0.1.8",
-    "underscore" : "1.7.0"
+    "underscore" : "1.7.0",
+    "angular-dragdrop" : "1.0.11"
   }
 }

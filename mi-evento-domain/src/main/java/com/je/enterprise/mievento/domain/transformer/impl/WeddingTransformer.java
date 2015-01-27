@@ -8,17 +8,17 @@ import org.springframework.stereotype.Component;
 import com.je.enterprise.mievento.api.dto.event.Guest;
 import com.je.enterprise.mievento.api.dto.event.Person;
 import com.je.enterprise.mievento.api.dto.event.Task;
-import com.je.enterprise.mievento.api.dto.event.wedding.Place;
 import com.je.enterprise.mievento.api.dto.event.wedding.Present;
 import com.je.enterprise.mievento.api.dto.event.wedding.Wedding;
 import com.je.enterprise.mievento.api.dto.location.CommercialLocation;
+import com.je.enterprise.mievento.api.dto.place.Place;
 import com.je.enterprise.mievento.api.dto.provider.Provider;
 import com.je.enterprise.mievento.domain.entity.common.event.GuestEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.TaskEntity;
 import com.je.enterprise.mievento.domain.entity.location.CommercialLocationEntity;
+import com.je.enterprise.mievento.domain.entity.place.PlaceEntity;
 import com.je.enterprise.mievento.domain.entity.wedding.PersonEntity;
-import com.je.enterprise.mievento.domain.entity.wedding.PlaceEntity;
 import com.je.enterprise.mievento.domain.entity.wedding.PresentEntity;
 import com.je.enterprise.mievento.domain.entity.wedding.WeddingEntity;
 import com.je.enterprise.mievento.domain.transformer.Transformer;
@@ -72,7 +72,7 @@ public class WeddingTransformer extends Transformer<WeddingEntity, Wedding> {
 		Place place = this.placeTransformer.transformAndValidateDomainToApi(domainObject
 				.getPlace());
 
-		return new Wedding(domainObject.getName(), domainObject.getEventDate(),
+		return new Wedding(domainObject.getName(), domainObject.getInitialDate(), domainObject.getFinalDate(), 
 				eventLocation, guests, husband, wife, presents, place,
 				domainObject.getBudget(), domainObject.getFinalPrice(),
 				providers);
@@ -97,7 +97,7 @@ public class WeddingTransformer extends Transformer<WeddingEntity, Wedding> {
 		PlaceEntity placeEntity = this.placeTransformer.transformAndValidateApiToDomain(apiObject
 				.getPlace());
 
-		return new WeddingEntity(apiObject.getName(), apiObject.getEventDate(),
+		return new WeddingEntity(apiObject.getName(), apiObject.getInitialDate(), apiObject.getFinalDate(),
 				eventLocationEntity, guestsEntities, tasksEntities, husbandEntity, wifeEntity, presentsEntities, placeEntity,
 				apiObject.getBudget(), apiObject.getFinalPrice(),
 				providersEntities);

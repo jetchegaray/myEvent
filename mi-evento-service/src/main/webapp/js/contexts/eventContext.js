@@ -98,6 +98,14 @@ mieventoContext.service("eventContext",function(){
 		selectedEvent.providers.push(provider);
 	}
 	
+	this.removeProviderSelectedEvent = function(provider){
+		if (selectedEvent.providers == null){
+			selectedEvent.providers = [];
+		}
+		var index = list.indexOf(provider)
+		selectedEvent.providers.splice(index, 1);
+	}
+	
 	this.setEditProvider = function(provider){
 		editProvider = provider;
 	}

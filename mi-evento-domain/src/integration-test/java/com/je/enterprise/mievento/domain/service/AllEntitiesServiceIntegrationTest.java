@@ -31,8 +31,8 @@ import com.je.enterprise.mievento.domain.entity.common.event.UserEntity;
 import com.je.enterprise.mievento.domain.entity.location.CommercialLocationEntity;
 import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
 import com.je.enterprise.mievento.domain.entity.location.StreetAddressEntity;
+import com.je.enterprise.mievento.domain.entity.place.PlaceEntity;
 import com.je.enterprise.mievento.domain.entity.wedding.PersonEntity;
-import com.je.enterprise.mievento.domain.entity.wedding.PlaceEntity;
 import com.je.enterprise.mievento.domain.entity.wedding.PresentEntity;
 import com.je.enterprise.mievento.domain.entity.wedding.WeddingEntity;
 import com.je.enterprise.mievento.domain.service.helper.CRUDHelper;
@@ -107,7 +107,8 @@ public class AllEntitiesServiceIntegrationTest {
 		
 		WeddingEntity wedding = new WeddingEntity();
 		wedding.setName("Mi Segunda Boda");
-		wedding.setEventDate(DateTime.now().plusWeeks(20).toDate());
+		wedding.setInitialDate(DateTime.now().plusWeeks(20).toDate());
+		wedding.setFinalDate(DateTime.now().plusWeeks(21).toDate());
 		wedding.setBudget(BigDecimal.TEN);
 		
 		LocationEntity locationHusband = new LocationEntity(CountryCode.AR,"CABA","Bs As",new StreetAddressEntity("callea", BigDecimal.ONE, null, "Palermo"));
@@ -133,7 +134,7 @@ public class AllEntitiesServiceIntegrationTest {
 		CommercialLocationEntity locationEntregaTPFinal = new CommercialLocationEntity("Facultad Ingenieria",CountryCode.AR,"CABA","Bs As",new StreetAddressEntity("Paseo Coloon", BigDecimal.valueOf(750), "esquina Independencia", "San Telmo"));
 		List<GuestEntity> guestsTP = Lists.<GuestEntity>newArrayList(new GuestEntity("mama","etche","mama@gmail.com",locationHusband),new GuestEntity("Abu","etche","abu@gmail.com",locationHusband));
 		List<TaskEntity> tasksTP = Arrays.asList(new TaskEntity("Conseguir libreta",DateTime.now().toDate(),DateTime.now().plusDays(10).toDate()),new TaskEntity("comprar traje",DateTime.now().plusDays(5).toDate(),DateTime.now().plusDays(15).toDate()));
-		EventEntity miJura = new EventEntity("Jura Ingeniero",DateTime.now().plusWeeks(10).toDate(),locationEntregaTPFinal,guestsTP,tasksTP,Lists.newArrayList(new ProviderEntity("Barman batman", "Carlitox HOOO", locationFotografo, "Fc@gmail.com", "15548798","454879865", BigDecimal.ONE, BigDecimal.TEN,Arrays.asList("http://image1"),ProviderType.PHOTOGRAPHER)),EventType.COMMON_EVENT);
+		EventEntity miJura = new EventEntity("Jura Ingeniero",DateTime.now().plusWeeks(10).toDate(),DateTime.now().plusWeeks(10).toDate(),locationEntregaTPFinal,guestsTP,tasksTP,Lists.newArrayList(new ProviderEntity("Barman batman", "Carlitox HOOO", locationFotografo, "Fc@gmail.com", "15548798","454879865", BigDecimal.ONE, BigDecimal.TEN,Arrays.asList("http://image1"),ProviderType.PHOTOGRAPHER)),EventType.COMMON_EVENT);
 		
 		user.getEvents().add(miJura);
 		

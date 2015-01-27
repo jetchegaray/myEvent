@@ -56,12 +56,16 @@ public class MailService {
 
 	public void sendInvitation(EventEntity eventEntity, String userEmail,String guestEmail)  {
 		try {
-			String pattern = "dd-MM-yyyy HH:mm";
-			DateTime date = new DateTime(eventEntity.getEventDate());
+			String dayPattern = "dd-MM-yyyy";
+			String hourPattern = "HH:mm";
+			DateTime initialDate = new DateTime(eventEntity.getInitialDate());
+			DateTime finalDate = new DateTime(eventEntity.getFinalDate());
 			
 			final Context ctx = new Context(Locale.ROOT);
 			ctx.setVariable("eventName", eventEntity.getName());
-			ctx.setVariable("eventDate", date.toString(pattern));
+			ctx.setVariable("initialDate", initialDate.toString(dayPattern));
+			ctx.setVariable("initialHour", initialDate.toString(hourPattern));
+			ctx.setVariable("duration", finalDate.minus(initialDate.getMillis()).toString(hourPattern));
 			ctx.setVariable("placeName", eventEntity.getEventLocation().getPlaceName());
 			ctx.setVariable("placeAddress", eventEntity.getEventLocation().toString());
 			ctx.setVariable("userEmail", userEmail);

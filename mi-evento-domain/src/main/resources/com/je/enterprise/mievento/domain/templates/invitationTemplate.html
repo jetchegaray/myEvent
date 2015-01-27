@@ -9,14 +9,15 @@
   	<p><span>Hola !</span></p>
   
   	<p>
-  		Estas invitado al Evento  : <strong><span th:text="${eventName}"></span></strong>,el dia <strong><span th:text="${eventDate}"></span></strong>.
-  
+  		Estas invitado al Evento  : <strong><span th:text="${eventName}"></span></strong>,el dia <strong><span th:text="${initialDate}"></span></strong> a las <strong><span th:text="${initialHour}"></span></strong>. 
+  		
   	</p>
 	<p>
 	
 		El lugar es <strong><span th:text="${placeName}"></span></strong>
 		en <strong><span th:text="${placeAddress}"></span></strong>.
 		
+		Duracion estimada de <strong><span th:text="${duration}"></span></strong>.
   	</p>
   	<p>
   		

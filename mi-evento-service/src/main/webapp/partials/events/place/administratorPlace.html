@@ -1,12 +1,64 @@
-<div class="row">
-	<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
-		<div class="empty-font" ng-show="placeSelected == null">
-			<p>	No selected place  </p>
-		</div>	
-<div class="line"></div>
-<div class="row">
-	<div class="btn-group">
-		<button class="btn btn-primary" ng-click="goToAddLocation()"><i class="fa fa-plus glyphiconSpace"></i>My place</button>
-		<button type="button" class="btn btn-primary" ng-click="goToListProvider()"><i class="fa fa-search glyphiconSpace"></i>Provider</button>
+<div class="row rectangle">
+<!-- 	<div class="content" ng-repeat="sittingGuest in sittingGuests"> -->
+<!-- 		<p><div class="droppable" data-drop="true" ng-model='sittingGuests' -->
+<!-- 			jqyoui-droppable="{index: {{$index}}}"> -->
+<!-- 			<div class="draggable" ng-show="table.firstName" -->
+<!-- 				data-drag="true" data-jqyoui-options="{revert: 'invalid'}" -->
+<!-- 				ng-model="sittingGuests" -->
+<!-- 				jqyoui-draggable="{index: {{$index}},placeholder:true,animate:true}"> -->
+<!-- 				<span class="fa-stack fa-lg"> -->
+<!--   					<i class="fa fa-circle-thin fa-stack-2x"></i> -->
+<!--   					<i class="fa fa-user text-success fa-stack-1x"></i> -->
+<!-- 				</span> -->
+<!-- 				{{table.firstName}} -->
+<!-- 				</div> -->
+<!--              </div> -->
+<!--          </p> -->
+<!-- 	</div> -->
+	<div class="content">
+		<div class="row">
+			<div class="col-md-2 col-md-offset-1 offsetTables" ng-repeat="table in tables">
+				<p><div class="droppable-table" data-drop="true" ng-model='tables' ng-show="true"
+					jqyoui-droppable="{index: {{$index}}}">
+						<div class="placeAdminTable taable"  ng-show="table.located"
+							data-drag="true" ng-model="tables" data-jqyoui-options="{revert: 'invalid'}"
+							jqyoui-draggable="{index: {{$index}},placeholder:true,animate:true}">
+								<div ng-repeat="n in table.guestAmount">
+							    	 <div ng-class="['placeAdminTable', n.text]"></div>
+							    </div>
+						</div>
+		            </div>
+		         </p>
+		        </div> 
+			</div>
+		</div>
+</div>
+<div class="navbar-inner">
+	<div class="container form-inline" style="text-align: center;">
+		<div class="droppable-guest"
+			ng-repeat="guest in guests" data-drop="true" ng-model='guests'
+			jqyoui-droppable="{index: {{$index}}}">
+				<div class="draggable-guest" data-drag="true"
+					data-jqyoui-options="{revert: 'invalid'}" ng-model="guests"
+					jqyoui-draggable="{index: {{$index}},animate:true}">
+					<span class="fa-stack fa-lg"> 
+  						<i class="fa fa-circle-thin fa-stack-2x"></i>
+  						<i class="fa fa-user text-success fa-stack-1x"></i>
+					</span>
+				</div>
+		</div>
 	</div>
-</div>	
+</div>
+<form name="addTableForm" role="form">
+	<div class="row">
+		<div class="col-sm-2">
+			<ui-select ng-model="formModel.guestAmountPerTable" theme="selectize">
+	  				<ui-select-match placeholder="Guest Amount">{{$select.selected.number}}-{{$select.selected.text}}</ui-select-match>
+	  				<ui-select-choices class="text-center" repeat="amountGuest in amountGuests">{{amountGuest.number}} - {{amountGuest.text}}</ui-select-choices>
+			</ui-select>
+		</div>
+		<div class="col-sm-2">
+			<button class="btn btn-primary" ng-click="addTable()" type="submit"><i class="fa fa-plus glyphiconSpace"></i></button>
+		</div>
+	</div>	
+</form>

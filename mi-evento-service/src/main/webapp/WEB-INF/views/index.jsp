@@ -40,11 +40,11 @@
 <script src="../bower_components/moment/moment.js"></script>
 <script src="../bower_components/underscore/underscore.js"></script>
 
-<script type="text/javascript" src="../bower_components/angular-ui-calendar/src/calendar.js"></script>
-<script type="text/javascript" src="../bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
-<script type="text/javascript" src="../bower_components/fullcalendar/dist/gcal.js"></script>
+<script src="../bower_components/angular-ui-calendar/src/calendar.js"></script>
+<script src="../bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+<script src="../bower_components/fullcalendar/dist/gcal.js"></script>
 <script src="../bower_components/angular-xeditable/dist/js/xeditable.js"></script>
-
+<script src="../bower_components/angular-dragdrop/src/angular-dragdrop.min.js"></script>
 <!-- ********************** angular app ********************** -->
 
 <script src="../js/app.js"></script>

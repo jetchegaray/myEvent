@@ -12,8 +12,8 @@ mieventoControllers.controller("CalendarEventController", ["$scope", "$state", "
 	  calendarEventBuilder = function(){
 	    	calendarEvents = [];
 	    		
-	    		calendarEvents.push(newCalendarEvent( $scope.selectedEvent.name, new Date( $scope.selectedEvent.eventDate),
-	    				new Date( $scope.selectedEvent.eventDate), "Event to do.", 'openSesame'));
+	    		calendarEvents.push(newCalendarEvent( $scope.selectedEvent.name, new Date( $scope.selectedEvent.initialDate),
+	    				new Date( $scope.selectedEvent.initialDate), "Event to do.", 'openSesame'));
 	    
 	    		angular.forEach($scope.selectedEvent.tasks,function(task){
 	    			calendarEvents.push(newTaskEvent(task.name, new Date(task.initialDate),

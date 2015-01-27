@@ -1,4 +1,3 @@
-
 /*
     Note: It is best to use a less version of this file ( see http://css2less.cc
     For the media queries use @screen-sm-min instead of 768px.
@@ -291,4 +290,113 @@ input.ng-dirty.ng-invalid {
 
 @media (max-width: 767px) {
     
+}
+
+/* Tables Adminsitrator */
+
+.rectangle { 
+	height: 380px !important; 
+	border: solid 1px;  
+	border-radius: 4px;  
+	box-shadow: 0 0 6px #ccc;
+	background: url("../img/floor.jpg") repeat center center fixed;
+}
+
+.droppable.guest {
+	width: 50px;
+	height: 50px;
+	border: solid 1px;
+	border-radius: 50%;
+}
+
+.draggable-guest {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	border: solid 1px;
+}
+
+
+.draggable-table {
+	width: 90px;
+	height: 90px;
+	border-radius: 50%;
+	border: solid 1px;  
+	box-shadow: 0 0 6px #ccc;
+	background: url("../img/table.jpg") no-repeat center center fixed;
+	-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+
+.offsetTables {
+	margin-top: 60px;	
+}
+
+
+
+.placeAdminTable {
+    width: 45px;
+	height: 45px;
+	border-radius: 50%;
+	border: solid 1px;
+    display: inline-block;
+    position: absolute;
+}
+
+.droppable-table {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	border: solid 1px;
+}
+
+.placeAdminTable.taable {
+    width: 100px;
+    height: 100px;
+  	box-shadow: 0 0 6px #ccc;
+ 	background: url("../img/table.jpg") no-repeat center center fixed;
+}
+
+.one {
+    left: -30px;
+    top: -35px;
+}
+
+.two {
+    top: -55px;
+    left: 30px;
+}
+
+.three {
+    right: -30px;
+    top: -35px;
+}
+
+
+.four {
+    left: -30px;
+    bottom: -35px;
+}
+
+.five {
+    right: -55px;
+    bottom: 30px;
+}
+
+.six {
+    bottom: -55px;
+    left: 30px;
+}
+
+.seven {
+    right: -30px;
+    bottom: -35px;
+}
+
+.eight {
+    left: -55px;
+    bottom: 30px;
 }

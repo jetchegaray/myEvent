@@ -3,9 +3,6 @@
 mieventoControllers.controller("BudgetEventController", ["$scope", "$state", "providerService", "userService", "applicationContext",
                 function($scope, $state, providerService, userService, applicationContext) {
 
-	
-	
-		
 		
 		/********* Min and colors **********/
 		minColors = function(){
@@ -143,7 +140,23 @@ mieventoControllers.controller("BudgetEventController", ["$scope", "$state", "pr
 		
 		
 		$scope.setSelectProvider = function(provider){
+			if (provider.selected === true){
+				provider.selected = false;
+			}
 			provider.selected = true;
+			
+			var allProvidersSelected = [];
+			_.each($scope.items, function(item){ allProvidersSelected.push(item.providers)});
+			allProvidersSelected = _.chain(allProvidersSelected).flatten(true).filter(function(provider){ return provider.selected === true;}).value();
+			applicationContext.getEventContext().setProvidersSelectedEvent(allProvidersSelected);
+			
+			console.log(angular.toJson(allProvidersSelected));
+			
+			userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
+				initialize();
+			}, function(error) {
+				applicationContext.getExceptionContext().setDanger(error.data);
+			});
 		}
  } ]);
 

@@ -12,7 +12,8 @@ import com.je.enterprise.mievento.api.dto.provider.Provider;
 public class Event {
 
 	private String name;
-	private Date eventDate;
+	private Date initialDate;
+	private Date finalDate;
 	private CommercialLocation eventLocation;
 	private List<Guest> guests;
 	private List<Task> tasks;
@@ -22,22 +23,15 @@ public class Event {
 	public Event() {
 	}
 	
-	public Event(String name, Date eventDate, CommercialLocation eventLocation,
+	public Event(String name, Date initialDate,Date finalDate, CommercialLocation eventLocation,
 			List<Guest> guests,List<Provider> providers,EventType type) {
 		this.name = name;
-		this.eventDate = eventDate;
+		this.initialDate = initialDate;
+		this.finalDate = finalDate;
 		this.eventLocation = eventLocation;
 		this.guests = guests;
 		this.providers = providers;
 		this.type = type;
-	}
-
-	public Date getEventDate() {
-		return eventDate;
-	}
-
-	public void setEventDate(Date eventDate) {
-		this.eventDate = eventDate;
 	}
 
 	public CommercialLocation getEventLocation() {
@@ -86,6 +80,22 @@ public class Event {
 
 	public void setType(EventType type) {
 		this.type = type;
+	}
+
+	public Date getInitialDate() {
+		return initialDate;
+	}
+
+	public void setInitialDate(Date initialDate) {
+		this.initialDate = initialDate;
+	}
+
+	public Date getFinalDate() {
+		return finalDate;
+	}
+
+	public void setFinalDate(Date finalDate) {
+		this.finalDate = finalDate;
 	}
 
 }

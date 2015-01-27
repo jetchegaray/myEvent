@@ -11,9 +11,9 @@
 					<th>Estimated Price</th>
 					<th>View</th>
 					<th>Delete</th>
+					<th>Selected</th>
 					<th>Compare To</th>
 					<th>More Cheaper</th>
-					<th>Selected</th>
 				</tr>
 				<tbody>
 					<tr ng-repeat-start="item in items">
@@ -49,6 +49,18 @@
 								</p>
 							</div>
 						</td>
+						<td>
+			          		<span ng-show="provider.selected">
+			          			<p><button class="badge btn  progress-bar-success btn-xs" ng-click="setSelectProvider(provider)">
+			          				<i class="fa fa fa-check glyphiconSpace"></i>
+			          			</button></p>	
+			          		</span>	
+			          		<span ng-show="!provider.selected">
+			          			<p><button class="btn btn-xs badge" ng-click="setSelectProvider(provider)">
+			          				<i class="fa fa fa-check glyphiconSpace"></i>
+			          			</button></p>	
+			          		</span>	
+			          	</td>
 						<td ng-if="$first">
 							<p>
 								<button class="btn btn-info btn-xs" ng-click="goToSearchAnotherProvider(provider)">
@@ -62,18 +74,6 @@
 								</button>
 							</p>
 						</td>
-						<td>
-			          		<span ng-show="provider.selected">
-			          			<p><button class="badge btn  progress-bar-success btn-xs" ng-click="setSelectProvider(provider)">
-			          				<i class="fa fa fa-check glyphiconSpace"></i>
-			          			</button></p>	
-			          		</span>	
-			          		<span ng-show="!provider.selected">
-			          			<p><button class="btn btn-xs badge" ng-click="setSelectProvider(provider)">
-			          				<i class="fa fa fa-check glyphiconSpace"></i>
-			          			</button></p>	
-			          		</span>	
-			          	</td>
 					</tr>
 					<tr ng-repeat-end></tr>
 				</tbody>

@@ -52,7 +52,19 @@ mieventoApp.config([ "$stateProvider", "$urlRouterProvider", function($stateProv
 	})
 	.state("eventState",{
 		url : EVENTS_PATH,
-		templateUrl : "../partials/events/events.html",
+		templateUrl : "../partials/events/events.html"
+//		 views: {
+//		     "dragAndDropView@eventState": {
+//		    	url : EVENT_PLACE_ADMIN_PATH,
+//		 		templateUrl : "../partials/events/place/administratorPlace.html",
+//				controller : "PlaceAdministratorController" 
+//			  },
+//			  "@" : {
+//				  url : EVENTS_PATH,
+//				  templateUrl : "../partials/events/events.html"
+//			  }
+//		 },
+		
 	})
 	.state("eventState.events",{
 		url : EVENTS_LIST_PATH,
