@@ -23,9 +23,17 @@
 						<div class="placeAdminTable taable"  ng-show="table.located"
 							data-drag="true" ng-model="tables" data-jqyoui-options="{revert: 'invalid'}"
 							jqyoui-draggable="{index: {{$index}},placeholder:true,animate:true}">
-								<div ng-repeat="n in table.guestAmount">
-							    	 <div ng-class="['placeAdminTable', n.text]"></div>
-							    </div>
+<!-- 								<div ng-repeat="n in table.guestAmount"> -->
+<!-- 							    	 <div ng-class="['placeAdminTable', n.text]"></div> -->
+<!-- 							    </div> -->
+							    <div ng-class="['placeAdminTable', n.text]" ng-repeat="n in table.guestAmount" data-drop="true"
+									jqyoui-droppable="{index: {{$index}}}">
+										<div class="draggable-guest" data-drag="true" ng-show="table.guests"
+											data-jqyoui-options="{revert: 'invalid'}" ng-model="table.guests"
+											jqyoui-draggable="{index: {{$index}},animate:true}">
+											<i class="fa fa-user text-success"></i>
+										</div>
+								</div>
 						</div>
 		            </div>
 		         </p>
@@ -34,17 +42,15 @@
 		</div>
 </div>
 <div class="navbar-inner">
-	<div class="container form-inline" style="text-align: center;">
-		<div class="droppable-guest"
+	<div class="container form-inline text-center">
+		<div class="btn droppable-guest"
 			ng-repeat="guest in guests" data-drop="true" ng-model='guests'
 			jqyoui-droppable="{index: {{$index}}}">
 				<div class="draggable-guest" data-drag="true"
 					data-jqyoui-options="{revert: 'invalid'}" ng-model="guests"
 					jqyoui-draggable="{index: {{$index}},animate:true}">
-					<span class="fa-stack fa-lg"> 
-  						<i class="fa fa-circle-thin fa-stack-2x"></i>
-  						<i class="fa fa-user text-success fa-stack-1x"></i>
-					</span>
+						<i class="fa fa-user text-success"></i>
+ <!-- 					{{guest.firstName}} {{guest.lastName}} -->
 				</div>
 		</div>
 	</div>

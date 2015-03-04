@@ -13,6 +13,7 @@ import com.je.enterprise.mievento.domain.dao.BaseEntity;
 public class UserEntity extends BaseEntity {
 
 	@Indexed(dropDups = true, name = "userMailIndex", unique = true)
+	private String nickName;
 	private String email;
 	private String password;
 	private Boolean activate;
@@ -22,7 +23,8 @@ public class UserEntity extends BaseEntity {
 	public UserEntity() {
 	}
 	
-	public UserEntity(String email, String password, boolean activate) {
+	public UserEntity(String nickName,String email, String password, boolean activate) {
+		this.nickName = nickName;
 		this.email = email;
 		this.password = password;
 		this.activate = activate;
@@ -58,6 +60,14 @@ public class UserEntity extends BaseEntity {
 
 	public void setEvents(List<EventEntity> events) {
 		this.events = events;
+	}
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 
 }

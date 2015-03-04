@@ -17,11 +17,12 @@ public class Provider {
 	private BigDecimal estimatedPrice;
 	private List<String> photos;
 	private ProviderType providerType;
+	private List<Review> reviews;
 
 
 	public Provider(String businessName, String description,
 			Location location, String email, String cellPhone, String phone,
-			BigDecimal price, BigDecimal estimatedPrice,List<String> photos, ProviderType providerType) {
+			BigDecimal price, BigDecimal estimatedPrice,List<String> photos, ProviderType providerType,List<Review> reviews) {
 		this.businessName = businessName;
 		this.description = description;
 		this.location = location;
@@ -32,6 +33,7 @@ public class Provider {
 		this.estimatedPrice = estimatedPrice;
 		this.photos = photos;
 		this.providerType = providerType;
+		this.reviews = reviews;
 	}
 
 	public Provider() {
@@ -118,6 +120,14 @@ public class Provider {
 
 	public void setProviderType(ProviderType providerType) {
 		this.providerType = providerType;
+	}
+
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
 	}
 
 }

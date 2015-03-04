@@ -41,8 +41,8 @@ public class UserController {
 	
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST)
-	public void signUp(@RequestBody User user){
-		userService.signUp(user.getEmail(), user.getPassword());
+	public void signUp(@RequestBody User user){ 
+		userService.signUp(user.getNickName(), user.getEmail(), user.getPassword());
 	}
 	
 	@ResponseBody

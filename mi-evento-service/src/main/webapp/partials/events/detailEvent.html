@@ -14,7 +14,7 @@
 						<input type="text" class="form-control"
 							datepicker-popup="{{format}}" placeholder="Event Date"
 							ng-model="event.initialDate" is-open="opened" min-date="minDate"
-							max-date="maxDate" datepickerOptions="dateOptions" ng-required close-text="Close"/>
+							max-date="maxDate" datepickerOptions="dateOptions" ng-required close-text="Close" ng-change="onDateChange()"/>
 							<span class="input-group-btn">
 								<button type="button" class="btn btn-default"
 									ng-click="open($event)"><i class="fa fa-calendar"></i>

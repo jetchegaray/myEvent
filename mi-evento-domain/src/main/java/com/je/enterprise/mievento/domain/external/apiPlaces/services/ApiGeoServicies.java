@@ -31,7 +31,7 @@ public class ApiGeoServicies {
 		this.restTemplate = restTemplate;
 	}
 
-	
+	//na ex : CT+ARGENTINA
 	public Geometry getGeoPosition(String address) {
 
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://maps.googleapis.com/maps/api/geocode/json?")

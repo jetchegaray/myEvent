@@ -1,39 +1,35 @@
 package com.je.enterprise.mievento.domain.external.apiPlaces.process;
 
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import com.google.common.collect.Maps;
-import com.je.enterprise.mievento.api.dto.location.CountryCode;
-import com.je.enterprise.mievento.domain.external.apiPlaces.entities.Geometry;
-import com.je.enterprise.mievento.domain.external.apiPlaces.services.ApiGeoServicies;
 
 @Component
 public class CitiesInfoCache {
 
-	CitiesByCountryHandler citiesByCountryHandler;
-	ApiGeoServicies apiGeoServicies;
-	LoadingCache<String, String> cache;
+	private GeoLocationByCityCountryHandler geoLocationByCityCountryHandler;
+	private LoadingCache<String, String> cache;
+	private static final Logger logger = Logger.getLogger(CitiesInfoCache.class);
+ 
 	
 	@Autowired
-	public CitiesInfoCache(CitiesByCountryHandler citiesByCountryHandler,ApiGeoServicies apiGeoServicies) {
-		this.citiesByCountryHandler = citiesByCountryHandler;
-		this.apiGeoServicies = apiGeoServicies;
+	public CitiesInfoCache(GeoLocationByCityCountryHandler geoLocationByCityCountryHandler) {
+		this.geoLocationByCityCountryHandler = geoLocationByCityCountryHandler;
 	}
 
 	@PostConstruct
 	public void init(){
 		cache = CacheBuilder.newBuilder()
-		       .expireAfterAccess(10, TimeUnit.SECONDS)
+		       .expireAfterAccess(10, TimeUnit.HOURS)
 		       .build(
 		           new CacheLoader<String, String>() {
 						@Override
@@ -49,17 +45,7 @@ public class CitiesInfoCache {
 		           
 		           
      public Map<String, String> getData(){
-    	 Map<CountryCode, List<String>> citiesCountryAbv = citiesByCountryHandler.getCitiesByCountry();
-    	 Map<String, String> latlngByCity = Maps.<String, String>newHashMap();
-    	 
-    	 for (CountryCode countryCode : CountryCode.values())  {
-    		 for (String city : citiesCountryAbv.get(countryCode)) {
-    			 //na ex : CT+ARGENTINA
-    			 Geometry geometry = apiGeoServicies.getGeoPosition(city+"+"+countryCode.getName());
-    			 latlngByCity.put(city, geometry.getLocation().toString());
-			 }
-		}
-    	return latlngByCity;
+    	return geoLocationByCityCountryHandler.getGeoLocationByCity();
      }
 
 }

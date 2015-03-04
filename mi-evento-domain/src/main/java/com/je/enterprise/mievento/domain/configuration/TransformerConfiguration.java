@@ -9,9 +9,11 @@ import com.je.enterprise.mievento.api.dto.event.Guest;
 import com.je.enterprise.mievento.api.dto.event.Task;
 import com.je.enterprise.mievento.api.dto.event.wedding.Present;
 import com.je.enterprise.mievento.api.dto.provider.Provider;
+import com.je.enterprise.mievento.api.dto.provider.Review;
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.GuestEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
+import com.je.enterprise.mievento.domain.entity.common.event.ProviderReviewEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.TaskEntity;
 import com.je.enterprise.mievento.domain.entity.wedding.PresentEntity;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.DetailPlace;
@@ -20,8 +22,11 @@ import com.je.enterprise.mievento.domain.transformer.TransformerList;
 import com.je.enterprise.mievento.domain.transformer.impl.CommercialLocationTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.EventTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.GuestTransformer;
+import com.je.enterprise.mievento.domain.transformer.impl.LocationTransformer;
+import com.je.enterprise.mievento.domain.transformer.impl.PlaceTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.PresentTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.ProviderTransformer;
+import com.je.enterprise.mievento.domain.transformer.impl.ReviewTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.TaskTransformer;
 
 @Configuration
@@ -32,13 +37,16 @@ public class TransformerConfiguration {
 	@Autowired
 	private TaskTransformer taskTransformer;
 	@Autowired
-	private ProviderTransformer providerTransformer;
+	private ReviewTransformer reviewTransformer;
+	@Autowired
+	private LocationTransformer locationTransformer;
 	@Autowired
 	private PresentTransformer presentTransformer;
 	@Autowired
-	private CommercialLocationTransformer CommercialLocationTransformer;
+	private CommercialLocationTransformer commercialLocationTransformer;
 	@Autowired
 	private ProviderPlacesTransformer providerPlacesTransformer;
+	
 
 	
 	@Bean(name = "guestTransformerList")
@@ -53,7 +61,7 @@ public class TransformerConfiguration {
 	
 	@Bean(name = "providerTransformerList")
 	public TransformerList<ProviderEntity, Provider> providerTransformerList(){
-		return new TransformerList<ProviderEntity, Provider>(this.providerTransformer);
+		return new TransformerList<ProviderEntity, Provider>(this.providerTransformer());
 	}
 	
 	@Bean(name = "presentTransformerList")
@@ -63,7 +71,7 @@ public class TransformerConfiguration {
 
 	@Bean(name = "eventTransformer")
 	public EventTransformer eventTransformer(){
-		return new EventTransformer(this.CommercialLocationTransformer,this.guestTransformerList(),this.taskTransformerList(),this.providerTransformerList());
+		return new EventTransformer(this.commercialLocationTransformer,this.guestTransformerList(),this.taskTransformerList(),this.providerTransformerList());
 	}
 	
 	@Bean(name = "eventTransformerList")
@@ -74,6 +82,21 @@ public class TransformerConfiguration {
 	@Bean(name = "providerPlacesTransformerList")
 	public TransformerList<ProviderEntity, DetailPlace> providerPlacesTransformerList(){
 		return new TransformerList<ProviderEntity, DetailPlace>(this.providerPlacesTransformer);
+	}
+	
+	@Bean(name = "reviewTransformerList")
+	public TransformerList<ProviderReviewEntity, Review> reviewTransformerList(){
+		return new TransformerList<ProviderReviewEntity, Review>(this.reviewTransformer);
+	}
+	
+	@Bean(name = "providerTransformer")
+	public ProviderTransformer providerTransformer(){
+		return new ProviderTransformer(this.locationTransformer,this.reviewTransformerList());
+	}
+	
+	@Bean(name = "placeTransformer")
+	public PlaceTransformer placeTransformer(){
+		return new PlaceTransformer(this.locationTransformer,this.reviewTransformerList());
 	}
 
 	

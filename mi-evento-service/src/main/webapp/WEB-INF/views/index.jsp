@@ -178,8 +178,6 @@
 				<a href="#">Terms</a>
 			</p>
 		</footer>
-	</div>
-	
 	
 </body>
 

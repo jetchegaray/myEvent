@@ -9,6 +9,7 @@ public class User {
 
 	//FIXME deberia ir en un objeto diferente. con una base diferente
 	private String idSession;
+	private String nickName;
 	private String email;
 	private String password;
 	private Boolean activate;
@@ -17,8 +18,9 @@ public class User {
 	public User() {
 	}
 
-	public User(String idSession,String email,String password,Boolean activate,List<Event> events) {
+	public User(String idSession,String nickName,String email,String password,Boolean activate,List<Event> events) {
 		this.idSession = idSession;
+		this.nickName = nickName;
 		this.email = email;
 		this.password = password;
 		this.activate = activate;
@@ -63,6 +65,14 @@ public class User {
 
 	public void setIdSession(String idSession) {
 		this.idSession = idSession;
+	}
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 
 

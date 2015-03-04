@@ -19,7 +19,7 @@ mieventoControllers.controller("ProviderPlaceTypesController",["$scope", "provid
 mieventoControllers.controller("ProviderDetailController",["$scope","applicationContext",function($scope, applicationContext){
 		
 		$scope.provider = applicationContext.getProviderContext().getDetailProvider();
-		
+		$scope.user = applicationContext.getUserContext().getLoggedUser();
 }]);
 
 

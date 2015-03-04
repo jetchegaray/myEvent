@@ -47,7 +47,7 @@ public class MailServiceIntegrationTest {
 	
 	@Test
 	public void sendMail_testOk(){
-		mailService.sendPassword(new UserEntity("etchegarayjavier@live.com.ar", RandomStringUtils.randomAlphanumeric(12), true));
+		mailService.sendPassword(new UserEntity("javimetal2014","etchegarayjavier@live.com.ar", RandomStringUtils.randomAlphanumeric(12), true));
 	}
 	
 	@Test

@@ -1,6 +1,9 @@
 package com.je.enterprise.mievento.domain.external.apiPlaces.entities;
 
+import java.util.Collections;
 import java.util.List;
+
+import org.apache.commons.lang3.Validate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -122,6 +125,11 @@ public class DetailPlace {
 	}
 	
 	public List<String> getPhotoReferences(){
+		try {
+			Validate.notNull(this.photos);
+		} catch (Exception e) {
+			return Collections.emptyList();
+		}
 		return Lists.transform(this.photos, new Function<Photo, String>() {
 			@Override
 			public String apply(Photo input) {

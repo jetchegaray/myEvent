@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.je.enterprise.mievento.api.dto.location.Location;
 import com.je.enterprise.mievento.api.dto.provider.Provider;
 import com.je.enterprise.mievento.api.dto.provider.ProviderType;
+import com.je.enterprise.mievento.api.dto.provider.Review;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Place extends Provider {
@@ -24,9 +25,9 @@ public class Place extends Provider {
 			String email, String cellPhone, String phone, BigDecimal price,
 			BigDecimal estimatedPrice, BigDecimal m2,
 			BigDecimal estimatedQuantityTables,
-			BigDecimal estimatedQuantityPerson,List<String> photos,ProviderType providerType) {
+			BigDecimal estimatedQuantityPerson,List<String> photos,ProviderType providerType,List<Review> reviews) {
 		super(businessName, description, location, email, cellPhone, phone,
-				price, estimatedPrice,photos,providerType);
+				price, estimatedPrice,photos,providerType,reviews);
 		this.m2 = m2;
 		this.estimatedQuantityTables = estimatedQuantityTables;
 		this.estimatedQuantityPerson = estimatedQuantityPerson;

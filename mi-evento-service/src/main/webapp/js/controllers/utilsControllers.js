@@ -125,9 +125,16 @@ mieventoControllers.controller("datepickerController",["$scope",function($scope)
 			'starting-day': 1
 		};
 		
-		$scope.minDate = new Date();
+		$scope.minDate = Date.parse(new Date());
 		$scope.maxDate = "22-06-2020";
 		$scope.format = "dd-MM-yyyy";
 		$scope.showWeeks = false;
+			
+		$scope.onDateChange = function() {
+			console.log($scope);
+            if ($scope.date) {
+              $scope.date = Date.parse($scope.date);
+            }
+          };
 					
 }]);

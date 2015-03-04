@@ -2,7 +2,6 @@ package com.je.enterprise.mievento.domain.service.impl;
 
 import java.util.List;
 
-
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.log4j.Logger;
@@ -32,9 +31,9 @@ public class UserService {
 		this.mailService = mailService;
 	}
 
-	public void signUp(String email, String password) {
+	public void signUp(String nickName,String email, String password) {
 		if (findByMail(email) == null) {
-			crudHelper.create(new UserEntity(email, password, true));
+			crudHelper.create(new UserEntity(nickName, email, password, true));
 		} else {
 			throw new UserAlredyExistsException();
 		}

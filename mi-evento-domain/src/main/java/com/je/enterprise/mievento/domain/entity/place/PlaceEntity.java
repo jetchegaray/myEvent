@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.je.enterprise.mievento.api.dto.provider.ProviderType;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
+import com.je.enterprise.mievento.domain.entity.common.event.ProviderReviewEntity;
 import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
 
 public class PlaceEntity extends ProviderEntity {
@@ -21,10 +22,10 @@ public class PlaceEntity extends ProviderEntity {
 			String email, String cellPhone, String phone, BigDecimal price,
 			BigDecimal estimatedPrice, BigDecimal m2,
 			BigDecimal estimatedQuantityTables,
-			BigDecimal estimatedQuantityPerson,List<String> photos,ProviderType providerType) {
+			BigDecimal estimatedQuantityPerson,List<String> photos,ProviderType providerType,List<ProviderReviewEntity> reviews) {
 		
 		super(businessName, description, location, email, cellPhone, phone,
-				price, estimatedPrice,photos,providerType);
+				price, estimatedPrice,photos,providerType,reviews);
 		this.m2 = m2;
 		this.estimatedQuantityTables = estimatedQuantityTables;
 		this.estimatedQuantityPerson = estimatedQuantityPerson;

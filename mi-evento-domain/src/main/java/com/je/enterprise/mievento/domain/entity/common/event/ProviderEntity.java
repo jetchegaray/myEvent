@@ -24,14 +24,14 @@ public class ProviderEntity extends BaseEntity {
 	private BigDecimal estimatedPrice;
 	private List<String> photos;
 	private ProviderType providerType;
-
+	private List<ProviderReviewEntity> reviews;
 	
 	public ProviderEntity() {
 	}
 
 	public ProviderEntity(String businessName, String description,
 			LocationEntity location, String email, String cellPhone, String phone,
-			BigDecimal price, BigDecimal estimatedPrice,List<String> photos,ProviderType providerType) {
+			BigDecimal price, BigDecimal estimatedPrice,List<String> photos,ProviderType providerType,List<ProviderReviewEntity> reviews) {
 		this.businessName = businessName;
 		this.description = description;
 		this.location = location;
@@ -42,6 +42,7 @@ public class ProviderEntity extends BaseEntity {
 		this.estimatedPrice = estimatedPrice;
 		this.photos = photos;
 		this.providerType = providerType;
+		this.reviews = reviews;
 	}
 
 
@@ -124,6 +125,14 @@ public class ProviderEntity extends BaseEntity {
 
 	public void setProviderType(ProviderType providerType) {
 		this.providerType = providerType;
+	}
+
+	public List<ProviderReviewEntity> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<ProviderReviewEntity> reviews) {
+		this.reviews = reviews;
 	}
 
 }

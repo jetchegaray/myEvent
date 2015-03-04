@@ -62,7 +62,7 @@ public class ApiPlacesServicies {
 			ResponseContainerObjects<SearchPlace> places = response.getBody();
 			
 			if (! places.getStatus().equals(StatusResponse.OK)){
-				logger.info("Status Response Api Places : "+places.getStatus());
+				logger.info("Status Response Api Places Search: "+places.getStatus());
 			}
 			return places.getData();
 
@@ -88,7 +88,7 @@ public class ApiPlacesServicies {
 			ResponseContainerObject<DetailPlace> place = response.getBody();
 			
 			if (! place.getStatus().equals(StatusResponse.OK)){
-				logger.info("Status Response Api Places : "+place.getStatus());
+				logger.info("Status Response Api Places Detail : "+place.getStatus());
 			}
 			
 			return place.getData();

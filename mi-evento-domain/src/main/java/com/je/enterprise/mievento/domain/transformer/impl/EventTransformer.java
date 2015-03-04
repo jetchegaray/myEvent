@@ -16,6 +16,7 @@ import com.je.enterprise.mievento.domain.transformer.Transformer;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
 
 
+//avoid redundancy because transformer list need trnasformer y this transformer needs trnaformer list
 public class EventTransformer extends Transformer<EventEntity, Event>{
 
 	

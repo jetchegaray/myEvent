@@ -44,8 +44,8 @@ public class UserServiceIntegrationTest {
 	
 	@Test
 	public void save(){
-		this.userService.signUp("a@gmail.com", "pass1");
-		this.userService.signUp("b@gmail.com", "pass2");
+		this.userService.signUp("javimetal2014", "a@gmail.com", "pass1");
+		this.userService.signUp("javimetal2014", "b@gmail.com", "pass2");
 		
 		List<UserEntity> users = this.userService.getAll();
 		
@@ -59,8 +59,8 @@ public class UserServiceIntegrationTest {
 	@Test
 	public void findByMail(){
 		
-		this.userService.signUp("a@gmail.com", "pass1");
-		this.userService.signUp("b@gmail.com", "pass2");
+		this.userService.signUp("javimetal2014", "a@gmail.com", "pass1");
+		this.userService.signUp("javimetal2014", "b@gmail.com", "pass2");
 		
 		UserEntity user_postStore1= this.userService.findByMail("a@gmail.com");
 		assertEquals("a@gmail.com",user_postStore1.getEmail());
