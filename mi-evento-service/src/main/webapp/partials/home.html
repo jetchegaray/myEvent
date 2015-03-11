@@ -1,60 +1,98 @@
 
-<div ng-controller="CarouselCtrl">
-	<carousel interval="interval" disable-animation="true">  <slide
-		ng-repeat="slide in slides" active="slide.active"> <img
-		ng-src="{{slide.image}}" style="width: 800px; height: 400px; margin: auto;">
-	<div class="carousel-caption">
-		<p>{{slide.text}}</p>
-	</div>
-	</slide> </carousel>
+<!-- <div ng-controller="CarouselCtrl"> -->
+<!-- 	<carousel interval="interval" disable-animation="true">  <slide -->
+<!-- 		ng-repeat="slide in slides" active="slide.active"> <img -->
+<!-- 		ng-src="{{slide.image}}" style="width: 800px; height: 400px; margin: auto;"> -->
+<!-- 	<div class="carousel-caption"> -->
+<!-- 		<p>{{slide.text}}</p> -->
+<!-- 	</div> -->
+<!-- 	</slide> </carousel> -->
+<!-- </div> -->
+
+<!-- <div class="container"  style="height: 300px; background-image: url('../img/carusel_1.jpg')"> -->
+	
+<!-- 	<div style="margin-top: 5%; width: 300px;height: 100; margin-left: 10%; background-color: blue;	"> -->
+	
+<!-- 			<div class="col-md-3"> -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<input type="text" class="form-control" name="name" -->
+<!-- 						placeholder="Name" ng-model="event.name" ng-required> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 	</div> -->
+	
+<!-- </div> -->
+<div class="home">
+    <div class="row">
+        <div class="col-md-10 col-sm-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading"> Busca Proveedores en cualquier lugar ..</div>
+                <div class="panel-body">
+                   <form role="form" style="margin: 25px;">
+                    <div class="form-group">
+	                    <div class="col-sm-4">
+							<ui-select ng-model="search.providerType" theme="selectize">
+			    				<ui-select-match placeholder="Provider type">{{$select.selected}}</ui-select-match>
+			    				<ui-select-choices repeat="provider in providerTypes">{{provider}}</ui-select-choices>
+			  				</ui-select>
+						</div>
+				        <div class="col-sm-3">
+							<ui-select  ng-model="search.province" theme="selectize">
+			    				<ui-select-match placeholder="Province or State">{{$select.selected}}</ui-select-match>
+			    				<ui-select-choices repeat="province in provinces">{{province}}</ui-select-choices>
+			  				</ui-select>
+						</div>
+						<div class="col-sm-3">
+							<ui-select  ng-model="search.country" theme="selectize">
+			    				<ui-select-match placeholder="Country">{{$select.selected}}</ui-select-match>
+			    				<ui-select-choices repeat="country in countries">{{country}}</ui-select-choices>
+			  				</ui-select>
+						</div>
+						<div class="col-sm-2">
+                            <button type="submit" class="btn btn-success">Search</button>
+                        </div>
+					</div>
+                    </form>
+                </div>
+                <div class="panel-footer">
+                    Not Registred? <a href="http://www.jquery2dotnet.com">Register here</a></div>
+               </div>
+            	
+        </div>
+    </div>
 </div>
 
-<div id="eventTypes" class="container marketing">
+
+
+<div id="eventTypes" class="container marketing" style="margin-top: 5%;">
 	<!-- Three columns of text below the carousel -->
 	<div class="row">
 		<div class="col-lg-4">
 			<img class="img-circle"
-				src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+				src="../img/evento.jpg"
 				alt="Generic placeholder image" style="width: 140px; height: 140px;">
-			<h2>Heading</h2>
-			<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis
-				euismod. Nullam id dolor id nibh ultricies vehicula ut id elit.
-				Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-				Praesent commodo cursus magna.</p>
-			<p>
-				<a class="btn btn-default" href="#" role="button">View details
-					&raquo;</a>
-			</p>
+			<h2>Eventos</h2>
+			<p>Crea cualquier tipo de evento que tengas pensado en 2 minutos.
+			   Invita a tus amigos y listo ! podes empezar a disfrutar... </p>
+	    </div>
+		<!-- /.col-lg-4 -->
+		<div class="col-lg-4">
+			<img class="img-circle"
+				src="../img/organizacion.jpg"
+				alt="Generic placeholder image" style="width: 140px; height: 140px;">
+			<h2>Organizacion</h2>
+			<p> Organiza tu evento como quieras, crea tu propio lugar de reunion,
+			    cronograma de tareas, calendario, invitados, y mucho mas...
 		</div>
 		<!-- /.col-lg-4 -->
 		<div class="col-lg-4">
 			<img class="img-circle"
-				src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+				src="../img/casamiento.jpg"
 				alt="Generic placeholder image" style="width: 140px; height: 140px;">
-			<h2>Heading</h2>
-			<p>Duis mollis, est non commodo luctus, nisi erat porttitor
-				ligula, eget lacinia odio sem nec elit. Cras mattis consectetur
-				purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo,
-				tortor mauris condimentum nibh.</p>
-			<p>
-				<a class="btn btn-default" href="#" role="button">View details
-					&raquo;</a>
-			</p>
-		</div>
-		<!-- /.col-lg-4 -->
-		<div class="col-lg-4">
-			<img class="img-circle"
-				src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-				alt="Generic placeholder image" style="width: 140px; height: 140px;">
-			<h2>Heading</h2>
-			<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in,
-				egestas eget quam. Vestibulum id ligula porta felis euismod semper.
-				Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum
-				nibh, ut fermentum massa justo sit amet risus.</p>
-			<p>
-				<a class="btn btn-default" href="#" role="button">View details
-					&raquo;</a>
-			</p>
+			<h2>Proveedores</h2>
+			<p>Mas de 3.000 provedores en todo el país, con los mejores servicios. 
+			   Informacion de contacto, calificaciones y precios.
+			   Comparador de proveedores por precio.</p>
 		</div>
 		<!-- /.col-lg-4 -->
 	</div>
@@ -68,17 +106,15 @@
 	<div class="row featurette">
 		<div class="col-md-7">
 			<h2 class="featurette-heading">
-				First featurette heading. <span class="text-muted">It'll blow
-					your mind.</span>
+				Ingresa Ya ! <span class="text-muted">Organiza el Casamiento de tus sueños</span>
 			</h2>
-			<p class="lead">Donec ullamcorper nulla non metus auctor
-				fringilla. Vestibulum id ligula porta felis euismod semper. Praesent
-				commodo cursus magna, vel scelerisque nisl consectetur. Fusce
-				dapibus, tellus ac cursus commodo.</p>
+			<p class="lead">Lugares, catering, alianzas, vestidos y trajes, 
+			    lista de regalos, invitaciones, calendario, tareas, cronograma,
+			    ubica a tus invitados en las mesas y más...</p>
 		</div>
 		<div class="col-md-5">
 			<img class="featurette-image img-responsive"
-				data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+				data-src="holder.js/100x100/auto" alt="Generic placeholder image">
 		</div>
 	</div>
 
@@ -91,13 +127,10 @@
 		</div>
 		<div class="col-md-7">
 			<h2 class="featurette-heading">
-				Oh yeah, it's that good. <span class="text-muted">See for
-					yourself.</span>
+				Todo en un mismo lugar. <span class="text-muted"> Reuniones, Cumpleaños, Fiestas </span>
 			</h2>
-			<p class="lead">Donec ullamcorper nulla non metus auctor
-				fringilla. Vestibulum id ligula porta felis euismod semper. Praesent
-				commodo cursus magna, vel scelerisque nisl consectetur. Fusce
-				dapibus, tellus ac cursus commodo.</p>
+			<p class="lead"> Comparador de proveedores por precio. 
+			Busca el mejor servicio donde necesites. </p>
 		</div>
 	</div>
 
@@ -106,7 +139,7 @@
 	<div class="row featurette">
 		<div class="col-md-7">
 			<h2 class="featurette-heading">
-				And lastly, this one. <span class="text-muted">Checkmate.</span>
+				 No esperes mas y <span class="text-muted">transforma tus eventos creados en facebook !</span>
 			</h2>
 			<p class="lead">Donec ullamcorper nulla non metus auctor
 				fringilla. Vestibulum id ligula porta felis euismod semper. Praesent

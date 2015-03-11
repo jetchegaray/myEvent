@@ -54,9 +54,10 @@
 
 <!-- ********************** controllers ********************** -->
 
-<script src="../js/controllers/providerControllers.js"></script>
+<script src="../js/controllers/homeControllers.js"></script>
 <script src="../js/controllers/userControllers.js"></script>
 <script src="../js/controllers/eventControllers.js"></script>
+<script src="../js/controllers/providerControllers.js"></script>
 <script src="../js/controllers/guestEventControllers.js"></script>
 <script src="../js/controllers/placeEventControllers.js"></script>
 <script src="../js/controllers/providerEventControllers.js"></script>
@@ -64,6 +65,7 @@
 <script src="../js/controllers/scheduledEventControllers.js"></script>
 <script src="../js/controllers/budgetEventControllers.js"></script>
 <script src="../js/controllers/placeAdministratorControllers.js"></script>
+<script src="../js/controllers/reviewsEventControllers.js"></script>
 
 <script src="../js/controllers/utilsControllers.js"></script>
 <script src="../js/controllers/exceptionControllers.js"></script>
@@ -96,13 +98,6 @@
 		<nav class="navbar navbar-default" role="navigation">
 			<div class="container">
 				<div class="navbar-header page-scroll">
-					<button type="button" class="navbar-toggle" data-toggle="collapse"
-						data-target=".navbar-ex1-collapse">
-						<span class="sr-only">Toggle navigation</span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-
 					<a class="navbar-brand page-scroll" href="#page-top">Mi Evento</a>
 				</div>
 
@@ -160,24 +155,25 @@
 			</div>
 			<!-- /.container -->
 		</nav>
+		
 		<div class="container" ng-controller="ExceptionController">
 			<div ng-show="alert.show" class="text-center animated flipInY">
 				<alert type="{{alert.type}}" close="closeAlert()"><i class="fa fa-exclamation-circle fa-5 glyphiconSpace"></i><strong>{{alert.msg}}</strong></alert>
 			</div>
 		</div>
   </div>
-		<div class="container" ui-view></div>
-		<!-- FOOTER -->
-		<footer class="container">
-			<div class="row omb_row-sm-offset-3 line"></div>
-			<p class="pull-right">
-				<a href="#">Back to top</a>
-			</p>
-			<p>
-				&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot;
-				<a href="#">Terms</a>
-			</p>
-		</footer>
+  <div class="container" ui-view></div>
+	<!-- FOOTER -->
+	<footer class="container">
+		<div class="row omb_row-sm-offset-3 line"></div>
+		<p class="pull-right">
+			<a href="#">Back to top</a>
+		</p>
+		<p>
+			&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot;
+			<a href="#">Terms</a>
+		</p>
+	</footer>
 	
 </body>
 

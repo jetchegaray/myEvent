@@ -3,6 +3,8 @@ package com.je.enterprise.mievento.domain.service.helper;
 import java.io.Serializable;
 import java.util.List;
 
+import org.bson.types.ObjectId;
+
 import com.je.enterprise.mievento.domain.dao.BaseEntity;
 import com.je.enterprise.mievento.domain.dao.GenericDAO;
 import com.mongodb.WriteConcern;
@@ -35,6 +37,13 @@ public class CRUDHelper<T extends BaseEntity, K extends Serializable> {
 	
 	public GenericDAO<T, K> getDao(){
 		return dao;
+	}
+	
+	public T findById(ObjectId id){
+		if (id != null){
+			return this.findById(id);
+		}
+		return null;
 	}
 	
 	

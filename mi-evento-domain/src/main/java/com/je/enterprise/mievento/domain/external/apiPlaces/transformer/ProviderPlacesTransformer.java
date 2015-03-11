@@ -6,7 +6,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
-import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +24,8 @@ import com.je.enterprise.mievento.domain.transformer.Transformer;
 public class ProviderPlacesTransformer extends
 		Transformer<ProviderEntity, DetailPlace> {
 	
-	Map<ProviderType, List<String>> keywords;
+	private Map<ProviderType, List<String>> keywords;
+	private Logger logger = LoggerFactory.getLogger(ProviderPlacesTransformer.class);
 
 	@Autowired
 	public ProviderPlacesTransformer(ProviderTypeKeyword providerTypeKeyword) {
@@ -49,11 +51,14 @@ public class ProviderPlacesTransformer extends
 		BigDecimal price = BigDecimal.ZERO;
 		BigDecimal estimatedPrice = BigDecimal.ZERO;
 		List<String> photos = detailPlace.getPhotoReferences();
-		ProviderType providerType = getProviderType(detailPlace);
 		
-		ProviderEntity entity = new ProviderEntity(businessName,description,location,email,cellPhone,phone,price,estimatedPrice,photos,providerType,null);
-		//only here to eliminate duplicates
-		entity.setId(new ObjectId(detailPlace.getId()));
+		if (photos.isEmpty()){
+			logger.debug("Photos vacias para el id : {}",detailPlace.getReference());
+		}
+		
+		ProviderType providerType = getProviderType(detailPlace);
+		//only here to eliminate duplicates id
+		ProviderEntity entity = new ProviderEntity(detailPlace.getId(), businessName,description,location,email,cellPhone,phone,price,estimatedPrice,photos,providerType,null);
 		
 		return entity;
 	}
@@ -69,23 +74,34 @@ public class ProviderPlacesTransformer extends
 		String neighborhood = StringUtils.EMPTY;
 		
 		for (AddressComponent addressComponent : detailPlace.getAddress()) {
-			if (addressComponent.isCity()){
+			boolean passIt = false;
+			if (addressComponent.isCountry()){
 				countryCode = CountryCode.valueOf(addressComponent.getShortName());
+				passIt = true;
 			}
 			if (addressComponent.isCity()){
 				city = addressComponent.getLongName();
+				passIt = true;
 			}
 			if (addressComponent.isProvince()){
 				province = addressComponent.getLongName();
+				passIt = true;
 			}
 			if (addressComponent.isStreet()){
 				street = addressComponent.getLongName();
+				passIt = true;
 			}
 			if (addressComponent.isNeighborhood()){
 				province = addressComponent.getLongName();
+				passIt = true;
 			}
 			if (addressComponent.isNumber()){
 				number = BigDecimal.valueOf(Long.valueOf(addressComponent.getLongName()));
+				passIt = true;
+			}
+			
+			if (!passIt){
+				logger.info(String.format(" The detail object id : %s, with addresComponent = %s DOESNT MATCH TO ANYONE IN MY MODEL. total dir from api is = %s",detailPlace.getReference(),addressComponent,detailPlace.getAddress()));
 			}
 		}
 		
@@ -98,8 +114,11 @@ public class ProviderPlacesTransformer extends
 		
 		String detailName = detailPlace.getName();
 		for (Entry<ProviderType, List<String>> entry : this.keywords.entrySet()) {
-			if (entry.getValue().contains(detailName)){
-				return entry.getKey();
+				
+			for (String value : entry.getValue()) {
+				if (detailName.toLowerCase().contains(value)){
+					return entry.getKey();
+				}
 			}
 		}
 		

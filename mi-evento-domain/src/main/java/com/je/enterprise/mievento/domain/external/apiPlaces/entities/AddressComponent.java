@@ -44,32 +44,37 @@ public class AddressComponent {
 	
 	@JsonIgnore
 	public Boolean isCountry(){
-		return this.adressTypes.contains(TypesAddressComponent.COUNTRY);
+		return this.adressTypes.contains(TypesAddressComponent.COUNTRY.getName());
 	}
 	
 	@JsonIgnore
 	public Boolean isCity(){
-		return this.adressTypes.contains(TypesAddressComponent.CITY);
+		return this.adressTypes.contains(TypesAddressComponent.CITY.getName());
 	}
 	
 	@JsonIgnore
 	public Boolean isProvince(){
-		return this.adressTypes.contains(TypesAddressComponent.STATE_OR_PROVINCE);
+		return this.adressTypes.contains(TypesAddressComponent.STATE_OR_PROVINCE.getName());
 	}	
 	
 	@JsonIgnore
 	public Boolean isNeighborhood(){
-		return this.adressTypes.contains(TypesAddressComponent.NEIGHBORHOOD);
+		return this.adressTypes.contains(TypesAddressComponent.NEIGHBORHOOD.getName());
 	}
 	
 	@JsonIgnore
 	public Boolean isStreet(){
-		return this.adressTypes.contains(TypesAddressComponent.STREET);
+		return this.adressTypes.contains(TypesAddressComponent.STREET.getName());
 	}
 	
 	@JsonIgnore
 	public Boolean isNumber(){
-		return this.adressTypes.contains(TypesAddressComponent.NUMBER);
+		return this.adressTypes.contains(TypesAddressComponent.NUMBER.getName());
+	}
+	
+	@Override
+	public String toString() {
+		return "longName : "+this.longName+" , shortName : "+this.shortName+" adressComponent : "+this.adressTypes;
 	}
 	
 		

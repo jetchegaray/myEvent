@@ -1,6 +1,7 @@
 db.providers.drop();
 db.providers.insert([
 { 
+	"businessId" : "1",
 	"className" : "com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity", 
 	"businessName" : "Plaza Group", 
 	"description" : "Fernando Díaz Photography busca captar una Boda de forma artística, con toques de poesía en cada una de las imágenes de la fiesta. Una mirada muy personal gracias a la pasión con que se dedica el profesional en todos los fotoreportajes de boda. La compañía sabe que el casamiento es un evento único, y por tanto, su trabajo es muy valioso, ya que será el único recuerdo que quede de un día cargado de emociones.",
@@ -27,6 +28,7 @@ db.providers.insert([
 	"version" : NumberLong(1) 
 },
 { 
+	"businessId" : "2",	
 	"className" : "com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity", 
 	"businessName" : "Plaza Group", 
 	"description" : "Fernando Díaz Photography busca captar una Boda de forma artística, con toques de poesía en cada una de las imágenes de la fiesta. Una mirada muy personal gracias a la pasión con que se dedica el profesional en todos los fotoreportajes de boda. La compañía sabe que el casamiento es un evento único, y por tanto, su trabajo es muy valioso, ya que será el único recuerdo que quede de un día cargado de emociones.",
@@ -53,6 +55,7 @@ db.providers.insert([
 	"version" : NumberLong(1) 
 },
 { 
+	"businessId" : "3",	
 	"className" : "com.je.enterprise.mievento.domain.entity.wedding.PlaceEntity", 
 	"m2" : "250", 
 	"estimatedQuantityTables" : "19", 
@@ -81,7 +84,4 @@ db.providers.insert([
 	"providerType" : "WEDDING_HALL", 
 	"version" : NumberLong(1) 
 }
-],
-{
-	writeConcern: 2
-});
+]);

@@ -8,7 +8,7 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
+import org.springframework.test.context.ContextConfiguration;
 
 import com.google.common.collect.Lists;
 import com.je.enterprise.mievento.api.dto.location.CountryCode;
@@ -19,10 +19,10 @@ import com.je.enterprise.mievento.domain.external.apiPlaces.entities.SearchPlace
 import com.je.enterprise.mievento.domain.external.apiPlaces.services.ApiPlacesServicies;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
 
-@Service
-public class FullProvidersServiceData {
+@ContextConfiguration(locations = {"classpath:com/je/enterprise/mievento/test/test-domain-context.xml"})
+public class FullProvidersServiceDataTest {
 
-	private static final Logger logger = Logger.getLogger(FullProvidersServiceDataTest.class);
+	private static final Logger logger = Logger.getLogger(FullProvidersServiceData.class);
 	
 	private ApiPlacesServicies apiPlacesServicies;
 	private KeyWordsHandler keyWordsHandler;
@@ -32,7 +32,7 @@ public class FullProvidersServiceData {
 	private TransformerList<ProviderEntity, DetailPlace> providerPlacesTransformerList;
 	
 	@Autowired
-	public FullProvidersServiceData(ApiPlacesServicies apiPlacesServicies,KeyWordsHandler keyWordsHandler,CitiesByCountryHandler citiesByCountryHandler,
+	public FullProvidersServiceDataTest(ApiPlacesServicies apiPlacesServicies,KeyWordsHandler keyWordsHandler,CitiesByCountryHandler citiesByCountryHandler,
 			TransformerList<ProviderEntity, DetailPlace> providerPlacesTransformerList,ProviderDAO providerDAO,CitiesInfoCache citiesInfoCache) {
 		this.apiPlacesServicies = apiPlacesServicies;
 		this.keyWordsHandler = keyWordsHandler;
@@ -43,7 +43,7 @@ public class FullProvidersServiceData {
 	}
 
 	//couta 1k request/day
-//	@Scheduled(cron = "* */5 * * * ?")
+	@Scheduled(cron = "* */5 * * * ?")
 	public void serviceProcessData() {
 		
 		List<DetailPlace> places = this.getData();

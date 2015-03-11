@@ -1,14 +1,19 @@
 package com.je.enterprise.mievento.domain.service.impl;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.log4j.Logger;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.je.enterprise.mievento.domain.dao.impl.ProviderDAO;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
+import com.je.enterprise.mievento.domain.entity.common.event.ProviderReviewEntity;
 import com.je.enterprise.mievento.domain.exception.customize.NotExistanceProvidersException;
 import com.je.enterprise.mievento.domain.service.filters.CriteriaFilterProvider;
 import com.je.enterprise.mievento.domain.service.helper.CRUDHelper;
@@ -17,6 +22,7 @@ import com.je.enterprise.mievento.domain.service.helper.CRUDHelper;
 public class ProviderService {
 
 	private CRUDHelper<ProviderEntity, ObjectId> crudHelper;
+	private static final Logger logger = Logger.getLogger(ProviderService.class);
 
 	@Autowired
 	public ProviderService(CRUDHelper<ProviderEntity, ObjectId> crudHelperProvider) {
@@ -53,7 +59,28 @@ public class ProviderService {
 		if (!providers.isEmpty()){
 			return providers.get(0);
 		}
-		
 		return null;
+	}
+
+	public void updated(ProviderEntity providerUpdated) {
+		try{
+			ProviderEntity oldProvider = this.crudHelper.findById(providerUpdated.getId());
+			Validate.notNull(oldProvider);
+			
+			List<ProviderReviewEntity> reviews = oldProvider.getReviews();
+			reviews.addAll(providerUpdated.getReviews());
+			oldProvider.setReviews(reviews);
+			
+			BigDecimal oldEstimatedPrice = oldProvider.getEstimatedPrice();
+			oldEstimatedPrice.add(providerUpdated.getEstimatedPrice());
+			BigDecimal estimatedPriceUpdated = oldEstimatedPrice.divide(BigDecimal.valueOf(reviews.size()), 2 , RoundingMode.HALF_DOWN);
+			
+			oldProvider.setEstimatedPrice(estimatedPriceUpdated);
+			
+			this.crudHelper.update(oldProvider);
+			
+		}catch(Exception ex){
+			logger.error(ExceptionUtils.getStackTrace(ex));
+		}
 	}
 }

@@ -5,9 +5,15 @@
 		<div class="col-xs-12 col-sm-6">
 			<form name="siginUpForm" class="omb_loginForm" action=""
 				autocomplete="off" method="POST">
-				<div class="input-group" ng-class="errorMailClass">
+				<div class="input-group" ng-class="">
 					<span class="input-group-addon"><i class="fa fa-user"></i></span> <input
-						type="text" class="form-control" name="username"
+						type="text" class="form-control" name="nickname"
+						placeholder="nick name" ng-model="user.nickName"
+						required>
+				</div>
+				<div class="input-group" ng-class="errorMailClass">
+					<span class="input-group-addon"><i class="fa fa-envelope"></i></span> <input
+						type="text" class="form-control" name="email"
 						placeholder="email address" ng-model="user.email"
 						ng-pattern="mailPattern" required>
 				</div>

@@ -31,7 +31,7 @@ public class ProviderTypeKeyword implements LoadFile{
 		Map<ProviderType, List<String>> providerKeyword = Maps.<ProviderType, List<String>>newHashMap();
 		for (ProviderType providerType : ProviderType.values()) {
 		
-			String value = String.valueOf(properties.get(providerType.getName()));
+			String value = String.valueOf(properties.get(providerType.name()));
 			
 			String[] citiesAbrv = value.split(",");
 			

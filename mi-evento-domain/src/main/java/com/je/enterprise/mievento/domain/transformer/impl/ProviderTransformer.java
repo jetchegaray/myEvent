@@ -29,7 +29,7 @@ public class ProviderTransformer extends
 
 		List<Review> reviews = reviewTransformerList.transformDomainToApi(domainObject.getReviews());
 		
-		return new Provider(domainObject.getBusinessName(),
+		return new Provider(domainObject.getBusinessId(), domainObject.getBusinessName(),
 				domainObject.getDescription(), location,
 				domainObject.getEmail(), domainObject.getCellPhone(),
 				domainObject.getPhone(), domainObject.getPrice(),
@@ -43,7 +43,7 @@ public class ProviderTransformer extends
 				.transformAndValidateApiToDomain(apiObject.getLocation());
 		List<ProviderReviewEntity> reviewEntities = reviewTransformerList.transformApiToDomain(apiObject.getReviews());
 		
-		return new ProviderEntity(apiObject.getBusinessName(),
+		return new ProviderEntity(apiObject.getBusinessId(), apiObject.getBusinessName(),
 				apiObject.getDescription(), locationEntity,
 				apiObject.getEmail(), apiObject.getCellPhone(),
 				apiObject.getPhone(), apiObject.getPrice(),

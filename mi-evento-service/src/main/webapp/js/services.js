@@ -23,10 +23,12 @@ mieventoServices.factory("providerService",["$resource",function($resource){
         	getAllTypes : {method : "GET",params: {requestMapping: "types"},isArray:true},
         	getPlaceTypes : {method : "GET",params: {requestMapping: "placeTypes"},isArray:true},
         	getByType : {method : "GET",params: {requestMapping: "byType"},isArray:true},
-        	getMoreCheaperByCategory : {method : "POST", params : {requestMapping : "moreCheaperByCategory"}, isArray :true}
+        	getMoreCheaperByCategory : {method : "POST", params : {requestMapping : "moreCheaperByCategory"}, isArray :true},
+        	updateReviews : {method : "POST", params : {requestMapping : "updateReviews"}, headers: {'Content-Type': 'application/json'}}
         });
        }                                     
 ]);
+
 
 
 mieventoServices.factory("eventGuestService",["$resource", function($resource){
@@ -42,6 +44,8 @@ mieventoServices.factory("eventGuestService",["$resource", function($resource){
 mieventoServices.factory("eventService",["$resource", function($resource){
 		return $resource("/mievento/event/:requestMapping",{requestMapping : "@requestMapping"},
 			{
-				getAllEventTypes : {method : "GET",params : { requestMapping : "eventTypes"}, isArray : true}
+				getAllEventTypes : {method : "GET",params : { requestMapping : "eventTypes"}, isArray : true},
+				getAllCountries: {method : "GET",params : { requestMapping : "countries"}, isArray:true},
+				getAllProvinces: {method : "GET",params : { requestMapping : "provinces"}, isArray:true}
 			});	
 }])

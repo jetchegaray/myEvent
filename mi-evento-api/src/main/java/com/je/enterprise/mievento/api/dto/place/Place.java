@@ -21,12 +21,12 @@ public class Place extends Provider {
 		super();
 	}
 
-	public Place(String businessName, String description, Location location,
+	public Place(String businessId,String businessName, String description, Location location,
 			String email, String cellPhone, String phone, BigDecimal price,
 			BigDecimal estimatedPrice, BigDecimal m2,
 			BigDecimal estimatedQuantityTables,
 			BigDecimal estimatedQuantityPerson,List<String> photos,ProviderType providerType,List<Review> reviews) {
-		super(businessName, description, location, email, cellPhone, phone,
+		super(businessId, businessName, description, location, email, cellPhone, phone,
 				price, estimatedPrice,photos,providerType,reviews);
 		this.m2 = m2;
 		this.estimatedQuantityTables = estimatedQuantityTables;

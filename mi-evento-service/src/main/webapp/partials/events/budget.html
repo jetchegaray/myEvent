@@ -17,9 +17,10 @@
 				</tr>
 				<tbody>
 					<tr ng-repeat-start="item in items">
-						<td colspan="8" ng-click="order.collapseRows = !order.collapseRows" class="collapsible-row">
-							{{item.providerType}} 
+						<td colspan="9" ng-click="order.collapseRows = !order.collapseRows" class="collapsible-row">
+							{{item.providerType}}  
 							<span ng-class="{'caret':!order.collapseRows, 'right-caret':order.collapseRows}"></span>
+							 <strong class="text-center">Total : $ <span class="text-danger">{{totalBudgetProvider}}</span></strong>
 						</td>
 					</tr>
 					<tr ng-repeat-end ng-repeat="provider in item.providers" ng-hide="order.collapseRows">

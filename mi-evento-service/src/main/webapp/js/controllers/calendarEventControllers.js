@@ -96,7 +96,7 @@ mieventoControllers.controller("CalendarEventController", ["$scope", "$state", "
 	    	var modalInstance = $modal.open({
 	            backdropClick: false,
 	            templateUrl : 'deleteCalendarEvent.html',
-				controller : "deleteCalendarEventInstanceController",
+				controller : "DeleteCalendarEventInstanceController",
 	            resolve : {
 	            	task : function () {
 	                    return $scope.selectedTask;
@@ -120,7 +120,7 @@ mieventoControllers.controller("CalendarEventController", ["$scope", "$state", "
 	    $scope.showAddModal = function () {
 	    	var modalInstance = $modal.open({
 	            templateUrl : 'addCalendarEvent.html',
-				controller : "addEventInstanceController",
+				controller : "AddEventInstanceController",
 	            resolve: {
 	                selectedDay : function(){
 	                	return $scope.selectedDay;

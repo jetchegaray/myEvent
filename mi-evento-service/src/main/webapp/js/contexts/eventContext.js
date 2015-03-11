@@ -32,8 +32,8 @@ mieventoContext.service("eventContext",function(){
 	//***********GUESTS EVENT **********
 	
 	this.getGuestsSelectedEvent = function(){
-		if (selectedEvent == null){
-			return null;
+		if (selectedEvent.guests == null){
+			selectedEvent.guests = [];
 		}
 		return selectedEvent.guests;
 	}
@@ -114,9 +114,20 @@ mieventoContext.service("eventContext",function(){
 		return editProvider;
 	}
 	
+	this.getTotalBuggetSelectedEvent = function(){
+		
+		if (selectedEvent == null || selectedEvent.providers == null){
+			return 0;
+		}
+		return _.reduce(selectedEvent.providers, function(memo, provider){ return memo + provider.estimatedPrice; }, 0);
+	}
+	
 	//**********PROVIDERS TO COMPARE IN EVENT ***********
 	
 	this.getProvidersToCompareEvent = function(){
+		if (selectedEvent == null || selectedEvent.providersToCompare){
+			return arrays();
+		}
 		return selectedEvent.providersToCompare;
 	}
 	
@@ -124,11 +135,18 @@ mieventoContext.service("eventContext",function(){
 		selectedEvent.providersToCompare = providers;
 	}
 	
-	this.addProviderToCompareEvent  = function(provider){
+	this.addProviderToCompareEvent  = function(providerToCompare){
+		if (selectedEvent.providers != null){
+			var foundIt = _.find(selectedEvent.providers,function(providerOriginal){ providerOriginal === providerToCompare});
+			if (foundIt != null){
+				console.log("The provider alredy exists in original list of providers.");
+			}
+		}
+		
 		if (selectedEvent.providersToCompare == null){
 			selectedEvent.providersToCompare = [];
 		}
-		selectedEvent.providersToCompare.push(provider);
+		selectedEvent.providersToCompare.push(providerToCompare);
 	}
 	
 	

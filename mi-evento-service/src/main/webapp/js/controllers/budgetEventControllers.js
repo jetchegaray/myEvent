@@ -51,6 +51,8 @@ mieventoControllers.controller("BudgetEventController", ["$scope", "$state", "pr
 			$scope.providers = applicationContext.getEventContext().getProvidersSelectedEvent();
 			$scope.providersToCompare = applicationContext.getEventContext().getProvidersToCompareEvent();
 			
+			$scope.totalBudgetProvider =  applicationContext.getEventContext().getTotalBuggetSelectedEvent();
+			
 			$scope.providers = _.chain($scope.providers).each(function(provider){ provider.selected = true;}).sortBy("estimatedPrice");
 			$scope.providersToCompare = _.chain($scope.providersToCompare).each(function(provider){ provider.selected = false;}).sortBy("estimatedPrice");
 			minColors();
@@ -132,6 +134,7 @@ mieventoControllers.controller("BudgetEventController", ["$scope", "$state", "pr
 			applicationContext.getEventContext().setProvidersSelectedEvent(changeProviders);
 			
 			userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
+				$rootScope.$broadcast(TAG_SUMMARY_VIEW_BUDGET_UPDATE);
 				initialize();
 			}, function(error) {
 				applicationContext.getExceptionContext().setDanger(error.data);
@@ -142,13 +145,16 @@ mieventoControllers.controller("BudgetEventController", ["$scope", "$state", "pr
 		$scope.setSelectProvider = function(provider){
 			if (provider.selected === true){
 				provider.selected = false;
+			}else {
+				provider.selected = true;
 			}
-			provider.selected = true;
 			
 			var allProvidersSelected = [];
 			_.each($scope.items, function(item){ allProvidersSelected.push(item.providers)});
 			allProvidersSelected = _.chain(allProvidersSelected).flatten(true).filter(function(provider){ return provider.selected === true;}).value();
 			applicationContext.getEventContext().setProvidersSelectedEvent(allProvidersSelected);
+			
+			$scope.totalBudgetProvider =  _.reduce(allProvidersSelected, function(memo, provider){ return memo + provider.estimatedPrice; }, 0);
 			
 			console.log(angular.toJson(allProvidersSelected));
 			

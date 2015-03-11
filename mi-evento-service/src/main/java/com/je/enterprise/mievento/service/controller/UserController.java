@@ -2,6 +2,7 @@ package com.je.enterprise.mievento.service.controller;
 
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.common.base.Preconditions;
 import com.je.enterprise.mievento.api.dto.event.Event;
 import com.je.enterprise.mievento.api.dto.event.wedding.Wedding;
+import com.je.enterprise.mievento.api.dto.location.CountryCode;
+import com.je.enterprise.mievento.api.dto.provider.ProviderType;
 import com.je.enterprise.mievento.api.dto.user.User;
 import com.je.enterprise.mievento.domain.exception.HttpEventException;
 import com.je.enterprise.mievento.domain.exception.customize.UserDoesNotExistException;
@@ -81,6 +84,7 @@ public class UserController {
 		user.setEvents(Arrays.asList(new Event(),new Wedding()));
 		return user;
 	}
+	
 	
 	
 }

@@ -4,7 +4,6 @@ mieventoControllers.controller("ProvidersEventController", ["$scope", "$state", 
                 function($scope, $state, userService, applicationContext) {
 
 		$scope.providersToCompare = applicationContext.getEventContext().getProvidersToCompareEvent();
-	  
 		$scope.providers = applicationContext.getEventContext().getProvidersSelectedEvent();
 	    
 	    

@@ -69,7 +69,6 @@ mieventoControllers.controller("SignUpController", ["$scope", "$state",
 					applicationContext.getExceptionContext().setDanger(error);
 					return false;	
 				}
-				
 				userService.signUp($scope.user, function(data) {
 					$state.go("loginState");
 				}, function(error) {

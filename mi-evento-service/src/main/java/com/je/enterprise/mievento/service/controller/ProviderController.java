@@ -83,4 +83,14 @@ public class ProviderController {
 	}
 	
 	
+	@ResponseBody
+	@RequestMapping(value={"/updateReviews"},method = RequestMethod.POST)
+	public void updateReviews(@RequestBody Provider providerUpdated){
+		logger.info(String.format("new review provider %s",providerUpdated.getBusinessName()));
+		providerService.updated(this.providerTransformer.transformApiToDomain(providerUpdated));
+	}
+	
+	
+	
+	
 }

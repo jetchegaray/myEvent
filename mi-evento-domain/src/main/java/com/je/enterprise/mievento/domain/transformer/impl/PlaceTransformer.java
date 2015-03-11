@@ -28,14 +28,14 @@ public class PlaceTransformer extends Transformer<PlaceEntity, Place>{
 	public Place transformDomainToApi(PlaceEntity domainObject) {
 		Location location = locationTransformer.transformAndValidateDomainToApi(domainObject.getLocation());
 		List<Review> reviews = reviewTransformerList.transformDomainToApi(domainObject.getReviews());
-		return new Place(domainObject.getBusinessName(), domainObject.getDescription(), location, domainObject.getEmail(), domainObject.getCellPhone(), domainObject.getPhone(), domainObject.getPrice(), domainObject.getEstimatedPrice(), domainObject.getM2(), domainObject.getEstimatedQuantityTables(), domainObject.getEstimatedQuantityPerson(), domainObject.getPhotos(), domainObject.getProviderType(),reviews);
+		return new Place(domainObject.getBusinessId(), domainObject.getBusinessName(), domainObject.getDescription(), location, domainObject.getEmail(), domainObject.getCellPhone(), domainObject.getPhone(), domainObject.getPrice(), domainObject.getEstimatedPrice(), domainObject.getM2(), domainObject.getEstimatedQuantityTables(), domainObject.getEstimatedQuantityPerson(), domainObject.getPhotos(), domainObject.getProviderType(),reviews);
 	}
 
 	@Override
 	public PlaceEntity transformApiToDomain(Place apiObject) {
 		LocationEntity locationEntity = locationTransformer.transformAndValidateApiToDomain(apiObject.getLocation());
 		List<ProviderReviewEntity> reviewEntities = reviewTransformerList.transformApiToDomain(apiObject.getReviews());
-		return new PlaceEntity(apiObject.getBusinessName(), apiObject.getDescription(), locationEntity, apiObject.getEmail(), apiObject.getCellPhone(), apiObject.getPhone(), apiObject.getPrice(), apiObject.getEstimatedPrice(), apiObject.getM2(), apiObject.getEstimatedQuantityTables(), apiObject.getEstimatedQuantityPerson(), apiObject.getPicture(), apiObject.getProviderType(),reviewEntities);
+		return new PlaceEntity(apiObject.getBusinessId(), apiObject.getBusinessName(), apiObject.getDescription(), locationEntity, apiObject.getEmail(), apiObject.getCellPhone(), apiObject.getPhone(), apiObject.getPrice(), apiObject.getEstimatedPrice(), apiObject.getM2(), apiObject.getEstimatedQuantityTables(), apiObject.getEstimatedQuantityPerson(), apiObject.getPicture(), apiObject.getProviderType(),reviewEntities);
 	}
 
 	

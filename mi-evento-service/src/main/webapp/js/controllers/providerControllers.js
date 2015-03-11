@@ -1,16 +1,22 @@
-mieventoControllers.controller("ProviderTypeController",["$scope", "providerService", function($scope, providerService){
+mieventoControllers.controller("ProviderTypeController",["$scope", "providerService", "applicationContext", 
+                                                         function($scope, providerService,applicationContext){
 			
 			providerService.getAllTypes(function(data){
 				$scope.types = data;
+			}, function(error) {
+				applicationContext.getExceptionContext().setDanger(error.data);
 			});
 					
 }]);
 
 
-mieventoControllers.controller("ProviderPlaceTypesController",["$scope", "providerService",function($scope, providerService){
+mieventoControllers.controller("ProviderPlaceTypesController",["$scope", "providerService", "applicationContext",
+                                                               function($scope, providerService,applicationContext){
 			
 			providerService.getPlaceTypes(function(data){
 				$scope.placeTypes = data;
+			}, function(error) {
+				applicationContext.getExceptionContext().setDanger(error.data);
 			});
 		
 }]);
@@ -24,9 +30,9 @@ mieventoControllers.controller("ProviderDetailController",["$scope","application
 
 
 
-mieventoControllers.controller("ProviderListController",["$scope", "$state", "$stateParams", 
+mieventoControllers.controller("ProviderListController",["$rootScope", "$scope", "$state", "$stateParams", 
          "providerService", "userService", "applicationContext", 
-         function( $scope, $state, $stateParams, providerService, userService, applicationContext){
+         function( $rootScope, $scope, $state, $stateParams, providerService, userService, applicationContext){
 	
 				providerService.getByType({ pathParams: $stateParams.providerType },function(data){
 					$scope.providers = data;
@@ -65,7 +71,8 @@ mieventoControllers.controller("ProviderListController",["$scope", "$state", "$s
 							applicationContext.getEventContext().addProviderSelectedEvent(provider);
 							
 							userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
-								//forward state
+								//actualizo la vista del budget 
+								$rootScope.$broadcast(TAG_SUMMARY_VIEW_BUDGET_UPDATE);
 							}, function(error) {
 								applicationContext.getExceptionContext().setDanger(error.data);
 							});

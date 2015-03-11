@@ -19,6 +19,7 @@ EVENT_PROVIDER_EDIT_PATH = "/provider/edit";
 EVENT_CALENDAR_PATH = "/calendar";
 EVENT_SCHEDULED_PATH = "/scheduled"
 EVENT_BUDGET_PATH = "/budget"
+EVENT_REVIEW_PATH = "/review"
 	
 
 mieventoApp.config([ "$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider){
@@ -28,7 +29,8 @@ mieventoApp.config([ "$stateProvider", "$urlRouterProvider", function($stateProv
 	$stateProvider
 	.state("homeState", {
 		url: HOME_PATH,
-		templateUrl : "../partials/home.html"
+		templateUrl : "../partials/home.html",
+		controller : "HomeController"	
 	})
 	.state("loginState",{
 		url : LOGIN_PATH,
@@ -135,7 +137,12 @@ mieventoApp.config([ "$stateProvider", "$urlRouterProvider", function($stateProv
 		url : EVENT_BUDGET_PATH,
 		templateUrl : "../partials/events/budget.html",
 		controller : "BudgetEventController"
-	});
+	})
+	.state("eventState.reviews", {
+		url : EVENT_REVIEW_PATH,
+		templateUrl : "../partials/events/reviews.html",
+		controller : "ReviewsEventController"
+	});;
 	
 	
 	

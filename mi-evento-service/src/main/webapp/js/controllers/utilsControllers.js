@@ -32,8 +32,8 @@ mieventoControllers.controller("accordionCtrl", ["$scope", function($scope){
 }]);
 
 
-mieventoControllers.controller("DeleteConfirmationModalController", ["$scope","$modal","userService","applicationContext",
-		function($scope, $modal, userService, applicationContext) {
+mieventoControllers.controller("DeleteConfirmationModalController", ["$rootScope", "$scope","$modal","userService","applicationContext",
+		function($rootScope, $scope, $modal, userService, applicationContext) {
 
 			$scope.openDeleteListConfirmation = function(list,element) {
 
@@ -47,6 +47,8 @@ mieventoControllers.controller("DeleteConfirmationModalController", ["$scope","$
 					var index = list.indexOf(element)
 					list.splice(index, 1);
 					userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
+						// si elimina proveedores. actualizo el budget.
+						$rootScope.$broadcast(TAG_SUMMARY_VIEW_BUDGET_UPDATE);
 					}, function(error) {
 						applicationContext.getExceptionContext().setDanger(error.data);
 					})
@@ -130,10 +132,11 @@ mieventoControllers.controller("datepickerController",["$scope",function($scope)
 		$scope.format = "dd-MM-yyyy";
 		$scope.showWeeks = false;
 			
-		$scope.onDateChange = function() {
-			console.log($scope);
-            if ($scope.date) {
-              $scope.date = Date.parse($scope.date);
+		$scope.onDateChange = function(date) {
+			console.log(date);
+            if (date) {
+              $scope.date = Date.parse(date);
+              console.log("despues "+$scope.date);
             }
           };
 					

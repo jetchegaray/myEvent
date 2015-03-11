@@ -1,3 +1,23 @@
+
+
+.home { 
+  background: url("../img/home.jpg") no-repeat center center local; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 300px;
+}
+
+.panel-default {
+opacity: 0.9;
+margin-top:30px;
+}
+
+.panel-footer{
+	margin-top:30px;		
+}
+
 /*
     Note: It is best to use a less version of this file ( see http://css2less.cc
     For the media queries use @screen-sm-min instead of 768px.
@@ -132,7 +152,7 @@
 }
 
 .providerElement .media-body{
-	margin-bottom: 5%;
+	margin-bottom: 2%;
 }
 
 .providerElement .media-body .description{
@@ -143,6 +163,9 @@
 	border-right: 5px grey;
 }
 
+.providerElement .star{
+	text-align: center;
+}
 
 /** EVENTS VIEW **/
 
@@ -158,45 +181,6 @@
 input.ng-dirty.ng-invalid {
   color: red
 }
-
-
-/*** Calendar ***/
-
-/* .calAlert{ */
-/* 	width: 595px; float: right; margin-bottom: 5px; */
-/* } */
-
-/* .calXBtn{ */
-/* 	float: right; margin-top: -5px; margin-right: -5px; */
-/* } */
-
-/* .calWell{ */
-/* 	float: left; margin-bottom: 40px; */
-/* } */
-
-/* .fc-event.openSesame .fc-event-skin{ */
-/* 	background-color: rgb(229, 229, 11); */
-/* 	color: black; */
-/* } */
-
-/* .fc-event.customFeed .fc-event-skin{ */
-/* 	background-color: rgb(132, 222, 175); */
-/* 	color: black; */
-/* } */
-
-/* .calTools{ */
-/* 	margin-bottom: 10px; */
-/* } */
-
-
-/* .empty-font { */
-/* 	font-family: monospace; */
-/* 	font-size: xx-large; */
-/* 	font: small-caps; */
-/* 	color: #bfbfbf; */
-/* 	text-align: center; */
-/* } */
-
 
 
 
@@ -307,8 +291,8 @@ input.ng-dirty.ng-invalid {
 }
 
 .draggable-guest {
-	width: 50px;
-	height: 50px;
+	width: 45px;
+	height: 45px;
 	border-radius: 50%;
 	border: solid 1px;
 }

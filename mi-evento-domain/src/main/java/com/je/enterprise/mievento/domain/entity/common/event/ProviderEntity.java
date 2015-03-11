@@ -1,10 +1,12 @@
 package com.je.enterprise.mievento.domain.entity.common.event;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Indexed;
 
 import com.je.enterprise.mievento.api.dto.provider.ProviderType;
 import com.je.enterprise.mievento.domain.dao.BaseEntity;
@@ -13,6 +15,9 @@ import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
 @Entity("providers")
 public class ProviderEntity extends BaseEntity {
 
+	@Indexed(unique = true)
+	private String businessId;
+	
 	private String businessName;
 	private String description;
 	@Embedded
@@ -29,7 +34,7 @@ public class ProviderEntity extends BaseEntity {
 	public ProviderEntity() {
 	}
 
-	public ProviderEntity(String businessName, String description,
+	public ProviderEntity(String businessId, String businessName, String description,
 			LocationEntity location, String email, String cellPhone, String phone,
 			BigDecimal price, BigDecimal estimatedPrice,List<String> photos,ProviderType providerType,List<ProviderReviewEntity> reviews) {
 		this.businessName = businessName;
@@ -43,6 +48,7 @@ public class ProviderEntity extends BaseEntity {
 		this.photos = photos;
 		this.providerType = providerType;
 		this.reviews = reviews;
+		this.businessId = businessId;
 	}
 
 
@@ -112,7 +118,10 @@ public class ProviderEntity extends BaseEntity {
 	}
 
 	public List<String> getPhotos() {
-		return photos;
+		if (photos != null){
+			return photos;
+		}
+		return Collections.emptyList();
 	}
 
 	public void setPhotos(List<String> photos) {
@@ -128,11 +137,22 @@ public class ProviderEntity extends BaseEntity {
 	}
 
 	public List<ProviderReviewEntity> getReviews() {
-		return reviews;
+		if (reviews != null){
+			return reviews;
+		}
+		return Collections.emptyList();
 	}
 
 	public void setReviews(List<ProviderReviewEntity> reviews) {
 		this.reviews = reviews;
+	}
+
+	public String getBusinessId() {
+		return businessId;
+	}
+
+	public void setBusinessId(String businessId) {
+		this.businessId = businessId;
 	}
 
 }

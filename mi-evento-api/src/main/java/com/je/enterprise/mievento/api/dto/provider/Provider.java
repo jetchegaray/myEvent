@@ -3,10 +3,13 @@ package com.je.enterprise.mievento.api.dto.provider;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.je.enterprise.mievento.api.dto.location.Location;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Provider {
 
+	private String businessId;
 	private String businessName;
 	private String description;
 	private Location location;
@@ -19,8 +22,7 @@ public class Provider {
 	private ProviderType providerType;
 	private List<Review> reviews;
 
-
-	public Provider(String businessName, String description,
+	public Provider(String businessId,String businessName, String description,
 			Location location, String email, String cellPhone, String phone,
 			BigDecimal price, BigDecimal estimatedPrice,List<String> photos, ProviderType providerType,List<Review> reviews) {
 		this.businessName = businessName;
@@ -34,6 +36,7 @@ public class Provider {
 		this.photos = photos;
 		this.providerType = providerType;
 		this.reviews = reviews;
+		this.businessId = businessId;
 	}
 
 	public Provider() {
@@ -128,6 +131,22 @@ public class Provider {
 
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
+	}
+
+	public String getBusinessId() {
+		return businessId;
+	}
+
+	public void setBusinessId(String businessId) {
+		this.businessId = businessId;
+	}
+
+	public List<String> getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(List<String> photos) {
+		this.photos = photos;
 	}
 
 }

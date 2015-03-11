@@ -34,7 +34,7 @@ public class UserTransformer extends Transformer<UserEntity,User> {
 	@Override
 	public UserEntity transformApiToDomain(User apiObject) {
 		List<EventEntity> eventsEntities = this.eventTransformerList.transformApiToDomain(apiObject.getEvents());
-		UserEntity userEntity =  new UserEntity(apiObject.getEmail(),apiObject.getNickName(),apiObject.getPassword(),true);
+		UserEntity userEntity =  new UserEntity(apiObject.getNickName(),apiObject.getEmail(),apiObject.getPassword(),true);
 		userEntity.setEvents(eventsEntities);
 		return userEntity;
 	}

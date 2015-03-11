@@ -18,13 +18,13 @@ public class PlaceEntity extends ProviderEntity {
 	public PlaceEntity() {
 	}
 
-	public PlaceEntity(String businessName, String description, LocationEntity location,
+	public PlaceEntity(String businessId, String businessName, String description, LocationEntity location,
 			String email, String cellPhone, String phone, BigDecimal price,
 			BigDecimal estimatedPrice, BigDecimal m2,
 			BigDecimal estimatedQuantityTables,
 			BigDecimal estimatedQuantityPerson,List<String> photos,ProviderType providerType,List<ProviderReviewEntity> reviews) {
 		
-		super(businessName, description, location, email, cellPhone, phone,
+		super(businessId, businessName, description, location, email, cellPhone, phone,
 				price, estimatedPrice,photos,providerType,reviews);
 		this.m2 = m2;
 		this.estimatedQuantityTables = estimatedQuantityTables;

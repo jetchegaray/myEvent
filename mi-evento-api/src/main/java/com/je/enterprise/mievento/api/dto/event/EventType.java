@@ -1,10 +1,7 @@
 package com.je.enterprise.mievento.api.dto.event;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.google.common.collect.Lists;
 
 public enum EventType {
 

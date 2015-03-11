@@ -6,7 +6,7 @@
 					<tr>
 						<th>Type</th>
 						<th>Name</th>
-						<th>Phone</th>
+						<th>Cell / Phone</th>
 						<th>Estimated Price</th>
 						<th>View</th>
 						<th>Delete</th>
@@ -17,8 +17,8 @@
 					 	<td>{{provider.providerType}}</td>
 						<td>{{provider.businessName}}</td>
 						<td>
-							<span ng-if="provider.cellPhone != null || provider.phone == null">{{provider.cellPhone}}</span>
-							<span ng-if="provider.cellPhone == null && provider.phone != null">{{provider.phone}}</span>
+							<span>{{provider.cellPhone || "No Phone"}} / {{provider.phone || "No Phone"}}</span>
+							
 						</td>
 						<td>
 							$ <a href="#" editable-text="provider.estimatedPrice" onbeforesave="save($data)">{{ provider.estimatedPrice || '0' }}</a>
