@@ -6,8 +6,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.Arrays;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -23,18 +22,15 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.beust.jcommander.internal.Lists;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.je.enterprise.mievento.api.dto.event.Event;
 import com.je.enterprise.mievento.api.dto.event.wedding.Wedding;
-import com.je.enterprise.mievento.api.dto.provider.Provider;
 import com.je.enterprise.mievento.api.dto.provider.ProviderType;
 import com.je.enterprise.mievento.api.dto.user.User;
-import com.je.enterprise.mievento.service.controller.UserController;
 import com.je.enterprise.mievento.service.request.ProviderTypesRequest;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@Ignore
 @WebAppConfiguration
 //@ContextConfiguration(classes = {TestContext.class, WebAppContext.class})
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/dispatcher-servlet.xml"})

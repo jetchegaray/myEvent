@@ -22,7 +22,7 @@ import com.je.enterprise.mievento.domain.transformer.TransformerList;
 @Service
 public class FullProvidersServiceData {
 
-	private static final Logger logger = Logger.getLogger(FullProvidersServiceDataTest.class);
+	private static final Logger logger = Logger.getLogger(FullProvidersServiceData.class);
 	
 	private ApiPlacesServicies apiPlacesServicies;
 	private KeyWordsHandler keyWordsHandler;
