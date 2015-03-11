@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -Dspring.profiles.active=prod -jar mi-evento-service/target/dependency/webapp-runner.jar --port $PORT mi-evento-service/target/*.war
+web: java $JAVA_OPTS -Dspring.profiles.active=prod  -Denvironment=prod -jar mi-evento-service/target/dependency/webapp-runner.jar --port $PORT mi-evento-service/target/*.war
