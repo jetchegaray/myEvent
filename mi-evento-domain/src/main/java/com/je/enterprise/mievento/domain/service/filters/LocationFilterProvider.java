@@ -16,11 +16,12 @@ public class LocationFilterProvider implements CriteriaFilterProvider{
 
 	@Override
 	public Query<ProviderEntity> buildQueryCriteria(ProviderDAO providerDAO){
+	
 		Query<ProviderEntity> query = providerDAO.createQuery().disableValidation().enableSnapshotMode();
 		
-		query.and(query.criteria("countryCode").equal(location.getCountryCode()));
-		query.and(query.criteria("province").equal(location.getProvince()));
-		query.and(query.criteria("neighborhood").equal(location.getStreetAddress().getNeighborhood()));
+		query.and(query.criteria("countryCode").containsIgnoreCase(location.getCountryCode().getName()));
+		query.and(query.criteria("province").containsIgnoreCase(location.getProvince().getName()));
+		query.and(query.criteria("neighborhood").containsIgnoreCase(location.getStreetAddress().getNeighborhood()));
 		
 		return query;
 	}

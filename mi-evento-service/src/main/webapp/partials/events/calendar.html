@@ -1,17 +1,17 @@
-
-<div id="directives-calendar" ng-controller="CalendarEventController">
-	<div class="well">
-		<div class="row">
-			<div class="span6">
+<div >
+	<div id="directives-calendar" ng-controller="CalendarEventController">
+		<div class="well">
+			<div class="row">
+				<div class="span6">
 					<div class="calendar" ng-model="eventSources" calendar="myCalendar1" config="uiConfig.calendar"
 						ui-calendar="uiConfig.calendar"></div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	<div>
-		<script type="text/ng-template" id="deleteCalendarEvent.html">
+</div>
+<div>
+	<script type="text/ng-template" id="deleteCalendarEvent.html">
 			<div class="modal-header">
         		<h4 class="modal-title custom_align" id="Heading">Delete Task</h4>
       		</div>
@@ -23,8 +23,7 @@
         		<button type="button" class="btn btn-warning" ng-click="cancel()"><span class="fa fa-close"></span> No</button>
       		</div>
     	</script>
-	</div>	
-</div>
+</div>	
 
 
 <div>

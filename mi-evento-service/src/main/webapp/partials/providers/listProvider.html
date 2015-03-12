@@ -1,48 +1,48 @@
-
-<div class="providerElement">
-	<div class="container" ng-controller="ProviderListController">
-		<div class="row oneElement" ng-repeat="provider in providers">
+<div class="container">
+	<div class="providerElement">
+		<div class="container" ng-controller="ProviderListController">
+			<div class="row oneElement" ng-repeat="provider in providers">
+			
+				<div class="media">
+					<a class="pull-left" ng-click="	" href="#">
+					  <div  ng-controller="providerCarouselCtrl" ng-init="init(provider)" class="media-object" style=" width: 300px; height: 150px; margin: 0 auto;">
+							<carousel interval="interval" disable-animation="true"> 
+								<slide ng-repeat="slide in slides" active="slide.active"> 
+									<img ng-src="{{slide.image}}"  >
+								</slide> 
+							</carousel>
+						</div>
+					</a>	
 		
-			<div class="media">
-				<a class="pull-left" ng-click="goToDetail(provider)" href="#">
-				  <div  ng-controller="providerCarouselCtrl" class="media-object" style="width: 300px; height: 150px; margin: 0 auto;">
-						<carousel interval="interval" disable-animation="true"> 
-							<slide ng-repeat="slide in slides" active="slide.active"> 
-								<img ng-src="{{slide.image}}"  >
-							</slide> 
-						</carousel>
+					<div class="media-body">
+						<h4 class="media-heading">{{provider.businessName}}</h4>
+						<h6 class="media-heading">
+							<i class="fa fa-map-marker color-red"> {{provider.location.streetAddress.street}}
+								<span ng-show="provider.location.streetAddress.number !=null && provider.location.streetAddress.number != 0">{{provider.location.streetAddress.number}}</span>
+								{{provider.location.streetAddress.additionalInfo}}
+								{{provider.location.streetAddress.neighborhood}}
+								{{provider.location.city}} ({{provider.location.province}})</i>
+						</h6>
+						<span class="star text-danger pull-right">
+	                		<i class="fa fa-star fa-2x"></i>
+		                   	<i class="fa fa-star fa-2x"></i>
+		                   	<i class="fa fa-star fa-2x"></i>
+		                   	<i class="fa fa-star-half-o fa-2x"></i>
+		                   	<i class="fa fa-star-o fa-2x"></i>
+	                    </span>
 					</div>
-				</a>	
-	
-				<div class="media-body">
-					<h4 class="media-heading">{{provider.businessName}}</h4>
-					<h6 class="media-heading">
-						<i class="fa fa-map-marker color-red"> {{provider.location.streetAddress.street}}
-							<span ng-show="provider.location.streetAddress.number !=null && provider.location.streetAddress.number != 0">{{provider.location.streetAddress.number}}</span>
-							{{provider.location.streetAddress.additionalInfo}}
-							{{provider.location.streetAddress.neighborhood}}
-							{{provider.location.city}} ({{provider.location.province}})</i>
-					</h6>
-					<span class="star text-danger pull-right">
-                		<i class="fa fa-star fa-2x"></i>
-	                   	<i class="fa fa-star fa-2x"></i>
-	                   	<i class="fa fa-star fa-2x"></i>
-	                   	<i class="fa fa-star-half-o fa-2x"></i>
-	                   	<i class="fa fa-star-o fa-2x"></i>
-                    </span>
-				</div>
-				<hr class="divide"/>
-				<span class="price">
-					<small>Precio Desde : </small>
-					<i class="fa fa-money glyphiconSpace"><strong> ${{provider.estimatedPrice}}</strong></i>
-				</span>	
-			     <span class="pull-right buttons">
-                   	<button class="btn btn-sm btn-default" ng-click="goToDetail(provider)"><i class="fa fa-eye"></i> Detail</button>
-                   	<button class="btn btn-sm btn-primary" ng-click="addProvider(provider)"><i class="fa fa-plus"></i> Add</button>
-         	     </span>	 
-			</div>    
+					<hr class="divide"/>
+					<span class="price">
+						<small>Precio Desde : </small>
+						<i class="fa fa-money glyphiconSpace"><strong> ${{provider.estimatedPrice}}</strong></i>
+					</span>	
+				     <span class="pull-right buttons">
+	                   	<button class="btn btn-sm btn-default" ng-click="goToDetail(provider)"><i class="fa fa-eye"></i> Detail</button>
+	                   	<button class="btn btn-sm btn-primary" ng-click="addProvider(provider)"><i class="fa fa-plus"></i> Add</button>
+	         	     </span>	 
+				</div>    
+			</div>
+		<hr class="divide"/>
 		</div>
-	<hr class="divide"/>
 	</div>
-</div>
-	 
+</div>	 
