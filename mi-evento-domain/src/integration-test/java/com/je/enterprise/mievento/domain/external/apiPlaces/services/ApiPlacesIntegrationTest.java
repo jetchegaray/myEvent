@@ -1,8 +1,8 @@
 package com.je.enterprise.mievento.domain.external.apiPlaces.services;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.client.RestTemplate;
 
-import com.google.common.primitives.Bytes;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.DetailPlace;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.Geometry;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.SearchPlace;
@@ -43,11 +42,15 @@ public class ApiPlacesIntegrationTest {
 		assertNotNull(detailPlace);
 		assertNotNull(detailPlace.getName());
 		assertFalse(detailPlace.getPhotos().isEmpty());
-		assertNotNull(detailPlace.getPhotos().get(0).getReference());
+		assertNotNull(detailPlace.getPhotos().get(0).getReference());		
+	}
+	
+	@Test
+	public void testPhotos_ok(){
+		String location	 = apiPlacesServicies.getPhoto("CnRnAAAAl7QHBJ68ZkxSWvnOQhZFlHAqR1fkhjZL9zMfFsE7KdsKYwbZ9w7M1jIWVwSDKY3VkZR2LEHHxgykpDcn39xs06lzM2ICQt9vomsUvdppyCs3JCXaVhF_fXEqSBNS0xbcVquqx49GNyHo4GtFAtahshIQSgt7GCNpsWN9_T2J9gWAeBoUjG2gjnKCV6KudgIAS0iJUdOEFaI");
 		
-		Bytes bytes = apiPlacesServicies.getPhoto(detailPlace.getPhotos().get(0).getReference());
-		
-		assertNotNull(bytes);
+		assertEquals("https://lh3.googleusercontent.com/-7S9uvywIrS0/VNqyKffjwjI/AAAAAAAAAAc/cWfUJNbUumI/s1600-w315-h317/photo.jpg",location);
+
 	}
 	
 	@Test

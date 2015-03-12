@@ -33,7 +33,7 @@ mieventoControllers.controller("ProviderDetailController",["$scope","application
 mieventoControllers.controller("ProviderListController",["$rootScope", "$scope", "$state", "$stateParams", 
          "providerService", "userService", "applicationContext", 
          function( $rootScope, $scope, $state, $stateParams, providerService, userService, applicationContext){
-	
+				
 				providerService.getByType({ pathParams: $stateParams.providerType },function(data){
 					$scope.providers = data;
 				},function(error){
@@ -89,6 +89,7 @@ mieventoControllers.controller("ProviderListController",["$rootScope", "$scope",
 					applicationContext.getProviderContext().setDetailProvider(provider);
 					$state.go("providerDetailState");
 				}
+				
 }]);
 
 

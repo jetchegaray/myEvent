@@ -1,8 +1,10 @@
 package com.je.enterprise.mievento.domain.external.apiPlaces.services;
 
+import java.net.URI;
 import java.util.List;
 
 import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.Validate;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -15,7 +17,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.google.common.primitives.Bytes;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.DetailPlace;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.SearchPlace;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.StatusResponse;
@@ -100,27 +101,29 @@ public class ApiPlacesServicies {
 	
 	
 	
-	public Bytes getPhoto(String referencePhoto) {
+	public String getPhoto(String referencePhoto) {
 
-		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("https://maps.googleapis.com/maps/api/place/photo/json?")
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("https://maps.googleapis.com/maps/api/place/photo?")
 				.queryParam("key", API_KEY)
 				.queryParam("sensor", SENSOR)
 				.queryParam("photoreference", referencePhoto)
 				.queryParam("maxheight", PHOTO_MAX_HEIGHT)
 				.queryParam("maxwidth", PHOTO_MAX_WIDTH);
 
-		HttpEntity<?> entity = new HttpEntity<>(this.getHeaders());
-		HttpEntity<Bytes> response = null;
-		
+		HttpHeaders response = null;
 		try {
-			response = restTemplate.exchange(builder.build().toUri(), HttpMethod.GET, entity, Bytes.class);
-			
-			return response.getBody();
+			response = restTemplate.headForHeaders(builder.build().toUri());
+			Validate.notNull(response);
+		
+			URI uri = response.getLocation();
+			return uri.toString();
+	
 		} catch (Exception e) {
 			logger.info(e.getMessage());
 			return null;
 		}
 	}
+	
 	
 	
 

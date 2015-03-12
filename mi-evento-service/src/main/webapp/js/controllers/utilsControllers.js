@@ -1,28 +1,13 @@
-mieventoControllers.controller("CarouselCtrl", [ "$scope", function($scope) {
-	$scope.interval = 5000;
-	var slides = $scope.slides = [];
-	for (var i = 1; i <= 5; i++) {
-		slides.push({
-			image : "../img/carusel_" + i + ".jpg",
-			text : "Cualquier Clase de Eventos Sociales"
-		});
-	}
-} ]);
-
-
 
 mieventoControllers.controller("providerCarouselCtrl", [ "$scope", function($scope) {
-	
-	// providers -> photos
-	$scope.interval = 5000;
-	var slides = $scope.slides = [];
-	for (var i = 1; i <= 5; i++) {
-		slides.push({
-			image : "../img/carusel_" + i + ".jpg",
-			text : "Cualquier Clase de Eventos Sociales"
-		});
+	$scope.init = function(provider)
+	{
+		// providers -> photos
+		$scope.interval = 5000;
+		$scope.slides = _.map(provider.photos, function(photo){ return { image : photo}; });
 	}
-} ]);
+	
+}]);
 
 
 /* Los watchers en ui-boostrap estan definidos sobre este nombre accordionCtrl => NO CAMBIAR*/

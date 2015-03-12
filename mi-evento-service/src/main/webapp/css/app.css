@@ -1,12 +1,9 @@
-
+body { overflow-x: hidden;}
 
 .home { 
   background: url("../img/home.jpg") no-repeat center center local; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  height: 300px;
 }
 
 .panel-default {

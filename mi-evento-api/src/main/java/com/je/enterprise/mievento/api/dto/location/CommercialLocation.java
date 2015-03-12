@@ -10,7 +10,7 @@ public class CommercialLocation extends Location{
 		super();
 	}
 
-	public CommercialLocation(String placeName,CountryCode countryCode, String province,String city,
+	public CommercialLocation(String placeName,CountryCode countryCode, ProvinceCode province,String city,
 			StreetAddress streetAddress) {
 		super(countryCode, province,city, streetAddress);
 		this.placeName = placeName;

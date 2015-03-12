@@ -11,25 +11,31 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.google.common.collect.Lists;
 import com.je.enterprise.mievento.api.dto.location.CountryCode;
+import com.je.enterprise.mievento.api.dto.location.ProvinceCode;
 import com.je.enterprise.mievento.api.dto.provider.ProviderType;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
 import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
 import com.je.enterprise.mievento.domain.entity.location.StreetAddressEntity;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.AddressComponent;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.DetailPlace;
+import com.je.enterprise.mievento.domain.external.apiPlaces.services.ApiPlacesServicies;
 import com.je.enterprise.mievento.domain.transformer.Transformer;
 
 @Component
 public class ProviderPlacesTransformer extends
 		Transformer<ProviderEntity, DetailPlace> {
 	
-	private Map<ProviderType, List<String>> keywords;
+	private ProviderTypeKeyword providerTypeKeyword;
+	private ApiPlacesServicies apiPlacesServicies;
+	
 	private Logger logger = LoggerFactory.getLogger(ProviderPlacesTransformer.class);
 
 	@Autowired
-	public ProviderPlacesTransformer(ProviderTypeKeyword providerTypeKeyword) {
-		keywords = providerTypeKeyword.getProviderTypeKeyword();
+	public ProviderPlacesTransformer(ProviderTypeKeyword providerTypeKeyword,ApiPlacesServicies apiPlacesServicies) {
+		this.providerTypeKeyword = providerTypeKeyword;
+		this.apiPlacesServicies = apiPlacesServicies;
 	}
 	
 	
@@ -50,10 +56,11 @@ public class ProviderPlacesTransformer extends
 		String phone = cellPhone;
 		BigDecimal price = BigDecimal.ZERO;
 		BigDecimal estimatedPrice = BigDecimal.ZERO;
-		List<String> photos = detailPlace.getPhotoReferences();
+		List<String> photos = this.transformToLocationPath(detailPlace.getPhotoReferences());
 		
 		if (photos.isEmpty()){
 			logger.debug("Photos vacias para el id : {}",detailPlace.getReference());
+			photos.add("../img/logo.jpg");
 		}
 		
 		ProviderType providerType = getProviderType(detailPlace);
@@ -63,10 +70,12 @@ public class ProviderPlacesTransformer extends
 		return entity;
 	}
 
+
+
 	private LocationEntity getLocation(DetailPlace detailPlace) {
 		
 		CountryCode countryCode = null;
-		String province = StringUtils.EMPTY;
+		ProvinceCode province = null;
 		String city = StringUtils.EMPTY;
 		String street = StringUtils.EMPTY;
 		BigDecimal number = BigDecimal.ZERO;
@@ -74,46 +83,39 @@ public class ProviderPlacesTransformer extends
 		String neighborhood = StringUtils.EMPTY;
 		
 		for (AddressComponent addressComponent : detailPlace.getAddress()) {
-			boolean passIt = false;
 			if (addressComponent.isCountry()){
 				countryCode = CountryCode.valueOf(addressComponent.getShortName());
-				passIt = true;
 			}
 			if (addressComponent.isCity()){
 				city = addressComponent.getLongName();
-				passIt = true;
 			}
 			if (addressComponent.isProvince()){
-				province = addressComponent.getLongName();
-				passIt = true;
+				province = ProvinceCode.valueOf(addressComponent.getShortName());
 			}
 			if (addressComponent.isStreet()){
 				street = addressComponent.getLongName();
-				passIt = true;
 			}
 			if (addressComponent.isNeighborhood()){
-				province = addressComponent.getLongName();
-				passIt = true;
+				neighborhood = addressComponent.getLongName();
 			}
 			if (addressComponent.isNumber()){
 				number = BigDecimal.valueOf(Long.valueOf(addressComponent.getLongName()));
-				passIt = true;
-			}
-			
-			if (!passIt){
-				logger.info(String.format(" The detail object id : %s, with addresComponent = %s DOESNT MATCH TO ANYONE IN MY MODEL. total dir from api is = %s",detailPlace.getReference(),addressComponent,detailPlace.getAddress()));
 			}
 		}
+//		logger.info(String.format(" The detail object id : %s, with addresComponent = %s DOESNT MATCH TO ANYONE IN MY MODEL. total dir from api is = %s",detailPlace.getReference(),addressComponent,detailPlace.getAddress()));
 		
 		StreetAddressEntity streetAddress = new StreetAddressEntity(street, number, additionalInfo, neighborhood);
 		return new LocationEntity(countryCode, province, city, streetAddress);
 	}
 
+	
 	//FIXME
 	private ProviderType getProviderType(DetailPlace detailPlace) {
 		
+		Map<ProviderType, List<String>> keywords = this.providerTypeKeyword.getProviderTypeKeyword();
+		
 		String detailName = detailPlace.getName();
-		for (Entry<ProviderType, List<String>> entry : this.keywords.entrySet()) {
+		for (Entry<ProviderType, List<String>> entry : keywords.entrySet()) {
 				
 			for (String value : entry.getValue()) {
 				if (detailName.toLowerCase().contains(value)){
@@ -123,6 +125,19 @@ public class ProviderPlacesTransformer extends
 		}
 		
 		return null;
+	}
+	
+	
+
+	private List<String> transformToLocationPath(List<String> photoReferences) {
+		
+		List<String> locationsPhotos = Lists.newArrayList();
+		if (photoReferences != null){
+			for (String reference : photoReferences) {
+				locationsPhotos.add(apiPlacesServicies.getPhoto(reference));
+			}
+		}
+		return locationsPhotos;
 	}
 
 }

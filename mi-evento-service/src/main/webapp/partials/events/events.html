@@ -1,117 +1,119 @@
-<div class="row">
-	<div class="col-sm-3 col-md-3" ng-controller="accordionCtrl">
-		<accordion close-others="oneAtATime">
-			<accordion-group is-open="isFirstOpen">
-				<accordion-heading>
-					<span class="fa fa-folder-open text-success  glyphiconSpace"> </span>Organize
-				</accordion-heading>
-				<div>
-					<table class="table">
-						<tr>
-							<td>
-								<span class="fa fa-home text-primary glyphiconSpace"></span><a ui-sref="eventState.place">Place</a>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<span class="fa fa-home text-primary glyphiconSpace"></span><a ui-sref="eventState.placeAdmin">Place Admin</a>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<span class="fa fa-envelope text-primary glyphiconSpace"></span><a ui-sref="eventState.guests">Invite</a>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<span class="fa fa-users text-primary glyphiconSpace"></span><a ui-sref="eventState.providers">Providers</a>
-							</td>
-						</tr>
-						<tr>
-							<td><span class="fa fa-gift text-primary glyphiconSpace"></span><a href>Gifts</a></td>
-						</tr>
-						<tr>
-							<td>
-								<span class="fa fa-money text-primary glyphiconSpace"></span><a ui-sref="eventState.budget">Budget</a> 
-							</td> 
-						</tr>
-						<!-- 								<span class="badge"> -->
-					</table>
-				</div>
-			</accordion-group>
-			<accordion-group>
-				<accordion-heading>
-					<span class="fa fa-tags text-success glyphiconSpace"> </span>Tasks
-				</accordion-heading>
-				<div class="panel-body">
-					<table class="table">
-						<tr>
-							<td><span class="fa fa-calendar text-success glyphiconSpace"></span><a ui-sref="eventState.calendar">Calendar</a></td>
-						</tr>
-						<tr>
-							<td>
-								<span class="fa fa-file text-success glyphiconSpace"></span>
-								<a ui-sref="eventState.scheduled">Scheduled</a>
-							</td>
-						</tr>
-					</table>
-				</div>
-			</accordion-group> 
-			<accordion-group>
-				<accordion-heading>
-					<span class="fa fa-user text-success glyphiconSpace"> </span>Account
-				</accordion-heading>
-				<div class="panel-body">
-					<table class="table">
-						<tr>
-							<td><a href>Change Password</a></td>
-						</tr>
-						<tr ng-controller="ReviewsPendingController">
-							<td><span class="fa fa-star-half-empty text-primary glyphiconSpace"></span><a ui-sref="eventState.reviews">Notification</a>
-							<span class="label label-warning pull-right" style="border-radius: 1em">{{pendingReviews}}</span></td>
-						</tr>
-						<tr>
-							<td><span class="fa fa-trash text-danger glyphiconSpace"></span><a
-								href class="text-danger"> Delete Account</a></td>
-						</tr>
-					</table>
-				</div>
-			</accordion-group> 
-		</accordion>	 
-		<div class="list-group">
-	         <div class="list-group-item" style="background-color: #F2F5A9;">
-	             <h3 class="pull-right">
-	                 <i class="text-info fa fa-eye"></i>
-	             </h3>
-	             <h4 class="list-group-item-heading count">{{summaryViewEvent.name || "No Event Selected"}}</h4>
-	             <p class="list-group-item-text">Selected Event</p>
-	         </div>
-	         <div class="list-group-item" style="background-color: #F3E2A9;">
-	             <h3 class="pull-right">
-	                 <i class="text-success fa fa-money"></i>
-	             </h3>
-	             <h4 class="list-group-item-heading count">$ {{summaryViewBudget || 0}}</h4>
-	             <p class="list-group-item-text">Total Budget</p>
-	         </div>
-   		</div>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-3 col-md-3" ng-controller="accordionCtrl">
+			<accordion close-others="oneAtATime">
+				<accordion-group is-open="isFirstOpen">
+					<accordion-heading>
+						<span class="fa fa-folder-open text-success  glyphiconSpace"> </span>Organize
+					</accordion-heading>
+					<div>
+						<table class="table">
+							<tr>
+								<td>
+									<span class="fa fa-home text-primary glyphiconSpace"></span><a ui-sref="eventState.place">Place</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<span class="fa fa-home text-primary glyphiconSpace"></span><a ui-sref="eventState.placeAdmin">Place Admin</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<span class="fa fa-envelope text-primary glyphiconSpace"></span><a ui-sref="eventState.guests">Invite</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<span class="fa fa-users text-primary glyphiconSpace"></span><a ui-sref="eventState.providers">Providers</a>
+								</td>
+							</tr>
+							<tr>
+								<td><span class="fa fa-gift text-primary glyphiconSpace"></span><a href>Gifts</a></td>
+							</tr>
+							<tr>
+								<td>
+									<span class="fa fa-money text-primary glyphiconSpace"></span><a ui-sref="eventState.budget">Budget</a> 
+								</td> 
+							</tr>
+							<!-- 								<span class="badge"> -->
+						</table>
+					</div>
+				</accordion-group>
+				<accordion-group>
+					<accordion-heading>
+						<span class="fa fa-tags text-success glyphiconSpace"> </span>Tasks
+					</accordion-heading>
+					<div class="panel-body">
+						<table class="table">
+							<tr>
+								<td><span class="fa fa-calendar text-success glyphiconSpace"></span><a ui-sref="eventState.calendar">Calendar</a></td>
+							</tr>
+							<tr>
+								<td>
+									<span class="fa fa-file text-success glyphiconSpace"></span>
+									<a ui-sref="eventState.scheduled">Scheduled</a>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</accordion-group> 
+				<accordion-group>
+					<accordion-heading>
+						<span class="fa fa-user text-success glyphiconSpace"> </span>Account
+					</accordion-heading>
+					<div class="panel-body">
+						<table class="table">
+							<tr>
+								<td><a href>Change Password</a></td>
+							</tr>
+							<tr ng-controller="ReviewsPendingController">
+								<td><span class="fa fa-star-half-empty text-primary glyphiconSpace"></span><a ui-sref="eventState.reviews">Notification</a>
+								<span class="label label-warning pull-right" style="border-radius: 1em">{{pendingReviews}}</span></td>
+							</tr>
+							<tr>
+								<td><span class="fa fa-trash text-danger glyphiconSpace"></span><a
+									href class="text-danger"> Delete Account</a></td>
+							</tr>
+						</table>
+					</div>
+				</accordion-group> 
+			</accordion>	 
+			<div class="list-group">
+		         <div class="list-group-item" style="background-color: #F2F5A9;">
+		             <h3 class="pull-right">
+		                 <i class="text-info fa fa-eye"></i>
+		             </h3>
+		             <h4 class="list-group-item-heading count">{{summaryViewEvent.name || "No Event Selected"}}</h4>
+		             <p class="list-group-item-text">Selected Event</p>
+		         </div>
+		         <div class="list-group-item" style="background-color: #F3E2A9;">
+		             <h3 class="pull-right">
+		                 <i class="text-success fa fa-money"></i>
+		             </h3>
+		             <h4 class="list-group-item-heading count">$ {{summaryViewBudget || 0}}</h4>
+		             <p class="list-group-item-text">Total Budget</p>
+		         </div>
+	   		</div>
+		</div>
+		
+		<div class="col-sm-9" >
+			<div ng-controller="SelectedEventController">
+				<span ng-show="loggedUser != null && selectedEvent == null">
+					<ol class="breadcrumb text-center alert-danger">	
+						<strong>Please, selected an event to organize !</strong>
+					</ol>
+				</span>	
+				<span ng-show="selectedEvent != null">	
+					<ol class="breadcrumb text-center alert-success">	
+						<strong>Selected Event : {{selectedEvent.name}}</strong>
+					</ol>
+			</div>	
+	<!-- 		class="animated fadeInRight" -->
+			<div ui-view></div>
+		</div>
+	<!-- 	<div ui-view="dragAndDropView"></div>	 -->
 	</div>
-	
-	<div class="col-sm-9" >
-		<div ng-controller="SelectedEventController">
-			<span ng-show="loggedUser != null && selectedEvent == null">
-				<ol class="breadcrumb text-center alert-danger">	
-					<strong>Please, selected an event to organize !</strong>
-				</ol>
-			</span>	
-			<span ng-show="selectedEvent != null">	
-				<ol class="breadcrumb text-center alert-success">	
-					<strong>Selected Event : {{selectedEvent.name}}</strong>
-				</ol>
-		</div>	
-<!-- 		class="animated fadeInRight" -->
-		<div ui-view></div>
-	</div>
-<!-- 	<div ui-view="dragAndDropView"></div>	 -->
 </div>
 <div ng-controller="DeleteConfirmationModalController">
 		<script type="text/ng-template" id="deleteConfirmation.html">
@@ -127,5 +129,3 @@
       		</div>
     	</script>
 </div>	
-
-
