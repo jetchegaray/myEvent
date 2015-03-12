@@ -1,14 +1,11 @@
 package com.je.enterprise.mievento.service.controller;
 
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.log4j.Logger;
-import org.jboss.netty.util.internal.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,15 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.collect.Lists;
-import com.je.enterprise.mievento.api.dto.location.CountryCode;
 import com.je.enterprise.mievento.api.dto.location.Location;
-import com.je.enterprise.mievento.api.dto.location.ProvinceCode;
-import com.je.enterprise.mievento.api.dto.location.StreetAddress;
 import com.je.enterprise.mievento.api.dto.provider.Provider;
 import com.je.enterprise.mievento.api.dto.provider.ProviderType;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
 import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
-import com.je.enterprise.mievento.domain.exception.customize.UserDoesNotExistException;
+import com.je.enterprise.mievento.domain.exception.customize.LocationNotValidToSearchException;
 import com.je.enterprise.mievento.domain.service.filters.CheaperFilterProvider;
 import com.je.enterprise.mievento.domain.service.filters.LocationFilterProvider;
 import com.je.enterprise.mievento.domain.service.filters.TypeFilterProvider;
