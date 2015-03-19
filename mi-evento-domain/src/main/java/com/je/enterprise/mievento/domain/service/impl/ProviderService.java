@@ -62,9 +62,10 @@ public class ProviderService {
 		return null;
 	}
 
+	
 	public void updated(ProviderEntity providerUpdated) {
 		try{
-			ProviderEntity oldProvider = this.crudHelper.findById(providerUpdated.getId());
+			ProviderEntity oldProvider = this.crudHelper.getDao().findOne("businessId",providerUpdated.getBusinessId());
 			Validate.notNull(oldProvider);
 			
 			List<ProviderReviewEntity> reviews = oldProvider.getReviews();
@@ -72,8 +73,8 @@ public class ProviderService {
 			oldProvider.setReviews(reviews);
 			
 			BigDecimal oldEstimatedPrice = oldProvider.getEstimatedPrice();
-			oldEstimatedPrice.add(providerUpdated.getEstimatedPrice());
-			BigDecimal estimatedPriceUpdated = oldEstimatedPrice.divide(BigDecimal.valueOf(reviews.size()), 2 , RoundingMode.HALF_DOWN);
+			oldEstimatedPrice = oldEstimatedPrice.add(providerUpdated.getEstimatedPrice());
+			BigDecimal estimatedPriceUpdated = oldEstimatedPrice.divide(BigDecimal.valueOf(reviews.size()), 0 , RoundingMode.HALF_DOWN);
 			
 			oldProvider.setEstimatedPrice(estimatedPriceUpdated);
 			

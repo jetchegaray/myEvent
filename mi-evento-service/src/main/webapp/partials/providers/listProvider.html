@@ -1,8 +1,12 @@
 <div class="container">
 	<div class="providerElement">
 		<div class="container" ng-controller="ProviderListController">
-			<div class="row oneElement" ng-repeat="provider in providers">
+			<div class="centered-message" ng-show="searching"><i class="fa fa-spinner fa-spin fa-5x"></i></div>
+			<div class="centered-message" class="row" ng-show="!searching && (providers == null || providers.length == 0)">
+				<span class="font-noResult"> No Providers for the search. Try to another Location.</span>
+			</div>
 			
+			<div class="row oneElement" ng-repeat="provider in providers">
 				<div class="media">
 					<a class="pull-left" ng-click="	" href="#">
 					  <div  ng-controller="providerCarouselCtrl" ng-init="init(provider)" class="media-object" style=" width: 300px; height: 150px; margin: 0 auto;">
@@ -24,11 +28,12 @@
 								{{provider.location.city}} ({{provider.location.province}})</i>
 						</h6>
 						<span class="star text-danger pull-right">
-	                		<i class="fa fa-star fa-2x"></i>
-		                   	<i class="fa fa-star fa-2x"></i>
-		                   	<i class="fa fa-star fa-2x"></i>
-		                   	<i class="fa fa-star-half-o fa-2x"></i>
-		                   	<i class="fa fa-star-o fa-2x"></i>
+							<span ng-repeat="star in getAverageStars(provider)">
+	                			<i class="fa fa-star fa-2x"></i>
+	                		</span>
+	                		<span ng-repeat="star in getAverageEmptyStars(provider)">
+	                			<i class="fa fa-star-o fa-2x"></i>
+	                		</span>
 	                    </span>
 					</div>
 					<hr class="divide"/>
@@ -41,8 +46,9 @@
 	                   	<button class="btn btn-sm btn-primary" ng-click="addProvider(provider)"><i class="fa fa-plus"></i> Add</button>
 	         	     </span>	 
 				</div>    
+				<hr class="divide"/>
 			</div>
-		<hr class="divide"/>
+		
 		</div>
 	</div>
 </div>	 

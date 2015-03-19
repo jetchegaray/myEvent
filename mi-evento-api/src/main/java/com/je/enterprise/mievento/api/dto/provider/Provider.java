@@ -15,6 +15,7 @@ public class Provider {
 	private Location location;
 	private String email;
 	private String cellPhone;
+	@Deprecated
 	private String phone;
 	private BigDecimal price;
 	private BigDecimal estimatedPrice;
@@ -40,7 +41,6 @@ public class Provider {
 	}
 
 	public Provider() {
-		super();
 	}
 
 	public String getBusinessName() {
@@ -75,10 +75,12 @@ public class Provider {
 		this.cellPhone = cellPhone;
 	}
 
+	@Deprecated
 	public String getPhone() {
 		return phone;
 	}
 
+	@Deprecated
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}

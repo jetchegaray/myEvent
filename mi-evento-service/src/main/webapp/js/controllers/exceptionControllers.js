@@ -10,7 +10,6 @@ mieventoControllers.controller("ExceptionController", ["$scope", "$timeout", "ap
 		       "msg": description,
 		       "show":true
 		   };
-		
 		$timeout(function(){
 			$scope.alert = null;
 		}, 3000); // maybe '}, 3000, false);' to avoid calling apply

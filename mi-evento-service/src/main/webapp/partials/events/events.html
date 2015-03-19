@@ -10,7 +10,17 @@
 						<table class="table">
 							<tr>
 								<td>
+									<span class="fa fa-calendar text-primary glyphiconSpace"></span><a ui-sref="eventState.events">My Events</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
 									<span class="fa fa-home text-primary glyphiconSpace"></span><a ui-sref="eventState.place">Place</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<span class="fa fa-home text-primary glyphiconSpace"></span><a ui-sref="eventState.myPlace">My Place</a>
 								</td>
 							</tr>
 							<tr>
@@ -79,15 +89,15 @@
 					</div>
 				</accordion-group> 
 			</accordion>	 
-			<div class="list-group">
-		         <div class="list-group-item" style="background-color: #F2F5A9;">
+			<div class="list-group" ng-controller="SummaryViewEventController" style="border: 1px;">
+		         <div class="list-group-item" style="background-color: #FA7D7D;">
 		             <h3 class="pull-right">
 		                 <i class="text-info fa fa-eye"></i>
 		             </h3>
-		             <h4 class="list-group-item-heading count">{{summaryViewEvent.name || "No Event Selected"}}</h4>
+		             <h4 class="list-group-item-heading count" >{{summaryViewEvent.name || "No Event Selected"}}</h4>
 		             <p class="list-group-item-text">Selected Event</p>
 		         </div>
-		         <div class="list-group-item" style="background-color: #F3E2A9;">
+		         <div class="list-group-item" style="background-color: #FA7D7D;">
 		             <h3 class="pull-right">
 		                 <i class="text-success fa fa-money"></i>
 		             </h3>
@@ -98,17 +108,17 @@
 		</div>
 		
 		<div class="col-sm-9" >
-			<div ng-controller="SelectedEventController">
-				<span ng-show="loggedUser != null && selectedEvent == null">
-					<ol class="breadcrumb text-center alert-danger">	
-						<strong>Please, selected an event to organize !</strong>
-					</ol>
-				</span>	
-				<span ng-show="selectedEvent != null">	
-					<ol class="breadcrumb text-center alert-success">	
-						<strong>Selected Event : {{selectedEvent.name}}</strong>
-					</ol>
-			</div>	
+<!-- 			<div ng-controller="SelectedEventController"> -->
+<!-- 				<span ng-show="loggedUser != null && selectedEvent == null"> -->
+<!-- 					<ol class="breadcrumb text-center alert-danger">	 -->
+<!-- 						<strong>Please, selected an event to organize !</strong> -->
+<!-- 					</ol> -->
+<!-- 				</span>	 -->
+<!-- 				<span ng-show="selectedEvent != null">	 -->
+<!-- 					<ol class="breadcrumb text-center alert-success">	 -->
+<!-- 						<strong>Selected Event : {{selectedEvent.name}}</strong> -->
+<!-- 					</ol> -->
+<!-- 			</div>	 -->
 	<!-- 		class="animated fadeInRight" -->
 			<div ui-view></div>
 		</div>

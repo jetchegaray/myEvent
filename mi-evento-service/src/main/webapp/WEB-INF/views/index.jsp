@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="../bower_components/angular-ui-select/dist/select.min.css">
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
 <link rel="stylesheet" href="../bower_components/fullcalendar/dist/fullcalendar.css">
-
+<link href="http://fonts.googleapis.com/css?family=Rancho" rel="stylesheet" type="text/css">
 
 <!-- ********************** Jquery ********************** -->
 <script src="../bower_components/jquery/dist/jquery.min.js"></script>
@@ -110,8 +110,7 @@
 						<ul class="nav navbar-nav">
 							<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
 							
-							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">Eventos<span class="caret"></span></a>
+							<li class="dropdown" dropdown><a href="#" class="dropdown-toggle" dropdown-toggle>Eventos<span class="caret"></span></a>
 		
 								<ul class="dropdown-menu" role="menu">
 									<li ng-repeat="event in $root.loggedUser.events | orderBy:+name">
@@ -121,16 +120,14 @@
 								</ul>
 							</li>
 							
-							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">Servicios<span class="caret"></span></a>
+							<li class="dropdown" dropdown><a href="#" class="dropdown-toggle" dropdown-toggle>Servicios<span class="caret"></span></a>
 		
 								<ul class="dropdown-menu" role="menu" ng-controller="ProviderTypeController">
-									<li ng-repeat="type in types | orderBy:'toString()'"><a ui-sref="providerListState({providerType : type})">{{type}}</a></li>
+									<li ng-repeat="type in types | orderBy:'toString()'"><a ui-sref="providerListState({searchLocationTypeRequest : {providerType : type}})">{{type}}</a></li>
 								</ul>
 							</li>
 							
-							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">Nuevo<span class="caret"></span></a>
+							<li class="dropdown" dropdown><a href="#" class="dropdown-toggle" dropdown-toggle>Nuevo<span class="caret"></span></a>
 								<ul class="dropdown-menu" role="menu">
 									<li><a href="#eventTypes">Que Eventos puedo crear ?</a></li>
 									<li><a href="#features">Como organizar mis eventos ?</a></li>
@@ -147,8 +144,8 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li id="nav-login-btn" ng-show="$root.loggedUser == null">
 								<a ui-sref="loginState"> Login<span class="fa fa-user text-primary glyphiconSpace"></span></a></li>
-							<li id="nav-login-btn" class="dropdown" ng-show="$root.loggedUser != null">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<li id="nav-login-btn" class="dropdown"  dropdown ng-show="$root.loggedUser != null">
+								<a href="#" class="dropdown-toggle" dropdown-toggle>
 									{{$root.loggedUser.email}} <i class="fa fa-user text-success glyphiconSpace"></i>
 									<span class="caret"></span>
 								</a>
@@ -163,7 +160,7 @@
 			</div>
 			<div class="container" ng-controller="ExceptionController">
 				<div ng-show="alert.show" class="text-center animated flipInY">
-					<alert type="{{alert.type}}" close="closeAlert()"><i class="fa fa-exclamation-circle fa-5 glyphiconSpace"></i><strong>{{alert.msg}}</strong></alert>
+					<alert type={{alert.type}} close="closeAlert()"><i class="fa fa-exclamation-circle fa-5 glyphiconSpace"></i><strong>{{alert.msg}}</strong></alert>
 				</div>
 			</div>
   		</div>

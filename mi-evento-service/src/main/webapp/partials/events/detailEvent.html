@@ -31,22 +31,22 @@
 			</div>
 		</div>	
 		<div class="row">	
-			<div class="col-md-4">	
-				<div class="form-group">
-					<input type="text" class="form-control" name="province"
-						placeholder="State or Province place" ng-model="event.eventLocation.province">
-				</div>
-			</div>
-			<div class="col-md-4">
-				<ui-select ng-model="event.eventLocation.countryCode" theme="selectize">
-    				<ui-select-match placeholder="Country place">{{$select.selected}}</ui-select-match>
-    				<ui-select-choices repeat="country in countries">{{country}}</ui-select-choices>
-  				</ui-select>
-			</div>
+<!-- 			<div class="col-md-4">	 -->
+<!-- 				<ui-select  ng-model="event.eventLocation.province" theme="selectize"> -->
+<!-- 				   	<ui-select-match placeholder="Province or State">{{$select.selected}}</ui-select-match> -->
+<!-- 					<ui-select-choices repeat="province in provinces">{{province}}</ui-select-choices> -->
+<!-- 		 		</ui-select> -->
+<!-- 			</div> -->
+<!-- 			<div class="col-md-4"> -->
+<!-- 				<ui-select ng-model="event.eventLocation.countryCode" theme="selectize"> -->
+<!--     				<ui-select-match placeholder="Country place">{{$select.selected}}</ui-select-match> -->
+<!--     				<ui-select-choices repeat="country in countries">{{country}}</ui-select-choices> -->
+<!--   				</ui-select> -->
+<!-- 			</div> -->
 			<div class="col-sm-2">
 				<button class="btn btn-primary btn-block" type="submit"
 					ng-click="save()">Save</button>
 			</div>
-		</div>
+		</div>		
 	</form>
 </div>

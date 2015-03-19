@@ -32,6 +32,9 @@ mieventoContext.service("eventContext",function(){
 	//***********GUESTS EVENT **********
 	
 	this.getGuestsSelectedEvent = function(){
+		if (selectedEvent == null){
+			selectedEvent.guests = [];
+		}
 		if (selectedEvent.guests == null){
 			selectedEvent.guests = [];
 		}
@@ -91,12 +94,28 @@ mieventoContext.service("eventContext",function(){
 		selectedEvent.providers = providers;
 	}
 	
-	this.addProviderSelectedEvent = function(provider){
-		if (selectedEvent.providers == null){
+	this.addProviderSelectedEvent = function(newProvider){
+		var error = isExistsInProvider();
+		if (error != null){
+			 return error;
+		}else{
 			selectedEvent.providers = [];
 		}
 		selectedEvent.providers.push(provider);
 	}
+	
+	
+	this.isExistsInProvider = function(newProvider){
+		
+		if (selectedEvent.providers != null){
+			var foundIt = _.find(selectedEvent.providers,function(provider){ return provider.businessId === newProvider.businessId});
+			if (! angular.isUndefined(foundIt)){
+				 return error = {code : 0007, description : "El proveedor ya se ha agregado !"};
+			}
+		}
+		return null;
+	}
+	
 	
 	this.removeProviderSelectedEvent = function(provider){
 		if (selectedEvent.providers == null){
@@ -114,7 +133,7 @@ mieventoContext.service("eventContext",function(){
 		return editProvider;
 	}
 	
-	this.getTotalBuggetSelectedEvent = function(){
+	this.getTotalBudgetSelectedEvent = function(){
 		
 		if (selectedEvent == null || selectedEvent.providers == null){
 			return 0;
@@ -125,8 +144,8 @@ mieventoContext.service("eventContext",function(){
 	//**********PROVIDERS TO COMPARE IN EVENT ***********
 	
 	this.getProvidersToCompareEvent = function(){
-		if (selectedEvent == null || selectedEvent.providersToCompare){
-			return arrays();
+		if (selectedEvent == null || selectedEvent.providersToCompare == null){
+			return [];
 		}
 		return selectedEvent.providersToCompare;
 	}
@@ -136,17 +155,16 @@ mieventoContext.service("eventContext",function(){
 	}
 	
 	this.addProviderToCompareEvent  = function(providerToCompare){
-		if (selectedEvent.providers != null){
-			var foundIt = _.find(selectedEvent.providers,function(providerOriginal){ providerOriginal === providerToCompare});
-			if (foundIt != null){
-				console.log("The provider alredy exists in original list of providers.");
+		if (selectedEvent.providersToCompare != null){
+			var foundIt = _.find(selectedEvent.providersToCompare,function(provider){ return provider.businessId == providerToCompare.businessId});
+			if (! angular.isUndefined(foundIt)){
+				 return error = {code : 0006, description : "El proveedor ya se ha agregado para comparar !"};
 			}
-		}
-		
-		if (selectedEvent.providersToCompare == null){
+		}else{
 			selectedEvent.providersToCompare = [];
 		}
 		selectedEvent.providersToCompare.push(providerToCompare);
+		return null;
 	}
 	
 	

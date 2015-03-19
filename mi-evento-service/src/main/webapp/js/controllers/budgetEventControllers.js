@@ -1,7 +1,7 @@
 
 
-mieventoControllers.controller("BudgetEventController", ["$scope", "$state", "providerService", "userService", "applicationContext",
-                function($scope, $state, providerService, userService, applicationContext) {
+mieventoControllers.controller("BudgetEventController", ["$rootScope", "$scope", "$state", "providerService", "userService", "applicationContext",
+                function($rootScope, $scope, $state, providerService, userService, applicationContext) {
 
 		
 		/********* Min and colors **********/
@@ -12,7 +12,7 @@ mieventoControllers.controller("BudgetEventController", ["$scope", "$state", "pr
 				minPrice = 0;
 				minProvider = provider;
 				angular.forEach($scope.providersToCompare,function(providerToCompare){
-					price = (providerToCompare.price != null) ? providerToCompare.price: providerToCompare.estimatedPrice;
+					price = providerToCompare.estimatedPrice;
 					
 					if (price <= minPrice){
 						minPrice = price;
@@ -28,7 +28,7 @@ mieventoControllers.controller("BudgetEventController", ["$scope", "$state", "pr
 		/********* Transformer **********/
 		
 		getAllProviderByType = function(providers, type){
-			providersByType = [];
+			var providersByType = [];
 			angular.forEach(providers, function(provider){
 				if (angular.equals(provider.providerType,type)){
 					providersByType.push(provider);
@@ -38,7 +38,7 @@ mieventoControllers.controller("BudgetEventController", ["$scope", "$state", "pr
 		}
 		
 		getAllTypes = function(providers){
-			types = [];
+			var types = [];
 			angular.forEach(providers, function(provider){
 				types.push(provider.providerType);
 			});
@@ -51,27 +51,27 @@ mieventoControllers.controller("BudgetEventController", ["$scope", "$state", "pr
 			$scope.providers = applicationContext.getEventContext().getProvidersSelectedEvent();
 			$scope.providersToCompare = applicationContext.getEventContext().getProvidersToCompareEvent();
 			
-			$scope.totalBudgetProvider =  applicationContext.getEventContext().getTotalBuggetSelectedEvent();
-			
 			$scope.providers = _.chain($scope.providers).each(function(provider){ provider.selected = true;}).sortBy("estimatedPrice");
 			$scope.providersToCompare = _.chain($scope.providersToCompare).each(function(provider){ provider.selected = false;}).sortBy("estimatedPrice");
 			minColors();
 			
 			$scope.items = [];
-			types = getAllTypes($scope.providers);
+			types = _.uniq(getAllTypes($scope.providers));
 			
 			angular.forEach(types, function(type){
 				$scope.providersByType = getAllProviderByType($scope.providers, type);
-				providers = providersByType;
+				var providers = $scope.providersByType;
 				
 				if ($scope.providersToCompare != null){
 					$scope.providersToCompareByType = getAllProviderByType($scope.providersToCompare, type);
 					providers = $scope.providersByType.concat($scope.providersToCompareByType);
 				}
+				var totalBudget = _.chain(providers).filter(function(provider){ return provider.selected === true;}).reduce(function(memo, provider){ return memo + provider.estimatedPrice; }, 0).value();
 				
 				item = {
-						providerType : type,
-						providers : providers
+						"providerType" : type,
+						"providers" : providers,
+						"totalBudget" : totalBudget
 				};
 				$scope.items.push(item);
 			});
@@ -89,25 +89,39 @@ mieventoControllers.controller("BudgetEventController", ["$scope", "$state", "pr
 		}
 		
 		$scope.goToSearchAnotherProvider = function(provider){
-			$state.go("providerListState",{"providerType" : provider.providerType});
+			$state.go("providerListState",{"searchLocationTypeRequest" : {"providerType" : provider.providerType }});
 		}
 		
 		
 		$scope.goToMoreCheaper = function(provider){
 			
-			params = [];
+			var params = [];
 			params.push(provider.providerType);
-			providerTypeRequest = {
+			
+			var providerTypeRequest = {
 					types : params
 			}
 	
 			providerService.getMoreCheaperByCategory(providerTypeRequest, function(data){
-				applicationContext.getEventContext().setProvidersToCompareEvent(data);
-				initialize();//refresh
+				
+				var errorProvComp = null;
+				var errorProv = applicationContext.getEventContext().isExistsInProvider(data[0]);
+				
+				if (errorProv == null){ // si no hay error
+					errorProvComp = applicationContext.getEventContext().addProviderToCompareEvent(data[0]);
+				}
+				var info = (errorProvComp != null) ? errorProvComp : errorProv;
+				
+				if (info != null){
+					applicationContext.getExceptionContext().setInfo(info);
+				}else{
+					initialize();//refresh
+				}
 			}, function(error){
 				applicationContext.getExceptionContext().setDanger(error.data);
 			});
 		}
+		
 		
 		$scope.checkNumber = function(price){
 			console.log(price);
@@ -120,49 +134,64 @@ mieventoControllers.controller("BudgetEventController", ["$scope", "$state", "pr
 		}
 		
 		$scope.save = function(newPrice,provider){
-			provider.price = newPrice;
-			
-			userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
+			provider.estimatedPrice = parseFloat(newPrice);
+			var user = applicationContext.getUserContext().getLoggedUser();
+			userService.update(user, function() {
+				applicationContext.getUserContext().setLoggedUser(user);
 				minColors();
+			
 			}, function(error) {
 				applicationContext.getExceptionContext().setDanger(error.data);
 			});
 		}
 		
-		$scope.changeProvidersEvent = function(newProviders){
-			changeProviders = _.chain(newProviders).find(function(newProviders){ return provider.selected == true})
-			applicationContext.getEventContext().setProvidersSelectedEvent(changeProviders);
-			
-			userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
-				$rootScope.$broadcast(TAG_SUMMARY_VIEW_BUDGET_UPDATE);
-				initialize();
-			}, function(error) {
-				applicationContext.getExceptionContext().setDanger(error.data);
-			});
-		};
+//		$scope.changeProvidersEvent = function(newProviders){
+//			var changeProviders = _.chain(newProviders).find(function(newProviders){ return provider.selected == true})
+//			applicationContext.getEventContext().setProvidersSelectedEvent(changeProviders);
+//			var user = applicationContext.getUserContext().getLoggedUser();
+//			
+//			userService.update(user, function() {
+//				applicationContext.getUserContext().setLoggedUser(user);
+//				$rootScope.$broadcast(TAG_SUMMARY_VIEW_BUDGET_UPDATE);
+//				initialize();
+//				
+//			}, function(error) {
+//				applicationContext.getExceptionContext().setDanger(error.data);
+//			});
+//		};
 		
 		
-		$scope.setSelectProvider = function(provider){
+		$scope.setSelectProvider = function(item, provider){
 			if (provider.selected === true){
 				provider.selected = false;
 			}else {
 				provider.selected = true;
 			}
 			
+			item.totalBudget = _.chain(item.providers).filter(function(provider){ return provider.selected === true;}).reduce(function(memo, provider){ return memo + provider.estimatedPrice; }, 0).value();
+		}
+		
+		
+		
+		$scope.saveSelectedProviders = function(){
+
 			var allProvidersSelected = [];
 			_.each($scope.items, function(item){ allProvidersSelected.push(item.providers)});
 			allProvidersSelected = _.chain(allProvidersSelected).flatten(true).filter(function(provider){ return provider.selected === true;}).value();
+			allProvidersNotSelected = _.chain(allProvidersSelected).flatten(true).filter(function(provider){ return provider.selected === false;}).value();
+		
 			applicationContext.getEventContext().setProvidersSelectedEvent(allProvidersSelected);
+			applicationContext.getEventContext().setProvidersToCompareEvent(allProvidersNotSelected);
 			
-			$scope.totalBudgetProvider =  _.reduce(allProvidersSelected, function(memo, provider){ return memo + provider.estimatedPrice; }, 0);
+			var user = applicationContext.getUserContext().getLoggedUser();
 			
-			console.log(angular.toJson(allProvidersSelected));
-			
-			userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
+			userService.update(user, function() {
+				applicationContext.getUserContext().setLoggedUser(user);
 				initialize();
+				$rootScope.$broadcast(TAG_SUMMARY_VIEW_BUDGET_UPDATE);
 			}, function(error) {
 				applicationContext.getExceptionContext().setDanger(error.data);
-			});
+			});			
 		}
  } ]);
 

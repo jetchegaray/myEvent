@@ -16,18 +16,31 @@ mieventoControllers.controller("PlaceAdministratorController", ["$scope", "$stat
 			$scope.tables.push({ located : false});
 		}
 		
-		
 		$scope.addTable = function(){
-			console.log($scope.formModel.guestAmountPerTable);
 			var guestsInTable = $scope.amountGuests.slice(0, $scope.formModel.guestAmountPerTable.number);
 			$scope.tables[currentTableIndex++] = {
 				guestAmount : guestsInTable,
-				located : true
+				located : true,
+				guests : []
 			};
-			console.log(angular.toJson($scope.tables));
+			for (i = 0; i < guestsInTable ;i++){
+				 $scope.tables[currentTableIndex].guests.push({});
+			}
+			console.log(angular.toJson($scope.tables))
 		}
-
 		
+		 $scope.startCallback = function(event, ui, guest) {
+			    console.log('You started draggin: ' + guest.firstName);
+			    $scope.draggedGuest = guest;
+			    console.log(angular.toJson(guest));
+		 };
+
+		 $scope.dropCallback = function(event, ui) {
+			 console.log('You started dropping: '+currentTableIndex);
+			 $scope.tables[currentTableIndex].guests.push($scope.draggedGuest);
+			 console.log(angular.toJson($scope.tables));
+		 };
+
  } ]);
 
 

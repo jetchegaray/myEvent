@@ -51,5 +51,12 @@ public class Location {
 	public void setCity(String city) {
 		this.city = city;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder(" Country : ").append(this.countryCode);
+		builder.append(" Province : ").append(province).append(" City : ").append(this.city);
+		return builder.toString();
+	}
 
 }

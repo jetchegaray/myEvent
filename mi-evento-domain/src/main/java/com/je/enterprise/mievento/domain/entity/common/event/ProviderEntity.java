@@ -8,6 +8,7 @@ import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Indexed;
 
+import com.google.common.collect.Lists;
 import com.je.enterprise.mievento.api.dto.provider.ProviderType;
 import com.je.enterprise.mievento.domain.dao.BaseEntity;
 import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
@@ -24,6 +25,7 @@ public class ProviderEntity extends BaseEntity {
 	private LocationEntity location;
 	private String email;
 	private String cellPhone;
+	@Deprecated
 	private String phone;
 	private BigDecimal price;
 	private BigDecimal estimatedPrice;
@@ -85,10 +87,12 @@ public class ProviderEntity extends BaseEntity {
 		this.cellPhone = cellPhone;
 	}
 
+	@Deprecated
 	public String getPhone() {
 		return phone;
 	}
 
+	@Deprecated
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
@@ -140,7 +144,7 @@ public class ProviderEntity extends BaseEntity {
 		if (reviews != null){
 			return reviews;
 		}
-		return Collections.emptyList();
+		return Lists.newArrayList();
 	}
 
 	public void setReviews(List<ProviderReviewEntity> reviews) {

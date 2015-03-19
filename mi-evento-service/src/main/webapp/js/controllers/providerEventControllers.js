@@ -13,8 +13,10 @@ mieventoControllers.controller("ProvidersEventController", ["$scope", "$state", 
 		}
 		
 		$scope.save = function(data) {
-			userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
-				$state.go("eventState.providers");
+			var user = applicationContext.getUserContext().getLoggedUser();
+			userService.update(user, function() {
+				applicationContext.getUserContext().setLoggedUser(user);
+				$rootScope.$broadcast(TAG_SUMMARY_VIEW_BUDGET_UPDATE);
 			}, function(error) {
 				applicationContext.getExceptionContext().setDanger(error.data);
 			});

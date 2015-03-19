@@ -22,6 +22,7 @@ import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
 import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
 import com.je.enterprise.mievento.domain.exception.customize.LocationNotValidToSearchException;
 import com.je.enterprise.mievento.domain.service.filters.CheaperFilterProvider;
+import com.je.enterprise.mievento.domain.service.filters.LocationAndTypeFilterProvider;
 import com.je.enterprise.mievento.domain.service.filters.LocationFilterProvider;
 import com.je.enterprise.mievento.domain.service.filters.TypeFilterProvider;
 import com.je.enterprise.mievento.domain.service.impl.ProviderService;
@@ -29,6 +30,7 @@ import com.je.enterprise.mievento.domain.transformer.TransformerList;
 import com.je.enterprise.mievento.domain.transformer.impl.LocationTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.ProviderTransformer;
 import com.je.enterprise.mievento.service.request.ProviderTypesRequest;
+import com.je.enterprise.mievento.service.request.SearchLocationTypeRequest;
 
 @Controller
 @RequestMapping(value= "/provider")
@@ -82,8 +84,6 @@ public class ProviderController {
 		try {
 			Validate.notNull(location.getCountryCode());
 			Validate.notNull(location.getProvince());
-			Validate.notNull(location.getStreetAddress());
-			Validate.notNull(location.getStreetAddress().getNeighborhood());
 		} catch (Exception e) {
 			logger.error(String.format("Location not valid to search %s ",location));
 			throw new LocationNotValidToSearchException();
@@ -91,6 +91,18 @@ public class ProviderController {
 		
 		LocationEntity locationEntity = this.locationTransformer.transformApiToDomain(location);
 		List<Provider> providers = providerTransformerList.transformDomainToApi(providerService.getBy(new LocationFilterProvider(locationEntity)));
+		return providers;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value={"/byLocationAndType"},method = RequestMethod.POST)
+	public List<Provider> getByLocationAndType(@RequestBody SearchLocationTypeRequest searchLocationTypeRequest){
+		logger.info(String.format("params, byLocationAndType %s",searchLocationTypeRequest));
+		
+		LocationEntity locationEntity = this.locationTransformer.transformAndValidateApiToDomain(searchLocationTypeRequest.getLocation());
+		List<Provider> providers = providerTransformerList.transformDomainToApi(providerService.getBy(
+				new LocationAndTypeFilterProvider(searchLocationTypeRequest.getProviderType(),locationEntity)));
 		return providers;
 	}
 	

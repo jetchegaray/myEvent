@@ -23,4 +23,9 @@ public class ProviderTypesRequest {
 		this.types = types;
 	}
 	
+	@Override
+	public String toString() {
+		return types.toString();
+	}
+	
 }

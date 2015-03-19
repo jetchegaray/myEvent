@@ -53,7 +53,7 @@ public class ProviderPlacesTransformer extends
 		LocationEntity location = getLocation(detailPlace);
 		String email = StringUtils.EMPTY;
 		String cellPhone = (detailPlace.getPhone() != null) ? detailPlace.getPhone() : detailPlace.getInternationalPhone();
-		String phone = cellPhone;
+		String phone = StringUtils.EMPTY;
 		BigDecimal price = BigDecimal.ZERO;
 		BigDecimal estimatedPrice = BigDecimal.ZERO;
 		List<String> photos = this.transformToLocationPath(detailPlace.getPhotoReferences());
@@ -91,6 +91,9 @@ public class ProviderPlacesTransformer extends
 			}
 			if (addressComponent.isProvince()){
 				province = ProvinceCode.valueOf(addressComponent.getShortName());
+				if (province == null){
+					province = ProvinceCode.getByName(addressComponent.getShortName());
+				}
 			}
 			if (addressComponent.isStreet()){
 				street = addressComponent.getLongName();

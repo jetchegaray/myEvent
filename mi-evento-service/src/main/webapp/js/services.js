@@ -16,13 +16,14 @@ mieventoServices.factory("userService",["$resource",function($resource){
 mieventoServices.factory("providerService",["$resource",function($resource){
 	    return $resource("/mievento/provider/:requestMapping/:pathParams",{
         	requestMapping: "@requestMapping",
-        	pathParams: "@pathParams"
+        	pathParams : "@pathParams",
         },
         {
         	getAll : {method : "GET",params: {requestMapping: "all"},isArray:true},
         	getAllTypes : {method : "GET",params: {requestMapping: "types"},isArray:true},
         	getPlaceTypes : {method : "GET",params: {requestMapping: "placeTypes"},isArray:true},
         	getByType : {method : "GET",params: {requestMapping: "byType"},isArray:true},
+        	getByLocationAndType : {method : "POST",params: {requestMapping: "byLocationAndType"},isArray:true},
         	getMoreCheaperByCategory : {method : "POST", params : {requestMapping : "moreCheaperByCategory"}, isArray :true},
         	updateReviews : {method : "POST", params : {requestMapping : "updateReviews"}, headers: {'Content-Type': 'application/json'}}
         });

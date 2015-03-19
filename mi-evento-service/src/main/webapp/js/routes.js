@@ -2,7 +2,7 @@ BASE_PATH = "/";
 HOME_PATH = "/home"
 LOGIN_PATH = "/user/login";
 SIGNUP_PATH = "/user/signUp";
-PROVIDER_PATH = "/providers/:providerType";
+PROVIDER_PATH = "/providers/:searchLocationTypeRequest";
 PROVIDER_DETAIL_PATH = "/provider/detail";
 EVENTS_PATH = "/events";
 EVENTS_LIST_PATH = "/list";
@@ -13,6 +13,7 @@ EVENT_NEW_GUESTS_PATH = "/guest/create";
 EVENT_EDIT_GUESTS_PATH="/guest/edit";
 EVENT_PLACE_PATH = "/place";
 EVENT_PLACE_CHOOSE_PATH = "/place/choose";
+EVENT_MYPLACE_PATH = "/myplace";
 EVENT_PLACE_ADMIN_PATH = "/placeAdmin"	
 EVENT_PROVIDERS_PATH = "/providers";
 EVENT_PROVIDER_EDIT_PATH = "/provider/edit";
@@ -55,18 +56,6 @@ mieventoApp.config([ "$stateProvider", "$urlRouterProvider", function($stateProv
 	.state("eventState",{
 		url : EVENTS_PATH,
 		templateUrl : "../partials/events/events.html"
-//		 views: {
-//		     "dragAndDropView@eventState": {
-//		    	url : EVENT_PLACE_ADMIN_PATH,
-//		 		templateUrl : "../partials/events/place/administratorPlace.html",
-//				controller : "PlaceAdministratorController" 
-//			  },
-//			  "@" : {
-//				  url : EVENTS_PATH,
-//				  templateUrl : "../partials/events/events.html"
-//			  }
-//		 },
-		
 	})
 	.state("eventState.events",{
 		url : EVENTS_LIST_PATH,
@@ -107,6 +96,11 @@ mieventoApp.config([ "$stateProvider", "$urlRouterProvider", function($stateProv
 		url : EVENT_PLACE_CHOOSE_PATH,
 		templateUrl : "../partials/events/place/detailPlace.html",
 		controller : "DetailPlaceEventController"
+	})
+	.state("eventState.myPlace",{
+		url : EVENT_MYPLACE_PATH,
+		templateUrl : "../partials/events/place/myPlace.html",
+		controller : "MyPlaceEventController"
 	})
 	.state("eventState.placeAdmin",{
 		url : EVENT_PLACE_ADMIN_PATH,

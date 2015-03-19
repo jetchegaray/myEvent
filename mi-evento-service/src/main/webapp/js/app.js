@@ -56,19 +56,25 @@ mieventoApp.run([ "$rootScope", "$cookies", "$state", "editableOptions", "userSe
 	
 	 $rootScope.$on('$stateChangeSuccess', function(event, to, toParams, from, fromParams) {
 		 applicationContext.setPreviousState(from);
-//		 console.log(to.name);
-//		 console.log(to.name.search("eventState"));
-//		 //if go to any event page you first selectedEvent
-//		 if (to.name.search("eventState") != -1){
-//			 var loggedUser = applicationContext.getUserContext().getLoggedUser();
-//			 console.log(loggedUser);
-//			 if (loggedUser == null){
-//				 $state.go('loginState');
-//			 }
-//			 $state.go('eventState.events');
-//		 }
+		 //if go to any event page you first selectedEvent
+		 if (to.name.search("eventState") != -1){
+			 var loggedUser = applicationContext.getUserContext().getLoggedUser();
+			 if (loggedUser == null){
+				 $state.go('loginState');
+				 error = {code : 0001,description : "Antes de ver todo lo bueno que hay...primero debe ingresar. Si no posee usuario registrese... "};
+				 applicationContext.getExceptionContext().setInfo(error);
+			 }else{
+				 var eventSelected = applicationContext.getEventContext().getSelectedEvent();
+				 if (eventSelected == null){
+					 error = {code : 0002,description : "Primero debe seleccionar el evento que quiere editar..."};
+					 $state.go('eventState.events');
+					 applicationContext.getExceptionContext().setInfo(error);
+				 }
+			 }
+		 }
      });
-		 
+	
+
 } ]);
 
 
