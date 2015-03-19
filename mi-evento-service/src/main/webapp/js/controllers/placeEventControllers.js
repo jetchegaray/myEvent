@@ -28,30 +28,28 @@ mieventoControllers.controller("PlaceEventController", [ "$scope","$state", "app
                                 function($scope, $state, applicationContext) {
 		
 		$scope.placeSelected = applicationContext.getEventContext().getEventLocationSelectedEvent();
+		console.log(angular.toJson($scope.placeSelected));
+		
+		if ($scope.placeSelected == null){
+			$state.go("eventState.myPlace");
+		}
 
 		$scope.deletePlace = function(){
 			applicationContext.getEventContext().deselectedEvent();
-			$state.go("eventState.placeChoose");
+			$state.go("eventState.myPlace");
 		}
 		
 		$scope.goToDetail = function(){
-			applicationContext.getProviderContext().setDetailProvider($scope.placeSelected);
-			$state.go("providerDetailState");
+			$state.go("eventState.myPlace");
 		}
 
-		$scope.goToListProvider = function(){
-			//FIXME cambiar poner algo como lugares.
-			$state.go("providerListState",{"providerType" : "fotografos"});
-		}
-		
-		$scope.goToAddLocation = function(){
-			$state.go("eventState.placeChoose");
-		}
 }]);
 
 
-mieventoControllers.controller("MyPlaceEventController", [ "$scope", "eventService", "applicationContext", 
-                               function($scope, eventService, applicationContext) {
+mieventoControllers.controller("MyPlaceEventController", [ "$scope", "$state" ,"eventService", "userService", "applicationContext", 
+                               function($scope, $state, eventService, userService, applicationContext) {
+	
+		$scope.place = applicationContext.getEventContext().getEventLocationSelectedEvent();
 	
 		eventService.getAllCountries(function(data) {
 			$scope.countries = data;
@@ -70,7 +68,10 @@ mieventoControllers.controller("MyPlaceEventController", [ "$scope", "eventServi
 			if ($scope.placeForm.$invalid){
 				return;
 			}
-			userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
+			applicationContext.getEventContext().setEventLocationSelectedEvent($scope.place);
+			var user = applicationContext.getUserContext().getLoggedUser();
+			userService.update(user, function() {
+				applicationContext.getUserContext().setLoggedUser(user);
 				$state.go("eventState.place");
 			}, function(error) {
 				applicationContext.getExceptionContext().setDanger(error.data);

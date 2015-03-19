@@ -24,12 +24,13 @@ public class Event {
 	}
 	
 	public Event(String name, Date initialDate,Date finalDate, CommercialLocation eventLocation,
-			List<Guest> guests,List<Provider> providers,EventType type) {
+			List<Guest> guests,List<Task> tasks, List<Provider> providers,EventType type) {
 		this.name = name;
 		this.initialDate = initialDate;
 		this.finalDate = finalDate;
 		this.eventLocation = eventLocation;
 		this.guests = guests;
+		this.tasks = tasks;
 		this.providers = providers;
 		this.type = type;
 	}

@@ -3,7 +3,6 @@ mieventoControllers.controller("CalendarEventController", ["$scope", "$state", "
 					function($scope, $state, userService, $modal, applicationContext) {
 					
 	  $scope.selectedEvent = applicationContext.getEventContext().getSelectedEvent();
-	  
 	  calendarEventBuilder = function(){
 	    	calendarEvents = [];
 	    		
@@ -14,7 +13,7 @@ mieventoControllers.controller("CalendarEventController", ["$scope", "$state", "
 	    			calendarEvents.push(newTaskEvent(task.name, new Date(task.initialDate),
 	    					new Date(task.finalDate), "Task to do this day", 'openSesame'));
 	    		});
-	    	
+	    		
 	    		angular.forEach($scope.selectedEvent.guests,function(guest){
 	    			var name = guest.firstName;
 	    			if (guest.lastName != null){
@@ -100,8 +99,14 @@ mieventoControllers.controller("CalendarEventController", ["$scope", "$state", "
 	    	});
 	        
 	        modalInstance.result.then(function (selectedTask) {
-	        	
 	        	applicationContext.getEventContext().deleteTaskFromEvent(selectedTask);
+	        	var user = applicationContext.getUserContext().getLoggedUser();
+	        	
+	        	userService.update(user, function() {
+					applicationContext.getUserContext().setLoggedUser(user);
+				}, function(error) {
+					applicationContext.getExceptionContext().setDanger(error.data);
+				});
 	        	
 	        	var index =  $scope.calendarEvents.indexOf(newTaskEvent(selectedTask.name, new Date(selectedTask.initialDate),
     					new Date(selectedTask.finalDate), "Task to do this day", 'openSesame'));
@@ -124,8 +129,17 @@ mieventoControllers.controller("CalendarEventController", ["$scope", "$state", "
 	        });
 	        
 	        modalInstance.result.then(function (selectedTask) {
-	        	 applicationContext.getEventContext().addTaskToEvent($scope.selectedEvent, selectedTask);
-	        	 $scope.calendarEvents.push(newTaskEvent(selectedTask.name, new Date(selectedTask.initialDate),
+	        	applicationContext.getEventContext().addTaskToEvent(selectedTask);
+	        	var user = applicationContext.getUserContext().getLoggedUser();
+	 
+	        	userService.update(user, function() {
+					applicationContext.getUserContext().setLoggedUser(user);
+				}, function(error) {
+					console.log("ERROR");
+					applicationContext.getExceptionContext().setDanger(error.data);
+				});
+	        		
+				$scope.calendarEvents.push(newTaskEvent(selectedTask.name, new Date(selectedTask.initialDate),
 	    					new Date(selectedTask.finalDate), "Task to do this day", 'openSesame'));
 	        });
 	    };
@@ -153,7 +167,7 @@ mieventoControllers.controller("CalendarEventController", ["$scope", "$state", "
 	        eventResize: $scope.alertOnResize,
 	        eventRender: function(event, element) {
 	            
-	        	angular.element(element).find('.fc-event-title').append("<br/>" + event.description); 
+	        	angular.element(element).find('.fc-event-title').append(" - "+event.description); 
 	        },
 	        
 	        dayClick: function(date, allDay, jsEvent, view){

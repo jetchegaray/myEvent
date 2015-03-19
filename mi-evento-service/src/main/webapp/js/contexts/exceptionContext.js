@@ -31,14 +31,15 @@ mieventoContext.service("exceptionContext",function($rootScope){
 	}	
 
 	this.setErrorWithoutType = function(data){
-		error.code = data.code;
-		if (error.code == null){
+		
+		if (angular.isUndefined(data) || data.code == null){
 			error.code = 5000;
 			error.httpStatus = 500;
 			error.description = "Error en el servidor. Estamos solucionando el problema !";
 			error.moreInfoURL = null;
 			error.type = 'danger';
 		}else{
+			error.code = data.code;
 			error.httpStatus = data.httpStatus;
 			error.description = data.description;
 			error.moreInfoURL = data.moreInfoURL;

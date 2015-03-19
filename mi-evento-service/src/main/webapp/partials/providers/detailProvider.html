@@ -4,9 +4,10 @@
 			<div class="col-lg-6 col-sm-4">
 			  <div ng-controller="providerCarouselCtrl" ng-init="init(provider)">
 					<carousel interval="interval" disable-animation="true"> 
-					<slide ng-repeat="slide in slides" active="slide.active"> <img
-						ng-src="{{slide.image}}">
-					</slide> </carousel>
+						<slide ng-repeat="slide in slides" active="slide.active"> 
+							<img ng-src="{{slide.image}}" style=" width: 300px; height: 150px; margin: 0 auto;">}
+						</slide> 
+					</carousel>
 				</div>
 			</div>
 			<div class="col-lg-6 col-sm-4 pull-left">

@@ -179,7 +179,7 @@ mieventoContext.service("eventContext",function(){
 	
 	
 	this.deleteTaskFromEvent = function(task){
-		var index = selectedEvent.tasks.indexOf(task)
+		var index = selectedEvent.tasks.indexOf(task);
 		selectedEvent.tasks.splice(index, 1);
 	}
 	
