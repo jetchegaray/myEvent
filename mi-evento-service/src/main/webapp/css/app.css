@@ -426,7 +426,7 @@ input.ng-dirty.ng-invalid {
 }
 
 .scrollable-x{
-	width: 250px;
+	width: 450px;
 	overflow-x : scroll; 
 }
 

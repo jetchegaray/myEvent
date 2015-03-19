@@ -12,7 +12,6 @@ EVENT_GUESTS_PATH = "/guests";
 EVENT_NEW_GUESTS_PATH = "/guest/create";
 EVENT_EDIT_GUESTS_PATH="/guest/edit";
 EVENT_PLACE_PATH = "/place";
-EVENT_PLACE_CHOOSE_PATH = "/place/choose";
 EVENT_MYPLACE_PATH = "/myplace";
 EVENT_PLACE_ADMIN_PATH = "/placeAdmin"	
 EVENT_PROVIDERS_PATH = "/providers";
@@ -91,11 +90,6 @@ mieventoApp.config([ "$stateProvider", "$urlRouterProvider", function($stateProv
 		url : EVENT_PLACE_PATH,
 		templateUrl : "../partials/events/place/place.html",
 		controller : "PlaceEventController"
-	})
-	.state("eventState.placeChoose",{
-		url : EVENT_PLACE_CHOOSE_PATH,
-		templateUrl : "../partials/events/place/detailPlace.html",
-		controller : "DetailPlaceEventController"
 	})
 	.state("eventState.myPlace",{
 		url : EVENT_MYPLACE_PATH,

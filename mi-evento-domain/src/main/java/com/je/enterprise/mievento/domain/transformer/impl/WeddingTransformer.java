@@ -61,6 +61,7 @@ public class WeddingTransformer extends Transformer<WeddingEntity, Wedding> {
 				.transformAndValidateDomainToApi(domainObject.getEventLocation());
 		List<Guest> guests = this.guestTransformerList
 				.transformDomainToApi(domainObject.getGuests());
+		List<Task> tasks = this.taskTransformerList.transformDomainToApi(domainObject.getTasks());
 		List<Provider> providers = this.providerTransformerList
 				.transformDomainToApi(domainObject.getProviders());
 		List<Present> presents = this.presentTransformerList
@@ -73,7 +74,7 @@ public class WeddingTransformer extends Transformer<WeddingEntity, Wedding> {
 				.getPlace());
 
 		return new Wedding(domainObject.getName(), domainObject.getInitialDate(), domainObject.getFinalDate(), 
-				eventLocation, guests, husband, wife, presents, place,
+				eventLocation, guests, tasks, husband, wife, presents, place,
 				domainObject.getBudget(), domainObject.getFinalPrice(),
 				providers);
 	}
