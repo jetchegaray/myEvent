@@ -95,20 +95,21 @@ mieventoContext.service("eventContext",function(){
 	}
 	
 	this.addProviderSelectedEvent = function(newProvider){
-		var error = isExistsInProvider();
+		var error = this.isExistsInProvider(newProvider);
 		if (error != null){
 			 return error;
-		}else{
+		}
+		if (selectedEvent.providers == null){
 			selectedEvent.providers = [];
 		}
-		selectedEvent.providers.push(provider);
+		selectedEvent.providers.push(newProvider);
 	}
 	
 	
 	this.isExistsInProvider = function(newProvider){
 		
 		if (selectedEvent.providers != null){
-			var foundIt = _.find(selectedEvent.providers,function(provider){ return provider.businessId === newProvider.businessId});
+			var foundIt = _.find(selectedEvent.providers,function(provider){ return provider.businessId == newProvider.businessId});
 			if (! angular.isUndefined(foundIt)){
 				 return error = {code : 0007, description : "El proveedor ya se ha agregado !"};
 			}

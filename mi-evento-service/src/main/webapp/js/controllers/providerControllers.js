@@ -87,43 +87,7 @@ mieventoControllers.controller("ProviderListController",["$rootScope", "$scope",
 						}
 						state = applicationContext.getPreviousState();
 						
-						if (angular.equals(state.name, "eventState.place")){
-						
-							applicationContext.getEventContext().setEventLocationSelectedEvent(provider);
-							
-							userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
-								info = {code : 0003,description : "El Lugar fue agregado con exito !"};
-								applicationContext.getExceptionContext().setSuccess(info);
-							
-							}, function(error) {
-								applicationContext.getExceptionContext().setDanger(error.data);
-							});
-							
-								
-						}else if (angular.equals(state.name, "eventState.providers")){
-							
-							var error = applicationContext.getEventContext().addProviderSelectedEvent(provider);
-							
-							if (error != null){
-								error.description = "El proveedor ya existe para el evento !";
-								applicationContext.getExceptionContext().setWarning(error);
-								return;
-							}
-							
-							var user = applicationContext.getUserContext().getLoggedUser();
-							
-							userService.update(user, function() {
-								applicationContext.getUserContext().setLoggedUser(user);
-								//actualizo la vista del budget 
-								$rootScope.$broadcast(TAG_SUMMARY_VIEW_BUDGET_UPDATE);
-								
-								info = {code : 0004,description : "El proveedor fue agregado con exito !"};
-								applicationContext.getExceptionContext().setSuccess(info);
-								
-							}, function(error) {
-								applicationContext.getExceptionContext().setDanger(error.data);
-							});
-						}else if (angular.equals(state.name, "eventState.budget")){
+						if (angular.equals(state.name, "eventState.budget")){
 							
 							var errorProvComp = null;
 							var errorProv = applicationContext.getEventContext().isExistsInProvider(provider);
@@ -139,10 +103,32 @@ mieventoControllers.controller("ProviderListController",["$rootScope", "$scope",
 								error = {code : 0005,description : "El proveedor para comparar fue agregado con exito !"};
 								applicationContext.getExceptionContext().setSuccess(error);
 							}
+						}else /* if (angular.equals(state.name, "eventState.providers"))*/{
+							var error = applicationContext.getEventContext().addProviderSelectedEvent(provider);
+							
+							if (error != null){
+								error.description = "El proveedor ya existe para el evento !";
+								applicationContext.getExceptionContext().setWarning(error);
+								return;
+							}
+							
+							userService.update(logged_user, function() {
+								applicationContext.getUserContext().setLoggedUser(logged_user);
+								//actualizo la vista del budget 
+								$rootScope.$broadcast(TAG_SUMMARY_VIEW_BUDGET_UPDATE);
+								
+								info = {code : 0004,description : "El proveedor fue agregado con exito !"};
+								applicationContext.getExceptionContext().setSuccess(info);
+								
+							}, function(error) {
+								applicationContext.getExceptionContext().setDanger(error.data);
+							});
 						}
+					}
+						
+						
 				
 //						$state.go(state.name);
-					}
 				}
 				
 				$scope.goToDetail = function(provider){
