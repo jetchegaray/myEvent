@@ -43,12 +43,12 @@
 		</div>
 	</div>
 	<div class="line"></div>
-	<div class="dropdown">
-		<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+	<div class="dropdown" dropdown>
+		<button class="btn btn-primary dropdown-toggle" dropdown-toggle aria-expanded="true">
 			Add Provider<span class="caret glyphiconSpace"></span>
 		</button>
 		<ul class="dropdown-menu" role="menu" ng-controller="ProviderTypeController">
-			<li ng-repeat="type in types | orderBy:'toString()'"><a ui-sref="providerListState({providerType : type})">{{type}}</a></li>
+			<li ng-repeat="type in types | orderBy:'toString()'"><a ui-sref="providerListState({searchLocationTypeRequest : {providerType : type}})">{{type}}</a></li>
 		</ul>
 	</div>
 </div>

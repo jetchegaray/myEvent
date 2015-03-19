@@ -19,7 +19,8 @@ public class CheaperFilterProvider implements CriteriaFilterProvider{
 		Query<ProviderEntity> query = providerDAO.createQuery().disableValidation();
 		
 		query.and(query.criteria("providerType").equal(type));
-		query.order("price");
+		query.and(query.criteria("estimatedPrice").notEqual("0"));
+		query.order("estimatedPrice");
 		
 		return query;
 	}

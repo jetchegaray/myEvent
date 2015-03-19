@@ -4,11 +4,6 @@ mieventoControllers.controller("CalendarEventController", ["$scope", "$state", "
 					
 	  $scope.selectedEvent = applicationContext.getEventContext().getSelectedEvent();
 	  
-	  //FIXME UNIFICARRRRR
-	  if ($scope.selectedEvent == null){
-		  $state.go("eventState");
-	  }
-	  
 	  calendarEventBuilder = function(){
 	    	calendarEvents = [];
 	    		

@@ -8,7 +8,7 @@ public enum EventType {
 	WEDDING("Boda o Casamiento"),
 	BIRTHDAY("Cumpleaños"),
 	PARTY("Fiesta"),
-	BAR_MITZVAH("Salon Bar Mitzvah"),
+	BAR_MITZVAH("Bar Mitzvah"),
 	COMMON_EVENT("Otro Evento");
 	
 	private String name;

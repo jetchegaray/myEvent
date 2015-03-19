@@ -3,7 +3,7 @@ package com.je.enterprise.mievento.domain.external.apiPlaces.entities;
 public enum TypesAddressComponent {
 
 	NUMBER("street_number"), STREET("route"), NEIGHBORHOOD("neighborhood"), 
-	STATE_OR_PROVINCE("locality"), CITY("administrative_area_level_1"), 
+	CITY("locality"), STATE_OR_PROVINCE("administrative_area_level_1"), 
 	COUNTRY("country"), POSTAL_CODE("postal_code");
 	
 	private TypesAddressComponent(String name) {

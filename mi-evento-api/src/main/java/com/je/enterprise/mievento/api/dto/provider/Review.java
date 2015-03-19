@@ -2,11 +2,17 @@ package com.je.enterprise.mievento.api.dto.provider;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Review {
 	
 	private String userName;
 	private String message;
 	private BigDecimal rating;
+	
+	public Review() {
+	}
 	
 	public Review(String userName, String message,BigDecimal rating) {
 		this.userName = userName;

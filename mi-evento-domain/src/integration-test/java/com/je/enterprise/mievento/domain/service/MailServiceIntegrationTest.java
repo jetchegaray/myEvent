@@ -53,7 +53,7 @@ public class MailServiceIntegrationTest {
 	
 	@Test
 	public void sendInvitation_testOk(){
-		EventEntity eventEntity = new EventEntity("EventoTest",DateTime.now().toDate(),DateTime.now().toDate(),new CommercialLocationEntity("placeTest", CountryCode.AR, ProvinceCode.CF, "CABA", new StreetAddressEntity("streetTest", BigDecimal.TEN, null, "Villa lugano")),null,null,null,EventType.COMMON_EVENT);
+		EventEntity eventEntity = new EventEntity("EventoTest",DateTime.now().toDate(),DateTime.now().toDate(),new CommercialLocationEntity("placeTest", CountryCode.AR, ProvinceCode.BA, "CABA", new StreetAddressEntity("streetTest", BigDecimal.TEN, null, "Villa lugano")),null,null,null,EventType.COMMON_EVENT);
 		mailService.sendInvitation(eventEntity, "aa@gmail.com", "etchegarayjavier@gmail.com");
 	}
 	

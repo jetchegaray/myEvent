@@ -1,39 +1,35 @@
-<div >
-	<form  name="reviewForm" role="form">
+<div ng-controller="ReviewsEventController">
 		<div ng-repeat="provider in providersWithoutReviews">
-		<div class="well">
-	    	<div class="row">
-			  		<div class="media col-md-3">
-	               		<h5 class="list-group-item-heading">Provider : {{provider.businessName}}</h5>
-	               		<h5 class="list-group-item-heading">Type : {{provider.providerType}}</h5>
+	    	<div ng-show="!provider.isReviewOK" animated rotateOutUpRight class="row well" style="border: 1px;">
+			  		<div class="col-md-4">
+	               		<h5 class="list-group-item-heading font-thirdtitle"><span style="font-weight: bold;">Provider : </span> {{provider.businessName}}</h5>
+	               		<h5 class="list-group-item-heading font-thirdtitle"><span style="font-weight: bold;">Type : </span>{{provider.providerType}}</h5>
 	               		<figure class="pull-left" ng-show="provider.photos.length != 0">
-	               			<img class="media-object img-rounded img-responsive"  ng-src="{{provider.photos[0]}}" alt="placehold.it/350x250" >
-	               		</figure>
-	               		<figure class="pull-left" ng-show="provider.photos.length == 0">
-	                   		<img class="media-object img-rounded img-responsive"  src="http://placehold.it/350x250" alt="placehold.it/350x250" >
+	               			<img style="width: 350px;height: 145px;" class="media-object img-rounded img-responsive"  ng-src="{{provider.photos[0]}}" alt="placehold.it/350x250" >
 	               		</figure>
 	                </div>
-	             
-	                <div class="col-md-4">
-	                   	<div class="form-group">
-	                      	<textarea ng-model="review.message" class="form-control" cols="30" id="messageReview" name="comment" placeholder="Enter your review here..." rows="5" style="resize:none;"></textarea> 
-						</div>
+	             	<form  name="reviewForm" role="form">	
+		                <div class="col-md-5" style="margin-top: 3%">
+		                   	<div class="form-group">
+		                      	<textarea ng-model="provider.newReview.message" class="form-control" cols="30" id="messageReview" name="comment" placeholder="Enter your review here..." rows="5" style="resize:none;"></textarea> 
+							</div>
 						 	<div class="form-group">
-								<input ng-model="provider.estimatedPrice" type="text" class="form-control" name="name" placeholder="$$$.. price did you cost" ng-model="event.name" ng-required>
+								<input ng-model="provider.newEstimatedPrice" type="text" class="form-control" name="name" placeholder="$$$.. price did you cost" ng-required>
 							</div>
-	        	    </div>
-	                <div class="col-md-3 text-center">
-	                   	<div class="form-group">
-	                       <div class="stars pull-right" star-rating rating-value="rating" max="5" on-rating-selected="//rateFunction(rating)"></div>
-		              	</div>
-	                  	Average 4.5 <small> / </small> 5
-	                  	    <div style="padding-top: 50%;">
-								<button class="btn btn-primary btn-md" type="submit" ng-click="save(provider)">Save</button>
-								<button class="btn btn-danger  btn-md" type="submit" ng-click="cancel()">Cancel</button>
-							</div>
-					</div>
-		  </div>
-	    </div>
-	    </div>
-	 </form> 
+		        	    </div>
+		                <div class="col-md-3 text-center">
+		                   	<div class="form-group">
+	<!-- 	                        <div mievento-star-rating rating-value="rating" max="5" on-rating-selected="//rateFunction(rating)"></div> -->
+			              		<span style="font-size : 20px;"> <rating ng-model="provider.newReview.rating" max="5" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating></span>
+			              		<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar">{{percent}}%</span>
+			              	</div>
+		                  	Average {{review.rating}} <small> / </small> 5
+		                  	    <div style="padding-top: 50%;">
+									<button class="btn btn-primary btn-md" type="submit" ng-click="save(provider)">Save</button>
+									<button class="btn btn-danger  btn-md" type="submit" ng-click="cancel()">Cancel</button>
+								</div>
+						</div>
+					</form>
+		  	</div>
+	    </div> 
  </div>         

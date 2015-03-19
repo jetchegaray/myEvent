@@ -65,7 +65,15 @@ public class FullProvidersServiceData {
 					List<SearchPlace> searchPlaces = apiPlacesServicies.getPlaces(latlng, keyWord);
 					for (SearchPlace searchPlace : searchPlaces) {
 						DetailPlace detailPlace = apiPlacesServicies.getDetailPlace(searchPlace.getReference());
-						detailPlaces.add(detailPlace);
+						
+						try {
+							Validate.notBlank(detailPlace.getPhone());
+							detailPlaces.add(detailPlace);
+						} catch (Exception e) {
+							//nullPointer or illegalArgument
+							continue;
+						}
+						
 					}
 				}
 			}

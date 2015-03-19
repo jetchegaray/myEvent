@@ -280,16 +280,23 @@ input.ng-dirty.ng-invalid {
 	border: solid 1px;  
 	border-radius: 4px;  
 	box-shadow: 0 0 6px #ccc;
-	background: url("../img/floor.jpg") repeat center center fixed;
+	background: url("../img/floor.jpg") repeat center center fixed;	
 }
 
-.droppable.guest {
-	 width: 180px; height: 30px; padding-left: 4px;
+/* .droppable.guest { */
+/* 	 width: 180px; height: 30px; padding-left: 4px; */
+/* } */
+
+.droppable-guest {
+	width: 45px;
+	height: 45px;
+	border-radius: 50%;
+	border: solid 1px;
 }
 
 .draggable-guest {
-	width: 45px;
-	height: 45px;
+	width: 40px;
+	height: 40px;
 	border-radius: 50%;
 	border: solid 1px;
 }
@@ -301,7 +308,7 @@ input.ng-dirty.ng-invalid {
 	border-radius: 50%;
 	border: solid 1px;  
 	box-shadow: 0 0 6px #ccc;
-	background: url("../img/table.jpg") no-repeat center center fixed;
+	background: url("../img/table.png");
 	-webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -319,7 +326,7 @@ input.ng-dirty.ng-invalid {
     width: 45px;
 	height: 45px;
 	border-radius: 50%;
-	border: solid 1px;
+/* 	border: solid 1px; */
     display: inline-block;
     position: absolute;
 }
@@ -334,8 +341,10 @@ input.ng-dirty.ng-invalid {
 .placeAdminTable.taable {
     width: 100px;
     height: 100px;
+    border: solid 1px;
   	box-shadow: 0 0 6px #ccc;
- 	background: url("../img/table.jpg") no-repeat center center fixed;
+ 	background: url("../img/table.png");
+ 	background-size: cover;
 }
 
 .one {
@@ -377,4 +386,51 @@ input.ng-dirty.ng-invalid {
 .eight {
     left: -55px;
     bottom: 30px;
+}
+
+
+
+/**************************************FONTS***************/
+
+.font-thirdtitle{
+	font: 15 30px/1.1 'Rancho', Georgia, serif;
+    color: #CC3333;
+}
+
+.font-secondtitle{
+	font-family: 'Corben', Georgia, Times, serif;
+    font-size: 20px;
+    line-height: 35px;
+    font-weight: bold;
+    color: graytext;
+}
+
+.font-button {
+  font: 'Pacifico', Helvetica, sans-serif;
+  color: #2b2b2b;
+  text-shadow: 3px 3px 0px rgba(0,0,0,0.1), 7px 7px 0px rgba(0,0,0,0.05);
+}
+
+.font-noResult {
+/*    font: 100 20px/1.2 'Sansita one', Georgia, serif; */
+   font-family: FontAwesome;
+   font-weight: bold;
+   color: #9999FF;
+   text-align: center;
+   text-shadow: gray;
+}
+
+.scrollable-y{
+	height: 350px;
+	overflow-y : scroll; 
+}
+
+.scrollable-x{
+	width: 250px;
+	overflow-x : scroll; 
+}
+
+.centered-message{
+	text-align: center;
+	margin: 10%;
 }

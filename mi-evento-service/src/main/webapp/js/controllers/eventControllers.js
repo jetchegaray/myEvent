@@ -41,7 +41,8 @@ mieventoControllers.controller("DetailEventController", [ "$scope", "$state", "u
 			}, function(error) {
 				applicationContext.getExceptionContext().setDanger(error.data);
 			});
-	
+			
+		
 			$scope.save = function() {
 				if ($scope.eventForm.$invalid){
 					return;
@@ -68,7 +69,7 @@ mieventoControllers.controller("EditEventController", [ "$scope", "$state", "use
 	function($scope, $state, userService, eventService, applicationContext) {
 		 
 		$scope.event = applicationContext.getEventContext().getEditEvent(event);
-		console.log(angular.toJson($scope.event));
+	
 		eventService.getAllEventTypes(function(data) {
 			$scope.eventTypes = data;
 		}, function(error) {
@@ -107,7 +108,7 @@ mieventoControllers.controller("SelectedEventController", [ "$scope", "applicati
 mieventoControllers.controller("SummaryViewEventController", [ "$scope", "applicationContext", function($scope, applicationContext) {
 	
 	$scope.summaryViewEvent = applicationContext.getEventContext().getSelectedEvent();
-	$scope.summaryViewBudget = applicationContext.getEventContext().getTotalBuggetSelectedEvent();
+	$scope.summaryViewBudget = applicationContext.getEventContext().getTotalBudgetSelectedEvent();
 
 	//if doesnt selected, observer the event to change.
 	$scope.$on(TAG_SELECTED_EVENT_UPDATE, function() {
@@ -115,7 +116,7 @@ mieventoControllers.controller("SummaryViewEventController", [ "$scope", "applic
 	});
  
 	$scope.$on(TAG_SUMMARY_VIEW_BUDGET_UPDATE, function() {
-		$scope.summaryViewBudget = applicationContext.getEventContext().getTotalBuggetSelectedEvent();
+		$scope.summaryViewBudget = applicationContext.getEventContext().getTotalBudgetSelectedEvent();
 	});
 } ]);
 

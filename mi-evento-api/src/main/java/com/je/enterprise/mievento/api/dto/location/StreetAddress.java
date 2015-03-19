@@ -52,5 +52,12 @@ public class StreetAddress {
 	public void setNeighborhood(String neighborhood) {
 		this.neighborhood = neighborhood;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder(" Street : ").append(this.street);
+		builder.append(" number : ").append(this.number).append(" neighborhood : ").append(this.neighborhood);
+		return builder.toString();
+	}
 
 }

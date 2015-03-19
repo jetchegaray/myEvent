@@ -13,6 +13,9 @@ public class ProviderReviewEntity {
 		this.message = message;
 		this.rating = rating;
 	}
+	
+	public ProviderReviewEntity() {
+	}
 
 	public String getUserName() {
 		return userName;

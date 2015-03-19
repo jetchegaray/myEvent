@@ -20,7 +20,7 @@
 						<td colspan="9" ng-click="order.collapseRows = !order.collapseRows" class="collapsible-row">
 							{{item.providerType}}  
 							<span ng-class="{'caret':!order.collapseRows, 'right-caret':order.collapseRows}"></span>
-							 <strong class="text-center">Total : $ <span class="text-danger">{{totalBudgetProvider}}</span></strong>
+							 <strong class="text-center">Total : $ <span class="text-danger">{{item.totalBudget}}</span></strong>
 						</td>
 					</tr>
 					<tr ng-repeat-end ng-repeat="provider in item.providers" ng-hide="order.collapseRows">
@@ -52,12 +52,12 @@
 						</td>
 						<td>
 			          		<span ng-show="provider.selected">
-			          			<p><button class="badge btn  progress-bar-success btn-xs" ng-click="setSelectProvider(provider)">
+			          			<p><button class="badge btn  progress-bar-success btn-xs" ng-click="setSelectProvider(item,provider)">
 			          				<i class="fa fa fa-check glyphiconSpace"></i>
 			          			</button></p>	
 			          		</span>	
 			          		<span ng-show="!provider.selected">
-			          			<p><button class="btn btn-xs badge" ng-click="setSelectProvider(provider)">
+			          			<p><button class="btn btn-xs badge" ng-click="setSelectProvider(item,provider)">
 			          				<i class="fa fa fa-check glyphiconSpace"></i>
 			          			</button></p>	
 			          		</span>	
@@ -82,15 +82,22 @@
 		</div>
 	</div>
 	<div class="line"></div>
-	<div class="dropdown">
-		<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-			aria-expanded="true">
-			Add Provider<span class="caret glyphiconSpace"></span>
-		</button>
-		<ul class="dropdown-menu" role="menu"
-			ng-controller="ProviderTypeController">
-			<li ng-repeat="type in types | orderBy:'toString()'"><a
-				ui-sref="providerListState({providerType : type})">{{type}}</a></li>
-		</ul>
-	</div>
+	<div class="row">
+<!-- 		<div class="col-md-4"> -->
+<!-- 			<div class="dropdown"> -->
+<!-- 				<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" -->
+<!-- 					aria-expanded="true"> -->
+<!-- 					Add Provider<span class="caret glyphiconSpace"></span> -->
+<!-- 				</button> -->
+<!-- 				<ul class="dropdown-menu" role="menu" -->
+<!-- 					ng-controller="ProviderTypeController"> -->
+<!-- 					<li ng-repeat="type in types | orderBy:'toString()'"><a -->
+<!-- 						ui-sref="providerListState({providerType : type})">{{type}}</a></li> -->
+<!-- 				</ul> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+		<div class="col-md-4">
+			<button type="button" class="btn btn-primary" ng-click="saveSelectedProviders()">Save selected</button>
+		</div>
+	</div>		
 </div>
