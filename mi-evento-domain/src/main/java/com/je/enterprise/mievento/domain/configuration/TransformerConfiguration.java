@@ -28,6 +28,7 @@ import com.je.enterprise.mievento.domain.transformer.impl.PresentTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.ProviderTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.ReviewTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.TaskTransformer;
+import com.je.enterprise.mievento.domain.transformer.impl.events.TransformerEventList;
 
 @Configuration
 public class TransformerConfiguration {
@@ -78,6 +79,7 @@ public class TransformerConfiguration {
 	public TransformerList<EventEntity, Event> eventTransformerList(){
 		return new TransformerList<EventEntity, Event>(this.eventTransformer());
 	}
+	
 	
 	@Bean(name = "providerPlacesTransformerList")
 	public TransformerList<ProviderEntity, DetailPlace> providerPlacesTransformerList(){

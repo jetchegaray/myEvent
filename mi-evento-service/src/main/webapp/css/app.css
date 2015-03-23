@@ -245,7 +245,7 @@ input.ng-dirty.ng-invalid {
 
 
 .agenda {  }
-
+	
 /* Dates */
 .agenda .agenda-date { width: 170px; }
 .agenda .agenda-date .dayofmonth {
@@ -292,11 +292,19 @@ input.ng-dirty.ng-invalid {
 	height: 45px;
 	border-radius: 50%;
 	border: solid 1px;
+	margin: 0px;
+}
+
+.droppable-btn-guest{
+	width: 45px;
+	height: 45px;
+	margin-left: 4%;
+	float:left;
 }
 
 .draggable-guest {
-	width: 40px;
-	height: 40px;
+	width: 45px;
+	height: 45px;
 	border-radius: 50%;
 	border: solid 1px;
 }

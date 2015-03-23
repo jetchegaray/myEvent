@@ -27,7 +27,7 @@
 mieventoControllers.controller("PlaceEventController", [ "$scope","$state", "applicationContext", 
                                 function($scope, $state, applicationContext) {
 		
-		$scope.placeSelected = applicationContext.getEventContext().getEventLocationSelectedEvent();
+		$scope.placeSelected = applicationContext.getEventContext().getPlaceSelectedEvent();
 		console.log(angular.toJson($scope.placeSelected));
 		
 		if ($scope.placeSelected == null){
@@ -49,7 +49,7 @@ mieventoControllers.controller("PlaceEventController", [ "$scope","$state", "app
 mieventoControllers.controller("MyPlaceEventController", [ "$scope", "$state" ,"eventService", "userService", "applicationContext", 
                                function($scope, $state, eventService, userService, applicationContext) {
 	
-		$scope.place = applicationContext.getEventContext().getEventLocationSelectedEvent();
+		$scope.place = applicationContext.getEventContext().getPlaceSelectedEvent();
 	
 		eventService.getAllCountries(function(data) {
 			$scope.countries = data;

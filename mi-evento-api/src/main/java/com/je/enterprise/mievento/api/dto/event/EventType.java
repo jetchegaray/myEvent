@@ -1,7 +1,10 @@
 package com.je.enterprise.mievento.api.dto.event;
 
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.common.collect.Sets;
 
 public enum EventType {
 
@@ -35,6 +38,10 @@ public enum EventType {
 	@Override
 	public String toString() {
 		return getName();
+	}
+	
+	public static Set<EventType> withPosiblesPlaces(){
+		return Sets.newHashSet(EventType.WEDDING,EventType.PARTY,EventType.BIRTHDAY,EventType.BAR_MITZVAH);
 	}
 	
 }

@@ -48,7 +48,7 @@
 			Add Provider<span class="caret glyphiconSpace"></span>
 		</button>
 		<ul class="dropdown-menu" role="menu" ng-controller="ProviderSearchController">
-			<li ng-repeat="type in types | orderBy:'toString()'"><a ng-click="search(type)">{{type}}</a></li>
+			<li ng-repeat="type in types | orderBy:'toString()'"><a href ng-click="search(type)">{{type}}</a></li>
 		</ul>
 	</div>
 </div>

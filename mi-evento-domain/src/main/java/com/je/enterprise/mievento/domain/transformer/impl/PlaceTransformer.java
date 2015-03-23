@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.je.enterprise.mievento.api.dto.location.Location;
 import com.je.enterprise.mievento.api.dto.place.Place;
+import com.je.enterprise.mievento.api.dto.provider.Provider;
 import com.je.enterprise.mievento.api.dto.provider.Review;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderReviewEntity;
 import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
@@ -37,6 +38,7 @@ public class PlaceTransformer extends Transformer<PlaceEntity, Place>{
 		List<ProviderReviewEntity> reviewEntities = reviewTransformerList.transformApiToDomain(apiObject.getReviews());
 		return new PlaceEntity(apiObject.getBusinessId(), apiObject.getBusinessName(), apiObject.getDescription(), locationEntity, apiObject.getEmail(), apiObject.getCellPhone(), apiObject.getPhone(), apiObject.getPrice(), apiObject.getEstimatedPrice(), apiObject.getM2(), apiObject.getEstimatedQuantityTables(), apiObject.getEstimatedQuantityPerson(), apiObject.getPicture(), apiObject.getProviderType(),reviewEntities);
 	}
+	
 
 	
 }

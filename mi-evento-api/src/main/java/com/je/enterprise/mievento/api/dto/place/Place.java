@@ -31,9 +31,13 @@ public class Place extends Provider {
 		this.m2 = m2;
 		this.estimatedQuantityTables = estimatedQuantityTables;
 		this.estimatedQuantityPerson = estimatedQuantityPerson;
-
 	}
 
+	public Place(Provider provider) {
+		this(provider.getBusinessId(), provider.getBusinessName(), provider.getDescription(), provider.getLocation(), provider.getEmail(), provider.getCellPhone(), provider.getPhone(),
+				provider.getPrice(), provider.getEstimatedPrice(), null, null, null, provider.getPhotos(),provider.getProviderType(), provider.getReviews());
+	}
+	
 	public BigDecimal getM2() {
 		return m2;
 	}
@@ -65,4 +69,5 @@ public class Place extends Provider {
 	public void setControlContextPlace(ControlContextPlace controlContextPlace) {
 		this.controlContextPlace = controlContextPlace;
 	}
+
 }

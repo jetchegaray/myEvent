@@ -58,29 +58,16 @@ mieventoContext.service("eventContext",function(){
 	
 	
 	
-	this.getEventLocationSelectedEvent = function(){
+	this.getPlaceSelectedEvent = function(){
 		if (selectedEvent == null){
 			return null;
 		}
 		
-		return selectedEvent.eventLocation;
+		return selectedEvent.place;
 	}
 	
-	this.setEventLocationSelectedEvent = function(place){
-		selectedEvent.eventLocation = toProviderPlaceToCommercialLocation(place);
-	}
-	
-	toProviderPlaceToCommercialLocation = function(place){
-		var eventLocation = {};
-		eventLocation.placeName = place.businessName;
-		eventLocation.location = place.location;
-//		eventLocation.city
-//		eventLocation.countryCode
-//		eventLocation.streetAddress.street
-//		eventLocation.streetAddress.number
-//		eventLocation.streetAddress.additionalInfo 
-//		eventLocation.streetAddress.neighborhood
-		return eventLocation;
+	this.setPlaceSelectedEvent = function(place){
+		selectedEvent.place = place;
 	}
 	
 	
@@ -138,7 +125,7 @@ mieventoContext.service("eventContext",function(){
 		if (selectedEvent == null || selectedEvent.providers == null){
 			return 0;
 		}
-		return _.reduce(selectedEvent.providers, function(memo, provider){ return memo + provider.estimatedPrice; }, 0);
+		return _.reduce(selectedEvent.providers, function(memo, provider){ return parseInt(memo) + parseInt(provider.estimatedPrice); }, 0);
 	}
 	
 	//**********PROVIDERS TO COMPARE IN EVENT ***********

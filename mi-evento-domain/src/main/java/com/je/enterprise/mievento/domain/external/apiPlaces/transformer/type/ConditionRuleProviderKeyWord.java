@@ -7,6 +7,8 @@ public enum ConditionRuleProviderKeyWord {
 	AND_CAT(Pair.of("catering","")),
 	AND_WEDD_HALL(Pair.of("salon","boda")),
 	AND_WEDD_HALL_2(Pair.of("salon","casamiento")),
+//	AND_WEDD_HALL_3(Pair.of("salones","casamientos")),
+//	AND_WEDD_HALL_4(Pair.of("salones","casamiento")),
 	AND_BIRTH_HALL(Pair.of("salon","cumpleaños")),
 	AND_PARTY_HALL(Pair.of("salon","fiestas")),
 	AND_BAR_HALL(Pair.of("salon","mitzvah")),
@@ -21,7 +23,7 @@ public enum ConditionRuleProviderKeyWord {
 	OR_FOT(Pair.of("fotografos","fotografo")),
 	OR_VID(Pair.of("videos","video")),
 	OR_DJ(Pair.of("dj","djs")),
-	OR_BARMAN(Pair.of("barman",""));
+	OR_BARMAN(Pair.of("barman","barmans"));
 	
 	
 	private Pair<String, String> arguments;
@@ -32,6 +34,14 @@ public enum ConditionRuleProviderKeyWord {
 	
 	public Pair<String, String> getArguments(){
 		return this.arguments; 
+	}
+
+	public boolean isAND() {
+		return this.name().contains("AND");
+	}
+	
+	public boolean isOR() {
+		return this.name().contains("OR");
 	}
 	
 }

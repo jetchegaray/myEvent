@@ -11,11 +11,13 @@ import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.UserEntity;
 import com.je.enterprise.mievento.domain.transformer.Transformer;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
+import com.je.enterprise.mievento.domain.transformer.impl.events.TransformerEventList;
 
 @Component
 public class UserTransformer extends Transformer<UserEntity,User> {
 
 	private TransformerList<EventEntity, Event> eventTransformerList;
+//	private TransformerEventList transformerEventList;
 	
 	@Autowired
 	public UserTransformer(

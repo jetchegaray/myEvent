@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.je.enterprise.mievento.api.dto.location.CommercialLocation;
 import com.je.enterprise.mievento.api.dto.provider.Provider;
 
 
@@ -14,7 +13,6 @@ public class Event {
 	private String name;
 	private Date initialDate;
 	private Date finalDate;
-	private CommercialLocation eventLocation;
 	private List<Guest> guests;
 	private List<Task> tasks;
 	private List<Provider> providers;
@@ -23,25 +21,17 @@ public class Event {
 	public Event() {
 	}
 	
-	public Event(String name, Date initialDate,Date finalDate, CommercialLocation eventLocation,
+	public Event(String name, Date initialDate,Date finalDate,
 			List<Guest> guests,List<Task> tasks, List<Provider> providers,EventType type) {
 		this.name = name;
 		this.initialDate = initialDate;
 		this.finalDate = finalDate;
-		this.eventLocation = eventLocation;
 		this.guests = guests;
 		this.tasks = tasks;
 		this.providers = providers;
 		this.type = type;
 	}
 
-	public CommercialLocation getEventLocation() {
-		return eventLocation;
-	}
-
-	public void setEventLocation(CommercialLocation eventLocation) {
-		this.eventLocation = eventLocation;
-	}
 
 	public List<Guest> getGuests() {
 		return guests;

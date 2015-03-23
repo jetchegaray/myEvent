@@ -10,9 +10,14 @@
 							    <div ng-class="['placeAdminTable', n.text]" ng-repeat="n in table.guestAmount">
 										<div class="droppable-guest" data-drop="true" 
 											data-jqyoui-options="{revert: 'invalid'}" ng-model="table.guests"
-											jqyoui-droppable="{index: {{$index}},animate:false, onDrop:'dropCallback'}">
-											<i ng-show="table.guests[$index].firstName" class="fa fa-user text-success"></i>
-			 								{{table.guests[$index].firstName}} {{table.guests[$index].lastName}}
+											jqyoui-droppable="{index: {{$index}},animate:false, onDrop:'dropCallback(table)'}">
+											<div class="draggable-guest" data-drag="true" 
+												data-jqyoui-options="{revert: 'invalid'}" ng-model="table.guests"
+												jqyoui-draggable="{index: {{$index}},animate:false, onStart:'startDragTable(guest, table)'}">
+												
+													<i ng-show="table.guests[$index].firstName" style="margin-left: 40%" class="fa fa-user text-success"></i>
+			 										<div style="text-align: center;">{{table.guests[$index].firstName}} {{table.guests[$index].lastName}}</div>
+			 								</div>		
 		 								</div>
 								</div>
 						</div>	
@@ -22,8 +27,9 @@
 	</div
 </div>	
 <div class="row" style="margin-top: 2%">
+	 <div class="col-sm-6">
 		<form name="addTableForm" role="form">
-				<div class="col-sm-2">
+				<div class="col-sm-4">
 					<ui-select ng-model="formModel.guestAmountPerTable" theme="selectize">
 			  				<ui-select-match placeholder="Guest Amount">{{$select.selected.number}}-{{$select.selected.text}}</ui-select-match>
 			  				<ui-select-choices class="text-center" repeat="amountGuest in amountGuests">{{amountGuest.number}} - {{amountGuest.text}}</ui-select-choices>
@@ -33,19 +39,28 @@
 					<button class="btn btn-primary" ng-click="addTable()" type="submit"><i class="fa fa-plus glyphiconSpace"></i></button>
 				</div>
 		</form>
-	<div class="col-sm-6 col-md-offset-2 well">
+		
+		<form name="saveTableForm" role="form">
+				<div class="col-sm-4">
+					<button class="btn btn-primary" ng-click="save()" type="submit"><i class="fa fa-plus glyphiconSpace"></i>Save Configuration</button>
+				</div>
+		</form>
+	</div>	
+	<div class="col-sm-6 well scrollable-x" style="height: 100px;display: block;">
 <!-- 		<div class="navbar-inner"> -->
-<!-- 			<div class="container form-inline text-center"> -->
-<!-- 				<div class="btn droppable-guest" style="border: 1px;" ng-repeat="guest in guests" data-drop="true" ng-model='guests' -->
-<!-- 					jqyoui-droppable="{index: {{$index}}}"> -->
-						<div class="draggable-guest" data-drag="true" ng-repeat="guest in guests"
+			<div class="container">
+				<div class="droppable-btn-guest" data-drop="true" ng-model='guests' ng-repeat="guest in guests"
+					jqyoui-droppable="{index: {{$index}},animate:false}">
+						<div class="draggable-guest" data-drag="true" 
 							data-jqyoui-options="{revert: 'invalid'}" ng-model="guests"
 							jqyoui-draggable="{index: {{$index}},animate:false, onStart:'startCallback(guest, $index)'}">
-								<i class="fa fa-user text-success"></i>
-		 						{{guest.firstName}} {{guest.lastName}}
+								<span>
+								<i style="margin-left: 40%" class="fa fa-user text-success"></i>
+		 						<div style="text-align: center;">{{guest.firstName}} {{guest.lastName}}</div>
+		 						</span>
 						</div>
-<!-- 				</div> -->
-<!-- 			</div> -->
+				</div>
+			</div>
 <!-- 		</div> -->
 	</div>
 

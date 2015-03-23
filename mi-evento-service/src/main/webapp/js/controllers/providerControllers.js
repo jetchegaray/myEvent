@@ -22,11 +22,17 @@ mieventoControllers.controller("ProviderPlaceTypesController",["$scope", "provid
 }]);
 
 
-mieventoControllers.controller("ProviderSearchController",["$scope", "providerService", "applicationContext",
-                                                               function($scope, providerService,applicationContext){
+mieventoControllers.controller("ProviderSearchController",["$scope", "$state", "providerService", "applicationContext",
+                                                               function($scope, $state, providerService,applicationContext){
 			
+		providerService.getAllTypes(function(data){
+			$scope.types = data;
+		}, function(error) {
+			applicationContext.getExceptionContext().setDanger(error.data);
+		});
+	
 		$scope.search = function(providerType){
-			var locationOwn = applicationContext.getEventContext().getEventLocationSelectedEvent();
+			var locationOwn = applicationContext.getEventContext().getPlaceSelectedEvent();
 			var providers = applicationContext.getEventContext().getProvidersSelectedEvent();
 			
 			var placeProvider = _.filter(function(provider){ return provider.providerType.indexOf("Salon") > -1}); 

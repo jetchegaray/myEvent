@@ -17,13 +17,13 @@
 	                         <div class="dayofweek">{{item.date | date:'EEEE'}}</div>
 	                         <div class="shortdate text-muted">{{item.date | date:'MMMM,yyyy '}}</div>
 	                     </td>
-	                     <td ng-repeat="hour in item.hours" class="agenda-time">
-	                         {{hour | date:'h:mm a'}}
+	                     <td ng-repeat="element in item.elements" class="agenda-time">
+	                         {{element.hour | date:'h:mm a' || '0:00 AM'}}
 	                     </td>
-	                     <td ng-repeat="name in item.names" class="agenda-events">
+	                     <td class="agenda-events">
 	                         <div class="agenda-event">
 	                             <i class="fa fa-tasks text-muted"></i> 
-	                             {{name}}
+	                             {{element.name}}
 	                         </div>
 	                     </td>
 	                 </tr>

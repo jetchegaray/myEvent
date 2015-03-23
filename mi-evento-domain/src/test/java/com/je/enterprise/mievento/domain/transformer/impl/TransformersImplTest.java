@@ -7,12 +7,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import com.je.enterprise.mievento.api.dto.event.Event;
 import com.je.enterprise.mievento.api.dto.event.Guest;
-import com.je.enterprise.mievento.api.dto.event.InvitationStatus;
 import com.je.enterprise.mievento.api.dto.event.GuestStatusType;
+import com.je.enterprise.mievento.api.dto.event.InvitationStatus;
 import com.je.enterprise.mievento.api.dto.event.Task;
 import com.je.enterprise.mievento.api.dto.location.CommercialLocation;
 import com.je.enterprise.mievento.api.dto.location.CountryCode;
@@ -160,10 +159,6 @@ public class TransformersImplTest {
 		event.setName("evento");
 		Assert.assertNotNull(this.eventTransformer.transformAndValidateApiToDomain(event));
 		
-		commercialLocation.setCity("Cordoba");
-		event.setEventLocation(commercialLocation);
-		Assert.assertNotNull(this.eventTransformer.transformAndValidateApiToDomain(event));	
-		
 		event.setGuests(Lists.<Guest>newArrayList(guest));
 		Assert.assertNotNull(this.eventTransformer.transformAndValidateApiToDomain(event));
 		
@@ -176,10 +171,6 @@ public class TransformersImplTest {
 		
 		eventEntity.setName("evento");
 		Assert.assertNotNull(this.eventTransformer.transformAndValidateDomainToApi(eventEntity));
-		
-		commercialLocation.setCity("Cordoba");
-		eventEntity.setEventLocation(commercialLocationEntity);
-		Assert.assertNotNull(this.eventTransformer.transformAndValidateDomainToApi(eventEntity));	
 		
 		eventEntity.setGuests(Lists.<GuestEntity>newArrayList(guestEntity));
 		Assert.assertNotNull(this.eventTransformer.transformAndValidateDomainToApi(eventEntity));

@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,51 @@ public class ApiPlacesServicies {
 			if (! places.getStatus().equals(StatusResponse.OK)){
 				logger.info("Status Response Api Places Search: "+places.getStatus());
 			}
+			
+			if (places.getNextPage() != null && places.getNextPage() != StringUtils.EMPTY){
+				List<SearchPlace> morePlaces = this.getPlacesNextPage(places.getNextPage());
+				if (morePlaces != null){
+					places.getResults().addAll(morePlaces);
+				}
+			}
+			
+			return places.getData();
+
+		} catch (Exception e) {
+			logger.info(e.getMessage());
+			return null;
+		}
+	}
+	
+	
+	public List<SearchPlace> getPlacesNextPage(String token) {
+
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("https://maps.googleapis.com/maps/api/place/nearbysearch/json?")
+				.queryParam("key", API_KEY)
+				.queryParam("sensor", SENSOR)
+				.queryParam("pagetoken", token);
+
+		HttpEntity<?> entity = new HttpEntity<>(this.getHeaders());
+		ResponseEntity<ResponseContainerObjects<SearchPlace>> response = null;
+		ResponseContainerObjects<SearchPlace> places = null;
+		
+		try {
+			do{
+				response = restTemplate.exchange(builder.build().toUri(), HttpMethod.GET, entity, new ParameterizedTypeReference<ResponseContainerObjects<SearchPlace>>() {});
+			
+				places = response.getBody();
+				
+				if (! places.getStatus().equals(StatusResponse.OK)){
+					logger.info("Status Response Api Places Search Next Token: "+places.getStatus());
+				}
+				
+			}while(places.getStatus().equalsIgnoreCase("INVALID_REQUEST"));
+
+			if (response.getBody().equals(HttpEntity.EMPTY)) {
+				logger.info("Status Response Rest Template Next Token: "+response.getBody().getStatus());
+				return null;
+			}
+			
 			return places.getData();
 
 		} catch (Exception e) {

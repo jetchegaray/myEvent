@@ -6,11 +6,13 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.je.enterprise.mievento.api.dto.location.CountryCode;
 import com.je.enterprise.mievento.api.dto.location.ProvinceCode;
@@ -21,6 +23,8 @@ import com.je.enterprise.mievento.domain.entity.location.StreetAddressEntity;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.AddressComponent;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.DetailPlace;
 import com.je.enterprise.mievento.domain.external.apiPlaces.services.ApiPlacesServicies;
+import com.je.enterprise.mievento.domain.external.apiPlaces.transformer.type.BuilderConditionRulesProvider;
+import com.je.enterprise.mievento.domain.external.apiPlaces.transformer.type.ConditionRuleProviderKeyWord;
 import com.je.enterprise.mievento.domain.transformer.Transformer;
 
 @Component
@@ -112,24 +116,48 @@ public class ProviderPlacesTransformer extends
 	}
 
 	
-	//FIXME
-	private ProviderType getProviderType(DetailPlace detailPlace) {
-		
-		Map<ProviderType, List<String>> keywords = this.providerTypeKeyword.getProviderTypeKeyword();
-		
-		String detailName = detailPlace.getName();
-		for (Entry<ProviderType, List<String>> entry : keywords.entrySet()) {
-				
-			for (String value : entry.getValue()) {
-				if (detailName.toLowerCase().contains(value)){
-					return entry.getKey();
-				}
-			}
-		}
-		
-		return null;
-	}
+//	//FIXME
+//	private ProviderType getProviderType(DetailPlace detailPlace) {
+//		
+//		Map<ProviderType, List<String>> keywords = this.providerTypeKeyword.getProviderTypeKeyword();
+//		
+//		String detailName = detailPlace.getName();
+//		for (Entry<ProviderType, List<String>> entry : keywords.entrySet()) {
+//				
+//			for (String value : entry.getValue()) {
+//				if (detailName.toLowerCase().contains(value)){
+//					return entry.getKey();
+//				}
+//			}
+//		}
+//		
+//		return null;
+//	}
 	
+	private ProviderType getProviderType(DetailPlace detailPlace){
+		
+		 Map<ProviderType,List<ConditionRuleProviderKeyWord>> rulesByType = BuilderConditionRulesProvider.getRules();
+		 String detailName = detailPlace.getName();
+		 
+		 for (Entry<ProviderType, List<ConditionRuleProviderKeyWord>> entry : rulesByType.entrySet()) {
+			 List<ConditionRuleProviderKeyWord> rules = entry.getValue();
+			 
+			 for (ConditionRuleProviderKeyWord conditionRuleProviderKeyWord : rules) {
+				 Pair<String, String> args = conditionRuleProviderKeyWord.getArguments();
+				 if (conditionRuleProviderKeyWord.isAND()){
+					 if (StringUtils.containsIgnoreCase(detailName, args.getLeft()) && StringUtils.containsIgnoreCase(detailName, args.getRight())){
+						 return entry.getKey();
+					 }
+				 }else if (conditionRuleProviderKeyWord.isOR()){
+					 if (StringUtils.containsIgnoreCase(detailName, args.getLeft()) || StringUtils.containsIgnoreCase(detailName, args.getRight())){
+						 return entry.getKey();
+					 }
+				 }
+			}
+		 }
+		 return null;
+		 
+	}
 	
 
 	private List<String> transformToLocationPath(List<String> photoReferences) {
@@ -142,5 +170,6 @@ public class ProviderPlacesTransformer extends
 		}
 		return locationsPhotos;
 	}
+	
 
 }

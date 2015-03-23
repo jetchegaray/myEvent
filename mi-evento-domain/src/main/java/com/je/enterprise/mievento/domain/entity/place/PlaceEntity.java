@@ -31,6 +31,11 @@ public class PlaceEntity extends ProviderEntity {
 		this.estimatedQuantityPerson = estimatedQuantityPerson;
 
 	}
+	
+	public PlaceEntity(ProviderEntity providerEntity) {
+		this(providerEntity.getBusinessId(), providerEntity.getBusinessName(), providerEntity.getDescription(), providerEntity.getLocation(), providerEntity.getEmail(), providerEntity.getCellPhone(), providerEntity.getPhone(),
+				providerEntity.getPrice(), providerEntity.getEstimatedPrice(), null, null, null, providerEntity.getPhotos(),providerEntity.getProviderType(), providerEntity.getReviews());
+	}
 
 	public BigDecimal getM2() {
 		return m2;

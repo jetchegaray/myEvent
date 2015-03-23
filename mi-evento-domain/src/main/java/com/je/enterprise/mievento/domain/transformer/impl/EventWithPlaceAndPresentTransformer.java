@@ -5,30 +5,27 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.je.enterprise.mievento.api.dto.event.Guest;
-import com.je.enterprise.mievento.api.dto.event.Person;
 import com.je.enterprise.mievento.api.dto.event.Task;
+import com.je.enterprise.mievento.api.dto.event.wedding.EventWithPlaceAndPresent;
 import com.je.enterprise.mievento.api.dto.event.wedding.Present;
-import com.je.enterprise.mievento.api.dto.event.wedding.Wedding;
-import com.je.enterprise.mievento.api.dto.location.CommercialLocation;
 import com.je.enterprise.mievento.api.dto.place.Place;
 import com.je.enterprise.mievento.api.dto.provider.Provider;
+import com.je.enterprise.mievento.api.dto.provider.ProviderType;
 import com.je.enterprise.mievento.domain.entity.common.event.GuestEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.TaskEntity;
-import com.je.enterprise.mievento.domain.entity.location.CommercialLocationEntity;
 import com.je.enterprise.mievento.domain.entity.place.PlaceEntity;
-import com.je.enterprise.mievento.domain.entity.wedding.PersonEntity;
+import com.je.enterprise.mievento.domain.entity.wedding.EventWithPlaceAndPresentEntity;
 import com.je.enterprise.mievento.domain.entity.wedding.PresentEntity;
-import com.je.enterprise.mievento.domain.entity.wedding.WeddingEntity;
 import com.je.enterprise.mievento.domain.transformer.Transformer;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
 
 @Component
-public class WeddingTransformer extends Transformer<WeddingEntity, Wedding> {
+public class EventWithPlaceAndPresentTransformer extends Transformer<EventWithPlaceAndPresentEntity, EventWithPlaceAndPresent> {
 
-	private CommercialLocationTransformer commercialLocationTransformer;
-	private PersonTransformer personTransformer;
 	private PlaceTransformer placeTransformer;
 
 	private TransformerList<GuestEntity, Guest> guestTransformerList;
@@ -37,16 +34,12 @@ public class WeddingTransformer extends Transformer<WeddingEntity, Wedding> {
 	private TransformerList<TaskEntity, Task> taskTransformerList;
 
 	@Autowired
-	public WeddingTransformer(
-			CommercialLocationTransformer commercialLocationTransformer,
-			PersonTransformer personTransformer,
+	public EventWithPlaceAndPresentTransformer(
 			PlaceTransformer placeTransformer,
 			TransformerList<GuestEntity, Guest> guestTransformerList,
 			TransformerList<ProviderEntity, Provider> providerTransformerList,
 			TransformerList<PresentEntity, Present> presentTransformerList,TransformerList<TaskEntity, Task> taskTransformerList) {
 
-		this.commercialLocationTransformer = commercialLocationTransformer;
-		this.personTransformer = personTransformer;
 		this.guestTransformerList = guestTransformerList;
 		this.providerTransformerList = providerTransformerList;
 		this.presentTransformerList = presentTransformerList;
@@ -55,10 +48,8 @@ public class WeddingTransformer extends Transformer<WeddingEntity, Wedding> {
 	}
 
 	@Override
-	public Wedding transformDomainToApi(WeddingEntity domainObject) {
+	public EventWithPlaceAndPresent transformDomainToApi(EventWithPlaceAndPresentEntity domainObject) {
 
-		CommercialLocation eventLocation = this.commercialLocationTransformer
-				.transformAndValidateDomainToApi(domainObject.getEventLocation());
 		List<Guest> guests = this.guestTransformerList
 				.transformDomainToApi(domainObject.getGuests());
 		List<Task> tasks = this.taskTransformerList.transformDomainToApi(domainObject.getTasks());
@@ -66,23 +57,27 @@ public class WeddingTransformer extends Transformer<WeddingEntity, Wedding> {
 				.transformDomainToApi(domainObject.getProviders());
 		List<Present> presents = this.presentTransformerList
 				.transformDomainToApi(domainObject.getPresents());
-		Person wife = this.personTransformer.transformAndValidateDomainToApi(domainObject
-				.getWife());
-		Person husband = this.personTransformer
-				.transformAndValidateDomainToApi(domainObject.getHusband());
+		
+		ProviderEntity providerPlace = Iterables.find(domainObject.getProviders(), new Predicate<ProviderEntity>() {
+			@Override
+			public boolean apply(ProviderEntity input) {
+				return ProviderType.getPlaceTypes().contains(input.getProviderType());
+			}
+		});
+		// Si hay un proveedor de lugar lo seteo.
+		if (providerPlace != null && domainObject.getPlace() == null){
+			domainObject.setPlace(new PlaceEntity(providerPlace));
+		}
+		
 		Place place = this.placeTransformer.transformAndValidateDomainToApi(domainObject
 				.getPlace());
 
-		return new Wedding(domainObject.getName(), domainObject.getInitialDate(), domainObject.getFinalDate(), 
-				eventLocation, guests, tasks, husband, wife, presents, place,
-				domainObject.getBudget(), domainObject.getFinalPrice(),
-				providers);
+		return new EventWithPlaceAndPresent(domainObject.getName(), domainObject.getInitialDate(), domainObject.getFinalDate(), guests, tasks, presents, place,
+				domainObject.getBudget(),providers, domainObject.getType());
 	}
 
 	@Override
-	public WeddingEntity transformApiToDomain(Wedding apiObject) {
-		CommercialLocationEntity eventLocationEntity = this.commercialLocationTransformer
-				.transformAndValidateApiToDomain(apiObject.getEventLocation());
+	public EventWithPlaceAndPresentEntity transformApiToDomain(EventWithPlaceAndPresent apiObject) {
 		List<TaskEntity> tasksEntities = this.taskTransformerList
 				.transformApiToDomain(apiObject.getTasks());
 		List<GuestEntity> guestsEntities = this.guestTransformerList
@@ -91,17 +86,24 @@ public class WeddingTransformer extends Transformer<WeddingEntity, Wedding> {
 				.transformApiToDomain(apiObject.getProviders());
 		List<PresentEntity> presentsEntities = this.presentTransformerList
 				.transformApiToDomain(apiObject.getPresents());
-		PersonEntity wifeEntity = this.personTransformer.transformAndValidateApiToDomain(apiObject
-				.getWife());
-		PersonEntity husbandEntity = this.personTransformer
-				.transformAndValidateApiToDomain(apiObject.getHusband());
+		
+		Provider providerPlace = Iterables.find(apiObject.getProviders(), new Predicate<Provider>() {
+			@Override
+			public boolean apply(Provider input) {
+				return ProviderType.getPlaceTypes().contains(input.getProviderType());
+			}
+		});
+		// Si hay un proveedor de lugar lo seteo.
+		if (providerPlace != null && apiObject.getPlace() == null){
+			apiObject.setPlace(new Place(providerPlace));
+		}
+		
 		PlaceEntity placeEntity = this.placeTransformer.transformAndValidateApiToDomain(apiObject
 				.getPlace());
 
-		return new WeddingEntity(apiObject.getName(), apiObject.getInitialDate(), apiObject.getFinalDate(),
-				eventLocationEntity, guestsEntities, tasksEntities, husbandEntity, wifeEntity, presentsEntities, placeEntity,
-				apiObject.getBudget(), apiObject.getFinalPrice(),
-				providersEntities);
+		return new EventWithPlaceAndPresentEntity(apiObject.getName(), apiObject.getInitialDate(), apiObject.getFinalDate(),
+				guestsEntities, tasksEntities, presentsEntities, placeEntity,
+				apiObject.getBudget(), providersEntities, apiObject.getType());
 	}
 
 }
