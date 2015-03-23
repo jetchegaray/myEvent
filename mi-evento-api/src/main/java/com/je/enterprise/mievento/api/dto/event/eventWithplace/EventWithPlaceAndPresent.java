@@ -1,4 +1,4 @@
-package com.je.enterprise.mievento.api.dto.event.wedding;
+package com.je.enterprise.mievento.api.dto.event.eventWithplace;
 
 import java.math.BigDecimal;
 import java.util.Date;

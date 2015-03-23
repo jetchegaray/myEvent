@@ -50,3 +50,11 @@ mieventoServices.factory("eventService",["$resource", function($resource){
 				getAllProvinces: {method : "GET",params : { requestMapping : "provinces"}, isArray:true}
 			});	
 }])
+
+
+mieventoServices.factory("countryService",["$resource", function($resource){
+		return $resource("/mievento/country/:requestMapping",{requestMapping : "@requestMapping"},
+			{
+				getAll : {method : "GET",params : { requestMapping : "all"}, isArray : true},
+			});	
+}])

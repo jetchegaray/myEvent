@@ -11,19 +11,16 @@ import org.junit.Test;
 import org.springframework.web.client.RestTemplate;
 
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.DetailPlace;
-import com.je.enterprise.mievento.domain.external.apiPlaces.entities.Geometry;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.SearchPlace;
 
 public class ApiPlacesIntegrationTest {
 
 	ApiPlacesServicies apiPlacesServicies;
-	ApiGeoServicies apiGeoServicies;
 	
 	@Before
 	public void setUp(){
 		RestTemplate template = new RestTemplate();
 		apiPlacesServicies = new ApiPlacesServicies(template);
-		apiGeoServicies = new ApiGeoServicies(template);
 	}
 	
 	
@@ -53,17 +50,5 @@ public class ApiPlacesIntegrationTest {
 
 	}
 	
-	@Test
-	public void allgeo_ok(){
-		Geometry geometryCatamarca = apiGeoServicies.getGeoPosition("CT+ARGENTINA");
-		
-		assertNotNull(geometryCatamarca);
-		assertEquals("-27.0763912,-66.9988011",geometryCatamarca.getLocation().toString());
-		
-		Geometry geometryChubut = apiGeoServicies.getGeoPosition("CH+ARGENTINA");
-		
-		assertNotNull(geometryChubut);
-		assertEquals("-43.6846192,-69.2745537",geometryChubut.getLocation().toString());
-	}
 	
 }

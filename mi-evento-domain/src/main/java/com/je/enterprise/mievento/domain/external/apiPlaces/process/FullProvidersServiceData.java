@@ -1,7 +1,6 @@
 package com.je.enterprise.mievento.domain.external.apiPlaces.process;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -14,9 +13,11 @@ import com.google.common.collect.Lists;
 import com.je.enterprise.mievento.api.dto.location.CountryCode;
 import com.je.enterprise.mievento.domain.dao.impl.ProviderDAO;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
+import com.je.enterprise.mievento.domain.entity.geo.CityEntity;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.DetailPlace;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.SearchPlace;
 import com.je.enterprise.mievento.domain.external.apiPlaces.services.ApiPlacesServicies;
+import com.je.enterprise.mievento.domain.service.impl.CountryService;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
 
 @Service
@@ -26,24 +27,22 @@ public class FullProvidersServiceData {
 	
 	private ApiPlacesServicies apiPlacesServicies;
 	private KeyWordsHandler keyWordsHandler;
-	private CitiesByCountryHandler citiesByCountryHandler;
 	private ProviderDAO providerDAO;
-	private CitiesInfoCache citiesInfoCache;
 	private TransformerList<ProviderEntity, DetailPlace> providerPlacesTransformerList;
+	private CountryService countryService;
 	
 	@Autowired
-	public FullProvidersServiceData(ApiPlacesServicies apiPlacesServicies,KeyWordsHandler keyWordsHandler,CitiesByCountryHandler citiesByCountryHandler,
-			TransformerList<ProviderEntity, DetailPlace> providerPlacesTransformerList,ProviderDAO providerDAO,CitiesInfoCache citiesInfoCache) {
+	public FullProvidersServiceData(ApiPlacesServicies apiPlacesServicies,KeyWordsHandler keyWordsHandler,
+			TransformerList<ProviderEntity, DetailPlace> providerPlacesTransformerList,ProviderDAO providerDAO,CountryService countryService) {
 		this.apiPlacesServicies = apiPlacesServicies;
 		this.keyWordsHandler = keyWordsHandler;
-		this.citiesByCountryHandler = citiesByCountryHandler;
 		this.providerPlacesTransformerList = providerPlacesTransformerList;
 		this.providerDAO = providerDAO;
-		this.citiesInfoCache = citiesInfoCache;
+		this.countryService = countryService;
 	}
 
 	//couta 1k request/day
-//	@Scheduled(cron = "* */5 * * * ?")
+	@Scheduled(cron = "* */5 * * * ?")
 	public void serviceProcessData() {
 		
 		List<DetailPlace> places = this.getData();
@@ -56,10 +55,10 @@ public class FullProvidersServiceData {
 	private List<DetailPlace> getData() {
 		
 		List<DetailPlace> detailPlaces = Lists.<DetailPlace>newArrayList();
-		Map<CountryCode, List<String>> citiesByCountry = citiesByCountryHandler.getCitiesByCountry();
-		for (CountryCode country : CountryCode.values()) {
-			for (String city : citiesByCountry.get(country)) {
-				String latlng = citiesInfoCache.getLatlngFromCityAbrv(city);
+		List<CityEntity> cities = countryService.getAllCitiesInCountry(CountryCode.AR);
+
+		for (CityEntity city : cities) {
+				String latlng = city.getLatLongToSearch();
 				for (String keyWord : keyWordsHandler.getKeywords()) {
 					
 					List<SearchPlace> searchPlaces = apiPlacesServicies.getPlaces(latlng, keyWord);
@@ -76,7 +75,6 @@ public class FullProvidersServiceData {
 						
 					}
 				}
-			}
 		}
 		return detailPlaces;
 	}

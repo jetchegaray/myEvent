@@ -22,31 +22,71 @@ mieventoControllers.controller("ProviderPlaceTypesController",["$scope", "provid
 }]);
 
 
-mieventoControllers.controller("ProviderSearchController",["$scope", "$state", "providerService", "applicationContext",
-                                                               function($scope, $state, providerService,applicationContext){
+mieventoControllers.controller("ProviderSearchController",["$scope", "$state", "countryService","providerService", "applicationContext",
+                                                               function($scope, $state, countryService, providerService,applicationContext){
 			
 		providerService.getAllTypes(function(data){
 			$scope.types = data;
 		}, function(error) {
 			applicationContext.getExceptionContext().setDanger(error.data);
 		});
-	
+		
+		$scope.countries = applicationContext.getCountryContext().getAllCountries();
+		if ($scope.countries == null){
+			countryService.getAll(function(data) {
+				$scope.countries = data;
+				applicationContext.getCountryContext().setAllCountries(data);
+			}, function(error) {
+				applicationContext.getExceptionContext().setDanger(error.data);
+			});	
+		}
+		
 		$scope.search = function(providerType){
 			var locationOwn = applicationContext.getEventContext().getPlaceSelectedEvent();
 			var providers = applicationContext.getEventContext().getProvidersSelectedEvent();
 			
-			var placeProvider = _.filter(function(provider){ return provider.providerType.indexOf("Salon") > -1}); 
-			
-			var locationDefinitive = (locationOwn != null) ? locationOwn : placeProvider.location;
+			var placeProvider = _.filter(providers, function(provider){ return provider.providerType.indexOf("Salon") > -1}); 
+
+			var locationDefinitive = null;
+			if (locationOwn != null){
+				locationDefinitive = locationOwn;
+			}else if (placeProvider != null && !angular.isUndefined(placeProvider)) {
+				locationDefinitive = placeProvider[0].location;
+			}
 			
 			var searchLocationTypeRequest = {
 					providerType : providerType,
 					location : locationDefinitive
 			}
+			console.log(angular.toJson(searchLocationTypeRequest));
 			$state.go("providerListState", {"searchLocationTypeRequest" : searchLocationTypeRequest});
 		}
 		
+		$scope.advancedSearch = function(){
+			var searchLocationTypeRequest = {
+					providerType : $scope.search.providerType,
+					location : {
+						countryCode : $scope.search.country.name,
+						province : $scope.search.state.name,
+						city : $scope.search.city.name,
+						streetAddress : $scope.search.streetAddress
+					}
+			}
+			$state.go("providerListState", {"searchLocationTypeRequest" : searchLocationTypeRequest});
+		}
+		
+		$scope.toAdvancedSearch = function(){
+			$state.go("providerAdvancedSearch");
+		}
+		
+		$scope.loadStates = function(){
+			$scope.states = $scope.search.country.states;
+		}
+		$scope.loadCities = function(){
+			$scope.cities = $scope.search.state.cities;
+		}
 }]);
+
 
 
 mieventoControllers.controller("ProviderDetailController",["$scope","applicationContext",function($scope, applicationContext){

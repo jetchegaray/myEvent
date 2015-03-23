@@ -17,9 +17,10 @@ EVENT_PLACE_ADMIN_PATH = "/placeAdmin"
 EVENT_PROVIDERS_PATH = "/providers";
 EVENT_PROVIDER_EDIT_PATH = "/provider/edit";
 EVENT_CALENDAR_PATH = "/calendar";
-EVENT_SCHEDULED_PATH = "/scheduled"
-EVENT_BUDGET_PATH = "/budget"
-EVENT_REVIEW_PATH = "/review"
+EVENT_SCHEDULED_PATH = "/scheduled";
+EVENT_BUDGET_PATH = "/budget";
+EVENT_REVIEW_PATH = "/review";
+ADVANCED_SEARCH_PATH = "/advancedSearch";
 	
 
 mieventoApp.config([ "$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider){
@@ -130,7 +131,12 @@ mieventoApp.config([ "$stateProvider", "$urlRouterProvider", function($stateProv
 		url : EVENT_REVIEW_PATH,
 		templateUrl : "../partials/events/reviews.html",
 		controller : "ReviewsEventController"
-	});;
+	}).state("providerAdvancedSearch", {
+		url : ADVANCED_SEARCH_PATH,
+		templateUrl : "../partials/advancedSearch.html",
+		controller : "ProviderSearchController"
+	});
+	
 	
 	
 	

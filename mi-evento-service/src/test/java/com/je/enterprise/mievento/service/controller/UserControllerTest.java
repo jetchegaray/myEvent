@@ -25,7 +25,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.je.enterprise.mievento.api.dto.event.Event;
-import com.je.enterprise.mievento.api.dto.event.wedding.EventWithPlaceAndPresent;
+import com.je.enterprise.mievento.api.dto.event.eventWithplace.EventWithPlaceAndPresent;
 import com.je.enterprise.mievento.api.dto.provider.ProviderType;
 import com.je.enterprise.mievento.api.dto.user.User;
 import com.je.enterprise.mievento.service.request.ProviderTypesRequest;

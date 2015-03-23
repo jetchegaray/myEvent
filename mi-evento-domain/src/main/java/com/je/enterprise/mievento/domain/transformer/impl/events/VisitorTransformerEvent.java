@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.je.enterprise.mievento.api.dto.event.Event;
-import com.je.enterprise.mievento.api.dto.event.wedding.EventWithPlaceAndPresent;
+import com.je.enterprise.mievento.api.dto.event.eventWithplace.EventWithPlaceAndPresent;
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
 import com.je.enterprise.mievento.domain.entity.wedding.EventWithPlaceAndPresentEntity;
 import com.je.enterprise.mievento.domain.transformer.impl.EventTransformer;

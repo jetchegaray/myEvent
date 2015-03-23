@@ -103,7 +103,7 @@ public class ApiPlacesServicies {
 				if (! places.getStatus().equals(StatusResponse.OK)){
 					logger.info("Status Response Api Places Search Next Token: "+places.getStatus());
 				}
-				
+				Thread.sleep(2000); //2 seg.
 			}while(places.getStatus().equalsIgnoreCase("INVALID_REQUEST"));
 
 			if (response.getBody().equals(HttpEntity.EMPTY)) {

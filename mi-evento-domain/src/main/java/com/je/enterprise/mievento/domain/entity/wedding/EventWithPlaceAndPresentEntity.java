@@ -7,7 +7,7 @@ import java.util.List;
 import org.mongodb.morphia.annotations.Embedded;
 
 import com.je.enterprise.mievento.api.dto.event.EventType;
-import com.je.enterprise.mievento.api.dto.event.wedding.EventWithPlaceAndPresent;
+import com.je.enterprise.mievento.api.dto.event.eventWithplace.EventWithPlaceAndPresent;
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.GuestEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;

@@ -1,6 +1,6 @@
 
-mieventoControllers.controller("HomeController", ["$scope", "$state", "providerService", "eventService", "applicationContext",
-		function($scope, $state, providerService, eventService, applicationContext) {
+mieventoControllers.controller("HomeController", ["$scope", "$state", "providerService", "countryService","applicationContext",
+		function($scope, $state, providerService, countryService,applicationContext) {
 		
 		providerService.getAllTypes(function(data){
 			$scope.providerTypes = data;
@@ -8,24 +8,25 @@ mieventoControllers.controller("HomeController", ["$scope", "$state", "providerS
 			applicationContext.getExceptionContext().setDanger(error.data);
 		});
 		
-		eventService.getAllCountries(function(data) {
-			$scope.countries = data;
-		}, function(error) {
-			applicationContext.getExceptionContext().setDanger(error.data);
-		});
-		
-		eventService.getAllProvinces(function(data) {
-			$scope.provinces = data;
-		}, function(error) {
-			applicationContext.getExceptionContext().setDanger(error.data);
-		});
+		$scope.countries = applicationContext.getCountryContext().getAllCountries();
+		if ($scope.countries == null){
+			countryService.getAll(function(data) {
+				$scope.countries = data;
+				applicationContext.getCountryContext().setAllCountries(data);
+			}, function(error) {
+				applicationContext.getExceptionContext().setDanger(error.data);
+			});	
+		}
 		
 		
+		$scope.loadStates = function(){
+			$scope.states = $scope.search.country.states;
+		}
 		
 		$scope.search = function(){
 			var searchLocation = {
-					countryCode : $scope.search.country,
-					province : $scope.search.province
+					countryCode : $scope.search.country.code,
+					province : $scope.search.province.name
 				}
 			
 			var searchLocationTypeRequest = {

@@ -4,10 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.je.enterprise.mievento.api.dto.country.City;
+import com.je.enterprise.mievento.api.dto.country.Country;
+import com.je.enterprise.mievento.api.dto.country.State;
 import com.je.enterprise.mievento.api.dto.event.Event;
 import com.je.enterprise.mievento.api.dto.event.Guest;
 import com.je.enterprise.mievento.api.dto.event.Task;
-import com.je.enterprise.mievento.api.dto.event.wedding.Present;
+import com.je.enterprise.mievento.api.dto.event.eventWithplace.Present;
 import com.je.enterprise.mievento.api.dto.provider.Provider;
 import com.je.enterprise.mievento.api.dto.provider.Review;
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
@@ -15,11 +18,16 @@ import com.je.enterprise.mievento.domain.entity.common.event.GuestEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderReviewEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.TaskEntity;
+import com.je.enterprise.mievento.domain.entity.geo.CityEntity;
+import com.je.enterprise.mievento.domain.entity.geo.CountryEntity;
+import com.je.enterprise.mievento.domain.entity.geo.StateEntity;
 import com.je.enterprise.mievento.domain.entity.wedding.PresentEntity;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.DetailPlace;
 import com.je.enterprise.mievento.domain.external.apiPlaces.transformer.ProviderPlacesTransformer;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
+import com.je.enterprise.mievento.domain.transformer.impl.CityGeoTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.CommercialLocationTransformer;
+import com.je.enterprise.mievento.domain.transformer.impl.CountryGeoTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.EventTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.GuestTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.LocationTransformer;
@@ -27,8 +35,8 @@ import com.je.enterprise.mievento.domain.transformer.impl.PlaceTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.PresentTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.ProviderTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.ReviewTransformer;
+import com.je.enterprise.mievento.domain.transformer.impl.StateGeoTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.TaskTransformer;
-import com.je.enterprise.mievento.domain.transformer.impl.events.TransformerEventList;
 
 @Configuration
 public class TransformerConfiguration {
@@ -47,6 +55,8 @@ public class TransformerConfiguration {
 	private CommercialLocationTransformer commercialLocationTransformer;
 	@Autowired
 	private ProviderPlacesTransformer providerPlacesTransformer;
+	@Autowired
+	private CityGeoTransformer cityGeoTransformer;
 	
 
 	
@@ -100,6 +110,30 @@ public class TransformerConfiguration {
 	public PlaceTransformer placeTransformer(){
 		return new PlaceTransformer(this.locationTransformer,this.reviewTransformerList());
 	}
-
 	
+	@Bean(name = "cityTransformerList")
+	public TransformerList<CityEntity, City> cityTransformerList(){
+		return new TransformerList<CityEntity, City>(this.cityGeoTransformer);
+	}
+	
+	@Bean(name = "stateTransformer")
+	public StateGeoTransformer stateTransformer(){
+		return new StateGeoTransformer(this.cityTransformerList());
+	}
+
+	@Bean(name = "stateTransformerList")
+	public TransformerList<StateEntity, State> stateTransformerList(){
+		return new TransformerList<StateEntity, State>(this.stateTransformer());
+	}
+	
+	@Bean(name = "countryTransformer")
+	public CountryGeoTransformer countryTransformer(){
+		return new CountryGeoTransformer(this.stateTransformerList());
+	}
+	
+	@Bean(name = "countryTransformerList")
+	public TransformerList<CountryEntity, Country> countryTransformerList(){
+		return new TransformerList<CountryEntity, Country>(this.countryTransformer());
+	}
+
 }

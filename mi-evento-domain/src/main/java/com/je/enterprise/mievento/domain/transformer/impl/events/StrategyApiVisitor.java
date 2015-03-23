@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import com.je.enterprise.mievento.api.dto.event.Event;
 import com.je.enterprise.mievento.api.dto.event.EventType;
-import com.je.enterprise.mievento.api.dto.event.wedding.EventWithPlaceAndPresent;
+import com.je.enterprise.mievento.api.dto.event.eventWithplace.EventWithPlaceAndPresent;
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
 
 @Component

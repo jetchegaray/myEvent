@@ -14,6 +14,7 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
 @Component
+@Deprecated
 public class CitiesInfoCache {
 
 	private GeoLocationByCityCountryHandler geoLocationByCityCountryHandler;

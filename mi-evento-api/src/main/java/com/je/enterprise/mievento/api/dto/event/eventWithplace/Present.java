@@ -1,4 +1,4 @@
-package com.je.enterprise.mievento.api.dto.event.wedding;
+package com.je.enterprise.mievento.api.dto.event.eventWithplace;
 
 import com.je.enterprise.mievento.api.dto.location.CommercialLocation;
 
