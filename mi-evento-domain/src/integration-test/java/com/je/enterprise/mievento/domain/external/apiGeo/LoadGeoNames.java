@@ -15,7 +15,7 @@ import com.je.enterprise.mievento.domain.dao.impl.CountryDAO;
 import com.je.enterprise.mievento.domain.entity.geo.CityEntity;
 import com.je.enterprise.mievento.domain.entity.geo.CountryEntity;
 import com.je.enterprise.mievento.domain.entity.geo.StateEntity;
-import com.je.enterprise.mievento.domain.external.apiGeo.services.CountryServices;
+import com.je.enterprise.mievento.domain.external.apiGeo.services.CountryHelper;
 import com.je.enterprise.mievento.domain.external.apiGeo.services.GEOExternalWrapper;
 import com.je.enterprise.mievento.domain.external.apiGeo.services.GEOServicies;
 import com.je.enterprise.mievento.domain.external.apiGeo.transformer.CityGeoExternalTransformer;
@@ -43,7 +43,7 @@ public class LoadGeoNames extends AbstractJUnit4SpringContextTests{
 //		RestTemplate template = new RestTemplate();
 //		this.geoServicies = new GEOServicies(template);
 //		
-		CountryServices countryServicies = new CountryServices();
+		CountryHelper countryServicies = new CountryHelper();
 		this.countryGeoId = countryServicies.getCountryGeoId();
 		
 		this.citiesGeoTransformer = new TransformerList<CityEntity, GEOExternalWrapper>(this.cityGeoTransformer); 

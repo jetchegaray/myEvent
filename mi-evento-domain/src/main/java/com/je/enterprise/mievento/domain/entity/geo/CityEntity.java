@@ -1,5 +1,7 @@
 package com.je.enterprise.mievento.domain.entity.geo;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 public class CityEntity {
 
 	private String name;
@@ -43,5 +45,16 @@ public class CityEntity {
 	
 	public String getLatLongToSearch(){
 		return new StringBuilder(this.latitude).append(",").append(this.longuitud).toString();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		CityEntity entity = (CityEntity)obj;
+		return entity.getName().equalsIgnoreCase(this.getName());
+	}
+	
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 }

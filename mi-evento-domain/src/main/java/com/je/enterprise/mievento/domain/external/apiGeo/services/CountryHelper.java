@@ -2,15 +2,13 @@ package com.je.enterprise.mievento.domain.external.apiGeo.services;
 
 import java.util.Map;
 
-import org.springframework.stereotype.Service;
-
 import com.google.common.collect.Maps;
 import com.je.enterprise.mievento.api.dto.location.CountryCode;
 import com.je.enterprise.mievento.domain.entity.geo.CountryEntity;
 
-public class CountryServices {
+public class CountryHelper {
 
-	public CountryServices() {
+	public CountryHelper() {
 		// TODO Auto-generated constructor stub
 	}
 	

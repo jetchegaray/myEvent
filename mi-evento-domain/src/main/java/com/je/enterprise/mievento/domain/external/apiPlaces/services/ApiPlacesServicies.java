@@ -42,7 +42,7 @@ public class ApiPlacesServicies {
 	}
 
 	
-	public List<SearchPlace> getPlaces(String latAndLong, String keyWords) {
+	public ResponseContainerObjects<SearchPlace> getPlaces(String latAndLong, String keyWords) {
 
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("https://maps.googleapis.com/maps/api/place/nearbysearch/json?")
 				.queryParam("key", API_KEY)
@@ -70,11 +70,11 @@ public class ApiPlacesServicies {
 			if (places.getNextPage() != null && places.getNextPage() != StringUtils.EMPTY){
 				List<SearchPlace> morePlaces = this.getPlacesNextPage(places.getNextPage());
 				if (morePlaces != null){
-					places.getResults().addAll(morePlaces);
+					places.getData().addAll(morePlaces);
 				}
 			}
 			
-			return places.getData();
+			return places;
 
 		} catch (Exception e) {
 			logger.info(e.getMessage());

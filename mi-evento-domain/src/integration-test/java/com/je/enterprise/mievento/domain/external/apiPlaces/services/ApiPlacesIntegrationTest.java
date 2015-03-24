@@ -27,8 +27,8 @@ public class ApiPlacesIntegrationTest {
 	@Test
 	public void allplaces_ok(){
 		
-		List<SearchPlace> searchPlaces = apiPlacesServicies.getPlaces("-34.6076388,-58.4463000", "casamiento|salon");
-		
+		ResponseContainerObjects<SearchPlace> response = apiPlacesServicies.getPlaces("-34.6076388,-58.4463000", "casamiento|salon");
+		List<SearchPlace> searchPlaces = response.getData();
 		assertNotNull(searchPlaces);
 		assertFalse(searchPlaces.isEmpty());
 		assertNotNull(searchPlaces.get(0).getId());
