@@ -10,7 +10,7 @@ import com.je.enterprise.mievento.api.dto.country.State;
 import com.je.enterprise.mievento.api.dto.event.Event;
 import com.je.enterprise.mievento.api.dto.event.Guest;
 import com.je.enterprise.mievento.api.dto.event.Task;
-import com.je.enterprise.mievento.api.dto.event.eventWithplace.Present;
+import com.je.enterprise.mievento.api.dto.event.eventWithplace.Presents;
 import com.je.enterprise.mievento.api.dto.provider.Provider;
 import com.je.enterprise.mievento.api.dto.provider.Review;
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
@@ -21,7 +21,7 @@ import com.je.enterprise.mievento.domain.entity.common.event.TaskEntity;
 import com.je.enterprise.mievento.domain.entity.geo.CityEntity;
 import com.je.enterprise.mievento.domain.entity.geo.CountryEntity;
 import com.je.enterprise.mievento.domain.entity.geo.StateEntity;
-import com.je.enterprise.mievento.domain.entity.wedding.PresentEntity;
+import com.je.enterprise.mievento.domain.entity.wedding.PresentsEntity;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.DetailPlace;
 import com.je.enterprise.mievento.domain.external.apiPlaces.transformer.ProviderPlacesTransformer;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
@@ -76,8 +76,8 @@ public class TransformerConfiguration {
 	}
 	
 	@Bean(name = "presentTransformerList")
-	public TransformerList<PresentEntity, Present> presentTransformerList(){
-		return new TransformerList<PresentEntity, Present>(this.presentTransformer);
+	public TransformerList<PresentsEntity, Presents> presentTransformerList(){
+		return new TransformerList<PresentsEntity, Presents>(this.presentTransformer);
 	}
 
 	@Bean(name = "eventTransformer")

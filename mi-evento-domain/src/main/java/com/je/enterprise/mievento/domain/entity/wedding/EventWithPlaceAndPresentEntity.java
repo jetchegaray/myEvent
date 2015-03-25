@@ -19,7 +19,7 @@ import com.je.enterprise.mievento.domain.transformer.impl.events.VisitorTransfor
 public class EventWithPlaceAndPresentEntity extends EventEntity {
 
 	@Embedded
-	private List<PresentEntity> presents;
+	private List<PresentsEntity> presents;
 	private PlaceEntity place;
 	private BigDecimal budget;
 
@@ -28,7 +28,7 @@ public class EventWithPlaceAndPresentEntity extends EventEntity {
 	
 	public EventWithPlaceAndPresentEntity(String name, Date initialDate,Date finalDate,
 			List<GuestEntity> guests, List<TaskEntity> tasks,
-			List<PresentEntity> presents, PlaceEntity place, BigDecimal budget, List<ProviderEntity> providers,EventType eventType) {
+			List<PresentsEntity> presents, PlaceEntity place, BigDecimal budget, List<ProviderEntity> providers,EventType eventType) {
 		super(name, initialDate, finalDate, guests, tasks, providers, eventType);
 		this.presents = presents;
 		this.place = place;
@@ -36,11 +36,11 @@ public class EventWithPlaceAndPresentEntity extends EventEntity {
 	}
 
 	
-	public List<PresentEntity> getPresents() {
+	public List<PresentsEntity> getPresents() {
 		return presents;
 	}
 
-	public void setPresents(List<PresentEntity> presents) {
+	public void setPresents(List<PresentsEntity> presents) {
 		this.presents = presents;
 	}
 

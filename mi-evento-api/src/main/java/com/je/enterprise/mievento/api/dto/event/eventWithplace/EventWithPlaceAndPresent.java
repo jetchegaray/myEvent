@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.je.enterprise.mievento.api.dto.event.Event;
 import com.je.enterprise.mievento.api.dto.event.EventType;
 import com.je.enterprise.mievento.api.dto.event.Guest;
@@ -11,10 +12,10 @@ import com.je.enterprise.mievento.api.dto.event.Task;
 import com.je.enterprise.mievento.api.dto.place.Place;
 import com.je.enterprise.mievento.api.dto.provider.Provider;
 
-
+//@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="objectType")
 public class EventWithPlaceAndPresent extends Event {
 
-	private List<Present> presents;
+	private List<Presents> presents;
 	private Place place;
 	private BigDecimal budget;
 
@@ -23,7 +24,7 @@ public class EventWithPlaceAndPresent extends Event {
 	}
 	
 	public EventWithPlaceAndPresent(String name, Date initialDate,Date finalDate, List<Guest> guests, List<Task> tasks,
-			List<Present> presents, Place place, BigDecimal budget, List<Provider> providers, EventType eventType) {
+			List<Presents> presents, Place place, BigDecimal budget, List<Provider> providers, EventType eventType) {
 		
 		super(name, initialDate, finalDate, guests, tasks, providers, eventType);
 		this.presents = presents;
@@ -31,11 +32,11 @@ public class EventWithPlaceAndPresent extends Event {
 		this.budget = budget;
 	}
 	
-	public List<Present> getPresents() {
+	public List<Presents> getPresents() {
 		return presents;
 	}
 
-	public void setPresents(List<Present> presents) {
+	public void setPresents(List<Presents> presents) {
 		this.presents = presents;
 	}
 

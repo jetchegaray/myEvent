@@ -60,6 +60,10 @@ mieventoContext.service("exceptionContext",function($rootScope){
 	this.getErrorType = function(){
 		return error.type;
 	}
+	
+	this.getErrorCode = function(){
+		return error.code;
+	}
 
 	
 	

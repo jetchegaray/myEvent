@@ -1,0 +1,42 @@
+<div>
+ 	<div class="row" ng-repeat="present in presents">
+		<div class="col-md-4 font-secondtitle">
+				{{present.placeName}}
+			<span class="col-md-4 font-fourtitle">
+				<i class="fa fa-map-marker danger"> {{present.locationCredit.streetAddress.street}}
+					<span ng-show="present.locationCredit.streetAddress.number !=null && present.locationCredit.streetAddress.number != 0">{{provider.location.streetAddress.number}}</span>
+					{{present.locationCredit.streetAddress.additionalInfo}}
+					{{present.locationCredit.streetAddress.neighborhood}}
+					{{present.locationCredit.city}} ({{present.locationCredit.province}})
+				</i>
+			</span>
+			<span class="col-md-4 font-secondtitle pull-right">
+				${{present.totalBudget}}
+			</span>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<table id="desciptionsTable" class="table table-hover">
+					<thead>
+					  <tr class="text-center">
+					     <th>Description Object</th>
+					  </tr>
+					</thead>
+					<tbody>
+						 <tr ng-repeat="description in present.descriptions">
+						 	<a href="#" editable-text="description" onbeforesave="save($data)">{{ description }}</a>
+						 </tr>
+						 <tr>
+							 <a href="#" editable-text="description" onbeforesave="addDescription($data)">{{ description }}</a>
+						 </tr>
+					</tbody>
+				</table>	
+			</div>
+		</div>
+	</div>	
+	<div class="row">
+		<div class="col-md-4">
+			<button class="btn btn-primary" ng-click="goAddPresent()"><i class="fa fa-plus"></i><spring:message code="present.buttonAdd"/></button>
+		</div>
+	</div>
+</div>

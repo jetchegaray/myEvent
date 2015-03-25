@@ -4,8 +4,10 @@ mieventoControllers.controller("ExceptionController", ["$scope", "$timeout", "ap
 		var exceptionContext = applicationContext.getExceptionContext();
 		var description = exceptionContext.getErrorDescription();
 		var type = exceptionContext.getErrorType();
+		var code = exceptionContext.getErrorCode();
 		$scope.alert = 
 		   {
+			   "code" : code,
 		       "type": type,
 		       "msg": description,
 		       "show":true

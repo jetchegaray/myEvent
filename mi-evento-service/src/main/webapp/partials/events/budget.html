@@ -5,22 +5,22 @@
 			<table class="table table-bordered"
 				style="width: 90%; margin-left: 10px; margin-top: 10px">
 				<tr class="active">
-					<th>Type</th>
-					<th>Name</th>
-					<th>Phone</th>
-					<th>Estimated Price</th>
-					<th>View</th>
-					<th>Delete</th>
-					<th>Selected</th>
-					<th>Compare To</th>
-					<th>More Cheaper</th>
+					<th><spring:message code="budget.tableType"/></th>
+					<th><spring:message code="budget.tableName"/></th>
+					<th><spring:message code="budget.tablePhone"/></th>
+					<th><spring:message code="budget.tablePrice"/></th>
+					<th><spring:message code="budget.tableView"/></th>
+					<th><spring:message code="budget.tableDelete"/></th>
+					<th><spring:message code="budget.tableSelected"/></th>
+					<th><spring:message code="budget.tableCompareTo"/></th>
+					<th><spring:message code="budget.tableMoreCheaper"/></th>
 				</tr>
 				<tbody>
 					<tr ng-repeat-start="item in items">
 						<td colspan="9" ng-click="order.collapseRows = !order.collapseRows" class="collapsible-row">
 							{{item.providerType}}  
 							<span ng-class="{'caret':!order.collapseRows, 'right-caret':order.collapseRows}"></span>
-							 <strong class="text-center">Total : $ <span class="text-danger">{{item.totalBudget}}</span></strong>
+							 <strong class="text-center"><spring:message code="budget.tableTotalBudget"/><span class="text-danger">{{item.totalBudget}}</span></strong>
 						</td>
 					</tr>
 					<tr ng-repeat-end ng-repeat="provider in item.providers" ng-hide="order.collapseRows">
@@ -97,7 +97,7 @@
 <!-- 			</div> -->
 <!-- 		</div> -->
 		<div class="col-md-4">
-			<button type="button" class="btn btn-primary" ng-click="saveSelectedProviders()">Save selected</button>
+			<button type="button" class="btn btn-primary" ng-click="saveSelectedProviders()"><spring:message code="budget.buttonSave"/></button>
 		</div>
 	</div>		
 </div>

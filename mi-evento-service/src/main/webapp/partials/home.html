@@ -2,7 +2,7 @@
 	<div class="container">
 	    <div class="col-md-10 col-sm-offset-1">
 	        <div class="panel panel-default">
-	            <div class="panel-heading"> Busca Proveedores en cualquier lugar ..</div>
+	            <div class="panel-heading"><spring:message code="home.searchLabel"/></div>
 	            <div class="panel-body">
 	               <form role="form" style="margin: 25px;">
 	                	<div class="form-group">
@@ -25,13 +25,13 @@
 					 				</ui-select>
 							</div>
 							<div class="col-sm-2">
-					             <button type="submit" class="btn btn-success" ng-click="search()">Search</button>
+					             <button type="submit" class="btn btn-success" ng-click="search()"><spring:message code="home.searchButton"/></button>
 					        </div>
 						</div>
 	                </form>
 	            </div>
 	            <div class="panel-footer">
-	                Not Registred? <a href="http://www.jquery2dotnet.com">Register here</a></div>
+	                <spring:message code="home.searchFooter.notRegistered"/><a ui-sref="signUpState"><spring:message code="home.searchFooter.registered"/></a></div>
 	           </div>
 	        	
 	    </div>
@@ -46,28 +46,24 @@
 			<img class="img-circle"
 				src="../img/evento.jpg"
 				alt="Generic placeholder image" style="width: 140px; height: 140px;">
-			<h2>Eventos</h2>
-			<p>Crea cualquier tipo de evento que tengas pensado en 2 minutos.
-			   Invita a tus amigos y listo ! podes empezar a disfrutar... </p>
+			<h2><spring:message code="home.bussinesFeature.1.title"/></h2>
+			<p><spring:message code="home.bussinesFeature.1.description"/></p>
 	    </div>
 		<!-- /.col-lg-4 -->
 		<div class="col-lg-4">
 			<img class="img-circle"
 				src="../img/organizacion.jpg"
 				alt="Generic placeholder image" style="width: 140px; height: 140px;">
-			<h2>Organizacion</h2>
-			<p> Organiza tu evento como quieras, crea tu propio lugar de reunion,
-			    cronograma de tareas, calendario, invitados, y mucho mas...
+			<h2><spring:message code="home.bussinesFeature.2.title"/></h2>
+			<p><spring:message code="home.bussinesFeature.2.description"/></p>
 		</div>
 		<!-- /.col-lg-4 -->
 		<div class="col-lg-4">
 			<img class="img-circle"
 				src="../img/casamiento.jpg"
 				alt="Generic placeholder image" style="width: 140px; height: 140px;">
-			<h2>Proveedores</h2>
-			<p>Mas de 3.000 provedores en todo el país, con los mejores servicios. 
-			   Informacion de contacto, calificaciones y precios.
-			   Comparador de proveedores por precio.</p>
+			<h2><spring:message code="home.bussinesFeature.3.title"/></h2>
+			<p><spring:message code="home.bussinesFeature.3.description"/></p>
 		</div>
 		<!-- /.col-lg-4 -->
 	</div>
@@ -81,11 +77,9 @@
 	<div class="row featurette">
 		<div class="col-md-7">
 			<h2 class="featurette-heading">
-				Ingresa Ya ! <span class="text-muted">Organiza el Casamiento de tus sueños</span>
+				<spring:message code="home.appFeature.1.title"/><span class="text-muted"><spring:message code="home.appFeature.1.subtitle"/></span>
 			</h2>
-			<p class="lead">Lugares, catering, alianzas, vestidos y trajes, 
-			    lista de regalos, invitaciones, calendario, tareas, cronograma,
-			    ubica a tus invitados en las mesas y más...</p>
+			<p class="lead"><spring:message code="home.appFeature.1.desc"/></p>
 		</div>
 		<div class="col-md-5">
 			<img class="featurette-image img-responsive"
@@ -102,10 +96,9 @@
 		</div>
 		<div class="col-md-7">
 			<h2 class="featurette-heading">
-				Todo en un mismo lugar. <span class="text-muted"> Reuniones, Cumpleaños, Fiestas </span>
+				<spring:message code="home.appFeature.2.title"/><span class="text-muted"><spring:message code="home.appFeature.2.subtitle"/></span>
 			</h2>
-			<p class="lead"> Comparador de proveedores por precio. 
-			Busca el mejor servicio donde necesites. </p>
+			<p class="lead"> <spring:message code="home.appFeature.2.desc"/></p>
 		</div>
 	</div>
 
@@ -114,12 +107,9 @@
 	<div class="row featurette">
 		<div class="col-md-7">
 			<h2 class="featurette-heading">
-				 No esperes mas y <span class="text-muted">transforma tus eventos creados en facebook !</span>
+				 <spring:message code="home.appFeature.3.title"/><span class="text-muted"><spring:message code="home.appFeature.3.subtitle"/></span>
 			</h2>
-			<p class="lead">Donec ullamcorper nulla non metus auctor
-				fringilla. Vestibulum id ligula porta felis euismod semper. Praesent
-				commodo cursus magna, vel scelerisque nisl consectetur. Fusce
-				dapibus, tellus ac cursus commodo.</p>
+			<p class="lead"><spring:message code="home.appFeature.3.desc"/></p>
 		</div>
 		<div class="col-md-5">
 			<img class="featurette-image img-responsive"

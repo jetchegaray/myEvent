@@ -3,7 +3,7 @@
 		<div class="container" ng-controller="ProviderListController">
 			<div class="centered-message" ng-show="searching"><i class="fa fa-spinner fa-spin fa-5x"></i></div>
 			<div class="centered-message" class="row" ng-show="!searching && (providers == null || providers.length == 0)">
-				<span class="font-noResult"> No Providers for the search. Try to another Location.</span>
+				<span class="font-noResult"><spring:message code="provider.list.notthere"/></span>
 			</div>
 			
 			<div class="row oneElement" ng-repeat="provider in providers">
@@ -38,12 +38,12 @@
 					</div>
 					<hr class="divide"/>
 					<span class="price">
-						<small>Precio Desde : </small>
+						<small><spring:message code="provider.list.priceSince"/></small>
 						<i class="fa fa-money glyphiconSpace"><strong> ${{provider.estimatedPrice}}</strong></i>
 					</span>	
 				     <span class="pull-right buttons">
-	                   	<button class="btn btn-sm btn-default" ng-click="goToDetail(provider)"><i class="fa fa-eye"></i> Detail</button>
-	                   	<button class="btn btn-sm btn-primary" ng-click="addProvider(provider)"><i class="fa fa-plus"></i> Add</button>
+	                   	<button class="btn btn-sm btn-default" ng-click="goToDetail(provider)"><i class="fa fa-eye"></i> <spring:message code="provider.list.buttonDetail"/></button>
+	                   	<button class="btn btn-sm btn-primary" ng-click="addProvider(provider)"><i class="fa fa-plus"></i> <spring:message code="provider.list.buttonAdd"/></button>
 	         	     </span>	 
 				</div>    
 				<hr class="divide"/>

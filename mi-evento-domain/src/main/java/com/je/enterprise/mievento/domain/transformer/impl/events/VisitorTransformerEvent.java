@@ -15,12 +15,12 @@ public class VisitorTransformerEvent implements VisitorTransformer{
 	
 	
 	private EventTransformer eventTransformer;
-	private EventWithPlaceAndPresentTransformer weddingTransformer;
+	private EventWithPlaceAndPresentTransformer eventWithPlaceAndPresentTransformer;
 
 	@Autowired
-	public void visitTransformer(EventTransformer eventTransformer,EventWithPlaceAndPresentTransformer weddingTransformer) {
+	public void visitTransformer(EventTransformer eventTransformer,EventWithPlaceAndPresentTransformer eventWithPlaceAndPresentTransformer) {
 		this.eventTransformer = eventTransformer;
-		this.weddingTransformer = weddingTransformer;
+		this.eventWithPlaceAndPresentTransformer = eventWithPlaceAndPresentTransformer;
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class VisitorTransformerEvent implements VisitorTransformer{
 
 	@Override
 	public EventWithPlaceAndPresentEntity visitTransformer(EventWithPlaceAndPresent eventWithPlaceAndPresent) {
-		return this.weddingTransformer.transformApiToDomain(eventWithPlaceAndPresent);
+		return this.eventWithPlaceAndPresentTransformer.transformApiToDomain(eventWithPlaceAndPresent);
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class VisitorTransformerEvent implements VisitorTransformer{
 
 	@Override
 	public EventWithPlaceAndPresent visitTransformer(EventWithPlaceAndPresentEntity eventWithPlaceAndPresentEntity) {
-		return this.weddingTransformer.transformAndValidateDomainToApi(eventWithPlaceAndPresentEntity);
+		return this.eventWithPlaceAndPresentTransformer.transformAndValidateDomainToApi(eventWithPlaceAndPresentEntity);
 	}
 	
 	

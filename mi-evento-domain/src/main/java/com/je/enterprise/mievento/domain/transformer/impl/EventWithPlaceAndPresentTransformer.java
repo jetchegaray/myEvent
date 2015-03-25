@@ -10,7 +10,7 @@ import com.google.common.collect.Iterables;
 import com.je.enterprise.mievento.api.dto.event.Guest;
 import com.je.enterprise.mievento.api.dto.event.Task;
 import com.je.enterprise.mievento.api.dto.event.eventWithplace.EventWithPlaceAndPresent;
-import com.je.enterprise.mievento.api.dto.event.eventWithplace.Present;
+import com.je.enterprise.mievento.api.dto.event.eventWithplace.Presents;
 import com.je.enterprise.mievento.api.dto.place.Place;
 import com.je.enterprise.mievento.api.dto.provider.Provider;
 import com.je.enterprise.mievento.api.dto.provider.ProviderType;
@@ -19,7 +19,7 @@ import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.TaskEntity;
 import com.je.enterprise.mievento.domain.entity.place.PlaceEntity;
 import com.je.enterprise.mievento.domain.entity.wedding.EventWithPlaceAndPresentEntity;
-import com.je.enterprise.mievento.domain.entity.wedding.PresentEntity;
+import com.je.enterprise.mievento.domain.entity.wedding.PresentsEntity;
 import com.je.enterprise.mievento.domain.transformer.Transformer;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
 
@@ -30,7 +30,7 @@ public class EventWithPlaceAndPresentTransformer extends Transformer<EventWithPl
 
 	private TransformerList<GuestEntity, Guest> guestTransformerList;
 	private TransformerList<ProviderEntity, Provider> providerTransformerList;
-	private TransformerList<PresentEntity, Present> presentTransformerList;
+	private TransformerList<PresentsEntity, Presents> presentTransformerList;
 	private TransformerList<TaskEntity, Task> taskTransformerList;
 
 	@Autowired
@@ -38,7 +38,7 @@ public class EventWithPlaceAndPresentTransformer extends Transformer<EventWithPl
 			PlaceTransformer placeTransformer,
 			TransformerList<GuestEntity, Guest> guestTransformerList,
 			TransformerList<ProviderEntity, Provider> providerTransformerList,
-			TransformerList<PresentEntity, Present> presentTransformerList,TransformerList<TaskEntity, Task> taskTransformerList) {
+			TransformerList<PresentsEntity, Presents> presentTransformerList,TransformerList<TaskEntity, Task> taskTransformerList) {
 
 		this.guestTransformerList = guestTransformerList;
 		this.providerTransformerList = providerTransformerList;
@@ -55,7 +55,7 @@ public class EventWithPlaceAndPresentTransformer extends Transformer<EventWithPl
 		List<Task> tasks = this.taskTransformerList.transformDomainToApi(domainObject.getTasks());
 		List<Provider> providers = this.providerTransformerList
 				.transformDomainToApi(domainObject.getProviders());
-		List<Present> presents = this.presentTransformerList
+		List<Presents> presents = this.presentTransformerList
 				.transformDomainToApi(domainObject.getPresents());
 		
 		ProviderEntity providerPlace = Iterables.find(domainObject.getProviders(), new Predicate<ProviderEntity>() {
@@ -84,7 +84,7 @@ public class EventWithPlaceAndPresentTransformer extends Transformer<EventWithPl
 				.transformApiToDomain(apiObject.getGuests());
 		List<ProviderEntity> providersEntities = this.providerTransformerList
 				.transformApiToDomain(apiObject.getProviders());
-		List<PresentEntity> presentsEntities = this.presentTransformerList
+		List<PresentsEntity> presentsEntities = this.presentTransformerList
 				.transformApiToDomain(apiObject.getPresents());
 		
 		Provider providerPlace = Iterables.find(apiObject.getProviders(), new Predicate<Provider>() {

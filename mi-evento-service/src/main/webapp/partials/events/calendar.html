@@ -13,14 +13,14 @@
 <div>
 	<script type="text/ng-template" id="deleteCalendarEvent.html">
 			<div class="modal-header">
-        		<h4 class="modal-title custom_align" id="Heading">Delete Task</h4>
+        		<h4 class="modal-title custom_align" id="Heading"><spring:message code="modal.delete.title"/></h4>
       		</div>
         	<div class="modal-body">
-       			<div class="alert alert-warning"><span class="fa fa-warning glyphiconSpace"></span> Are you sure you want to delete the task <strong>{{task.title}}</strong> ?</div>
+       			<div class="alert alert-warning"><span class="fa fa-warning glyphiconSpace"></span><spring:message code="modal.calendar.delete.question"/><strong>{{task.title}}</strong> ?</div>
        		</div>
         	<div class="modal-footer ">
-        		<button type="button" class="btn btn-warning" ng-click="ok()"><span class="fa fa-check-circle-o"></span> Yes</button>
-        		<button type="button" class="btn btn-warning" ng-click="cancel()"><span class="fa fa-close"></span> No</button>
+        		<button type="button" class="btn btn-warning" ng-click="ok()"><span class="fa fa-check-circle-o"></span> <spring:message code="modal.delete.questionYes"/></button>
+        		<button type="button" class="btn btn-warning" ng-click="cancel()"><span class="fa fa-close"></span> <spring:message code="modal.delete.questionNo"/></button>
       		</div>
     	</script>
 </div>	
@@ -29,7 +29,7 @@
 <div>
 	<script type="text/ng-template" id="addCalendarEvent.html">
 		<div class="modal-header">
-        		<h4 class="modal-title custom_align" id="Heading">New Task</h4>
+        		<h4 class="modal-title custom_align" id="Heading"><spring:message code="modal.calendar.add.title"/></h4>
       		</div>
         <div class="modal-body">
 			<div class="row">
@@ -73,8 +73,8 @@
        		</div>
 		</div>
         <div class="modal-footer ">
-        	<button type="button" class="btn btn-warning" ng-click="ok()"><span class="fa fa-check-circle-o"></span> Yes</button>
-        	<button type="button" class="btn btn-warning" ng-click="cancel()"><span class="fa fa-close"></span> No</button>
+        	<button type="button" class="btn btn-warning" ng-click="ok()"><span class="fa fa-check-circle-o"></span> <spring:message code="modal.delete.questionYes"/></button>
+        	<button type="button" class="btn btn-warning" ng-click="cancel()"><span class="fa fa-close"></span> <spring:message code="modal.delete.questionNo"/></button>
       	</div>
 	</script>
 </div>

@@ -1,0 +1,74 @@
+<div > 
+	<form name="presentForm" role="form">
+		<div class="row">
+			<div class="col-md-4 font-secondtitle">
+				<spring:message code="present.detail.title"/>
+			</div>
+		</div>
+		<div class="line"></div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Place Name" ng-model="present.placeName" required>
+				</div>
+			</div>
+			<div class="col-md-4">	
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Initial Budget" ng-model="present.totalBudget">
+				</div>
+			</div>	
+		</div>	
+		<div class="line"></div>
+		<div class="row">
+			<div class="col-md-4">
+				<ui-select  ng-change="loadStates($select.selected)" ng-model="present.search.country" theme="selectize" required>
+	   				<ui-select-match placeholder="Country">{{$select.selected.name}}</ui-select-match>
+	   				<ui-select-choices repeat="country in countries">{{country.name}}</ui-select-choices>
+	 			</ui-select>
+			</div>
+			<div class="col-sm-4">
+				<ui-select ng-change="loadCities($select.selected)" ng-model="present.search.state" theme="selectize" required>
+	   				<ui-select-match placeholder="Province or State">{{$select.selected.name}}</ui-select-match>
+	   				<ui-select-choices repeat="state in states">{{state.name}}</ui-select-choices>
+	 			</ui-select>
+			</div>
+			<div class="col-md-4">
+				<ui-select ng-model="present.search.city" theme="selectize" required>
+	   				<ui-select-match placeholder="City">{{$select.selected.name}}</ui-select-match>
+	   				<ui-select-choices repeat="city in cities">{{city.name}}</ui-select-choices>
+	 			</ui-select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">	
+				<div class="form-group">
+					<input type="text" class="form-control" name="neighborhood"
+						placeholder="neighborhood : Ej. Palermo" ng-model="present.locationCredit.streetAddress.neighborhood">
+				</div>
+			</div>	
+			<div class="col-md-3">
+				<div class="form-group">
+					<input type="text" class="form-control" name="street"
+						placeholder="Street" ng-model="present.locationCredit.streetAddress.street">
+				</div>
+			</div>	
+			<div class="col-md-3">	
+				<div class="form-group">
+					<input type="text" class="form-control" name="number"
+						placeholder="Number" ng-model="present.locationCredit.streetAddress.number">
+				</div>
+			</div>	
+			<div class="col-md-3">	
+				<div class="form-group">
+					<input type="text" class="form-control" name="city"
+						placeholder="Ej : 6° B" ng-model="present.locationCredit.streetAddress.additionalInfo">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<button type="button" class="btn btn-primary" ng-click="save()"><spring:message code="present.detail.buttonSave"/></button>
+			</div>
+		</div>		
+	</form>
+</div>

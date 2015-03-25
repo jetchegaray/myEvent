@@ -171,4 +171,20 @@ mieventoContext.service("eventContext",function(){
 		selectedEvent.tasks.splice(index, 1);
 	}
 	
+	
+	//**********PRESENTS******************************
+	
+	this.getPresents = function(){
+		if (selectedEvent.presents == null){
+			selectedEvent.presents =  [];
+		}
+		return selectedEvent.presents;
+	}
+	
+	this.addPresent = function(present){
+		if (selectedEvent.presents == null){
+			selectedEvent.presents = [];
+		}
+		selectedEvent.presents.push(present);	
+	}
 });

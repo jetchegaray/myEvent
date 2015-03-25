@@ -38,7 +38,7 @@ public class TransformerEventList{
 		}
 	}
 
-	public List<EventEntity> transformApiToDomain(List<Event> apiObjects) {
+	public List<EventEntity> transformApiToDomain(List<? extends Event> apiObjects) {
 		List<EventEntity> domainObjects = Lists.newArrayList();
 		try {
 			Preconditions.checkNotNull(domainObjects);

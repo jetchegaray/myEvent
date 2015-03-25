@@ -28,6 +28,9 @@ import com.je.enterprise.mievento.domain.entity.location.CommercialLocationEntit
 import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
 import com.je.enterprise.mievento.domain.entity.location.StreetAddressEntity;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
+import com.je.enterprise.mievento.domain.transformer.impl.events.StrategyApiVisitor;
+import com.je.enterprise.mievento.domain.transformer.impl.events.TransformerEventList;
+import com.je.enterprise.mievento.domain.transformer.impl.events.VisitorTransformerEvent;
 
 public class TransformersImplTest {
 
@@ -52,7 +55,7 @@ public class TransformersImplTest {
 		
 		this.eventTransformer = new EventTransformer(commercialLocationTransformer, guestTransformerList,taskTransformerList,providerTransformerList);
 		
-		userTransformer = new UserTransformer(new TransformerList<EventEntity, Event>(eventTransformer));
+		userTransformer = new UserTransformer(new TransformerEventList(new VisitorTransformerEvent(), new StrategyApiVisitor()));
 	}
 	
 

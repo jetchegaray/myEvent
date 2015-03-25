@@ -9,7 +9,7 @@ public class InvalidCredentialException extends HttpEventException {
 	private static final long serialVersionUID = 2L;
 
 	public InvalidCredentialException() {
-		super(HttpEventExceptionCode.INVALID_CREDENTIAL,HttpEventExceptionHttpStatus.BAD_REQUEST ,"El Usuario no existe.Registrese !");
+		super(HttpEventExceptionCode.INVALID_CREDENTIAL_USER,HttpEventExceptionHttpStatus.BAD_REQUEST ,"El Usuario no existe.Registrese !");
 	}
 
 }

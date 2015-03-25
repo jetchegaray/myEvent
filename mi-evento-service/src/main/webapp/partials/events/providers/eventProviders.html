@@ -4,12 +4,12 @@
 			<table id="providerEventTable" class="table table-hover" ng-show="providers != null && providers.length">
 				<thead>
 					<tr>
-						<th>Type</th>
-						<th>Name</th>
-						<th>Cell / Phone</th>
-						<th>Estimated Price</th>
-						<th>View</th>
-						<th>Delete</th>
+						<th><spring:message code="event.provider.tableType"/></th>
+						<th><spring:message code="event.provider.tableName"/></th>
+						<th><spring:message code="event.provider.tablePhone"/></th>
+						<th><spring:message code="event.provider.tablePrice"/></th>
+						<th><spring:message code="event.provider.tableView"/></th>
+						<th><spring:message code="event.provider.tableDelete"/></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -46,7 +46,7 @@
 	<div class="row" ng-controller="ProviderSearchController">
 		<div class="dropdown" dropdown>
 			<button class="btn btn-primary dropdown-toggle" dropdown-toggle aria-expanded="true">
-				Add Provider<span class="caret glyphiconSpace"></span>
+				<spring:message code="event.provider.buttonAdd"/><span class="caret glyphiconSpace"></span>
 			</button>
 			<ul class="dropdown-menu" role="menu">
 				<li ng-repeat="type in types | orderBy:'toString()'"><a href ng-click="search(type)">{{type}}</a></li>

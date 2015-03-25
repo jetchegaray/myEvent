@@ -4,11 +4,11 @@
 			<table id="guestsTable" class="table table-hover">
 				<thead>
 				  <tr class="text-center">
-				     <th>Name</th>
-		           	 <th>Send Invitation</th>
-		           	 <th>Status</th>
-		         	 <th>Edit</th>
-		             <th>Delete</th>
+				     <th><spring:message code="guest.tableName"/></th>
+		           	 <th><spring:message code="guest.tableSendInvitation"/></th>
+		           	 <th><spring:message code="guest.tableStatus"/></th>
+		         	 <th><spring:message code="guest.tableEdit"/></th>
+		             <th><spring:message code="guest.tableDelete"/></th>
 				  </tr>
 				</thead>
 				<tbody>
@@ -47,7 +47,7 @@
 			</table>
 		</div>
 	</div>
-	<button class="btn btn-primary " ng-click="goAddGuest()"><i class="fa fa-plus"></i>Add Person</button>
+	<button class="btn btn-primary " ng-click="goAddGuest()"><i class="fa fa-plus"></i><spring:message code="guest.buttonAdd"/></button>
 	   
 		
 </div>

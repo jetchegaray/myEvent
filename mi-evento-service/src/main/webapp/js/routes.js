@@ -20,6 +20,8 @@ EVENT_CALENDAR_PATH = "/calendar";
 EVENT_SCHEDULED_PATH = "/scheduled";
 EVENT_BUDGET_PATH = "/budget";
 EVENT_REVIEW_PATH = "/review";
+EVENT_PRESENT_PATH = "/presents";
+EVENT_PRESENT_DETAIL_PATH = "/presents/create";
 ADVANCED_SEARCH_PATH = "/advancedSearch";
 	
 
@@ -131,7 +133,18 @@ mieventoApp.config([ "$stateProvider", "$urlRouterProvider", function($stateProv
 		url : EVENT_REVIEW_PATH,
 		templateUrl : "../partials/events/reviews.html",
 		controller : "ReviewsEventController"
-	}).state("providerAdvancedSearch", {
+	})
+	.state("eventState.presents", {
+		url : EVENT_PRESENT_PATH,
+		templateUrl : "../partials/events/present/presents.html",
+		controller : "PresentsEventController"
+	})
+	.state("eventState.presentsCreate", {
+		url : EVENT_PRESENT_DETAIL_PATH,
+		templateUrl : "../partials/events/present/detailPresent.html",
+		controller : "DetailPresentEventController"
+	})
+	.state("providerAdvancedSearch", {
 		url : ADVANCED_SEARCH_PATH,
 		templateUrl : "../partials/advancedSearch.html",
 		controller : "ProviderSearchController"
