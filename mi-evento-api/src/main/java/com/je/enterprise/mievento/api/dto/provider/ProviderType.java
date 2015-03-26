@@ -19,6 +19,7 @@ public enum ProviderType {
 	DRESSES_SUITS("Trajes y Vestidos"),
 	RINGS("Alianzas o Anillos De Compromiso"),
 	CAKES("Tortas"),
+	DECORATION("Decoracion"),
 	BARMAN("Barman");
 	
 	private String name;

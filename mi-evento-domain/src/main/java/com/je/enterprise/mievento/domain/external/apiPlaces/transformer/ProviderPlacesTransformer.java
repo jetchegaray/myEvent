@@ -12,16 +12,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.je.enterprise.mievento.api.dto.location.CountryCode;
 import com.je.enterprise.mievento.api.dto.location.ProvinceCode;
 import com.je.enterprise.mievento.api.dto.provider.ProviderType;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
+import com.je.enterprise.mievento.domain.entity.common.event.ProviderReviewEntity;
 import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
 import com.je.enterprise.mievento.domain.entity.location.StreetAddressEntity;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.AddressComponent;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.DetailPlace;
+import com.je.enterprise.mievento.domain.external.apiPlaces.entities.DetailPlaceReview;
 import com.je.enterprise.mievento.domain.external.apiPlaces.services.ApiPlacesServicies;
 import com.je.enterprise.mievento.domain.external.apiPlaces.transformer.type.BuilderConditionRulesProvider;
 import com.je.enterprise.mievento.domain.external.apiPlaces.transformer.type.ConditionRuleProviderKeyWord;
@@ -31,14 +32,12 @@ import com.je.enterprise.mievento.domain.transformer.Transformer;
 public class ProviderPlacesTransformer extends
 		Transformer<ProviderEntity, DetailPlace> {
 	
-	private ProviderTypeKeyword providerTypeKeyword;
 	private ApiPlacesServicies apiPlacesServicies;
 	
 	private Logger logger = LoggerFactory.getLogger(ProviderPlacesTransformer.class);
 
 	@Autowired
-	public ProviderPlacesTransformer(ProviderTypeKeyword providerTypeKeyword,ApiPlacesServicies apiPlacesServicies) {
-		this.providerTypeKeyword = providerTypeKeyword;
+	public ProviderPlacesTransformer(ApiPlacesServicies apiPlacesServicies) {
 		this.apiPlacesServicies = apiPlacesServicies;
 	}
 	
@@ -67,13 +66,27 @@ public class ProviderPlacesTransformer extends
 			photos.add("../img/logo.jpg");
 		}
 		
+		List<ProviderReviewEntity> reviews = this.getReviews(detailPlace.getReviews(),detailPlace.getRating());
 		ProviderType providerType = getProviderType(detailPlace);
 		//only here to eliminate duplicates id
-		ProviderEntity entity = new ProviderEntity(detailPlace.getId(), businessName,description,location,email,cellPhone,phone,price,estimatedPrice,photos,providerType,null);
+		ProviderEntity entity = new ProviderEntity(detailPlace.getId(), businessName,description,location,email,cellPhone,phone,price,estimatedPrice,photos,providerType,reviews);
 		
 		return entity;
 	}
 
+
+
+	private List<ProviderReviewEntity> getReviews(List<DetailPlaceReview> reviewsPlace, Double rating) {
+		List<ProviderReviewEntity> reviews = Lists.<ProviderReviewEntity>newArrayList();
+		if (reviewsPlace == null){
+			return reviews;
+		}
+		
+		for (DetailPlaceReview detailPlaceReview : reviewsPlace) {
+			reviews.add(new ProviderReviewEntity(detailPlaceReview.getAuthor(),detailPlaceReview.getText(),BigDecimal.valueOf(rating)));
+		}
+		return reviews;
+	}
 
 
 	private LocationEntity getLocation(DetailPlace detailPlace) {
@@ -94,8 +107,9 @@ public class ProviderPlacesTransformer extends
 				city = addressComponent.getLongName();
 			}
 			if (addressComponent.isProvince()){
-				province = ProvinceCode.valueOf(addressComponent.getShortName());
-				if (province == null){
+				try{
+					province = ProvinceCode.valueOf(addressComponent.getShortName());
+				}catch(Exception ex){
 					province = ProvinceCode.getByName(addressComponent.getShortName());
 				}
 			}
@@ -115,24 +129,6 @@ public class ProviderPlacesTransformer extends
 		return new LocationEntity(countryCode, province, city, streetAddress);
 	}
 
-	
-//	//FIXME
-//	private ProviderType getProviderType(DetailPlace detailPlace) {
-//		
-//		Map<ProviderType, List<String>> keywords = this.providerTypeKeyword.getProviderTypeKeyword();
-//		
-//		String detailName = detailPlace.getName();
-//		for (Entry<ProviderType, List<String>> entry : keywords.entrySet()) {
-//				
-//			for (String value : entry.getValue()) {
-//				if (detailName.toLowerCase().contains(value)){
-//					return entry.getKey();
-//				}
-//			}
-//		}
-//		
-//		return null;
-//	}
 	
 	private ProviderType getProviderType(DetailPlace detailPlace){
 		

@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.je.enterprise.mievento.api.dto.event.Event;
 import com.je.enterprise.mievento.api.dto.event.EventType;
 import com.je.enterprise.mievento.api.dto.event.Guest;
@@ -12,7 +12,7 @@ import com.je.enterprise.mievento.api.dto.event.Task;
 import com.je.enterprise.mievento.api.dto.place.Place;
 import com.je.enterprise.mievento.api.dto.provider.Provider;
 
-//@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="objectType")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class EventWithPlaceAndPresent extends Event {
 
 	private List<Presents> presents;

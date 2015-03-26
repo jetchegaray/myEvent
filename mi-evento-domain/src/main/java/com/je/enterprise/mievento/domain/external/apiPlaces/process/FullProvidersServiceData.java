@@ -19,6 +19,8 @@ import com.je.enterprise.mievento.domain.external.apiPlaces.entities.DetailPlace
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.SearchPlace;
 import com.je.enterprise.mievento.domain.external.apiPlaces.services.ApiPlacesServicies;
 import com.je.enterprise.mievento.domain.external.apiPlaces.services.ResponseContainerObjects;
+import com.je.enterprise.mievento.domain.external.apiPlaces.transformer.type.BuilderConditionRulesProvider;
+import com.je.enterprise.mievento.domain.external.apiPlaces.transformer.type.ConditionRuleProviderKeyWord;
 import com.je.enterprise.mievento.domain.service.impl.CountryService;
 import com.je.enterprise.mievento.domain.service.impl.ProviderService;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
@@ -29,16 +31,14 @@ public class FullProvidersServiceData {
 	private static final Logger logger = Logger.getLogger(FullProvidersServiceData.class);
 	
 	private ApiPlacesServicies apiPlacesServicies;
-	private KeyWordsHandler keyWordsHandler;
 	private ProviderService providerService;
 	private TransformerList<ProviderEntity, DetailPlace> providerPlacesTransformerList;
 	private CountryService countryService;
 	
 	@Autowired
-	public FullProvidersServiceData(ApiPlacesServicies apiPlacesServicies,KeyWordsHandler keyWordsHandler,ProviderService providerService,
+	public FullProvidersServiceData(ApiPlacesServicies apiPlacesServicies,ProviderService providerService,
 			TransformerList<ProviderEntity, DetailPlace> providerPlacesTransformerList,CountryService countryService) {
 		this.apiPlacesServicies = apiPlacesServicies;
-		this.keyWordsHandler = keyWordsHandler;
 		this.providerPlacesTransformerList = providerPlacesTransformerList;
 		this.providerService = providerService;
 		this.countryService = countryService;
@@ -58,6 +58,8 @@ public class FullProvidersServiceData {
 	private List<DetailPlace> getData() {
 		
 		List<DetailPlace> detailPlaces = Lists.<DetailPlace>newArrayList();
+		List<ConditionRuleProviderKeyWord> keyWords = BuilderConditionRulesProvider.getRules().values().iterator().next();
+		
 		Set<CityEntity> cities = countryService.getAllCitiesInCountry(CountryCode.AR);
 		Set<CityEntity> alredyCity = this.providerService.getAllCitiesThereProviders(CountryCode.AR);
 		
@@ -65,9 +67,9 @@ public class FullProvidersServiceData {
 		
 		for (CityEntity city : defintiveCities) {
 				String latlng = city.getLatLongToSearch();
-				for (String keyWord : keyWordsHandler.getKeywords()) {
+				for (ConditionRuleProviderKeyWord keyWord : keyWords) {
 					
-					ResponseContainerObjects<SearchPlace> response = apiPlacesServicies.getPlaces(latlng, keyWord);
+					ResponseContainerObjects<SearchPlace> response = apiPlacesServicies.getPlaces(latlng, keyWord.toStringWithSpace());
 					if (response.getStatus().equalsIgnoreCase("OVER_QUERY_LIMIT")){
 						return detailPlaces;
 					}
@@ -82,7 +84,6 @@ public class FullProvidersServiceData {
 							//nullPointer or illegalArgument
 							continue;
 						}
-						
 					}
 				}
 		}

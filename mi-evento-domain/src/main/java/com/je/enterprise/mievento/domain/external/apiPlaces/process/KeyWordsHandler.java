@@ -13,6 +13,7 @@ import com.je.enterprise.mievento.domain.utils.LoadFile;
 import com.je.enterprise.mievento.domain.utils.PropertiesHelper;
 
 @Component
+@Deprecated
 public class KeyWordsHandler implements LoadFile{
 
 	Properties properties;

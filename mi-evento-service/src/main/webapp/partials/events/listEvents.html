@@ -4,12 +4,12 @@
 			<table id="eventsTable" class="table table-hover" ng-show="events != null && events.length">
 				<thead>
 				  <tr class="text-center">
-				     <th><spring:message code="events.list.tableName"/></th>
-		           	 <th><spring:message code="events.list.tableDate"/></th>
-		           	 <th><spring:message code="events.list.tableType"/></th>
-		           	 <th><spring:message code="events.list.tableSelect"/></th>
-		         	 <th><spring:message code="events.list.tableEdit"/></th>
-		             <th><spring:message code="events.list.tableDelete"/></th>
+				     <th><legend translate>events.list.tableName<legend /></th>
+		           	 <th><legend translate>events.list.tableDate<legend /></th>
+		           	 <th><legend translate>events.list.tableType<legend/></th>
+		           	 <th><legend translate>events.list.tableSelect<legend/></th>
+		         	 <th><legend translate>events.list.tableEdit<legend/></th>
+		             <th><legend translate>events.list.tableDelete<legend/></th>
 				  </tr>
 				</thead>
 				<tbody>
@@ -46,5 +46,5 @@
 	</div>
 	
 	<div class="line"></div>
-	<button class="btn btn-primary pull-right" ng-click="goAddEvent()"><i class="fa fa-plus glyphiconSpace"></i><spring:message code="events.list.buttonAdd"/></button>
+	<button class="btn btn-primary pull-right" ng-click="goAddEvent()"><i class="fa fa-plus glyphiconSpace"></i><legend translate>events.list.buttonAdd<legend/></button>
 </div>

@@ -58,3 +58,13 @@ mieventoServices.factory("countryService",["$resource", function($resource){
 				getAll : {method : "GET",params : { requestMapping : "all"}, isArray : true},
 			});	
 }])
+
+
+mieventoServices.factory('UrlLanguageStorage', ['$location', function($location) {
+    return {
+        set: function (name, value) {},
+        get: function (name) {
+            return $location.search()['lang']
+        }
+    };
+}]);

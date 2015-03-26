@@ -3,25 +3,17 @@ package com.je.enterprise.mievento.api.dto.event;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.je.enterprise.mievento.api.dto.event.eventWithplace.EventWithPlaceAndPresent;
 import com.je.enterprise.mievento.api.dto.provider.Provider;
 
 
-
-@JsonTypeInfo(  
-    use = JsonTypeInfo.Id.NAME,  
-    include = JsonTypeInfo.As.EXTERNAL_PROPERTY,  
-    property = "type")
-//    defaultImpl = Event.class, 
-//    visible = true)  
-
-@JsonSubTypes(value = {        
-		@JsonSubTypes.Type(value = EventWithPlaceAndPresent.class, name = "Boda o Casamiento"), 
-		@JsonSubTypes.Type(value = EventWithPlaceAndPresent.class, name = "Cumpleaños"), 
-		@JsonSubTypes.Type(value = EventWithPlaceAndPresent.class, name = "Fiesta"), 
-		@JsonSubTypes.Type(value = EventWithPlaceAndPresent.class, name = "Bar Mitzvah") })  
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "clazz", visible = true)
+@JsonSubTypes({ @Type(value = EventWithPlaceAndPresent.class, name = "EventWithPlaceAndPresent")})
 public class Event {
 
 	private String name;

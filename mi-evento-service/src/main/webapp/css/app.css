@@ -450,3 +450,18 @@ input.ng-dirty.ng-invalid {
 	text-align: center;
 	margin: 10%;
 }
+
+legend { 
+  display: inline;
+  width: auto;
+  padding: 0;
+  margin: 0;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: normal;
+  color: #000000;
+  border: 0;
+  border-bottom: none;
+  color: inherit;
+}
+}

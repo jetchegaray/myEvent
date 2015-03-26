@@ -10,7 +10,6 @@
     "angular-mocks": "~1.2.x",
     "angular-resource": "~1.2.x",
     "angular-cookies": "~1.2.x",
-    "angular-i18n" : "~1.2.x",
     "angular-animate" : "~1.2.x",
     "angular-bootstrap" : "0.12.0",
     "angular-ui-router": "0.2.11",
@@ -21,6 +20,8 @@
     "moment" : "*",
     "angular-xeditable": "0.1.8",
     "underscore" : "1.7.0",
-    "angular-dragdrop" : "1.0.11"
+    "angular-dragdrop" : "1.0.11",
+    "angular-translate" : "2.6.1",
+    "angular-translate-loader-url" : "2.6.1"
   }
 }

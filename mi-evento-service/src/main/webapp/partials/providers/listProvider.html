@@ -3,12 +3,12 @@
 		<div class="container" ng-controller="ProviderListController">
 			<div class="centered-message" ng-show="searching"><i class="fa fa-spinner fa-spin fa-5x"></i></div>
 			<div class="centered-message" class="row" ng-show="!searching && (providers == null || providers.length == 0)">
-				<span class="font-noResult"><spring:message code="provider.list.notthere"/></span>
+				<span class="font-noResult"><legend translate>provider.list.notthere<legend /></span>
 			</div>
 			
 			<div class="row oneElement" ng-repeat="provider in providers">
 				<div class="media">
-					<a class="pull-left" ng-click="	" href="#">
+					<a class="pull-left" ng-click="	" href>
 					  <div  ng-controller="providerCarouselCtrl" ng-init="init(provider)" class="media-object" style=" width: 300px; height: 150px; margin: 0 auto;">
 							<carousel interval="interval" disable-animation="true"> 
 								<slide ng-repeat="slide in slides" active="slide.active"> 
@@ -38,12 +38,12 @@
 					</div>
 					<hr class="divide"/>
 					<span class="price">
-						<small><spring:message code="provider.list.priceSince"/></small>
+						<small><legend translate>provider.list.priceSince<legend /></small>
 						<i class="fa fa-money glyphiconSpace"><strong> ${{provider.estimatedPrice}}</strong></i>
 					</span>	
 				     <span class="pull-right buttons">
-	                   	<button class="btn btn-sm btn-default" ng-click="goToDetail(provider)"><i class="fa fa-eye"></i> <spring:message code="provider.list.buttonDetail"/></button>
-	                   	<button class="btn btn-sm btn-primary" ng-click="addProvider(provider)"><i class="fa fa-plus"></i> <spring:message code="provider.list.buttonAdd"/></button>
+	                   	<button class="btn btn-sm btn-default" ng-click="goToDetail(provider)"><i class="fa fa-eye"></i> <legend translate>provider.list.<legend /></button>
+	                   	<button class="btn btn-sm btn-primary" ng-click="addProvider(provider)"><i class="fa fa-plus"></i> <legend translate>provider.list.buttonAdd<legend /></button>
 	         	     </span>	 
 				</div>    
 				<hr class="divide"/>

@@ -5,15 +5,15 @@
 			<table class="table table-bordered"
 				style="width: 90%; margin-left: 10px; margin-top: 10px">
 				<tr class="active">
-					<th><spring:message code="budget.tableType"/></th>
-					<th><spring:message code="budget.tableName"/></th>
-					<th><spring:message code="budget.tablePhone"/></th>
-					<th><spring:message code="budget.tablePrice"/></th>
-					<th><spring:message code="budget.tableView"/></th>
-					<th><spring:message code="budget.tableDelete"/></th>
-					<th><spring:message code="budget.tableSelected"/></th>
-					<th><spring:message code="budget.tableCompareTo"/></th>
-					<th><spring:message code="budget.tableMoreCheaper"/></th>
+					<th><legend translate>budget.tableType<legend/></th>
+					<th><legend translate>budget.tableName<legend/></th>
+					<th><legend translate>budget.tablePhone<legend/></th>
+					<th><legend translate>budget.tablePrice<legend/></th>
+					<th><legend translate>budget.tableView<legend/></th>
+					<th><legend translate>budget.tableDelete<legend/></th>
+					<th><legend translate>budget.tableSelected<legend/></th>
+					<th><legend translate>budget.tableCompareTo<legend/></th>
+					<th><legend translate>budget.tableMoreCheaper<legend/></th>
 				</tr>
 				<tbody>
 					<tr ng-repeat-start="item in items">
@@ -97,7 +97,7 @@
 <!-- 			</div> -->
 <!-- 		</div> -->
 		<div class="col-md-4">
-			<button type="button" class="btn btn-primary" ng-click="saveSelectedProviders()"><spring:message code="budget.buttonSave"/></button>
+			<button type="button" class="btn btn-primary" ng-click="saveSelectedProviders()"><legend translate>budget.buttonSave<legend/></button>
 		</div>
 	</div>		
 </div>

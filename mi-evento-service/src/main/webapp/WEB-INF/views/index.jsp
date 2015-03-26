@@ -1,5 +1,5 @@
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <html ng-app="mieventoApp">
 <head>
 
@@ -12,17 +12,19 @@
 <title>MiEvento</title>
 
 <!-- ********************** Styles ********************** -->
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
 <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/app.css">
 <link href="../bower_components/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
 <!-- <link rel="stylesheet" href="../css/animate.css"> -->
-<link rel="stylesheet" href="../bower_components/angular-ui-select/dist/select.min.css">
+<link rel="stylesheet" href="../bower_components/angular-ui-select/dist/select.css">
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
 <link rel="stylesheet" href="../bower_components/fullcalendar/dist/fullcalendar.css">
-<link href="http://fonts.googleapis.com/css?family=Rancho" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Rancho" rel="stylesheet">
+<link rel="stylesheet" href="../css/app.css">
 
 <!-- ********************** Jquery ********************** -->
+
 <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="../bower_components/jquery-ui/jquery-ui.min.js"></script>
 
@@ -45,6 +47,8 @@
 <script src="../bower_components/fullcalendar/dist/gcal.js"></script>
 <script src="../bower_components/angular-xeditable/dist/js/xeditable.js"></script>
 <script src="../bower_components/angular-dragdrop/src/angular-dragdrop.min.js"></script>
+<script src="../bower_components/angular-translate/angular-translate.min.js"></script>
+<script src="../bower_components/angular-translate-loader-url/angular-translate-loader-url.min.js"></script>
 <!-- ********************** angular app ********************** -->
 
 <script src="../js/app.js"></script>
@@ -68,9 +72,10 @@
 <script src="../js/controllers/reviewsEventControllers.js"></script>
 <script src="../js/controllers/presentsEventControllers.js"></script>
 
+
 <script src="../js/controllers/utilsControllers.js"></script>
 <script src="../js/controllers/exceptionControllers.js"></script>
-
+<script src="../js/controllers/languageControllers.js"></script>
 
 <!-- ********************** contexts ********************** -->
 <script src="../js/contexts/applicationContext.js"></script>
@@ -98,11 +103,11 @@
 					<div class="container">
 						<a class="brand"> <img src="../img/logo.jpg"
 							style="width: 200px; height: 100px;"></a>
-						<div id="flags" class="pull-right">
-						    <a href="?lang=es">
+						<div id="flags" ng-controller="LanguageController" class="pull-right">
+						    <a href ng-click="changeLanguage('es')">
 						        <img alt="es" title="Spanish" src="../img/flag-es.png">
 						    </a>
-						    <a href="?lang=en">
+						    <a href ng-click="changeLanguage('en')">
 						        <img alt="en" title="English" src="../img/flag-us.png">
 						    </a>
 					 	</div> 	

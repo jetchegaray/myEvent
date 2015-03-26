@@ -1,11 +1,19 @@
 //ngRoute if it doesnt use, promise and resolve object in response service.
-var mieventoApp = angular.module("mieventoApp", [ "ngCookies", "ngRoute", "ui.bootstrap", "ngAnimate", "ui.router", "ui.select", "ui.calendar", "xeditable", "ngDragDrop",
+var mieventoApp = angular.module("mieventoApp", [ "ngCookies", "ngRoute", "ui.bootstrap", "ngAnimate", "ui.router", "ui.select", 
+                                                  "ui.calendar", "xeditable", "ngDragDrop", "pascalprecht.translate",
                                                   "mieventoControllers", "mieventoServices", "mieventoContext"]);
 
 var mieventoControllers = angular.module("mieventoControllers", []);
 var mieventoContext = angular.module("mieventoContext",[]);
 var mieventoServices = angular.module("mieventoServices",["ngResource"]);
 
+
+mieventoApp.config(function ($translateProvider) {
+	$translateProvider.useUrlLoader('/mievento/messageBundle');
+//    $translateProvider.useStorage('UrlLanguageStorage');
+	$translateProvider.preferredLanguage('en');
+	$translateProvider.fallbackLanguage('en');
+});
 
 mieventoApp.run([ "$rootScope", "$cookies", "$state", "editableOptions", "userService", "applicationContext",
 		function($rootScope, $cookies, $state, editableOptions, userService, applicationContext) {

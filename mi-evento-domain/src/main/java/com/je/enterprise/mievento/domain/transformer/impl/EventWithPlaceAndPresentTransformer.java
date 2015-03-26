@@ -58,12 +58,15 @@ public class EventWithPlaceAndPresentTransformer extends Transformer<EventWithPl
 		List<Presents> presents = this.presentTransformerList
 				.transformDomainToApi(domainObject.getPresents());
 		
-		ProviderEntity providerPlace = Iterables.find(domainObject.getProviders(), new Predicate<ProviderEntity>() {
-			@Override
-			public boolean apply(ProviderEntity input) {
-				return ProviderType.getPlaceTypes().contains(input.getProviderType());
-			}
-		});
+		ProviderEntity providerPlace = null;
+		if (domainObject.getProviders() != null && !domainObject.getProviders().isEmpty()){
+			providerPlace = Iterables.find(domainObject.getProviders(), new Predicate<ProviderEntity>() {
+				@Override
+				public boolean apply(ProviderEntity input) {
+					return ProviderType.getPlaceTypes().contains(input.getProviderType());
+				}
+			});
+		}
 		// Si hay un proveedor de lugar lo seteo.
 		if (providerPlace != null && domainObject.getPlace() == null){
 			domainObject.setPlace(new PlaceEntity(providerPlace));
@@ -87,12 +90,15 @@ public class EventWithPlaceAndPresentTransformer extends Transformer<EventWithPl
 		List<PresentsEntity> presentsEntities = this.presentTransformerList
 				.transformApiToDomain(apiObject.getPresents());
 		
-		Provider providerPlace = Iterables.find(apiObject.getProviders(), new Predicate<Provider>() {
-			@Override
-			public boolean apply(Provider input) {
-				return ProviderType.getPlaceTypes().contains(input.getProviderType());
-			}
-		});
+		Provider providerPlace = null;
+		if (apiObject.getProviders() != null && !apiObject.getProviders().isEmpty()){
+			providerPlace = Iterables.find(apiObject.getProviders(), new Predicate<Provider>() {
+				@Override
+				public boolean apply(Provider input) {
+					return ProviderType.getPlaceTypes().contains(input.getProviderType());
+				}
+			});
+		}
 		// Si hay un proveedor de lugar lo seteo.
 		if (providerPlace != null && apiObject.getPlace() == null){
 			apiObject.setPlace(new Place(providerPlace));

@@ -31,7 +31,7 @@ public class DetailPlace {
 	
 	private Geometry geometry;
 	private Double rating;
-	private List<Review> reviews;
+	private List<DetailPlaceReview> reviews;
 	
 	public DetailPlace() {
 	}
@@ -116,11 +116,11 @@ public class DetailPlace {
 		this.rating = rating;
 	}
 
-	public List<Review> getReviews() {
+	public List<DetailPlaceReview> getReviews() {
 		return reviews;
 	}
 
-	public void setReviews(List<Review> reviews) {
+	public void setReviews(List<DetailPlaceReview> reviews) {
 		this.reviews = reviews;
 	}
 	

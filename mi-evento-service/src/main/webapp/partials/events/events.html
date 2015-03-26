@@ -4,13 +4,13 @@
 			<accordion close-others="oneAtATime">
 				<accordion-group is-open="isFirstOpen">
 					<accordion-heading>
-						<span class="fa fa-folder-open text-success  glyphiconSpace"> </span><spring:message code="events.menu.organize"/>
+						<span class="fa fa-folder-open text-success  glyphiconSpace pull-left"> </span><legend translate>events.menu.organize<legend />
 					</accordion-heading>
 					<div>
 						<table class="table">
 							<tr>
 								<td>
-									<span class="fa fa-calendar text-primary glyphiconSpace"></span><a ui-sref="eventState.events"><spring:message code="events.menu.myEvents"/></a>
+									<span class="fa fa-calendar text-primary glyphiconSpace pull-left"></span><a ui-sref="eventState.events"><legend translate>events.menu.myEvents<legend /></a>
 								</td>
 							</tr>
 <!-- 							<tr> -->
@@ -20,30 +20,30 @@
 <!-- 							</tr> -->
 							<tr>
 								<td>
-									<span class="fa fa-home text-primary glyphiconSpace"></span><a ui-sref="eventState.place"><spring:message code="events.menu.myPlace"/></a>
+									<span class="fa fa-home text-primary glyphiconSpace pull-left"></span><a ui-sref="eventState.place"><legend translate>events.menu.myPlace<legend /></a>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<span class="fa fa-home text-primary glyphiconSpace"></span><a ui-sref="eventState.placeAdmin"><spring:message code="events.menu.placeAdmin"/></a>
+									<span class="fa fa-home text-primary glyphiconSpace pull-left"></span><a ui-sref="eventState.placeAdmin"><legend translate>events.menu.placeAdmin<legend /></a>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<span class="fa fa-envelope text-primary glyphiconSpace"></span><a ui-sref="eventState.guests"><spring:message code="events.menu.invite"/></a>
+									<span class="fa fa-envelope text-primary glyphiconSpace pull-left"></span><a ui-sref="eventState.guests"><legend translate>events.menu.invite<legend/></a>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<span class="fa fa-users text-primary glyphiconSpace"></span><a ui-sref="eventState.providers"><spring:message code="events.menu.providers"/></a>
+									<span class="fa fa-users text-primary glyphiconSpace pull-left"></span><a ui-sref="eventState.providers"><legend translate>events.menu.providers<legend/></a>
 								</td>
 							</tr>
 							<tr>
-								<td><span class="fa fa-gift text-primary glyphiconSpace"></span><a ui-sref="eventState.presents"><spring:message code="events.menu.gifts"/></a></td>
+								<td><span class="fa fa-gift text-primary glyphiconSpace pull-left"></span><a ui-sref="eventState.presents"><legend translate>events.menu.gifts<legend/></a></td>
 							</tr>
 							<tr>
 								<td>
-									<span class="fa fa-money text-primary glyphiconSpace"></span><a ui-sref="eventState.budget"><spring:message code="events.menu.budget"/></a> 
+									<span class="fa fa-money text-primary glyphiconSpace pull-left"></span><a ui-sref="eventState.budget"><legend translate>events.menu.budget<legend/></a> 
 								</td> 
 							</tr>
 							<!-- 								<span class="badge"> -->
@@ -52,17 +52,17 @@
 				</accordion-group>
 				<accordion-group>
 					<accordion-heading>
-						<span class="fa fa-tags text-success glyphiconSpace"> </span><spring:message code="events.menu.tasks"/>
+						<span class="fa fa-tags text-success glyphiconSpace pull-left"> </span><legend translate>events.menu.tasks<legend />
 					</accordion-heading>
 					<div class="panel-body">
 						<table class="table">
 							<tr>
-								<td><span class="fa fa-calendar text-success glyphiconSpace"></span><a ui-sref="eventState.calendar"><spring:message code="events.menu.calendar"/></a></td>
+								<td><span class="fa fa-calendar text-success glyphiconSpace pull-left"></span><a ui-sref="eventState.calendar"><legend translate>events.menu.calendar<legend /></a></td>
 							</tr>
 							<tr>
 								<td>
-									<span class="fa fa-file text-success glyphiconSpace"></span>
-									<a ui-sref="eventState.scheduled"><spring:message code="events.menu.scheduled"/></a>
+									<span class="fa fa-file text-success glyphiconSpace pull-left"></span>
+									<a ui-sref="eventState.scheduled"><legend translate>events.menu.scheduled<legend/></a>
 								</td>
 							</tr>
 						</table>
@@ -70,20 +70,20 @@
 				</accordion-group> 
 				<accordion-group>
 					<accordion-heading>
-						<span class="fa fa-user text-success glyphiconSpace"> </span><spring:message code="events.menu.account"/>
+						<span class="fa fa-user text-success glyphiconSpace pull-left"> </span><legend translate>events.menu.account<legend/>
 					</accordion-heading>
 					<div class="panel-body">
 						<table class="table">
 							<tr>
-								<td><a href><spring:message code="events.menu.changePass"/></a></td>
+								<td class="pull-left"><a href><legend translate>events.menu.changePass<legend/></a></td>
 							</tr>
 							<tr ng-controller="ReviewsPendingController">
-								<td><span class="fa fa-star-half-empty text-primary glyphiconSpace"></span><a ui-sref="eventState.reviews"><spring:message code="events.menu.notifications"/></a>
+								<td><span class="fa fa-star-half-empty text-primary glyphiconSpace pull-left"></span><a ui-sref="eventState.reviews"><legend translate>events.menu.notifications<legend /></a>
 								<span class="label label-warning pull-right" style="border-radius: 1em">{{pendingReviews}}</span></td>
 							</tr>
 							<tr>
-								<td><span class="fa fa-trash text-danger glyphiconSpace"></span><a
-									href class="text-danger"><spring:message code="events.menu.deleteAccount"/></a></td>
+								<td><span class="fa fa-trash text-danger glyphiconSpace pull-left"></span><a
+									href class="text-danger"><legend translate>events.menu.deleteAccount<legend /></a></td>
 							</tr>
 						</table>
 					</div>
@@ -95,14 +95,14 @@
 		                 <i class="text-info fa fa-eye"></i>
 		             </h3>
 		             <h4 class="list-group-item-heading count" >{{summaryViewEvent.name || "No Event Selected"}}</h4>
-		             <p class="list-group-item-text"><spring:message code="events.summary.selectedEvent"/></p>
+		             <p class="list-group-item-text"><legend translate>events.summary.selectedEvent<legend /></p>
 		         </div>
 		         <div class="list-group-item" style="background-color: #FA7D7D;">
 		             <h3 class="pull-right">
 		                 <i class="text-success fa fa-money"></i>
 		             </h3>
 		             <h4 class="list-group-item-heading count">$ {{summaryViewBudget || 0}}</h4>
-		             <p class="list-group-item-text"><spring:message code="events.summary.totalBudget"/></p>
+		             <p class="list-group-item-text"><legend translate>events.summary.totalBudget<legend /></p>
 		         </div>
 	   		</div>
 		</div>
@@ -128,14 +128,14 @@
 <div ng-controller="DeleteConfirmationModalController">
 		<script type="text/ng-template" id="deleteConfirmation.html">
 			<div class="modal-header">
-        		<h4 class="modal-title custom_align" id="Heading"><spring:message code="modal.delete.title"/></h4>
+        		<h4 class="modal-title custom_align" id="Heading"><legend translate>modal.delete.title<legend /></h4>
       		</div>
         	<div class="modal-body">
-       			<div class="alert alert-warning"><span class="fa fa-warning glyphiconSpace"></span><spring:message code="modal.delete.question"/></div>
+       			<div class="alert alert-warning"><span class="fa fa-warning glyphiconSpace"></span><legend translate>modal.delete.question<legend /></div>
        		</div>
         	<div class="modal-footer ">
-        		<button type="button" class="btn btn-warning" ng-click="ok()"><span class="fa fa-check-circle-o"></span> <spring:message code="modal.delete.questionYes"/></button>
-        		<button type="button" class="btn btn-warning" ng-click="cancel()"><span class="fa fa-close"></span> <spring:message code="modal.delete.questionNo"/></button>
+        		<button type="button" class="btn btn-warning" ng-click="ok()"><span class="fa fa-check-circle-o"></span> <legend translate>modal.delete.questionYes<legend /></button>
+        		<button type="button" class="btn btn-warning" ng-click="cancel()"><span class="fa fa-close"></span> <legend translate>modal.delete.questionNo<legend/></button>
       		</div>
     	</script>
 </div>	

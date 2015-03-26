@@ -13,14 +13,14 @@
 <div>
 	<script type="text/ng-template" id="deleteCalendarEvent.html">
 			<div class="modal-header">
-        		<h4 class="modal-title custom_align" id="Heading"><spring:message code="modal.delete.title"/></h4>
+        		<h4 class="modal-title custom_align" id="Heading"><legend translate>modal.delete.title<legend/></h4>
       		</div>
         	<div class="modal-body">
-       			<div class="alert alert-warning"><span class="fa fa-warning glyphiconSpace"></span><spring:message code="modal.calendar.delete.question"/><strong>{{task.title}}</strong> ?</div>
+       			<div class="alert alert-warning"><span class="fa fa-warning glyphiconSpace"></span><legend translate>modal.calendar.delete.question<legend /><strong>{{task.title}}</strong> ?</div>
        		</div>
         	<div class="modal-footer ">
-        		<button type="button" class="btn btn-warning" ng-click="ok()"><span class="fa fa-check-circle-o"></span> <spring:message code="modal.delete.questionYes"/></button>
-        		<button type="button" class="btn btn-warning" ng-click="cancel()"><span class="fa fa-close"></span> <spring:message code="modal.delete.questionNo"/></button>
+        		<button type="button" class="btn btn-warning" ng-click="ok()"><span class="fa fa-check-circle-o"></span> <legend translate>modal.delete.questionYes<legend /></button>
+        		<button type="button" class="btn btn-warning" ng-click="cancel()"><span class="fa fa-close"></span> <legend translate>modal.delete.questionNo<legend/></button>
       		</div>
     	</script>
 </div>	
@@ -29,7 +29,7 @@
 <div>
 	<script type="text/ng-template" id="addCalendarEvent.html">
 		<div class="modal-header">
-        		<h4 class="modal-title custom_align" id="Heading"><spring:message code="modal.calendar.add.title"/></h4>
+        		<h4 class="modal-title custom_align" id="Heading"><legend translate>modal.calendar.add.title<legend/></h4>
       		</div>
         <div class="modal-body">
 			<div class="row">
@@ -73,8 +73,8 @@
        		</div>
 		</div>
         <div class="modal-footer ">
-        	<button type="button" class="btn btn-warning" ng-click="ok()"><span class="fa fa-check-circle-o"></span> <spring:message code="modal.delete.questionYes"/></button>
-        	<button type="button" class="btn btn-warning" ng-click="cancel()"><span class="fa fa-close"></span> <spring:message code="modal.delete.questionNo"/></button>
+        	<button type="button" class="btn btn-warning" ng-click="ok()"><span class="fa fa-check-circle-o"></span> <legend translate>modal.delete.questionYes<legend/></button>
+        	<button type="button" class="btn btn-warning" ng-click="cancel()"><span class="fa fa-close"></span> <legend translate>modal.delete.questionNo<legend/></button>
       	</div>
 	</script>
 </div>
