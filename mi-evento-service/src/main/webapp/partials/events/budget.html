@@ -5,22 +5,22 @@
 			<table class="table table-bordered"
 				style="width: 90%; margin-left: 10px; margin-top: 10px">
 				<tr class="active">
-					<th><legend translate>budget.tableType<legend/></th>
-					<th><legend translate>budget.tableName<legend/></th>
-					<th><legend translate>budget.tablePhone<legend/></th>
-					<th><legend translate>budget.tablePrice<legend/></th>
-					<th><legend translate>budget.tableView<legend/></th>
-					<th><legend translate>budget.tableDelete<legend/></th>
-					<th><legend translate>budget.tableSelected<legend/></th>
-					<th><legend translate>budget.tableCompareTo<legend/></th>
-					<th><legend translate>budget.tableMoreCheaper<legend/></th>
+					<th><span translate>budget.tableType<span/></th>
+					<th><span translate>budget.tableName<span/></th>
+					<th><span translate>budget.tablePhone<span/></th>
+					<th><span translate>budget.tablePrice<span/></th>
+					<th><span translate>budget.tableView<span/></th>
+					<th><span translate>budget.tableDelete<span/></th>
+					<th><span translate>budget.tableSelected<span/></th>
+					<th><span translate>budget.tableCompareTo<span/></th>
+					<th><span translate>budget.tableMoreCheaper<span/></th>
 				</tr>
 				<tbody>
 					<tr ng-repeat-start="item in items">
 						<td colspan="9" ng-click="order.collapseRows = !order.collapseRows" class="collapsible-row">
 							{{item.providerType}}  
 							<span ng-class="{'caret':!order.collapseRows, 'right-caret':order.collapseRows}"></span>
-							 <strong class="text-center"><spring:message code="budget.tableTotalBudget"/><span class="text-danger">{{item.totalBudget}}</span></strong>
+							 <strong class="text-center"><span translate>budget.tableTotalBudget</span><span class="text-danger">{{item.totalBudget}}</span></strong>
 						</td>
 					</tr>
 					<tr ng-repeat-end ng-repeat="provider in item.providers" ng-hide="order.collapseRows">
@@ -97,7 +97,7 @@
 <!-- 			</div> -->
 <!-- 		</div> -->
 		<div class="col-md-4">
-			<button type="button" class="btn btn-primary" ng-click="saveSelectedProviders()"><legend translate>budget.buttonSave<legend/></button>
+			<button type="button" class="btn btn-primary" ng-click="saveSelectedProviders()"><span translate>budget.buttonSave<span/></button>
 		</div>
 	</div>		
 </div>

@@ -4,12 +4,12 @@
 			<table id="providerEventTable" class="table table-hover" ng-show="providers != null && providers.length">
 				<thead>
 					<tr>
-						<th><legend translate>event.provider.tableType<legend/></th>
-						<th><legend translate>event.provider.tableName<legend/></th>
-						<th><legend translate>event.provider.tablePhone<legend/></th>
-						<th><legend translate>event.provider.tablePrice<legend/></th>
-						<th><legend translate>event.provider.tableView<legend/></th>
-						<th><legend translate>event.provider.tableDelete<legend/></th>
+						<th><span translate>event.provider.tableType<span/></th>
+						<th><span translate>event.provider.tableName<span/></th>
+						<th><span translate>event.provider.tablePhone<span/></th>
+						<th><span translate>event.provider.tablePrice<span/></th>
+						<th><span translate>event.provider.tableView<span/></th>
+						<th><span translate>event.provider.tableDelete<span/></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -46,7 +46,7 @@
 	<div class="row" ng-controller="ProviderSearchController">
 		<div class="dropdown" dropdown>
 			<button class="btn btn-primary dropdown-toggle" dropdown-toggle aria-expanded="true">
-				<legend translate>event.provider.buttonAdd<legend/><span class="caret glyphiconSpace"></span>
+				<span translate>event.provider.buttonAdd<span/><span class="caret glyphiconSpace"></span>
 			</button>
 			<ul class="dropdown-menu" role="menu">
 				<li ng-repeat="type in types | orderBy:'toString()'"><a href ng-click="search(type)">{{type}}</a></li>

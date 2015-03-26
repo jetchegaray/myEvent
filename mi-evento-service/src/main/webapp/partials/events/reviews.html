@@ -2,8 +2,8 @@
 		<div ng-repeat="provider in providersWithoutReviews">
 	    	<div ng-show="!provider.isReviewOK" animated rotateOutUpRight class="row well" style="border: 1px;">
 			  		<div class="col-md-4">
-	               		<h5 class="list-group-item-heading font-thirdtitle"><span style="font-weight: bold;"><legend translate>reviews.titleprovider<legend /></span> {{provider.businessName}}</h5>
-	               		<h5 class="list-group-item-heading font-thirdtitle"><span style="font-weight: bold;"><legend translate>reviews.titletype<legend /></span>{{provider.providerType}}</h5>
+	               		<h5 class="list-group-item-heading font-thirdtitle"><span style="font-weight: bold;"><span translate>reviews.titleprovider<span /></span> {{provider.businessName}}</h5>
+	               		<h5 class="list-group-item-heading font-thirdtitle"><span style="font-weight: bold;"><span translate>reviews.titletype<span /></span>{{provider.providerType}}</h5>
 	               		<figure class="pull-left" ng-show="provider.photos.length != 0">
 	               			<img style="width: 350px;height: 145px;" class="media-object img-rounded img-responsive"  ng-src="{{provider.photos[0]}}" alt="placehold.it/350x250" >
 	               		</figure>
@@ -23,10 +23,10 @@
 			              		<span style="font-size : 20px;"> <rating ng-model="provider.newReview.rating" max="5" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating></span>
 			              		<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar">{{percent}}%</span>
 			              	</div>
-		                  	<spring:message code="reviews.average"/> {{review.rating}} <small> / </small> 5
+		                  	<span translate>reviews.average</span> {{review.rating}} <small> / </small> 5
 		                  	    <div style="padding-top: 50%;">
-									<button class="btn btn-primary btn-md" type="submit" ng-click="save(provider)"><legend translate>reviews.buttonSave<legend /></button>
-									<button class="btn btn-danger  btn-md" type="submit" ng-click="cancel()"><legend translate>reviews.buttonCancel<legend /></button>
+									<button class="btn btn-primary btn-md" type="submit" ng-click="save(provider)"><span translate>reviews.buttonSave<span /></button>
+									<button class="btn btn-danger  btn-md" type="submit" ng-click="cancel()"><span translate>reviews.buttonCancel<span /></button>
 								</div>
 						</div>
 					</form>

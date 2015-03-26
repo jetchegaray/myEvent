@@ -118,54 +118,54 @@
 				<nav class="navbar navbar-default" role="navigation">
 					<div class="container">
 						<div class="navbar-header page-scroll">
-							<a class="navbar-brand page-scroll" href="#page-top"><spring:message code="index.myEvent"/></a>
+							<a class="navbar-brand page-scroll" href="#page-top"><span translate>index.myEvent</span></a>
 						</div>
 		
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<ul class="nav navbar-nav">
 							<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
 							
-							<li class="dropdown" dropdown><a href="#" class="dropdown-toggle" dropdown-toggle><spring:message code="index.events"/><span class="caret"></span></a>
+							<li class="dropdown" dropdown><a href="#" class="dropdown-toggle" dropdown-toggle><span translate>index.events</span><span class="caret"></span></a>
 		
 								<ul class="dropdown-menu" role="menu">
 									<li ng-repeat="event in $root.loggedUser.events | orderBy:+name">
 										<a href ng-click="$root.selectEvent(event)">{{event.name}}</a></li>
 									<li class="divider" ng-show="$root.loggedUser.events != null && $root.loggedUser.events.length"></li>
-									<li><a ui-sref="eventState.eventCreate"><spring:message code="index.createNewEvent"/></a></li>
+									<li><a ui-sref="eventState.eventCreate"><span translate>index.createNewEvent</span></a></li>
 								</ul>
 							</li>
 							
-							<li class="dropdown" dropdown><a href="#" class="dropdown-toggle" dropdown-toggle><spring:message code="index.services"/><span class="caret"></span></a>
+							<li class="dropdown" dropdown><a href="#" class="dropdown-toggle" dropdown-toggle><span translate>index.services</span><span class="caret"></span></a>
 		
 								<ul class="dropdown-menu" role="menu" ng-controller="ProviderTypeController">
 									<li ng-repeat="type in types | orderBy:'toString()'"><a ui-sref="providerListState({searchLocationTypeRequest : {providerType : type}})">{{type}}</a></li>
 								</ul>
 							</li>
 							
-							<li class="dropdown" dropdown><a href="#" class="dropdown-toggle" dropdown-toggle><spring:message code="index.new"/><span class="caret"></span></a>
+							<li class="dropdown" dropdown><a href="#" class="dropdown-toggle" dropdown-toggle><span translate>index.new</span><span class="caret"></span></a>
 								<ul class="dropdown-menu" role="menu">
-									<li><a href="#eventTypes"><spring:message code="index.news.1"/></a></li>
-									<li><a href="#features"><spring:message code="index.news.2"/></a></li>
+									<li><a href="#eventTypes"><span translate>index.news.1</span></a></li>
+									<li><a href="#features"><span translate>index.news.2</span></a></li>
 									<li class="divider"></li>
-									<li class="dropdown-header"><spring:message code="index.news.next"/></li>
-									<li><a href="#"><spring:message code="index.news.next.1"/></a></li>
-									<li><a href="#"><spring:message code="index.news.next.2"/></a></li>
+									<li class="dropdown-header"><span translate>index.news.next</span></li>
+									<li><a href="#"><span translate>index.news.next.1</span></a></li>
+									<li><a href="#"><span translate>index.news.next.2</span></a></li>
 								</ul>
 							</li>
 						
-						<li><a class="page-scroll" href="#contact"><spring:message code="index.contact"/></a>
+						<li><a class="page-scroll" href="#contact"><span translate>index.contact</span></a>
 						</li>	
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li id="nav-login-btn" ng-show="$root.loggedUser == null">
-								<a ui-sref="loginState"> <spring:message code="index.login"/><span class="fa fa-user text-primary glyphiconSpace"></span></a></li>
+								<a ui-sref="loginState"> <span translate>index.login</span><span class="fa fa-user text-primary glyphiconSpace"></span></a></li>
 							<li id="nav-login-btn" class="dropdown"  dropdown ng-show="$root.loggedUser != null">
 								<a href="#" class="dropdown-toggle" dropdown-toggle>
 									{{$root.loggedUser.email}} <i class="fa fa-user text-success glyphiconSpace"></i>
 									<span class="caret"></span>
 								</a>
 								<ul class="dropdown-menu" role="menu">
-									<li><a href ng-click="$root.logout()"><spring:message code="index.logout"/></a></li>
+									<li><a href ng-click="$root.logout()"><span translate>index.logout</span></a></li>
 								</ul>
 							</li>
 						</ul>
@@ -187,11 +187,11 @@
 		<footer class="container">
 			<div class="row omb_row-sm-offset-3 line"></div>
 			<p class="pull-right">
-				<a href="#"><spring:message code="index.toTheTop"/></a>
+				<a href="#"><span translate>index.toTheTop</span></a>
 			</p>
 			<p>
-				&copy; 2014 JE Company, Inc. &middot; <a href="#"><spring:message code="index.privacy"/></a> &middot;
-				<a href="#"><spring:message code="index.terms"/></a>
+				&copy; 2014 JE Company, Inc. &middot; <a href="#"><span translate>index.privacy</span></a> &middot;
+				<a href="#"><span translate>index.terms</span></a>
 			</p>
 		</footer>
 	</div>
