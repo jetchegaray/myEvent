@@ -21,8 +21,11 @@ mieventoControllers.controller("PresentsEventController", ["$scope", "$state", "
 			});
 		}
 		
-		$scope.addDescription = function(description) {
-			$scope.presents.descriptions.push(description);
+		$scope.addDescription = function(description,present) {
+			if (present.descriptions == null){
+				present.descriptions = [];
+			}
+			present.descriptions.push(description);
 			
 			var user = applicationContext.getUserContext().getLoggedUser();
 			userService.update(user, function() {

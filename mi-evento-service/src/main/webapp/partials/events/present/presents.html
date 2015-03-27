@@ -1,42 +1,47 @@
 <div>
  	<div class="row" ng-repeat="present in presents">
-		<div class="col-md-4 font-secondtitle">
-				{{present.placeName}}
-			<span class="col-md-4 font-fourtitle">
-				<i class="fa fa-map-marker danger"> {{present.locationCredit.streetAddress.street}}
-					<span ng-show="present.locationCredit.streetAddress.number !=null && present.locationCredit.streetAddress.number != 0">{{provider.location.streetAddress.number}}</span>
-					{{present.locationCredit.streetAddress.additionalInfo}}
-					{{present.locationCredit.streetAddress.neighborhood}}
-					{{present.locationCredit.city}} ({{present.locationCredit.province}})
-				</i>
-			</span>
-			<span class="col-md-4 font-secondtitle pull-right">
-				${{present.totalBudget}}
-			</span>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<table id="desciptionsTable" class="table table-hover">
-					<thead>
-					  <tr class="text-center">
-					     <th>Description Object</th>
-					  </tr>
-					</thead>
-					<tbody>
-						 <tr ng-repeat="description in present.descriptions">
-						 	<a href="#" editable-text="description" onbeforesave="save($data)">{{ description }}</a>
-						 </tr>
-						 <tr>
-							 <a href="#" editable-text="description" onbeforesave="addDescription($data)">{{ description }}</a>
-						 </tr>
-					</tbody>
-				</table>	
+ 		<div class="row">
+			<div class="col-md-6 font-secondtitle">
+					{{present.locationCredit.placeName}}
+					<span class="col-md-6 font-fourtitle">
+						<i class="fa fa-map-marker danger"> {{present.locationCredit.streetAddress.street}}
+							<span ng-show="present.locationCredit.streetAddress.number !=null && present.locationCredit.streetAddress.number != 0">{{provider.location.streetAddress.number}}</span>
+							{{present.locationCredit.streetAddress.additionalInfo}}
+							{{present.locationCredit.streetAddress.neighborhood}}
+							{{present.locationCredit.city}} {{present.locationCredit.province}}
+						</i>
+					</span>
+			</div>
+			<div>	
+				<span class="col-md-6 font-secondtitle pull-right">
+					${{present.totalBudget}}
+				</span>
 			</div>
 		</div>
-	</div>	
-	<div class="row">
-		<div class="col-md-4">
-			<button class="btn btn-primary" ng-click="goAddPresent()"><i class="fa fa-plus"></i>save</button>
+		<div class="row">
+    		<div class="col-md-12 table-responsive">
+				<table class="table table-bordered table-hover table-sortable" id="tab_logic">
+					<thead>
+						<tr class="text-center">
+				     		<th><span translate>presents.tableObject<span /></th>
+				     	 	<th><span translate>guest.tableDelete<span /></th>
+				  		</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="description in present.descriptions">
+			 				<td>{{ description || 'Nothing'}}</td>
+				 				<td>
+				 					<div ng-controller="DeleteConfirmationModalController">
+	    			  	 				<p><button class="btn btn-danger btn-xs" ng-click="openDeleteListConfirmation(present.descriptions,description)"><span class="fa fa-trash"></span></button></p>
+	 		       					</div>
+					 			</td>
+						</tr>
+				 		<tr>
+					 		<td><a href="#" editable-text="description" onbeforesave="addDescription($data,present)">Add object in the list</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 </div>

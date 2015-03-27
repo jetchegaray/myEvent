@@ -187,4 +187,5 @@ mieventoContext.service("eventContext",function(){
 		}
 		selectedEvent.presents.push(present);	
 	}
+	
 });
