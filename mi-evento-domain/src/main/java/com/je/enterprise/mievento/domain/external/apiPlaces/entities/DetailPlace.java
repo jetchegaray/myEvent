@@ -28,6 +28,8 @@ public class DetailPlace {
 	
 	private List<Photo> photos;
 	private List<String> types;	
+	//se agregan al convertir las referencias.
+	private List<String> photoLocations;	
 	
 	private Geometry geometry;
 	private Double rating;
@@ -136,6 +138,14 @@ public class DetailPlace {
 				return input.getReference();
 			}
 		});
+	}
+
+	public List<String> getPhotoLocations() {
+		return photoLocations;
+	}
+
+	public void setPhotoLocations(List<String> photoLocations) {
+		this.photoLocations = photoLocations;
 	}
 	
 	

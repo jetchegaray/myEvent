@@ -31,16 +31,6 @@ mieventoControllers.controller("ProviderSearchController",["$scope", "$state", "
 			applicationContext.getExceptionContext().setDanger(error.data);
 		});
 		
-		$scope.countries = applicationContext.getCountryContext().getAllCountries();
-		if ($scope.countries == null){
-			countryService.getAll(function(data) {
-				$scope.countries = data;
-				applicationContext.getCountryContext().setAllCountries(data);
-			}, function(error) {
-				applicationContext.getExceptionContext().setDanger(error.data);
-			});	
-		}
-		
 		$scope.search = function(providerType){
 			var locationOwn = applicationContext.getEventContext().getPlaceSelectedEvent();
 			var providers = applicationContext.getEventContext().getProvidersSelectedEvent();
@@ -79,13 +69,33 @@ mieventoControllers.controller("ProviderSearchController",["$scope", "$state", "
 			$state.go("providerAdvancedSearch");
 		}
 		
-		$scope.loadStates = function(){
-			$scope.states = $scope.search.country.states;
-		}
-		$scope.loadCities = function(){
-			$scope.cities = $scope.search.state.cities;
-		}
+		
 }]);
+
+
+mieventoControllers.controller("LocationSearchComboController",["$scope", "$state", "countryService","providerService", "applicationContext",
+                                                           function($scope, $state, countryService, providerService,applicationContext){
+	
+	$scope.countries = applicationContext.getCountryContext().getAllCountries();
+	if ($scope.countries == null){
+		countryService.getAll(function(data) {
+			$scope.countries = data;
+			applicationContext.getCountryContext().setAllCountries(data);
+		}, function(error) {
+			applicationContext.getExceptionContext().setDanger(error.data);
+		});	
+	}
+	
+	$scope.loadStates = function(){
+		$scope.states = $scope.search.country.states;
+		$scope.search.state = ""; 
+	}
+	$scope.loadCities = function(){
+		$scope.cities = $scope.search.state.cities;
+		$scope.search.city = ""; 
+	}
+}]);
+
 
 
 

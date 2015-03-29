@@ -18,7 +18,7 @@ public class CitiesFilterProvider implements CriteriaFilterProvider{
 	public Query<ProviderEntity> buildQueryCriteria(ProviderDAO providerDAO){
 	
 		Query<ProviderEntity> query = providerDAO.createQuery().disableValidation().enableSnapshotMode();
-		query.criteria("location.countryCode").equal(this.country.getName());
+		query.criteria("location.countryCode").equal(this.country);
 		return query;
 	}
 

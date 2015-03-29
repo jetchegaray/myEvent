@@ -1,6 +1,14 @@
 package com.je.enterprise.mievento.domain.external.apiPlaces.transformer.type;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 public enum ConditionRuleProviderKeyWord {
 
@@ -8,21 +16,21 @@ public enum ConditionRuleProviderKeyWord {
 	AND_WEDD_HALL(Pair.of("salon","boda")),
 	AND_WEDD_HALL_2(Pair.of("salon","casamiento")),
 	AND_BIRTH_HALL(Pair.of("salon","cumpleaños")),
+	AND_BIRTH_HALL_2(Pair.of("salon","infantil")),
 	AND_PARTY_HALL(Pair.of("salon","fiestas")),
+	AND_PARTY_HALL_2(Pair.of("salon","infantil")),
 	AND_BAR_HALL(Pair.of("salon","mitzvah")),
 	AND_SUIT(Pair.of("traje","casamiento")),
 	AND_DRESS(Pair.of("vestidos","casamiento")),
 	AND_ALIZ(Pair.of("alianza","casamiento")),
 	AND_RINGS(Pair.of("anillo","casamiento")),
-	AND_CAKE(Pair.of("tortas","casamiento")),
-	AND_CAKE_2(Pair.of("torta","casamiento")),
+	AND_CAKE(Pair.of("torta","casamiento")),
 	AND_DECORATION(Pair.of("decoracion","evento")),
 	AND_DECORATION_2(Pair.of("decoracion","fiesta")),
 	AND_DECORATION_3(Pair.of("decoracion","casamiento")),
 	AND_BARMAN(Pair.of("barman","evento")),
 	AND_BARMAN_2(Pair.of("barman","fiesta")),
-	AND_DJ(Pair.of("disc jockey","fiestas")),
-	AND_DJ_2(Pair.of("disc jockey","evento")),
+	AND_DJ(Pair.of("disc","jockey")),
 	
 	OR_FOT(Pair.of("fotografo","fotografo")),
 	OR_VID(Pair.of("video","video"));
@@ -47,12 +55,38 @@ public enum ConditionRuleProviderKeyWord {
 		return this.name().contains("OR");
 	}
 	
-	public String toStringWithSpace(){
-		if (this.isAND()){
-			return this.arguments.toString("%1$s %2$s");
+	
+	public static Set<String> getKeyWords(){
+		Set<String> keyWords = Sets.newLinkedHashSet();
+		
+		for (ConditionRuleProviderKeyWord rule : ConditionRuleProviderKeyWord.values()) {
+			keyWords.add(rule.arguments.getLeft());
+			keyWords.add(rule.arguments.getRight());
 		}
 		
-		return this.arguments.toString("%1$s");
+		return Sets.newLinkedHashSet(ConditionRuleProviderKeyWord.shuffle(keyWords));
 	}
+	
+	private static <T> List<T> shuffle(Iterable<T> iterable)
+    {
+        List<T> list = Lists.newArrayList(iterable);
+        Collections.shuffle(list);
+        return list;
+    }
+	
+	
+	public static Set<String> getKeyWordsWithOut(String providerTypeName){
+		
+		Set<String> keywords = ConditionRuleProviderKeyWord.getKeyWords();
+		Set<String> keywordsWitout = Sets.newLinkedHashSet(); 
+		
+		for (String keyword : keywords) {
+			if (!StringUtils.containsIgnoreCase(providerTypeName,keyword)){
+				keywordsWitout.add(keyword);
+			}
+		}
+		return keywordsWitout;
+	}
+	
 	
 }

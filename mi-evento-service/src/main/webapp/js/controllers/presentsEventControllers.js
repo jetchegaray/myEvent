@@ -42,15 +42,6 @@ mieventoControllers.controller("PresentsEventController", ["$scope", "$state", "
 mieventoControllers.controller("DetailPresentEventController", ["$scope", "$state", "applicationContext", "userService", "countryService", 
                 function($scope, $state, applicationContext, userService, countryService) {
 	
-		$scope.countries = applicationContext.getCountryContext().getAllCountries();
-		if ($scope.countries == null){
-			countryService.getAll(function(data) {
-				$scope.countries = data;
-				applicationContext.getCountryContext().setAllCountries(data);
-			}, function(error) {
-				applicationContext.getExceptionContext().setDanger(error.data);
-			});	
-		}
 	
 		$scope.save = function() {
 			var location = {
@@ -73,10 +64,4 @@ mieventoControllers.controller("DetailPresentEventController", ["$scope", "$stat
 			});
 		}
 		
-		$scope.loadStates = function(country){
-			$scope.states = country.states;
-		}
-		$scope.loadCities = function(state){
-			$scope.cities = state.cities;
-		}
  } ]);

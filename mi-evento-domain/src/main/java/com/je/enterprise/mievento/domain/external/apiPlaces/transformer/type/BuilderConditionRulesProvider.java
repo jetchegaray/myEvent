@@ -17,12 +17,12 @@ public class BuilderConditionRulesProvider {
 		rulesByProvider.put(ProviderType.WEDDING_HALL, Arrays.asList(ConditionRuleProviderKeyWord.AND_WEDD_HALL,ConditionRuleProviderKeyWord.AND_WEDD_HALL_2));
 		rulesByProvider.put(ProviderType.PHOTOGRAPHER, Arrays.asList(ConditionRuleProviderKeyWord.OR_FOT));
 		rulesByProvider.put(ProviderType.VIDEO, Arrays.asList(ConditionRuleProviderKeyWord.OR_VID));
-		rulesByProvider.put(ProviderType.DJ, Arrays.asList(ConditionRuleProviderKeyWord.AND_DJ,ConditionRuleProviderKeyWord.AND_DJ_2));
-		rulesByProvider.put(ProviderType.BIRTHDAY_HALL, Arrays.asList(ConditionRuleProviderKeyWord.AND_BIRTH_HALL));
+		rulesByProvider.put(ProviderType.DJ, Arrays.asList(ConditionRuleProviderKeyWord.AND_DJ));
+		rulesByProvider.put(ProviderType.BIRTHDAY_HALL, Arrays.asList(ConditionRuleProviderKeyWord.AND_BIRTH_HALL,ConditionRuleProviderKeyWord.AND_BIRTH_HALL_2,ConditionRuleProviderKeyWord.AND_PARTY_HALL,ConditionRuleProviderKeyWord.AND_PARTY_HALL));
 		rulesByProvider.put(ProviderType.BAR_MITZVAH_HALL, Arrays.asList(ConditionRuleProviderKeyWord.AND_BAR_HALL));
 		rulesByProvider.put(ProviderType.DRESSES_SUITS, Arrays.asList(ConditionRuleProviderKeyWord.AND_DRESS,ConditionRuleProviderKeyWord.AND_SUIT));
 		rulesByProvider.put(ProviderType.RINGS, Arrays.asList(ConditionRuleProviderKeyWord.AND_RINGS,ConditionRuleProviderKeyWord.AND_ALIZ));
-		rulesByProvider.put(ProviderType.CAKES, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAKE,ConditionRuleProviderKeyWord.AND_CAKE_2));
+		rulesByProvider.put(ProviderType.CAKES, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAKE));
 		rulesByProvider.put(ProviderType.BARMAN, Arrays.asList(ConditionRuleProviderKeyWord.AND_BARMAN,ConditionRuleProviderKeyWord.AND_BARMAN_2));
 		rulesByProvider.put(ProviderType.DECORATION, Arrays.asList(ConditionRuleProviderKeyWord.AND_DECORATION,ConditionRuleProviderKeyWord.AND_DECORATION_2,ConditionRuleProviderKeyWord.AND_DECORATION_3));
 			

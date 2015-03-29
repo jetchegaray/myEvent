@@ -7,7 +7,6 @@ import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
@@ -19,7 +18,6 @@ import com.je.enterprise.mievento.domain.external.apiPlaces.entities.DetailPlace
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.SearchPlace;
 import com.je.enterprise.mievento.domain.external.apiPlaces.services.ApiPlacesServicies;
 import com.je.enterprise.mievento.domain.external.apiPlaces.services.ResponseContainerObjects;
-import com.je.enterprise.mievento.domain.external.apiPlaces.transformer.type.BuilderConditionRulesProvider;
 import com.je.enterprise.mievento.domain.external.apiPlaces.transformer.type.ConditionRuleProviderKeyWord;
 import com.je.enterprise.mievento.domain.service.impl.CountryService;
 import com.je.enterprise.mievento.domain.service.impl.ProviderService;
@@ -58,32 +56,33 @@ public class FullProvidersServiceData {
 	private List<DetailPlace> getData() {
 		
 		List<DetailPlace> detailPlaces = Lists.<DetailPlace>newArrayList();
-		List<ConditionRuleProviderKeyWord> keyWords = BuilderConditionRulesProvider.getRules().values().iterator().next();
+		Set<String> keyWords = ConditionRuleProviderKeyWord.getKeyWords();
 		
 		Set<CityEntity> cities = countryService.getAllCitiesInCountry(CountryCode.AR);
 		Set<CityEntity> alredyCity = this.providerService.getAllCitiesThereProviders(CountryCode.AR);
 		
 		Set<CityEntity> defintiveCities = Sets.difference(cities, alredyCity);
-		
+
 		for (CityEntity city : defintiveCities) {
 				String latlng = city.getLatLongToSearch();
-				for (ConditionRuleProviderKeyWord keyWord : keyWords) {
+				for (String keyWord : keyWords) {
 					
-					ResponseContainerObjects<SearchPlace> response = apiPlacesServicies.getPlaces(latlng, keyWord.toStringWithSpace());
+					ResponseContainerObjects<SearchPlace> response = apiPlacesServicies.getPlaces(latlng, keyWord);
 					if (response.getStatus().equalsIgnoreCase("OVER_QUERY_LIMIT")){
 						return detailPlaces;
 					}
 					
 					for (SearchPlace searchPlace : response.getData()) {
 						DetailPlace detailPlace = apiPlacesServicies.getDetailPlace(searchPlace.getReference());
-						
-						try {
-							Validate.notBlank(detailPlace.getPhone());
-							detailPlaces.add(detailPlace);
-						} catch (Exception e) {
-							//nullPointer or illegalArgument
-							continue;
+					
+						List<String> locationsPhotos = Lists.newArrayList();
+						if (detailPlace.getPhotoReferences() != null){
+							for (String reference : detailPlace.getPhotoReferences()) {
+								locationsPhotos.add(apiPlacesServicies.getPhoto(reference));
+							}
+							detailPlace.setPhotoLocations(locationsPhotos);
 						}
+						detailPlaces.add(detailPlace);
 					}
 				}
 		}
@@ -112,11 +111,12 @@ public class FullProvidersServiceData {
 				try {
 					this.providerService.create(providerEntity);
 				} catch (Exception e) {
-					logger.error("Error Save in DataBase provider : {} from places api : {} "+ providerEntity.getBusinessId() +  ExceptionUtils.getStackTrace(e));
+					logger.error("Error Save in DataBase provider : %s from places api : %s "+ providerEntity.getBusinessId() +  ExceptionUtils.getStackTrace(e));
+					continue;
 				}
 			}
 		}catch(Exception ex){
-			logger.debug(" Save Data entities is null : ");
+			logger.debug(" Save Data entities is null : ",ex);
 		}
 	}
 

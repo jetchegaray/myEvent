@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.tuple.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +24,6 @@ import com.je.enterprise.mievento.domain.entity.location.StreetAddressEntity;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.AddressComponent;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.DetailPlace;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.DetailPlaceReview;
-import com.je.enterprise.mievento.domain.external.apiPlaces.services.ApiPlacesServicies;
 import com.je.enterprise.mievento.domain.external.apiPlaces.transformer.type.BuilderConditionRulesProvider;
 import com.je.enterprise.mievento.domain.external.apiPlaces.transformer.type.ConditionRuleProviderKeyWord;
 import com.je.enterprise.mievento.domain.transformer.Transformer;
@@ -32,13 +32,10 @@ import com.je.enterprise.mievento.domain.transformer.Transformer;
 public class ProviderPlacesTransformer extends
 		Transformer<ProviderEntity, DetailPlace> {
 	
-	private ApiPlacesServicies apiPlacesServicies;
-	
 	private Logger logger = LoggerFactory.getLogger(ProviderPlacesTransformer.class);
 
 	@Autowired
-	public ProviderPlacesTransformer(ApiPlacesServicies apiPlacesServicies) {
-		this.apiPlacesServicies = apiPlacesServicies;
+	public ProviderPlacesTransformer() {
 	}
 	
 	
@@ -59,7 +56,7 @@ public class ProviderPlacesTransformer extends
 		String phone = StringUtils.EMPTY;
 		BigDecimal price = BigDecimal.ZERO;
 		BigDecimal estimatedPrice = BigDecimal.ZERO;
-		List<String> photos = this.transformToLocationPath(detailPlace.getPhotoReferences());
+		List<String> photos = detailPlace.getPhotoLocations();
 		
 		if (photos.isEmpty()){
 			logger.debug("Photos vacias para el id : {}",detailPlace.getReference());
@@ -68,6 +65,9 @@ public class ProviderPlacesTransformer extends
 		
 		List<ProviderReviewEntity> reviews = this.getReviews(detailPlace.getReviews(),detailPlace.getRating());
 		ProviderType providerType = getProviderType(detailPlace);
+		
+		Validate.notNull(providerType,"El providertype es null cuando es "+detailPlace.getName());
+		Validate.notBlank(cellPhone, "No tiene telefono");
 		//only here to eliminate duplicates id
 		ProviderEntity entity = new ProviderEntity(detailPlace.getId(), businessName,description,location,email,cellPhone,phone,price,estimatedPrice,photos,providerType,reviews);
 		
@@ -81,9 +81,16 @@ public class ProviderPlacesTransformer extends
 		if (reviewsPlace == null){
 			return reviews;
 		}
+		Double ratingDef = (rating != null) ? rating : Double.valueOf(3);
 		
 		for (DetailPlaceReview detailPlaceReview : reviewsPlace) {
-			reviews.add(new ProviderReviewEntity(detailPlaceReview.getAuthor(),detailPlaceReview.getText(),BigDecimal.valueOf(rating)));
+			try{
+				Validate.notBlank(detailPlaceReview.getAuthor());
+				Validate.notBlank(detailPlaceReview.getText());
+				reviews.add(new ProviderReviewEntity(detailPlaceReview.getAuthor(),detailPlaceReview.getText(),BigDecimal.valueOf(ratingDef)));
+			}catch(Exception ex){
+				continue;
+			}
 		}
 		return reviews;
 	}
@@ -123,6 +130,11 @@ public class ProviderPlacesTransformer extends
 				number = BigDecimal.valueOf(Long.valueOf(addressComponent.getLongName()));
 			}
 		}
+		
+		Validate.notNull(countryCode," El countrycode es null para el address"+detailPlace.getAddress());
+		Validate.notNull(province," El province es null para el address"+detailPlace.getAddress());
+		Validate.notNull(city," El city es null para el address"+detailPlace.getAddress());
+		
 //		logger.info(String.format(" The detail object id : %s, with addresComponent = %s DOESNT MATCH TO ANYONE IN MY MODEL. total dir from api is = %s",detailPlace.getReference(),addressComponent,detailPlace.getAddress()));
 		
 		StreetAddressEntity streetAddress = new StreetAddressEntity(street, number, additionalInfo, neighborhood);
@@ -154,18 +166,7 @@ public class ProviderPlacesTransformer extends
 		 return null;
 		 
 	}
-	
 
-	private List<String> transformToLocationPath(List<String> photoReferences) {
-		
-		List<String> locationsPhotos = Lists.newArrayList();
-		if (photoReferences != null){
-			for (String reference : photoReferences) {
-				locationsPhotos.add(apiPlacesServicies.getPhoto(reference));
-			}
-		}
-		return locationsPhotos;
-	}
 	
 
 }

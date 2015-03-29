@@ -5,7 +5,7 @@
 	            <div class="panel-heading"><span translate>home.searchLabel</span></div>
 	            <div class="panel-body">
 	               <form role="form" style="margin: 25px;">
-	                	<div class="form-group">
+	                	<div class="form-group" ng-controller="LocationSearchComboController">
 			                 <div class="col-sm-4">
 								<ui-select ng-model="search.providerType" theme="selectize">
 					   				<ui-select-match placeholder="Provider type">{{$select.selected}}</ui-select-match>
@@ -31,13 +31,14 @@
 	                </form>
 	            </div>
 	            <div class="panel-footer">
-	                <span translate>home.searchFooter.notRegistered</span><a href ui-sref="signUpState"><span translate>home.searchFooter.registered</span></a></div>
+	                <span translate>home.searchFooter.notRegistered</span><a href ui-sref="signUpState"><span translate>home.searchFooter.registered</span></a>
+	                <a href ui-sref="providerAdvancedSearch"><span translate class="pull-right">advancedSearch.link</span></a>
 	           </div>
 	        	
 	    </div>
 	</div>
 </div>
-
+</div>
 
 <div class="row">
 <div id="eventTypes" class="container" style="margin-top: 5%;">
@@ -77,9 +78,9 @@
 	<div class="row featurette">
 		<div class="col-md-7">
 			<h2 class="featurette-heading">
-				<span translate>home.appFeature.1.title<span /><span class="text-muted"><span translate>home.appFeature.1.subtitle<span /></span>
+				<span translate>home.appFeature.1.title</span><span class="text-muted"><span translate>home.appFeature.1.subtitle</span></span>
 			</h2>
-			<p class="lead"><span translate>home.appFeature.1.desc<span /></p>
+			<p class="lead"><span translate>home.appFeature.1.desc</span></p>
 		</div>
 		<div class="col-md-5">
 			<img class="featurette-image img-responsive"
@@ -96,9 +97,9 @@
 		</div>
 		<div class="col-md-7">
 			<h2 class="featurette-heading">
-				<span translate>home.appFeature.2.title</span><span class="text-muted"><span translate>home.appFeature.2.subtitle<span/></span>
+				<span translate>home.appFeature.2.title</span><span class="text-muted"><span translate>home.appFeature.2.subtitle</span></span>
 			</h2>
-			<p class="lead"><span translate>home.appFeature.2.desc<span/></p>
+			<p class="lead"><span translate>home.appFeature.2.desc</span></p>
 		</div>
 	</div>
 
@@ -107,9 +108,9 @@
 	<div class="row featurette">
 		<div class="col-md-7">
 			<h2 class="featurette-heading">
-				 <span translate>home.appFeature.3.title<span/><span class="text-muted"><span translate>home.appFeature.3.subtitle<span/></span>
+				 <span translate>home.appFeature.3.title</span><span class="text-muted"><span translate>home.appFeature.3.subtitle</span></span>
 			</h2>
-			<p class="lead"><span translate>home.appFeature.3.desc<span/></p>
+			<p class="lead"><span translate>home.appFeature.3.desc</span></p>
 		</div>
 		<div class="col-md-5">
 			<img class="featurette-image img-responsive"

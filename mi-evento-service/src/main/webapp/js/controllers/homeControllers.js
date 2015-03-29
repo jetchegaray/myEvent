@@ -8,21 +8,7 @@ mieventoControllers.controller("HomeController", ["$scope", "$state", "providerS
 			applicationContext.getExceptionContext().setDanger(error.data);
 		});
 		
-		$scope.countries = applicationContext.getCountryContext().getAllCountries();
-		if ($scope.countries == null){
-			countryService.getAll(function(data) {
-				$scope.countries = data;
-				applicationContext.getCountryContext().setAllCountries(data);
-			}, function(error) {
-				applicationContext.getExceptionContext().setDanger(error.data);
-			});	
-		}
-		
-		
-		$scope.loadStates = function(){
-			$scope.states = $scope.search.country.states;
-		}
-		
+	
 		$scope.search = function(){
 			var searchLocation = {
 					countryCode : $scope.search.country.code,

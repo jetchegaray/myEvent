@@ -20,7 +20,7 @@
 				</div>
 			</div>	
 		</div>	
-		<div class="row">
+		<div class="row" ng-controller="LocationSearchComboController">
 			<div class="col-md-4">
 				<ui-select  ng-change="loadStates()" ng-model="search.country" theme="selectize">
 	   				<ui-select-match placeholder="Country">{{$select.selected.name}}</ui-select-match>

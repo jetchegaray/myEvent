@@ -13,7 +13,9 @@ public class StateGeoExternalTransformer extends
 	
 	private static final String PROV_DE = "Provincia de ";
 	private static final String PROV_DEL = "Provincia del ";
-	
+	private static final String DEPT_DE = "Departamento de ";
+	private static final String EST_DE = "Estado de ";
+	private static final String EST = "Estado ";
 
 	@Override
 	protected GEOExternalWrapper transformDomainToApi(StateEntity domainObject) {
@@ -22,8 +24,13 @@ public class StateGeoExternalTransformer extends
 
 	@Override
 	protected StateEntity transformApiToDomain(GEOExternalWrapper apiObject) {
-		String newName = StringUtils.delete(apiObject.getName(), PROV_DE);
-		newName = StringUtils.delete(newName, PROV_DEL);
+		
+		String newName = StringUtils.delete(apiObject.getName(), PROV_DEL);
+		newName = StringUtils.delete(newName, PROV_DE);
+		newName = StringUtils.delete(newName, DEPT_DE);
+		newName = StringUtils.delete(newName, EST_DE);
+		newName = StringUtils.delete(newName, EST);
+		
 		return new StateEntity(newName, apiObject.getLat(), apiObject.getLng(), null);
 	}
 

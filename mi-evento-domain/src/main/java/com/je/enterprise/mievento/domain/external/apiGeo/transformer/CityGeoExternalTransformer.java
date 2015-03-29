@@ -13,6 +13,10 @@ public class CityGeoExternalTransformer extends
 	
 	private static final String PART_DE = "Partido de ";
 	private static final String DEPT_DE = "Departamento de ";
+	private static final String DEPT_DEL = "Departamento del ";
+	private static final String MUN_DE = "Municipio de ";
+	private static final String MUN = "Municipio ";
+	private static final String COUN = "Country ";
 	
 	@Override
 	protected GEOExternalWrapper transformDomainToApi(CityEntity domainObject) {
@@ -21,8 +25,14 @@ public class CityGeoExternalTransformer extends
 
 	@Override
 	protected CityEntity transformApiToDomain(GEOExternalWrapper apiObject) {
+		
 		String newName = StringUtils.delete(apiObject.getName(), PART_DE);
+		newName = StringUtils.delete(newName, DEPT_DEL);
 		newName = StringUtils.delete(newName, DEPT_DE);
+		newName = StringUtils.delete(newName, MUN_DE);
+		newName = StringUtils.delete(newName, MUN);
+		newName = StringUtils.delete(newName, COUN);
+		
 		return new CityEntity(newName, apiObject.getLat(), apiObject.getLng());
 	}
 
