@@ -1,8 +1,10 @@
 <div>
 	<div class="row">
 		<div class="col-md-12">
-			<!-- 			<table id="budgetTable" class="table table-hover" ng-show="providers != null && providers.length"> -->
-			<table class="table table-bordered"
+			<div class="centered-message" class="row" ng-show="providers == null || providers.length == 0">
+				<span class="font-noResult"><span translate>provider.list.notthere<span /></span>
+			</div>
+ 			<table class="table table-bordered" class="table table-hover" ng-show="providers != null && providers.length"
 				style="width: 90%; margin-left: 10px; margin-top: 10px">
 				<tr class="active">
 					<th><span translate>budget.tableType<span/></th>
@@ -35,7 +37,7 @@
 						</td>
 						<td>
 							<p>
-								<button class="btn btn-info btn-xs"
+								<button class="btn btn-info btn-xs btn-outline"
 									ng-click="goToDetailProvider(provider)">
 									<span class="fa fa-eye"></span>
 								</button>
@@ -44,7 +46,7 @@
 						<td>
 							<div ng-controller="DeleteConfirmationModalNotPersistenceController">
 								<p>
-									<button class="btn btn-danger btn-xs" ng-click="openDeleteListConfirmation(item.providers,provider)">
+									<button class="btn btn-danger btn-xs btn-outline" ng-click="openDeleteListConfirmation(item.providers,provider)">
 										<span class="fa fa-trash"></span>
 									</button>
 								</p>
@@ -64,13 +66,13 @@
 			          	</td>
 						<td ng-if="$first">
 							<p>
-								<button class="btn btn-info btn-xs" ng-click="goToSearchAnotherProvider(provider)">
+								<button class="btn btn-info btn-xs btn-outline" ng-click="goToSearchAnotherProvider(provider)">
 									<span class="fa fa-search"></span>
 								</button>
 							</p>
 						</td>
 						<td ng-if="$first"><p>
-								<button class="btn btn-info btn-xs" ng-click="goToMoreCheaper(provider)">
+								<button class="btn btn-info btn-xs btn-outline" ng-click="goToMoreCheaper(provider)">
 									<span class="fa fa-angle-double-down"></span><span class="fa fa-dollar"></span>
 								</button>
 							</p>
@@ -81,23 +83,10 @@
 			</table>
 		</div>
 	</div>
-	<div class="line"></div>
-	<div class="row">
-<!-- 		<div class="col-md-4"> -->
-<!-- 			<div class="dropdown"> -->
-<!-- 				<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" -->
-<!-- 					aria-expanded="true"> -->
-<!-- 					Add Provider<span class="caret glyphiconSpace"></span> -->
-<!-- 				</button> -->
-<!-- 				<ul class="dropdown-menu" role="menu" -->
-<!-- 					ng-controller="ProviderTypeController"> -->
-<!-- 					<li ng-repeat="type in types | orderBy:'toString()'"><a -->
-<!-- 						ui-sref="providerListState({providerType : type})">{{type}}</a></li> -->
-<!-- 				</ul> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
+	<div class="row" ng-show="providers != null && providers.length != 0">
+		<div class="line"></div>
 		<div class="col-md-4">
-			<button type="button" class="btn btn-primary" ng-click="saveSelectedProviders()"><span translate>budget.buttonSave<span/></button>
+			<button   type="button" class="btn btn-primary btn-outline" ng-click="saveSelectedProviders()"><span translate>budget.buttonSave<span/></button>
 		</div>
 	</div>		
 </div>

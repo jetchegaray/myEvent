@@ -16,7 +16,7 @@
 							ng-model="event.initialDate" is-open="opened" min-date="minDate"
 							max-date="maxDate" datepickerOptions="dateOptions" ng-required close-text="Close" ng-change="onDateChange(event.initialDate)"/>
 							<span class="input-group-btn">
-								<button type="button" class="btn btn-default"
+								<button type="button" class="btn btn-default btn-outline"
 									ng-click="open($event)"><i class="fa fa-calendar"></i>
 								</button>
 							</span>
@@ -32,7 +32,7 @@
 		</div>	
 		<div class="row">	
 			<div class="col-sm-2">
-				<button class="btn btn-primary btn-block" type="submit" ng-click="save()"><i class="fa fa-plus glyphiconSpace"></i><span translate>events.detail.buttonAdd<span /></button>
+				<button class="btn btn-primary btn-block btn-outline" type="submit" ng-click="save()"><i class="fa fa-plus glyphiconSpace"></i><span translate>events.detail.buttonAdd<span /></button>
 			</div>
 		</div>		
 	</form>

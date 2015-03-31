@@ -36,11 +36,11 @@ mieventoControllers.controller("ProviderSearchController",["$scope", "$state", "
 			var providers = applicationContext.getEventContext().getProvidersSelectedEvent();
 			
 			var placeProvider = _.filter(providers, function(provider){ return provider.providerType.indexOf("Salon") > -1}); 
-
+			console.log(placeProvider);
 			var locationDefinitive = null;
 			if (locationOwn != null){
 				locationDefinitive = locationOwn;
-			}else if (placeProvider != null && !angular.isUndefined(placeProvider)) {
+			}else if (placeProvider != null && !angular.isUndefined(placeProvider) && _.size(placeProvider) != 0) {
 				locationDefinitive = placeProvider[0].location;
 			}
 			
@@ -73,8 +73,8 @@ mieventoControllers.controller("ProviderSearchController",["$scope", "$state", "
 }]);
 
 
-mieventoControllers.controller("LocationSearchComboController",["$scope", "$state", "countryService","providerService", "applicationContext",
-                                                           function($scope, $state, countryService, providerService,applicationContext){
+mieventoControllers.controller("LocationSearchComboController",["$scope", "countryService", "applicationContext",
+                                                           function($scope, countryService, applicationContext){
 	
 	$scope.countries = applicationContext.getCountryContext().getAllCountries();
 	if ($scope.countries == null){
@@ -87,6 +87,7 @@ mieventoControllers.controller("LocationSearchComboController",["$scope", "$stat
 	}
 	
 	$scope.loadStates = function(){
+		console.log($scope);
 		$scope.states = $scope.search.country.states;
 		$scope.search.state = ""; 
 	}

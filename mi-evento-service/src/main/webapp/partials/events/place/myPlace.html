@@ -9,12 +9,12 @@
 		<div class="row">
 			<div class="col-md-4">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="{{'place.input.name' | translate}}" ng-model="place.businessName" required>
+					<input type="text" class="form-control" placeholder="{{'place.input.name' | translate}}" ng-model="place.businessName" ng-required>
 				</div>
 			</div>
 			<div class="col-md-4">	
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="{{'place.input.price' | translate}}" ng-model="place.price">
+					<input type="text" class="form-control" placeholder="{{'place.input.price' | translate}}" ng-model="place.price" ng-required>
 				</div>
 			</div>	
 		</div>	
@@ -44,19 +44,19 @@
 		<div class="line"></div>
 		<div class="row" ng-controller="LocationSearchComboController">
 			<div class="col-md-4">
-				<ui-select  ng-change="loadStates()" ng-model="search.country" theme="selectize">
+				<ui-select  ng-change="loadStates()" ng-model="search.country" theme="selectize" ng-required>
 	   				<ui-select-match placeholder="{{'advancedSearch.input.country' | translate}}">{{$select.selected.name}}</ui-select-match>
 	   				<ui-select-choices repeat="country in countries">{{country.name}}</ui-select-choices>
 	 			</ui-select>
 			</div>
 			<div class="col-sm-4">
-				<ui-select ng-change="loadCities()" ng-model="search.state" theme="selectize">
+				<ui-select ng-change="loadCities()" ng-model="search.state" theme="selectize" ng-required>
 	   				<ui-select-match placeholder="{{'advancedSearch.input.state' | translate}}">{{$select.selected.name}}</ui-select-match>
 	   				<ui-select-choices repeat="state in states">{{state.name}}</ui-select-choices>
 	 			</ui-select>
 			</div>
 			<div class="col-md-4">
-				<ui-select ng-model="search.city" theme="selectize">
+				<ui-select ng-model="search.city" theme="selectize" ng-required>
 	   				<ui-select-match placeholder="{{'advancedSearch.input.city' | translate}}">{{$select.selected.name}}</ui-select-match>
 	   				<ui-select-choices repeat="city in cities">{{city.name}}</ui-select-choices>
 	 			</ui-select>
@@ -65,7 +65,7 @@
 		<div class="row">
 			<div class="col-md-3">	
 				<div class="form-group">
-					<input type="text" class="form-control" name="neighborhood"
+					<input type="text" class="form-control" name="neighborhood" ng-required
 						placeholder="{{'advancedSearch.input.neighborhood' | translate}}" ng-model="place.location.streetAddress.neighborhood">
 				</div>
 			</div>	
@@ -90,7 +90,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-4">
-				<button type="button" class="btn btn-primary" ng-click="save()"><span translate>place.buttonSave<span/></button>
+				<button type="button" class="btn btn-primary  btn-outline" ng-click="save()"><span translate>place.buttonSave<span/></button>
 			</div>
 		</div>		
 	</form>

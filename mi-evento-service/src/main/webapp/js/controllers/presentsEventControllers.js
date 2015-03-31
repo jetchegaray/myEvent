@@ -44,10 +44,15 @@ mieventoControllers.controller("DetailPresentEventController", ["$scope", "$stat
 	
 	
 		$scope.save = function() {
+			
+			if ($scope.presentForm.$invalid){
+				return;
+			}
+			
 			var location = {
-					countryCode :  $scope.present.search.country.name,
-					province :  $scope.present.search.state.name,
-					city :  $scope.present.search.city.name,
+					countryCode :  $scope.search.country.name,
+					province :  $scope.search.state.name,
+					city :  $scope.search.city.name,
 					streetAddress : $scope.present.locationCredit.streetAddress
 			};
 			

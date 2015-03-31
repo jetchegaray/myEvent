@@ -10,7 +10,6 @@ import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.tuple.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.common.collect.Lists;
@@ -62,7 +61,7 @@ public class ProviderPlacesTransformer extends
 		List<ProviderReviewEntity> reviews = this.getReviews(detailPlace.getReviews(),detailPlace.getRating());
 		ProviderType providerType = getProviderType(detailPlace);
 		
-		Validate.notNull(providerType,"El providertype es null cuando es "+detailPlace.getName());
+		Validate.notNull(providerType,"El providertype es null "+detailPlace.getName());
 		Validate.notBlank(cellPhone, "No tiene telefono");
 		//only here to eliminate duplicates id
 		ProviderEntity entity = new ProviderEntity(detailPlace.getId(), businessName,description,location,email,cellPhone,phone,price,estimatedPrice,photos,providerType,reviews);
@@ -81,8 +80,8 @@ public class ProviderPlacesTransformer extends
 		
 		for (DetailPlaceReview detailPlaceReview : reviewsPlace) {
 			try{
-				Validate.notBlank(detailPlaceReview.getAuthor());
-				Validate.notBlank(detailPlaceReview.getText());
+				Validate.notBlank(detailPlaceReview.getAuthor(),"Author blank");
+				Validate.notBlank(detailPlaceReview.getText(),"Text blank");
 				reviews.add(new ProviderReviewEntity(detailPlaceReview.getAuthor(),detailPlaceReview.getText(),BigDecimal.valueOf(ratingDef)));
 			}catch(Exception ex){
 				continue;

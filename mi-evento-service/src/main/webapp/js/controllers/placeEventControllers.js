@@ -28,7 +28,6 @@ mieventoControllers.controller("PlaceEventController", [ "$scope","$state", "app
                                 function($scope, $state, applicationContext) {
 		
 		$scope.placeSelected = applicationContext.getEventContext().getPlaceSelectedEvent();
-		console.log(angular.toJson($scope.placeSelected));
 		
 		if ($scope.placeSelected == null){
 			$state.go("eventState.myPlace");

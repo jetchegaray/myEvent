@@ -24,14 +24,14 @@
 							$ <a href="#" editable-text="provider.estimatedPrice" onbeforesave="save($data)">{{ provider.estimatedPrice || '0' }}</a>
 						</td>
 						<td><p>
-								<button class="btn btn-info btn-xs" ng-click="goToDetailProvider(provider)">
+								<button class="btn btn-info btn-xs btn-outline" ng-click="goToDetailProvider(provider)">
 									<span class="fa fa-eye"></span>
 								</button>
 							</p>
 						</td>
 						<td><div ng-controller="DeleteConfirmationModalController">
 								<p>
-									<button class="btn btn-danger btn-xs" ng-click="openDeleteListConfirmation(providers,provider)">
+									<button class="btn btn-danger btn-xs btn-outline" ng-click="openDeleteListConfirmation(providers,provider)">
 										<span class="fa fa-trash"></span>
 									</button>
 								</p>
@@ -44,14 +44,13 @@
 	</div>
 	<div class="line"></div>
 	<div class="row" ng-controller="ProviderSearchController">
-		<div class="dropdown" dropdown>
-			<button class="btn btn-primary dropdown-toggle" dropdown-toggle aria-expanded="true">
-				<span translate>event.provider.buttonAdd<span/><span class="caret glyphiconSpace"></span>
-			</button>
-			<ul class="dropdown-menu" role="menu">
+		<div class="ui-group-buttons" dropdown>
+             <button type="button" class="btn btn-primary dropdown-toggle btn-outline" dropdown-toggle popover="{{'event.provider.popover.bytype' | translate}}" popover-trigger="mouseenter" ><span translate>event.provider.buttonAdd</span><span class="caret faSpace"></span></button>
+	         <ul class="dropdown-menu" role="menu">
 				<li ng-repeat="type in types | orderBy:'toString()'"><a href ng-click="search(type)">{{type}}</a></li>
-			</ul>
-		</div>
-		<button class="btn btn-primary" ng-click="toAdvancedSearch()"><i class="fa fa-search"></i></button>
+			 </ul>	 
+			 <div class="or"></div>
+             <button class="btn btn-success btn-outline" ng-click="toAdvancedSearch()"><span translate>advancedSearch.link</span><i class="fa fa-search faSpace"></i></button>
+        </div>
 	</div>
 </div>

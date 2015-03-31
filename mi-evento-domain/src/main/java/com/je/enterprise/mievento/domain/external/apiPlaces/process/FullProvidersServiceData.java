@@ -17,6 +17,7 @@ import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
 import com.je.enterprise.mievento.domain.entity.geo.CityEntity;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.DetailPlace;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.SearchPlace;
+import com.je.enterprise.mievento.domain.external.apiPlaces.entities.StatusResponse;
 import com.je.enterprise.mievento.domain.external.apiPlaces.services.ApiPlacesServicies;
 import com.je.enterprise.mievento.domain.external.apiPlaces.services.ResponseContainerObject;
 import com.je.enterprise.mievento.domain.external.apiPlaces.services.ResponseContainerObjects;
@@ -80,7 +81,11 @@ public class FullProvidersServiceData {
 						if (response.getStatus().equalsIgnoreCase("OVER_QUERY_LIMIT")){
 							return detailPlaces;
 						}
+						
 						DetailPlace detailPlace = responseDetail.getData();
+						if (! responseDetail.getStatus().equals(StatusResponse.OK)){
+							continue;
+						}
 						
 						List<String> locationsPhotos = Lists.newArrayList();
 						if (detailPlace.getPhotoReferences() != null){
