@@ -7,6 +7,7 @@ import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
@@ -17,6 +18,7 @@ import com.je.enterprise.mievento.domain.entity.geo.CityEntity;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.DetailPlace;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.SearchPlace;
 import com.je.enterprise.mievento.domain.external.apiPlaces.services.ApiPlacesServicies;
+import com.je.enterprise.mievento.domain.external.apiPlaces.services.ResponseContainerObject;
 import com.je.enterprise.mievento.domain.external.apiPlaces.services.ResponseContainerObjects;
 import com.je.enterprise.mievento.domain.external.apiPlaces.transformer.type.ConditionRuleProviderKeyWord;
 import com.je.enterprise.mievento.domain.service.impl.CountryService;
@@ -42,6 +44,7 @@ public class FullProvidersServiceData {
 		this.countryService = countryService;
 	}
 
+	
 	//couta 1k request/day
 //	@Scheduled(cron = "* */5 * * * ?")
 	public void serviceProcessData() {
@@ -73,12 +76,19 @@ public class FullProvidersServiceData {
 					}
 					
 					for (SearchPlace searchPlace : response.getData()) {
-						DetailPlace detailPlace = apiPlacesServicies.getDetailPlace(searchPlace.getReference());
-					
+						ResponseContainerObject<DetailPlace> responseDetail = apiPlacesServicies.getDetailPlace(searchPlace.getReference());
+						if (response.getStatus().equalsIgnoreCase("OVER_QUERY_LIMIT")){
+							return detailPlaces;
+						}
+						DetailPlace detailPlace = responseDetail.getData();
+						
 						List<String> locationsPhotos = Lists.newArrayList();
 						if (detailPlace.getPhotoReferences() != null){
 							for (String reference : detailPlace.getPhotoReferences()) {
-								locationsPhotos.add(apiPlacesServicies.getPhoto(reference));
+								String photoLocation = apiPlacesServicies.getPhoto(reference);
+								if (photoLocation != null){
+									locationsPhotos.add(photoLocation);
+								}
 							}
 							detailPlace.setPhotoLocations(locationsPhotos);
 						}
@@ -104,6 +114,7 @@ public class FullProvidersServiceData {
 		}
 	}
 
+	
 	private void saveData(List<ProviderEntity> entities) {
 		try{
 			Validate.notNull(entities);

@@ -126,3 +126,23 @@ mieventoControllers.controller("datepickerController",["$scope",function($scope)
           };
 					
 }]);
+
+
+//
+//mieventoControllers.controller("PaginationController",["$scope",function($scope) {
+//
+//	 	$scope.totalItems = $scope.$parent.totalResult;
+//	 	$scope.itemPerPage = $scope.$parent.limitPagination;		
+//	 	$scope.bigCurrentPage = 1;
+//	 	$scope.maxSize = 5;
+//	 	$scope.data = $scope.parent.providers; 
+//	 	 
+//	 	$scope.setPage = function (pageNo) {
+//	 		$scope.currentPage = pageNo;
+//	 	};
+//	
+//	 	$scope.pageChanged = function() {
+//	 		$log.log('Page changed to: ' + $scope.currentPage);
+//	 	};
+//
+//}]);

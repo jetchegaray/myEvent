@@ -34,8 +34,9 @@ public class ApiPlacesIntegrationTest {
 		assertNotNull(searchPlaces.get(0).getId());
 		assertNotNull(searchPlaces.get(0).getReference());
 		
-		DetailPlace detailPlace = apiPlacesServicies.getDetailPlace(searchPlaces.get(0).getReference());
+		ResponseContainerObject<DetailPlace> responseDetail = apiPlacesServicies.getDetailPlace(searchPlaces.get(0).getReference());
 		
+		DetailPlace detailPlace = responseDetail.getData();
 		assertNotNull(detailPlace);
 		assertNotNull(detailPlace.getName());
 		assertFalse(detailPlace.getPhotos().isEmpty());

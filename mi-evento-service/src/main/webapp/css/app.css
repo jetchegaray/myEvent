@@ -276,7 +276,7 @@ input.ng-dirty.ng-invalid {
 /* Tables Adminsitrator */
 
 .rectangle { 
-	height: 380px !important; 
+	height: 400px !important; 
 	border: solid 1px;  
 	border-radius: 4px;  
 	box-shadow: 0 0 6px #ccc;
@@ -288,8 +288,8 @@ input.ng-dirty.ng-invalid {
 /* } */
 
 .droppable-guest {
-	width: 45px;
-	height: 45px;
+	width: 30px;
+	height: 30px;
 	border-radius: 50%;
 	border: solid 1px;
 	margin: 0px;
@@ -303,50 +303,39 @@ input.ng-dirty.ng-invalid {
 }
 
 .draggable-guest {
-	width: 45px;
-	height: 45px;
+	width: 30px;
+	height: 30px;
 	border-radius: 50%;
 	border: solid 1px;
 }
 
 
-.draggable-table {
-	width: 90px;
-	height: 90px;
-	border-radius: 50%;
-	border: solid 1px;  
-	box-shadow: 0 0 6px #ccc;
-	background: url("../img/table.png");
-	-webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
-
-
 .offsetTables {
-	margin-top: 60px;	
+	margin-top: 7%;	
+	margin-left: 5%;
+	margin-right: 5%;
+	float: left;
 }
-
-
 
 .placeAdminTable {
-    width: 45px;
-	height: 45px;
+    width: 30px;
+	height: 30px;
 	border-radius: 50%;
 /* 	border: solid 1px; */
     display: inline-block;
     position: absolute;
 }
 
-.droppable-table {
+/******************** 100 px -- 8 tables *********************/
+
+.droppable-tableCien {
 	width: 100px;
-	height: 100px;
+	height: 100px;	
 	border-radius: 50%;
 	border: solid 1px;
 }
 
-.placeAdminTable.taable {
+.placeAdminTable.taableCien {
     width: 100px;
     height: 100px;
     border: solid 1px;
@@ -355,45 +344,126 @@ input.ng-dirty.ng-invalid {
  	background-size: cover;
 }
 
-.one {
-    left: -30px;
-    top: -35px;
+
+/******************** 85 px -- 10 tables *********************/
+
+.droppable-tableOchentayCinco {
+	width: 85px;
+	height: 85px;	
+	border-radius: 50%;
+	border: solid 1px;
 }
 
-.two {
-    top: -55px;
-    left: 30px;
+.placeAdminTable.taableOchentayCinco {
+    width: 85px;
+    height: 85px;
+    border: solid 1px;
+  	box-shadow: 0 0 6px #ccc;
+ 	background: url("../img/table.png");
+ 	background-size: cover;
 }
 
-.three {
-    right: -30px;
-    top: -35px;
+/******************** 50 px -- 20 tables *********************/
+
+.droppable-tableCincuenta {
+	width: 50px;
+	height: 50px;	
+	border-radius: 50%;
+	border: solid 1px;
+}
+
+.placeAdminTable.taableCincuenta {
+    width: 50px;
+    height: 50px;
+    border: solid 1px;
+  	box-shadow: 0 0 6px #ccc;
+ 	background: url("../img/table.png");
+ 	background-size: cover;
 }
 
 
-.four {
-    left: -30px;
-    bottom: -35px;
+.one-lg {
+	top: -35px;
+    left: 35px;
 }
 
-.five {
-    right: -55px;
+.two-lg {
+ 	bottom: -35px;
+    left: 35px;
+}
+
+.three-lg {
+	left: -35px;
+    bottom: 30px;	
+}
+
+
+.four-lg {
+	right: -35px;
     bottom: 30px;
 }
 
-.six {
-    bottom: -55px;
-    left: 30px;
+.five-lg {
+     top: -20px; 
+     left: -15px; 
 }
 
-.seven {
-    right: -30px;
-    bottom: -35px;
+.six-lg {
+     top: -20px; 
+     right: -15px; 
 }
 
-.eight {
-    left: -55px;
-    bottom: 30px;
+.seven-lg {
+  	 bottom: -13px; 
+     right: -23px; 
+}
+
+.eight-lg {
+     bottom: -13px; 
+     left: -23px; 
+}
+
+
+
+.one-sm {
+	top: -32px;
+    left: 10px;
+}
+
+.two-sm {
+ 	bottom: -32px;
+    left: 10px;
+}
+
+.three-sm {
+	left: -32px;
+    bottom: 10px;	
+}
+
+
+.four-sm {
+	right: -32px;
+    bottom: 10px;
+}
+
+.five-sm {
+     top: -22px; 
+     left: -20px; 
+}
+
+.six-sm {
+     top: -22px; 
+     right: -20px; 
+}
+
+.seven-sm {
+  	 bottom: -19px; 
+     right: -23px; 
+}
+
+.eight-sm {
+     bottom: -19px; 
+     left: -23px; 
 }
 
 
@@ -449,4 +519,18 @@ input.ng-dirty.ng-invalid {
 .centered-message{
 	text-align: center;
 	margin: 10%;
+}
+
+
+.dropTable-space {
+    position:relative;
+}    
+.dropTable-space:before {
+    position:absolute;
+    font-family: FontAwesome;
+    text-align: center;
+/*     left:-5px; */
+    content: "\f014";
+    font-size: 500%;
+    color: silver;
 }

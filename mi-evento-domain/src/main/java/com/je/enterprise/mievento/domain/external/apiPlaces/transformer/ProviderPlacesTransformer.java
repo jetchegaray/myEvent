@@ -34,10 +34,6 @@ public class ProviderPlacesTransformer extends
 	
 	private Logger logger = LoggerFactory.getLogger(ProviderPlacesTransformer.class);
 
-	@Autowired
-	public ProviderPlacesTransformer() {
-	}
-	
 	
 	@Override
 	protected DetailPlace transformDomainToApi(ProviderEntity domainObject) {

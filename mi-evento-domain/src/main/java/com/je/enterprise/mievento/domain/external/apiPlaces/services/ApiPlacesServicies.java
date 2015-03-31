@@ -120,7 +120,7 @@ public class ApiPlacesServicies {
 	}
 
 	
-	public DetailPlace getDetailPlace(String referencePlace) {
+	public ResponseContainerObject<DetailPlace> getDetailPlace(String referencePlace) {
 
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("https://maps.googleapis.com/maps/api/place/details/json?")
 				.queryParam("key", API_KEY)
@@ -138,7 +138,7 @@ public class ApiPlacesServicies {
 				logger.info("Status Response Api Places Detail : "+place.getStatus());
 			}
 			
-			return place.getData();
+			return place;
 		} catch (Exception e) {
 			logger.info(e.getMessage());
 			return null;

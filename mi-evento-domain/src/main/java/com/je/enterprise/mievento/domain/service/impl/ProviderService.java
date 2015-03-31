@@ -105,8 +105,15 @@ public class ProviderService {
 		
 		return cities;
 	}
+	
 
 	public void create(ProviderEntity providerEntity) {
 		this.crudHelper.create(providerEntity);
+	}
+	
+	public Long totalCount(CriteriaFilterProvider criteriaFilterProvider){
+		ProviderDAO providerDAO = (ProviderDAO)this.crudHelper.getDao();
+		Long count = Long.valueOf(providerDAO.countBy(criteriaFilterProvider));
+		return count;
 	}
 }

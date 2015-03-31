@@ -123,6 +123,8 @@ mieventoControllers.controller("ProviderListController",["$rootScope", "$scope",
 				providerService.getByLocationAndType($stateParams.searchLocationTypeRequest,function(data){
 					$scope.searching =false;
 					$scope.providers = data;
+//					$scope.totalResult = data.totalCount;
+//					$scope.limitPagination = data.limit;
 					
 				}, function(error) {
 					applicationContext.getExceptionContext().setDanger(error.data);
@@ -181,10 +183,6 @@ mieventoControllers.controller("ProviderListController",["$rootScope", "$scope",
 							});
 						}
 					}
-						
-						
-				
-//						$state.go(state.name);
 				}
 				
 				$scope.goToDetail = function(provider){

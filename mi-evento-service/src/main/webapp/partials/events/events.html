@@ -89,17 +89,17 @@
 					</div>
 				</accordion-group> 
 			</accordion>	 
-			<div class="list-group" ng-controller="SummaryViewEventController" style="border: 1px;">
-		         <div class="list-group-item" style="background-color: #FA7D7D;">
+			<div class="list-group" ng-controller="SummaryViewEventController" style="border: 1px; color: white;">
+		         <div class="list-group-item" style="background-color: #ff766c;">
 		             <h3 class="pull-right">
-		                 <i class="text-info fa fa-eye"></i>
+		                 <i class="fa fa-eye"></i>
 		             </h3>
 		             <h4 class="list-group-item-heading count" >{{summaryViewEvent.name || "No Event Selected"}}</h4>
 		             <p class="list-group-item-text"><span translate>events.summary.selectedEvent<span /></p>
 		         </div>
-		         <div class="list-group-item" style="background-color: #FA7D7D;">
+		         <div class="list-group-item" style="background-color: #ff766c;">
 		             <h3 class="pull-right">
-		                 <i class="text-success fa fa-money"></i>
+		                 <i class="fa fa-money"></i>
 		             </h3>
 		             <h4 class="list-group-item-heading count">$ {{summaryViewBudget || 0}}</h4>
 		             <p class="list-group-item-text"><span translate>events.summary.totalBudget<span /></p>
