@@ -8,24 +8,24 @@
 					<div class="input-group" ng-class="">
 						<span class="input-group-addon"><i class="fa fa-user"></i></span> <input
 							type="text" class="form-control" name="nickname"
-							placeholder="nick name" ng-model="user.nickName"
+							placeholder="{{'signup.input.nick' | translate}}" ng-model="user.nickName"
 							required>
 					</div>
 					<div class="input-group" ng-class="errorMailClass">
 						<span class="input-group-addon"><i class="fa fa-envelope"></i></span> <input
 							type="text" class="form-control" name="email"
-							placeholder="email address" ng-model="user.email"
+							placeholder="{{'signup.input.email' | translate}}" ng-model="user.email"
 							ng-pattern="mailPattern" required>
 					</div>
 				
 					<div class="input-group" ng-class="errorPasswordClass">
 						<span class="input-group-addon"><i class="fa fa-lock"></i></span> 
 						<input type="password" class="form-control" name="password"
-							placeholder="Clave" ng-model="user.password" required> 
+							placeholder="{{'signup.input.pass' | translate}}" ng-model="user.password" required> 
 						
 						<span class="input-group-addon"><i class="fa fa-lock"></i></span> 
 						<input type="password" class="form-control" name="passwordRepeat"
-							placeholder="Repetir Clave" ng-model="passwordRepeat" required>
+							placeholder="{{'signup.input.againPass' | translate}}" ng-model="passwordRepeat" required>
 					</div>
 	
 					<button class="btn btn-lg btn-primary btn-block" type="submit"

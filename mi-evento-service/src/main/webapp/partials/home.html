@@ -8,19 +8,19 @@
 	                	<div class="form-group" ng-controller="LocationSearchComboController">
 			                 <div class="col-sm-4">
 								<ui-select ng-model="search.providerType" theme="selectize">
-					   				<ui-select-match placeholder="Provider type">{{$select.selected}}</ui-select-match>
+					   				<ui-select-match placeholder="{{'home.input.providerType' | translate}}">{{$select.selected}}</ui-select-match>
 					   				<ui-select-choices repeat="provider in providerTypes">{{provider}}</ui-select-choices>
 					 			</ui-select>
 							</div>
 							<div class="col-sm-3">
 								<ui-select  ng-change="loadStates()" ng-model="search.country" theme="selectize">
-					   				<ui-select-match placeholder="Country">{{$select.selected.name}}</ui-select-match>
+					   				<ui-select-match placeholder="{{'home.input.country' | translate}}">{{$select.selected.name}}</ui-select-match>
 					   				<ui-select-choices repeat="country in countries">{{country.name}}</ui-select-choices>
 					 			</ui-select>
 							</div>
 					        <div class="col-sm-3">
 								<ui-select  ng-model="search.province" theme="selectize">
-					   				<ui-select-match placeholder="Province or State">{{$select.selected.name}}</ui-select-match>
+					   				<ui-select-match placeholder="{{'home.input.state' | translate}}">{{$select.selected.name}}</ui-select-match>
 					   				<ui-select-choices repeat="state in states">{{state.name}}</ui-select-choices>
 					 				</ui-select>
 							</div>

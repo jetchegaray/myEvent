@@ -11,10 +11,10 @@
 	             	<form  name="reviewForm" role="form">	
 		                <div class="col-md-5" style="margin-top: 3%">
 		                   	<div class="form-group">
-		                      	<textarea ng-model="provider.newReview.message" class="form-control" cols="30" id="messageReview" name="comment" placeholder="Enter your review here..." rows="5" style="resize:none;"></textarea> 
+		                      	<textarea ng-model="provider.newReview.message" class="form-control" cols="30" id="messageReview" name="comment" placeholder="{{'review.input.message' | translate}}" rows="5" style="resize:none;"></textarea> 
 							</div>
 						 	<div class="form-group">
-								<input ng-model="provider.newEstimatedPrice" type="text" class="form-control" name="name" placeholder="$$$.. price did you cost" ng-required>
+								<input ng-model="provider.newEstimatedPrice" type="text" class="form-control" name="name" placeholder="{{'review.input.estimatedPrice' | translate}}" ng-required>
 							</div>
 		        	    </div>
 		                <div class="col-md-3 text-center">

@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="omb_login">
 		<h3 class="omb_authTitle">
-			<span translate>login.titleLabel</span><a ui-sref="signUpState"><span translate>login.signup<span /></a>
+			<span translate>login.titleLabel</span><a ui-sref="signUpState"><span translate>login.signup</span></a>
 		</h3>
 		<div class="row omb_row-sm-offset-3">
 			<div class="col-xs-12 col-sm-6">
@@ -10,13 +10,13 @@
 					<div class="input-group" ng-class="errorMailClass">
 						<span class="input-group-addon"><i class="fa fa-user"></i></span> <input
 							type="text" class="form-control" name="username"
-							placeholder="ej@gmail.com" ng-model="user.email" required
+							placeholder="{{'login.input.email' | translate}}" ng-model="user.email" required
 							ng-pattern="mailPattern">
 					</div>
 					<div class="input-group">
-						<span class="input-group-addon"><i class="fa fa-lock"></i></span> <input
-							type="password" class="form-control" name="password"
-							placeholder="Clave" ng-model="user.password" required>
+						<span class="input-group-addon"><i class="fa fa-lock"></i></span> 
+						<input type="password" class="form-control" name="password"
+							placeholder="{{'login.input.pass' | translate}}" ng-model="user.password" required>
 					</div>
 					<button class="btn btn-lg btn-primary btn-block" type="submit"
 						ng-click="login()"><span translate>login.button<span /></button>

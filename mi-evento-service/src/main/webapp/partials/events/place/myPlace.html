@@ -9,12 +9,12 @@
 		<div class="row">
 			<div class="col-md-4">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Place Name" ng-model="place.businessName" required>
+					<input type="text" class="form-control" placeholder="{{'place.input.name' | translate}}" ng-model="place.businessName" required>
 				</div>
 			</div>
 			<div class="col-md-4">	
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Price" ng-model="place.price">
+					<input type="text" class="form-control" placeholder="{{'place.input.price' | translate}}" ng-model="place.price">
 				</div>
 			</div>	
 		</div>	
@@ -27,12 +27,12 @@
 		<div class="row">
 			<div class="col-md-4">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Estimated Quantity Tables" ng-model="place.estimatedQuantityTables">
+					<input type="text" class="form-control" placeholder="{{'place.input.estimatedTables' | translate}}" ng-model="place.estimatedQuantityTables">
 				</div>
 			</div>	
 			<div class="col-md-4">	
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Estimated Quantity Persons" ng-model="place.estimatedQuantityPerson">
+					<input type="text" class="form-control" placeholder="{{'place.input.estimatedPersons' | translate}}" ng-model="place.estimatedQuantityPerson">
 				</div>
 			</div>	
 		</div>		
@@ -42,49 +42,49 @@
 			</div>
 		</div>	
 		<div class="line"></div>
-		<div class="row">
-			<div class="col-md-4">	 
-				<ui-select  ng-model="place.location.province" theme="selectize">
-				   	<ui-select-match placeholder="Province or State">{{$select.selected}}</ui-select-match>
-					<ui-select-choices repeat="province in provinces">{{province}}</ui-select-choices>
-		 		</ui-select>
+		<div class="row" ng-controller="LocationSearchComboController">
+			<div class="col-md-4">
+				<ui-select  ng-change="loadStates()" ng-model="search.country" theme="selectize">
+	   				<ui-select-match placeholder="{{'advancedSearch.input.country' | translate}}">{{$select.selected.name}}</ui-select-match>
+	   				<ui-select-choices repeat="country in countries">{{country.name}}</ui-select-choices>
+	 			</ui-select>
+			</div>
+			<div class="col-sm-4">
+				<ui-select ng-change="loadCities()" ng-model="search.state" theme="selectize">
+	   				<ui-select-match placeholder="{{'advancedSearch.input.state' | translate}}">{{$select.selected.name}}</ui-select-match>
+	   				<ui-select-choices repeat="state in states">{{state.name}}</ui-select-choices>
+	 			</ui-select>
 			</div>
 			<div class="col-md-4">
-				<ui-select ng-model="place.location.countryCode" theme="selectize">
-	   				<ui-select-match placeholder="Country place">{{$select.selected}}</ui-select-match>
-	   				<ui-select-choices repeat="country in countries">{{country}}</ui-select-choices>
-	 				</ui-select>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<input type="text" class="form-control" name="city"
-						placeholder="city : Ej. Capital Federal" ng-model="place.location.city">
-				</div>
+				<ui-select ng-model="search.city" theme="selectize">
+	   				<ui-select-match placeholder="{{'advancedSearch.input.city' | translate}}">{{$select.selected.name}}</ui-select-match>
+	   				<ui-select-choices repeat="city in cities">{{city.name}}</ui-select-choices>
+	 			</ui-select>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-3">	
 				<div class="form-group">
 					<input type="text" class="form-control" name="neighborhood"
-						placeholder="neighborhood : Ej. Palermo" ng-model="place.location.streetAddress.neighborhood">
+						placeholder="{{'advancedSearch.input.neighborhood' | translate}}" ng-model="place.location.streetAddress.neighborhood">
 				</div>
 			</div>	
 			<div class="col-md-3">
 				<div class="form-group">
 					<input type="text" class="form-control" name="street"
-						placeholder="Street" ng-model="place.location.streetAddress.street">
+						placeholder="{{'place.input.street' | translate}}" ng-model="place.location.streetAddress.street">
 				</div>
 			</div>	
 			<div class="col-md-3">	
 				<div class="form-group">
 					<input type="text" class="form-control" name="number"
-						placeholder="Number" ng-model="place.location.streetAddress.number">
+						placeholder="{{'place.input.number' | translate}}" ng-model="place.location.streetAddress.number">
 				</div>
 			</div>	
 			<div class="col-md-3">	
 				<div class="form-group">
-					<input type="text" class="form-control" name="city"
-						placeholder="Ej : 6° B" ng-model="place.location.streetAddress.additionalInfo">
+					<input type="text" class="form-control" name="additionalInfo"
+						placeholder="{{'place.input.additionalInfo' | translate}}" ng-model="place.location.streetAddress.additionalInfo">
 				</div>
 			</div>
 		</div>

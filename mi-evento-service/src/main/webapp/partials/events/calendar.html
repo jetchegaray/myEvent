@@ -35,7 +35,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="form-group">
-						<textarea class="form-control" rows="2" placeholder="Note : " ng-model="task.name" required></textarea>
+						<textarea class="form-control" rows="2" placeholder="{{'modal.calendar.add.input.note' | translate}} :" ng-model="task.name" required></textarea>
 					</div>
 				</div>
 			</div>
@@ -44,7 +44,7 @@
 						<div class="col-lg-6">
 							<p class="input-group">
 								<input type="text" class="form-control"
-									datepicker-popup="{{format}}" placeholder="Event Date"
+									datepicker-popup="{{format}}" placeholder="{{'modal.calendar.add.input.taskInitialDate' | translate}}"
 									ng-model="task.initialDate" is-open="opened" min-date="minDate"
 									max-date="maxDate" datepickerOptions="dateOptions" ng-required close-text="Close"/>
 									<span class="input-group-btn">
@@ -59,7 +59,7 @@
 						<div class="col-lg-6">
 							<p class="input-group">
 								<input type="text" class="form-control"
-									datepicker-popup="{{format}}" placeholder="Event Date"
+									datepicker-popup="{{format}}" placeholder="{{'modal.calendar.add.input.taskFinalDate' | translate}}"
 									ng-model="task.finalDate" is-open="opened" min-date="minDate"
 									max-date="maxDate" datepickerOptions="dateOptions" ng-required close-text="Close"/>
 									<span class="input-group-btn">

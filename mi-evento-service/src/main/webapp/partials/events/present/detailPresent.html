@@ -9,12 +9,12 @@
 		<div class="row">
 			<div class="col-md-4">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Place Name" ng-model="present.locationCredit.placeName" required>
+					<input type="text" class="form-control" placeholder="{{'place.input.name' | translate}}" ng-model="present.locationCredit.placeName" required>
 				</div>
 			</div>
 			<div class="col-md-4">	
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Initial Budget" ng-model="present.totalBudget">
+					<input type="text" class="form-control" placeholder="{{'present.input.totalBudget' | translate}}" ng-model="present.totalBudget">
 				</div>
 			</div>	
 		</div>	
@@ -22,19 +22,19 @@
 		<div class="row" ng-controller="LocationSearchComboController">
 			<div class="col-md-4">
 				<ui-select  ng-change="loadStates($select.selected)" ng-model="present.search.country" theme="selectize" required>
-	   				<ui-select-match placeholder="Country">{{$select.selected.name}}</ui-select-match>
+	   				<ui-select-match placeholder="{{'advancedSearch.input.country' | translate}}">{{$select.selected.name}}</ui-select-match>
 	   				<ui-select-choices repeat="country in countries">{{country.name}}</ui-select-choices>
 	 			</ui-select>
 			</div>
 			<div class="col-sm-4">
 				<ui-select ng-change="loadCities($select.selected)" ng-model="present.search.state" theme="selectize" required>
-	   				<ui-select-match placeholder="Province or State">{{$select.selected.name}}</ui-select-match>
+	   				<ui-select-match placeholder="{{'advancedSearch.input.state' | translate}}">{{$select.selected.name}}</ui-select-match>
 	   				<ui-select-choices repeat="state in states">{{state.name}}</ui-select-choices>
 	 			</ui-select>
 			</div>
 			<div class="col-md-4">
 				<ui-select ng-model="present.search.city" theme="selectize" required>
-	   				<ui-select-match placeholder="City">{{$select.selected.name}}</ui-select-match>
+	   				<ui-select-match placeholder="{{'advancedSearch.input.city' | translate}}">{{$select.selected.name}}</ui-select-match>
 	   				<ui-select-choices repeat="city in cities">{{city.name}}</ui-select-choices>
 	 			</ui-select>
 			</div>
@@ -43,25 +43,25 @@
 			<div class="col-md-3">	
 				<div class="form-group">
 					<input type="text" class="form-control" name="neighborhood"
-						placeholder="neighborhood : Ej. Palermo" ng-model="present.locationCredit.streetAddress.neighborhood">
+						placeholder="{{'advancedSearch.input.neighborhood' | translate}}" ng-model="present.locationCredit.streetAddress.neighborhood">
 				</div>
 			</div>	
 			<div class="col-md-3">
 				<div class="form-group">
 					<input type="text" class="form-control" name="street"
-						placeholder="Street" ng-model="present.locationCredit.streetAddress.street">
+						placeholder="{{'place.input.street' | translate}}" ng-model="present.locationCredit.streetAddress.street">
 				</div>
 			</div>	
 			<div class="col-md-3">	
 				<div class="form-group">
 					<input type="text" class="form-control" name="number"
-						placeholder="Number" ng-model="present.locationCredit.streetAddress.number">
+						placeholder="{{'place.input.number' | translate}}" ng-model="present.locationCredit.streetAddress.number">
 				</div>
 			</div>	
 			<div class="col-md-3">	
 				<div class="form-group">
-					<input type="text" class="form-control" name="city"
-						placeholder="Ej : 6° B" ng-model="present.locationCredit.streetAddress.additionalInfo">
+					<input type="text" class="form-control" name="additionalInfo"
+						placeholder="{{'place.input.additionalInfo' | translate}}" ng-model="present.locationCredit.streetAddress.additionalInfo">
 				</div>
 			</div>
 		</div>

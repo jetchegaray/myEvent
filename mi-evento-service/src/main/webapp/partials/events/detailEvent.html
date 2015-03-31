@@ -4,7 +4,7 @@
 			<div class="col-md-4">
 				<div class="form-group">
 					<input type="text" class="form-control" name="name"
-						placeholder="Name" ng-model="event.name" ng-required>
+						placeholder="{{'event.detail.input.name' | translate}}" ng-model="event.name" ng-required>
 				</div>
 			</div>
 			
@@ -12,7 +12,7 @@
 				<div class="col-md-4">
 					<p class="input-group">
 						<input type="text" class="form-control"
-							datepicker-popup="{{format}}" placeholder="Event Date"
+							datepicker-popup="{{format}}" placeholder="{{'event.detail.input.eventDate' | translate}}"
 							ng-model="event.initialDate" is-open="opened" min-date="minDate"
 							max-date="maxDate" datepickerOptions="dateOptions" ng-required close-text="Close" ng-change="onDateChange(event.initialDate)"/>
 							<span class="input-group-btn">
@@ -25,7 +25,7 @@
 			</div>
 			<div class="col-md-4">
 				<ui-select ng-model="event.type" theme="selectize">
-    				<ui-select-match placeholder="Event type">{{$select.selected}}</ui-select-match>
+    				<ui-select-match placeholder="{{'event.detail.input.eventType' | translate}}">{{$select.selected}}</ui-select-match>
     				<ui-select-choices repeat="eventType in eventTypes">{{eventType}}</ui-select-choices>
   				</ui-select>
 			</div>

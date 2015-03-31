@@ -4,38 +4,38 @@
 		<div class="row">
 			<div class="col-md-4">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Place Name" ng-model="search.businessName" required>
+					<input type="text" class="form-control" placeholder="{{'advancedSearch.input.placeName' | translate}}" ng-model="search.businessName" required>
 				</div>
 			</div>
  			<div class="col-sm-4">
 				<ui-select ng-model="search.providerType" theme="selectize">
-	   				<ui-select-match placeholder="Provider type">{{$select.selected}}</ui-select-match>
+	   				<ui-select-match placeholder="{{'advancedSearch.input.providerType' | translate}}">{{$select.selected}}</ui-select-match>
 	   				<ui-select-choices repeat="type in types">{{type}}</ui-select-choices>
 	 			</ui-select>
 			</div>	
 			<div class="col-md-3">	
 				<div class="form-group">
 					<input type="text" class="form-control" name="neighborhood"
-						placeholder="neighborhood" ng-model="search.streetAddress.neighborhood">
+						placeholder="{{'advancedSearch.input.neighborhood' | translate}}" ng-model="search.streetAddress.neighborhood">
 				</div>
 			</div>	
 		</div>	
 		<div class="row" ng-controller="LocationSearchComboController">
 			<div class="col-md-4">
 				<ui-select  ng-change="loadStates()" ng-model="search.country" theme="selectize">
-	   				<ui-select-match placeholder="Country">{{$select.selected.name}}</ui-select-match>
+	   				<ui-select-match placeholder="{{'advancedSearch.input.country' | translate}}">{{$select.selected.name}}</ui-select-match>
 	   				<ui-select-choices repeat="country in countries">{{country.name}}</ui-select-choices>
 	 			</ui-select>
 			</div>
 			<div class="col-sm-4">
 				<ui-select ng-change="loadCities()" ng-model="search.state" theme="selectize">
-	   				<ui-select-match placeholder="Province or State">{{$select.selected.name}}</ui-select-match>
+	   				<ui-select-match placeholder="{{'advancedSearch.input.state' | translate}}">{{$select.selected.name}}</ui-select-match>
 	   				<ui-select-choices repeat="state in states">{{state.name}}</ui-select-choices>
 	 			</ui-select>
 			</div>
 			<div class="col-md-4">
 				<ui-select ng-model="search.city" theme="selectize">
-	   				<ui-select-match placeholder="City">{{$select.selected.name}}</ui-select-match>
+	   				<ui-select-match placeholder="{{'advancedSearch.input.city' | translate}}">{{$select.selected.name}}</ui-select-match>
 	   				<ui-select-choices repeat="city in cities">{{city.name}}</ui-select-choices>
 	 			</ui-select>
 			</div>
