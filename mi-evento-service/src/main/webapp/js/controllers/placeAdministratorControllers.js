@@ -35,11 +35,11 @@ mieventoControllers.controller("PlaceAdministratorController", ["$scope", "$stat
 		$scope.setAmountTables = function(){
 			
 			if ($scope.formModel.amountTables < 0){
-				 error = {code : 0009,description : "El numero de mesas debe ser mayor a 0 !"};
+				 error = {code : "0006"};
 				 applicationContext.getExceptionContext().setInfo(error);
 				 return;
 			}else if ($scope.formModel.amountTables > 21){
-				 error = {code : 0009,description : "El numero de mesas debe ser menor a 21 !"};
+				 error = {code : "0007"};
 				 applicationContext.getExceptionContext().setInfo(error);
 				 return;
 			}
@@ -74,7 +74,7 @@ mieventoControllers.controller("PlaceAdministratorController", ["$scope", "$stat
 					break;
 				}
 				if (i+1 == $scope.amountTables){
-					 error = {code : 0008,description : "No hay mas lugar para agregar mesas !"};
+					 error = {code : "0008"};
 					 applicationContext.getExceptionContext().setInfo(error);
 				}
 			}

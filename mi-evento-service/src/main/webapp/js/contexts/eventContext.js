@@ -98,7 +98,7 @@ mieventoContext.service("eventContext",function(){
 		if (selectedEvent.providers != null){
 			var foundIt = _.find(selectedEvent.providers,function(provider){ return provider.businessId == newProvider.businessId});
 			if (! angular.isUndefined(foundIt)){
-				 return error = {code : 0007, description : "El proveedor ya se ha agregado !"};
+				 return error = {code : "0004"};
 			}
 		}
 		return null;
@@ -146,7 +146,7 @@ mieventoContext.service("eventContext",function(){
 		if (selectedEvent.providersToCompare != null){
 			var foundIt = _.find(selectedEvent.providersToCompare,function(provider){ return provider.businessId == providerToCompare.businessId});
 			if (! angular.isUndefined(foundIt)){
-				 return error = {code : 0006, description : "El proveedor ya se ha agregado para comparar !"};
+				 return error = {code : "0005"};
 			}
 		}else{
 			selectedEvent.providersToCompare = [];

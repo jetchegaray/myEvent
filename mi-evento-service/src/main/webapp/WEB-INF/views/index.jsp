@@ -175,7 +175,7 @@
 			</div>
 			<div class="container" ng-controller="ExceptionController">
 				<div ng-show="alert.show" class="text-center animated flipInY">
-					<alert type={{alert.type}} close="closeAlert()"><i class="fa fa-exclamation-circle fa-5 glyphiconSpace"></i><strong>{{alert.msg}}</strong></alert>
+					<alert type={{alert.type}} close="closeAlert()"><i class="fa fa-exclamation-circle fa-5 glyphiconSpace"></i><strong translate>{{alert.code}}</strong></alert>
 				</div>
 			</div>
   		</div>

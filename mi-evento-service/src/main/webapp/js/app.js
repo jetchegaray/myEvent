@@ -69,12 +69,12 @@ mieventoApp.run([ "$rootScope", "$cookies", "$state", "editableOptions", "userSe
 			 var loggedUser = applicationContext.getUserContext().getLoggedUser();
 			 if (loggedUser == null){
 				 $state.go('loginState');
-				 error = {code : 0001,description : "Antes de ver todo lo bueno que hay...primero debe ingresar. Si no posee usuario registrese... "};
+				 error = {code : "0001"};
 				 applicationContext.getExceptionContext().setInfo(error);
 			 }else if (!angular.equals(to.name,"eventState.eventCreate") && !angular.equals(to.name,"eventState.events")){
 				 var eventSelected = applicationContext.getEventContext().getSelectedEvent();
 				 if (eventSelected == null){
-					 error = {code : 0002,description : "Primero debe seleccionar el evento que quiere editar..."};
+					 error = {code : "0002"};
 					 $state.go('eventState.events');
 					 applicationContext.getExceptionContext().setInfo(error);
 				 }

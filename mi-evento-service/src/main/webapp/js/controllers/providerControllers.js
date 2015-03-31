@@ -158,14 +158,15 @@ mieventoControllers.controller("ProviderListController",["$rootScope", "$scope",
 							if (info != null){
 								applicationContext.getExceptionContext().setInfo(info);
 							}else{
-								error = {code : 0005,description : "El proveedor para comparar fue agregado con exito !"};
-								applicationContext.getExceptionContext().setSuccess(error);
+								info = {code : "2002"};
+								applicationContext.getExceptionContext().setSuccess(info);
 							}
 						}else /* if (angular.equals(state.name, "eventState.providers"))*/{
 							var error = applicationContext.getEventContext().addProviderSelectedEvent(provider);
 							
 							if (error != null){
-								error.description = "El proveedor ya existe para el evento !";
+								
+								error = {code : "0003"};
 								applicationContext.getExceptionContext().setWarning(error);
 								return;
 							}
@@ -175,7 +176,7 @@ mieventoControllers.controller("ProviderListController",["$rootScope", "$scope",
 								//actualizo la vista del budget 
 								$rootScope.$broadcast(TAG_SUMMARY_VIEW_BUDGET_UPDATE);
 								
-								info = {code : 0004,description : "El proveedor fue agregado con exito !"};
+								info = {code : "2001"};
 								applicationContext.getExceptionContext().setSuccess(info);
 								
 							}, function(error) {

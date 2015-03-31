@@ -120,7 +120,7 @@ mieventoControllers.controller("datepickerController",["$scope",function($scope)
 		$scope.onDateChange = function(date) {
 			console.log(date);
             if (date) {
-              $scope.date = Date.parse(date);
+              $scope.date =  moment(date).asMilliseconds();
               console.log("despues "+$scope.date);
             }
           };
