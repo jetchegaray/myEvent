@@ -25,6 +25,7 @@ mieventoControllers.controller("ProviderPlaceTypesController",["$scope", "provid
 mieventoControllers.controller("ProviderSearchController",["$scope", "$state", "countryService","providerService", "applicationContext",
                                                                function($scope, $state, countryService, providerService,applicationContext){
 			
+		
 		providerService.getAllTypes(function(data){
 			$scope.types = data;
 		}, function(error) {
@@ -52,6 +53,7 @@ mieventoControllers.controller("ProviderSearchController",["$scope", "$state", "
 			$state.go("providerListState", {"searchLocationTypeRequest" : searchLocationTypeRequest});
 		}
 		
+		$scope.search = {}; //para que funcionen los combos en un child controller.
 		$scope.advancedSearch = function(){
 			var searchLocationTypeRequest = {
 					providerType : $scope.search.providerType,
@@ -86,12 +88,11 @@ mieventoControllers.controller("LocationSearchComboController",["$scope", "count
 		});	
 	}
 	
-	$scope.loadStates = function(){
-		console.log($scope);
+	$scope.loadStates = function(search){
 		$scope.states = $scope.search.country.states;
 		$scope.search.state = ""; 
 	}
-	$scope.loadCities = function(){
+	$scope.loadCities = function(search){
 		$scope.cities = $scope.search.state.cities;
 		$scope.search.city = ""; 
 	}

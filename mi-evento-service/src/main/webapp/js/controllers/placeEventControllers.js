@@ -62,7 +62,7 @@ mieventoControllers.controller("MyPlaceEventController", [ "$scope", "$state" ,"
 			applicationContext.getExceptionContext().setDanger(error.data);
 		});
 		
-		
+		$scope.search = {};
 		$scope.save = function(){
 			if ($scope.placeForm.$invalid){
 				return;

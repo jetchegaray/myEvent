@@ -3,7 +3,7 @@
 		<div class="container" ng-controller="ProviderListController">
 			<div class="centered-message" ng-show="searching"><i class="fa fa-spinner fa-spin fa-5x"></i></div>
 			<div class="centered-message" class="row" ng-show="!searching && (providers == null || providers.length == 0)">
-				<span class="font-noResult"><span translate>budget.providers.notExists<span /></span>
+				<span class="font-noResult"><span translate>provider.list.notthere<span /></span>
 			</div>
 			
 			<div class="row oneElement" ng-repeat="provider in providers">

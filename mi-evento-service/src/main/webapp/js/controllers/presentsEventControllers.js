@@ -8,7 +8,7 @@ mieventoControllers.controller("PresentsEventController", ["$scope", "$state", "
 			$state.go("eventState.presentsCreate");
 		}
 		
-		$scope.goAddPresent = function(){
+		$scope.goToAddCreditPlace = function(){
 			$state.go("eventState.presentsCreate");
 		}
 		
@@ -42,7 +42,7 @@ mieventoControllers.controller("PresentsEventController", ["$scope", "$state", "
 mieventoControllers.controller("DetailPresentEventController", ["$scope", "$state", "applicationContext", "userService", "countryService", 
                 function($scope, $state, applicationContext, userService, countryService) {
 	
-	
+		$scope.search = {};
 		$scope.save = function() {
 			
 			if ($scope.presentForm.$invalid){
@@ -50,6 +50,7 @@ mieventoControllers.controller("DetailPresentEventController", ["$scope", "$stat
 			}
 			
 			var location = {
+					placeName : $scope.present.locationCredit.placeName,
 					countryCode :  $scope.search.country.name,
 					province :  $scope.search.state.name,
 					city :  $scope.search.city.name,
