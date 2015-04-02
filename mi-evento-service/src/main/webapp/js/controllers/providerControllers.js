@@ -116,13 +116,13 @@ mieventoControllers.controller("ProviderDetailController",["$scope","application
 
 
 
-mieventoControllers.controller("ProviderListController",["$rootScope", "$scope", "$state", "$stateParams", "$location", "$filter",
-         "providerService", "userService", "applicationContext", 
-         function( $rootScope, $scope, $state, $stateParams, $location, $filter, providerService, userService, applicationContext){
+mieventoControllers.controller("ProviderListController",["$rootScope", "$scope", "$state", "$stateParams", 
+         "$anchorScroll", "$filter","providerService", "userService", "applicationContext", 
+         function( $rootScope, $scope, $state, $stateParams, $anchorScroll, $filter, providerService, userService, applicationContext){
 				
 				$scope.searching = true;
 				$scope.currentPage = 1;
-				$scope.itemPerPage = 10;
+				$scope.itemPerPage = 5;
 				$scope.maxSize = 5;
 				
 				getPage = function(){
@@ -131,7 +131,7 @@ mieventoControllers.controller("ProviderListController",["$rootScope", "$scope",
 					var begin = (($scope.currentPage - 1) * $scope.itemPerPage);
 					var end = begin + $scope.itemPerPage;
 					$scope.providersPagination = $scope.providers.slice(begin, end);
-					$location.hash("top");
+					$anchorScroll();
 				}
 				
 				
@@ -175,6 +175,7 @@ mieventoControllers.controller("ProviderListController",["$rootScope", "$scope",
 								info = {code : "2002"};
 								applicationContext.getExceptionContext().setSuccess(info);
 							}
+							$anchorScroll();
 						}else /* if (angular.equals(state.name, "eventState.providers"))*/{
 							var error = applicationContext.getEventContext().addProviderSelectedEvent(provider);
 							
@@ -182,6 +183,7 @@ mieventoControllers.controller("ProviderListController",["$rootScope", "$scope",
 								
 								error = {code : "0003"};
 								applicationContext.getExceptionContext().setWarning(error);
+								$anchorScroll();
 								return;
 							}
 							
@@ -192,6 +194,7 @@ mieventoControllers.controller("ProviderListController",["$rootScope", "$scope",
 								
 								info = {code : "2001"};
 								applicationContext.getExceptionContext().setSuccess(info);
+								$anchorScroll();
 								
 							}, function(error) {
 								applicationContext.getExceptionContext().setDanger(error.data);
