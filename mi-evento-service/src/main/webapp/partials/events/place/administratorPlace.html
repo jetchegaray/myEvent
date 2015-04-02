@@ -28,7 +28,7 @@
 	<div class="rectangle">
 			<div class="offsetTables" ng-repeat="table in tables">
 				<p><div ng-class="selectCss.droppableTable" data-drop="true" ng-model='tables' ng-show="true"
-					jqyoui-droppable="{index: {{$index}}}">
+					jqyoui-droppable="{index: {{$index}}, onDrop:'dropTable(table)'}">
 						<div ng-class="['placeAdminTable', selectCss.placeAdminTableTaable]" ng-show="table.located"
 							data-drag="true" ng-model="tables" data-jqyoui-options="{revert: 'invalid'}"
 							jqyoui-draggable="{index: {{$index}},placeholder:true,animate:false, onStart:'startDragTable(table)'}">

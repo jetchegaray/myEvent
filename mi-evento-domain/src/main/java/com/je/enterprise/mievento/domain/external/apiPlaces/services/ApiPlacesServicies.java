@@ -63,7 +63,7 @@ public class ApiPlacesServicies {
 			}
 			ResponseContainerObjects<SearchPlace> places = response.getBody();
 			
-			if (! places.getStatus().equals(StatusResponse.OK)){
+			if (! places.getStatus().equals(StatusResponse.OK.getName())){
 				logger.info("Status Response Api Places Search: "+places.getStatus());
 			}
 			
@@ -100,11 +100,11 @@ public class ApiPlacesServicies {
 			
 				places = response.getBody();
 				
-				if (! places.getStatus().equals(StatusResponse.OK)){
+				if (! places.getStatus().equals(StatusResponse.OK.getName())){
 					logger.info("Status Response Api Places Search Next Token: "+places.getStatus());
 				}
 				Thread.sleep(2000); //2 seg.
-			}while(places.getStatus().equalsIgnoreCase("INVALID_REQUEST"));
+			}while(places.getStatus().equalsIgnoreCase(StatusResponse.INVALID_REQUEST.getName()));
 
 			if (response.getBody().equals(HttpEntity.EMPTY)) {
 				logger.info("Status Response Rest Template Next Token: "+response.getBody().getStatus());
@@ -133,10 +133,7 @@ public class ApiPlacesServicies {
 		try {
 			response = restTemplate.exchange(builder.build().toUri(), HttpMethod.GET, entity,new ParameterizedTypeReference<ResponseContainerObject<DetailPlace>>() {});
 			ResponseContainerObject<DetailPlace> place = response.getBody();
-			
-			if (! place.getStatus().equals(StatusResponse.OK)){
-				logger.info("Status Response Api Places Detail : "+place.getStatus());
-			}
+			logger.info("Status Response Api Places Detail : "+place.getStatus());
 			
 			return place;
 		} catch (Exception e) {

@@ -11,10 +11,8 @@ public class ControlContextPlaceEntity {
 	}
 
 	public ControlContextPlaceEntity(
-			List<ControlContextTableEntity> controlContextTableEntities,
-			ConfigurationPlaceEntity configurarionPlaceEntity) {
+			List<ControlContextTableEntity> controlContextTableEntities) {
 		this.controlContextTableEntities = controlContextTableEntities;
-		this.configurarionPlaceEntity = configurarionPlaceEntity;
 	}
 
 	public List<ControlContextTableEntity> getControlContextTableEntities() {

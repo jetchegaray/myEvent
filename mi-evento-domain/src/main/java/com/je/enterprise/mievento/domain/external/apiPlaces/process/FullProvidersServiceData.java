@@ -72,18 +72,18 @@ public class FullProvidersServiceData {
 				for (String keyWord : keyWords) {
 					
 					ResponseContainerObjects<SearchPlace> response = apiPlacesServicies.getPlaces(latlng, keyWord);
-					if (response.getStatus().equalsIgnoreCase("OVER_QUERY_LIMIT")){
+					if (response.getStatus().equalsIgnoreCase(StatusResponse.OVER_QUERY_LIMIT.getName())){
 						return detailPlaces;
 					}
 					
 					for (SearchPlace searchPlace : response.getData()) {
 						ResponseContainerObject<DetailPlace> responseDetail = apiPlacesServicies.getDetailPlace(searchPlace.getReference());
-						if (response.getStatus().equalsIgnoreCase("OVER_QUERY_LIMIT")){
+						if (response.getStatus().equalsIgnoreCase(StatusResponse.OVER_QUERY_LIMIT.getName())){
 							return detailPlaces;
 						}
 						
 						DetailPlace detailPlace = responseDetail.getData();
-						if (! responseDetail.getStatus().equals(StatusResponse.OK)){
+						if (! responseDetail.getStatus().equals(StatusResponse.OK.getName())){
 							continue;
 						}
 						
@@ -111,6 +111,7 @@ public class FullProvidersServiceData {
 			
 			List<ProviderEntity> entities = this.providerPlacesTransformerList.transformApiToDomain(places);
 			Validate.notNull(entities);
+			logger.debug(" Entities size : "+entities.size());
 			return entities;
 			
 		}catch(Exception ex){

@@ -11,6 +11,7 @@ import com.je.enterprise.mievento.api.dto.event.Event;
 import com.je.enterprise.mievento.api.dto.event.Guest;
 import com.je.enterprise.mievento.api.dto.event.Task;
 import com.je.enterprise.mievento.api.dto.event.eventWithplace.Presents;
+import com.je.enterprise.mievento.api.dto.place.ControlContextTable;
 import com.je.enterprise.mievento.api.dto.provider.Provider;
 import com.je.enterprise.mievento.api.dto.provider.Review;
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
@@ -21,12 +22,15 @@ import com.je.enterprise.mievento.domain.entity.common.event.TaskEntity;
 import com.je.enterprise.mievento.domain.entity.geo.CityEntity;
 import com.je.enterprise.mievento.domain.entity.geo.CountryEntity;
 import com.je.enterprise.mievento.domain.entity.geo.StateEntity;
+import com.je.enterprise.mievento.domain.entity.place.ControlContextTableEntity;
 import com.je.enterprise.mievento.domain.entity.wedding.PresentsEntity;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.DetailPlace;
 import com.je.enterprise.mievento.domain.external.apiPlaces.transformer.ProviderPlacesTransformer;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
 import com.je.enterprise.mievento.domain.transformer.impl.CityGeoTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.CommercialLocationTransformer;
+import com.je.enterprise.mievento.domain.transformer.impl.ContextPlaceTransformer;
+import com.je.enterprise.mievento.domain.transformer.impl.ContextTableTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.CountryGeoTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.EventTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.GuestTransformer;
@@ -82,7 +86,7 @@ public class TransformerConfiguration {
 
 	@Bean(name = "eventTransformer")
 	public EventTransformer eventTransformer(){
-		return new EventTransformer(this.commercialLocationTransformer,this.guestTransformerList(),this.taskTransformerList(),this.providerTransformerList());
+		return new EventTransformer(this.guestTransformerList(),this.taskTransformerList(),this.providerTransformerList());
 	}
 	
 	@Bean(name = "eventTransformerList")
@@ -101,6 +105,22 @@ public class TransformerConfiguration {
 		return new TransformerList<ProviderReviewEntity, Review>(this.reviewTransformer);
 	}
 	
+	@Bean(name = "contextTableTransformer")
+	public ContextTableTransformer contextTableTransformer(){
+		return new ContextTableTransformer(this.guestTransformerList());
+	}
+	
+	@Bean(name = "contextTableTransformerList")
+	public TransformerList<ControlContextTableEntity, ControlContextTable> contextTableTransformerList(){
+		return new TransformerList<ControlContextTableEntity, ControlContextTable>(this.contextTableTransformer());
+	}
+	
+	@Bean(name = "contextPlaceTransformer")
+	public ContextPlaceTransformer contextPlaceTransformer(){
+		return new ContextPlaceTransformer(this.contextTableTransformerList());
+	}
+	
+	
 	@Bean(name = "providerTransformer")
 	public ProviderTransformer providerTransformer(){
 		return new ProviderTransformer(this.locationTransformer,this.reviewTransformerList());
@@ -108,7 +128,7 @@ public class TransformerConfiguration {
 	
 	@Bean(name = "placeTransformer")
 	public PlaceTransformer placeTransformer(){
-		return new PlaceTransformer(this.locationTransformer,this.reviewTransformerList());
+		return new PlaceTransformer(this.locationTransformer,this.reviewTransformerList(), this.contextPlaceTransformer());
 	}
 	
 	@Bean(name = "cityTransformerList")
@@ -135,5 +155,7 @@ public class TransformerConfiguration {
 	public TransformerList<CountryEntity, Country> countryTransformerList(){
 		return new TransformerList<CountryEntity, Country>(this.countryTransformer());
 	}
+	
+	
 
 }

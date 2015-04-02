@@ -5,13 +5,11 @@ import java.util.List;
 import com.je.enterprise.mievento.api.dto.event.Event;
 import com.je.enterprise.mievento.api.dto.event.Guest;
 import com.je.enterprise.mievento.api.dto.event.Task;
-import com.je.enterprise.mievento.api.dto.location.CommercialLocation;
 import com.je.enterprise.mievento.api.dto.provider.Provider;
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.GuestEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.TaskEntity;
-import com.je.enterprise.mievento.domain.entity.location.CommercialLocationEntity;
 import com.je.enterprise.mievento.domain.transformer.Transformer;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
 
@@ -20,14 +18,12 @@ import com.je.enterprise.mievento.domain.transformer.TransformerList;
 public class EventTransformer extends Transformer<EventEntity, Event>{
 
 	
-	private CommercialLocationTransformer commercialLocationTransformer;
 	private TransformerList<GuestEntity, Guest> guestTransformerList;
 	private TransformerList<TaskEntity, Task> taskTransformerList;
 	private TransformerList<ProviderEntity, Provider> providerTransformerList;
 	
-	public EventTransformer(CommercialLocationTransformer commercialLocationTransformer,
+	public EventTransformer(
 			TransformerList<GuestEntity, Guest> guestTransformerList, TransformerList<TaskEntity, Task> taskTransformerList, TransformerList<ProviderEntity, Provider> providerTransformerList) {
-		this.commercialLocationTransformer = commercialLocationTransformer;
 		this.guestTransformerList = guestTransformerList;
 		this.taskTransformerList = taskTransformerList;
 		this.providerTransformerList = providerTransformerList;

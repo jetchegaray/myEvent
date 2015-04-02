@@ -2,6 +2,7 @@ package com.je.enterprise.mievento.domain.transformer.impl;
 
 import java.math.BigDecimal;
 
+
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Before;
@@ -46,14 +47,13 @@ public class TransformersImplTest {
 	public void setUp(){
 		
 		StreetAddressTransformer streetAddressTransformer = new StreetAddressTransformer();
-		this.commercialLocationTransformer = new CommercialLocationTransformer(streetAddressTransformer);
 		this.locationTransformer = new LocationTransformer(streetAddressTransformer);
 		this.guestTransformer = new GuestTransformer(locationTransformer,new InvitationStatusTransformer());
 		TransformerList<TaskEntity, Task> taskTransformerList = new TransformerList<TaskEntity, Task>(taskTransformer);
 		TransformerList<GuestEntity, Guest> guestTransformerList = new TransformerList<GuestEntity, Guest>(guestTransformer);
 		TransformerList<ProviderEntity, Provider> providerTransformerList = new TransformerList<ProviderEntity, Provider>(providerTransformer);
 		
-		this.eventTransformer = new EventTransformer(commercialLocationTransformer, guestTransformerList,taskTransformerList,providerTransformerList);
+		this.eventTransformer = new EventTransformer(guestTransformerList,taskTransformerList,providerTransformerList);
 		
 		userTransformer = new UserTransformer(new TransformerEventList(new VisitorTransformerEvent(), new StrategyApiVisitor()));
 	}
@@ -155,7 +155,6 @@ public class TransformersImplTest {
 	public void event_ok(){
 		Event event =  new Event();
 		Guest guest = new Guest();
-		CommercialLocation commercialLocation = new CommercialLocation();
 		
 		Assert.assertNull(this.eventTransformer.transformAndValidateApiToDomain(null));
 		
@@ -168,7 +167,6 @@ public class TransformersImplTest {
 		
 		EventEntity eventEntity =  new EventEntity();
 		GuestEntity guestEntity = new GuestEntity();
-		CommercialLocationEntity commercialLocationEntity = new CommercialLocationEntity();
 		
 		Assert.assertNull(this.eventTransformer.transformAndValidateDomainToApi(null));
 		

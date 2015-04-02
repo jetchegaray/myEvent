@@ -4,9 +4,6 @@
 mieventoControllers.controller("PlaceAdministratorController", ["$scope", "$state", "userService", "applicationContext",
                 function($scope, $state, userService, applicationContext) {
 			
-		$scope.amountTables = 0;
-		$scope.guests = angular.copy(applicationContext.getEventContext().getGuestsSelectedEvent());
-		
 		calculateSizePxTables = function(){
 			if ($scope.amountTables <= 8){
 				$scope.selectCss = {
@@ -32,6 +29,23 @@ mieventoControllers.controller("PlaceAdministratorController", ["$scope", "$stat
 			}
 		}
 		
+		//INIT
+		$scope.guests = angular.copy(applicationContext.getEventContext().getGuestsSelectedEvent());
+		$scope.tables = applicationContext.getEventContext().getTablesPlaceSelectedEvent();
+		
+		
+		if ($scope.tables == null){
+			$scope.amountTables = 0;
+		}else{
+			$scope.amountTables = _.size($scope.tables);
+			calculateSizePxTables();
+			_.each($scope.tables,function(table, index){table.id = index; table.located = true; table.guestAmount = $scope.amountGuests.slice(0, _.size(table.guests));});
+			var guestsSitting = _.chain($scope.tables).pluck("guests").flatten().filter(function(guest){return guest.firstName != null && guest.lastName != null}).value();
+			$scope.guests = _.difference(_.pluck($scope.guests,"email"),_.pluck(guestsSitting,"email"));
+		}
+		
+		
+		//functions
 		$scope.setAmountTables = function(){
 			
 			if ($scope.formModel.amountTables < 0){
@@ -47,11 +61,10 @@ mieventoControllers.controller("PlaceAdministratorController", ["$scope", "$stat
 
 			calculateSizePxTables();
 			
-
-			$scope.tables = [];
-			
 			for (i = 0; i < $scope.amountTables ;i++){
-				$scope.tables.push({ id : i,located : false});
+				if ($scope.tables[i] == null){
+					$scope.tables.push({ id : i,located : false});
+				}
 			}
 		}
 	
@@ -65,13 +78,13 @@ mieventoControllers.controller("PlaceAdministratorController", ["$scope", "$stat
 							id : i,
 							guestAmount : guestsInTable,
 							located : true,
-							guests : []
+							guests : guests
 					};
 				
-					for (k = 0; k < guestsInTable ;k++){
-						 $scope.tables[i].guests.push({});
+					for (k = 0; k < $scope.formModel.guestAmountPerTable.number ;k++){
+						 $scope.tables[i].guests[k] = {};
 					}
-					break;
+					break; //solo creo una tabla.
 				}
 				if (i+1 == $scope.amountTables){
 					 error = {code : "0008"};
@@ -81,43 +94,38 @@ mieventoControllers.controller("PlaceAdministratorController", ["$scope", "$stat
 			console.log(angular.toJson($scope.tables));
 		}
 		
+		
 		 $scope.startDragGuest = function(event, ui, guest) {
 			    $scope.draggedGuest = guest;
-			    console.log(angular.toJson(guest));
 		 };
 
 		 $scope.dropGuestSitting = function(event, ui,table) {
-			 console.log(angular.toJson(table));
 		 };
 		
 		 $scope.startDragTable = function(event, ui, table) {
 			 $scope.draggedTable = table;
 		 };
 		 
+		 $scope.dropTable = function(event, ui,table) {
+		 };
+		 
 		 $scope.dropDeleteTable = function(event, ui, table) {
-			 console.log($scope.draggedTable);
-			 
-			 $scope.guests.concat($scope.draggedTable.guests.slice());
+			 $scope.guests = _.union($scope.guests,_.filter($scope.draggedTable.guests,function(guest){return guest.firstName != null && guest.lastName != null}));
 			 
 			 //reset table	
 			 $scope.tables = _.filter($scope.tables, function(table){ return table.id != $scope.draggedTable.id});
 			 $scope.tables = _.filter($scope.tables, function(table){ return !angular.isUndefined(table.id);});
-			 
+			 console.log($scope.draggedTable.id);
 			 $scope.tables.push({ id : $scope.draggedTable.id,located : false});
-			 console.log($scope.tables.length);
-			 console.log(angular.toJson($scope.tables));
 		 };
 		 
 		 
-		 
-		 
 		 $scope.save = function(){
-			 var place = applicationContext.getEventContext().getPlaceSelectedEvent();
-			 place.controlContextPlace = $scope.tables;
-			 applicationContext.getEventContext().setPlaceSelectedEvent(place);
-			 
+			 applicationContext.getEventContext().setTablesPlaceSelectedEvent($scope.tables);
+			  
 			 userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
-				 //nothing to do.
+				 var success = {code : "2000"};
+				applicationContext.getExceptionContext().setSuccess(success);
 			 }, function(error) {
 				applicationContext.getExceptionContext().setDanger(error.data);
 			 });

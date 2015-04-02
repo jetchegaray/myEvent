@@ -22,19 +22,19 @@ public class PlaceEntity extends ProviderEntity {
 			String email, String cellPhone, String phone, BigDecimal price,
 			BigDecimal estimatedPrice, BigDecimal m2,
 			BigDecimal estimatedQuantityTables,
-			BigDecimal estimatedQuantityPerson,List<String> photos,ProviderType providerType,List<ProviderReviewEntity> reviews) {
+			BigDecimal estimatedQuantityPerson,List<String> photos,ProviderType providerType,List<ProviderReviewEntity> reviews,ControlContextPlaceEntity contextPlaceEntity) {
 		
 		super(businessId, businessName, description, location, email, cellPhone, phone,
 				price, estimatedPrice,photos,providerType,reviews);
 		this.m2 = m2;
 		this.estimatedQuantityTables = estimatedQuantityTables;
 		this.estimatedQuantityPerson = estimatedQuantityPerson;
-
+		this.contextPlaceEntity = contextPlaceEntity;
 	}
 	
 	public PlaceEntity(ProviderEntity providerEntity) {
 		this(providerEntity.getBusinessId(), providerEntity.getBusinessName(), providerEntity.getDescription(), providerEntity.getLocation(), providerEntity.getEmail(), providerEntity.getCellPhone(), providerEntity.getPhone(),
-				providerEntity.getPrice(), providerEntity.getEstimatedPrice(), null, null, null, providerEntity.getPhotos(),providerEntity.getProviderType(), providerEntity.getReviews());
+				providerEntity.getPrice(), providerEntity.getEstimatedPrice(), null, null, null, providerEntity.getPhotos(),providerEntity.getProviderType(), providerEntity.getReviews(),null);
 	}
 
 	public BigDecimal getM2() {

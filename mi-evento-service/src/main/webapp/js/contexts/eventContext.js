@@ -32,9 +32,6 @@ mieventoContext.service("eventContext",function(){
 	//***********GUESTS EVENT **********
 	
 	this.getGuestsSelectedEvent = function(){
-		if (selectedEvent == null){
-			selectedEvent.guests = [];
-		}
 		if (selectedEvent.guests == null){
 			selectedEvent.guests = [];
 		}
@@ -68,6 +65,23 @@ mieventoContext.service("eventContext",function(){
 	
 	this.setPlaceSelectedEvent = function(place){
 		selectedEvent.place = place;
+	}
+	
+	
+	this.getTablesPlaceSelectedEvent = function(){
+		if (selectedEvent.place == null || selectedEvent.place.controlContextPlace == null){
+			return [];
+		}
+		
+		return selectedEvent.place.controlContextPlace.controlContextTables;
+	}
+	
+	this.setTablesPlaceSelectedEvent = function(tables){
+		selectedEvent.place = {
+				 controlContextPlace : {
+					 controlContextTables : tables
+				 } 
+		 }
 	}
 	
 	

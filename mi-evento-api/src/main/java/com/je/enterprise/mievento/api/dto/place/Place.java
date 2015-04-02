@@ -25,17 +25,18 @@ public class Place extends Provider {
 			String email, String cellPhone, String phone, BigDecimal price,
 			BigDecimal estimatedPrice, BigDecimal m2,
 			BigDecimal estimatedQuantityTables,
-			BigDecimal estimatedQuantityPerson,List<String> photos,ProviderType providerType,List<Review> reviews) {
+			BigDecimal estimatedQuantityPerson,List<String> photos,ProviderType providerType,List<Review> reviews,ControlContextPlace controlContextPlace) {
 		super(businessId, businessName, description, location, email, cellPhone, phone,
 				price, estimatedPrice,photos,providerType,reviews);
 		this.m2 = m2;
 		this.estimatedQuantityTables = estimatedQuantityTables;
 		this.estimatedQuantityPerson = estimatedQuantityPerson;
+		this.controlContextPlace = controlContextPlace;
 	}
 
 	public Place(Provider provider) {
 		this(provider.getBusinessId(), provider.getBusinessName(), provider.getDescription(), provider.getLocation(), provider.getEmail(), provider.getCellPhone(), provider.getPhone(),
-				provider.getPrice(), provider.getEstimatedPrice(), null, null, null, provider.getPhotos(),provider.getProviderType(), provider.getReviews());
+				provider.getPrice(), provider.getEstimatedPrice(), null, null, null, provider.getPhotos(),provider.getProviderType(), provider.getReviews(),null);
 	}
 	
 	public BigDecimal getM2() {

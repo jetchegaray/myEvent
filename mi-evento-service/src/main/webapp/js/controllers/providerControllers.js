@@ -37,7 +37,6 @@ mieventoControllers.controller("ProviderSearchController",["$scope", "$state", "
 			var providers = applicationContext.getEventContext().getProvidersSelectedEvent();
 			
 			var placeProvider = _.filter(providers, function(provider){ return provider.providerType.indexOf("Salon") > -1}); 
-			console.log(placeProvider);
 			var locationDefinitive = null;
 			if (locationOwn != null){
 				locationDefinitive = locationOwn;
@@ -117,17 +116,30 @@ mieventoControllers.controller("ProviderDetailController",["$scope","application
 
 
 
-mieventoControllers.controller("ProviderListController",["$rootScope", "$scope", "$state", "$stateParams", 
+mieventoControllers.controller("ProviderListController",["$rootScope", "$scope", "$state", "$stateParams", "$location", "$filter",
          "providerService", "userService", "applicationContext", 
-         function( $rootScope, $scope, $state, $stateParams, providerService, userService, applicationContext){
+         function( $rootScope, $scope, $state, $stateParams, $location, $filter, providerService, userService, applicationContext){
+				
 				$scope.searching = true;
+				$scope.currentPage = 1;
+				$scope.itemPerPage = 10;
+				$scope.maxSize = 5;
+				
+				getPage = function(){
+					$scope.totalItems = _.size($scope.providers);
+					
+					var begin = (($scope.currentPage - 1) * $scope.itemPerPage);
+					var end = begin + $scope.itemPerPage;
+					$scope.providersPagination = $scope.providers.slice(begin, end);
+					$location.hash("top");
+				}
+				
 				
 				providerService.getByLocationAndType($stateParams.searchLocationTypeRequest,function(data){
 					$scope.searching =false;
-					$scope.providers = data;
-//					$scope.totalResult = data.totalCount;
-//					$scope.limitPagination = data.limit;
-					
+					$scope.providers = $filter('orderBy')(data,"estimatedPrice");
+					getPage();
+		
 				}, function(error) {
 					applicationContext.getExceptionContext().setDanger(error.data);
 				});
@@ -213,8 +225,11 @@ mieventoControllers.controller("ProviderListController",["$rootScope", "$scope",
 				getRatingReview = function(reviews){
 					var sumRating =  _.chain(reviews).map(function(review){ return review.rating;}).reduce(function(memo, rating){ return memo + rating; },0).value();
 					return Math.round(sumRating / reviews.length);
-				}
+				} 
 				
+				$scope.pageChanged = function() {
+		            getPage(); 
+				}; 
 }]);
 
 

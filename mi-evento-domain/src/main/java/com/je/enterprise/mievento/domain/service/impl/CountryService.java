@@ -19,6 +19,7 @@ import com.je.enterprise.mievento.domain.entity.geo.StateEntity;
 import com.je.enterprise.mievento.domain.exception.customize.NotExistanceCountriesException;
 import com.je.enterprise.mievento.domain.external.apiGeo.services.CountryHelper;
 import com.je.enterprise.mievento.domain.service.helper.CRUDHelper;
+import com.je.enterprise.mievento.domain.utils.UtilsCollections;
 
 @Service
 public class CountryService {
@@ -61,7 +62,7 @@ public class CountryService {
 		for (StateEntity stateEntity : selectedCountry.getStates()) {
 			cities.addAll(stateEntity.getCities());
 		}
-		return cities;
+		return Sets.newLinkedHashSet(UtilsCollections.shuffle(cities));
 	}
 	
 	

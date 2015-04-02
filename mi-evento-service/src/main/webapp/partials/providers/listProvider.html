@@ -6,7 +6,7 @@
 				<span class="font-noResult"><span translate>provider.list.notthere<span /></span>
 			</div>
 			
-			<div class="row oneElement" ng-repeat="provider in providers">
+			<div class="row oneElement" ng-repeat="provider in providersPagination  |  orderBy:-estimatedPrice ">
 				<div class="media">
 					<a class="pull-left" ng-click="	" href>
 					  <div  ng-controller="providerCarouselCtrl" ng-init="init(provider)" class="media-object" style=" width: 300px; height: 150px; margin: 0 auto;">
@@ -48,9 +48,10 @@
 				</div>    
 				<hr class="divide"/>
 			</div>
-<!-- 			<div class="row" ng-controller="PaginationController"> -->
-<!-- 				<pagination total-items="totalItems" items-per-page="itemPerPage" ng-model="data" max-size="maxSize" class="pagination-sm" boundary-links="true" direction-links="false" rotate="false" num-pages="numPages"></pagination> -->
-<!-- 			</div> -->
+			<div ng-show="providers "= null && providers.length != 0" class="row">
+				<pagination total-items="totalItems" items-per-page="itemPerPage" ng-model="currentPage" ng-change="pageChanged()" max-size="maxSize" class="pagination-sm" boundary-links="true" direction-links="false" rotate="false"></pagination>
+			</div>
 		</div>
+		
 	</div>
 </div>	 

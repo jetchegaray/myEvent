@@ -1,14 +1,12 @@
 package com.je.enterprise.mievento.domain.external.apiPlaces.transformer.type;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.je.enterprise.mievento.domain.utils.UtilsCollections;
 
 public enum ConditionRuleProviderKeyWord {
 
@@ -18,7 +16,7 @@ public enum ConditionRuleProviderKeyWord {
 	AND_BIRTH_HALL(Pair.of("salon","cumpleaños")),
 	AND_BIRTH_HALL_2(Pair.of("salon","infantil")),
 	AND_PARTY_HALL(Pair.of("salon","fiestas")),
-	AND_PARTY_HALL_2(Pair.of("salon","infantil")),
+//	AND_PARTY_HALL_2(Pair.of("salon","infantil")),
 	AND_BAR_HALL(Pair.of("salon","mitzvah")),
 	AND_SUIT(Pair.of("traje","casamiento")),
 	AND_DRESS(Pair.of("vestidos","casamiento")),
@@ -64,16 +62,10 @@ public enum ConditionRuleProviderKeyWord {
 			keyWords.add(rule.arguments.getRight());
 		}
 		
-		return Sets.newLinkedHashSet(ConditionRuleProviderKeyWord.shuffle(keyWords));
+		return Sets.newLinkedHashSet(UtilsCollections.shuffle(keyWords));
 	}
 	
-	private static <T> List<T> shuffle(Iterable<T> iterable)
-    {
-        List<T> list = Lists.newArrayList(iterable);
-        Collections.shuffle(list);
-        return list;
-    }
-	
+
 	
 	public static Set<String> getKeyWordsWithOut(String providerTypeName){
 		
