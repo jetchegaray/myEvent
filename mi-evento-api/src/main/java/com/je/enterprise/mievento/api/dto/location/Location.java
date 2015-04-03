@@ -1,23 +1,30 @@
 package com.je.enterprise.mievento.api.dto.location;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Location {
 	
 	private CountryCode countryCode;
 	private ProvinceCode province;
 	private String city;
 	private StreetAddress streetAddress;
+	private String  lat;
+	private String lng;
 	
 	public Location() {
 	}
 	
-	public Location(CountryCode countryCode, ProvinceCode province,String city,
-			StreetAddress streetAddress) {
+	public Location(CountryCode countryCode, ProvinceCode province,
+			String city, StreetAddress streetAddress, String lat, String lng) {
 		this.countryCode = countryCode;
 		this.province = province;
 		this.city = city;
 		this.streetAddress = streetAddress;
+		this.lat = lat;
+		this.lng = lng;
 	}
 
 	public CountryCode getCountryCode() {
@@ -59,4 +66,22 @@ public class Location {
 		return builder.toString();
 	}
 
+	public String getLat() {
+		return lat;
+	}
+
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+
+	public String getLng() {
+		return lng;
+	}
+
+	public void setLng(String lng) {
+		this.lng = lng;
+	}
+
+
+	
 }

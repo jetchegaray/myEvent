@@ -19,7 +19,8 @@ mieventoControllers.controller("HomeController", ["$scope", "$state", "providerS
 					providerType : $scope.search.providerType,
 					location : searchLocation
 			}
-			$state.go("providerListState", {"searchLocationTypeRequest" : searchLocationTypeRequest});
+			applicationContext.setSearchLocationTypeRequest(searchLocationTypeRequest);
+			$state.go("providerListState");
 		}
 } ]);
 

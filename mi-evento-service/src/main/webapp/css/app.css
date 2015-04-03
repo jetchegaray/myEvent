@@ -586,3 +586,5 @@ input.ng-dirty.ng-invalid {
 .btn-danger.btn-outline:hover {
     color: #fff;
 }
+
+#gmaps  { height: 350px; }

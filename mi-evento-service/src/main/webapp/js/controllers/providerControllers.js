@@ -1,11 +1,20 @@
-mieventoControllers.controller("ProviderTypeController",["$scope", "providerService", "applicationContext", 
-                                                         function($scope, providerService,applicationContext){
+mieventoControllers.controller("ProviderTypeController",["$scope", "$state", "providerService", "applicationContext", 
+                                                         function($scope, $state, providerService,applicationContext){
 			
 			providerService.getAllTypes(function(data){
 				$scope.types = data;
 			}, function(error) {
 				applicationContext.getExceptionContext().setDanger(error.data);
 			});
+			
+			
+			$scope.goToProviderList = function(type){
+				var searchLocationTypeRequest = {
+						providerType : type
+				}
+				applicationContext.setSearchLocationTypeRequest(searchLocationTypeRequest);
+				$state.go("providerListState");
+			}
 					
 }]);
 
@@ -48,8 +57,8 @@ mieventoControllers.controller("ProviderSearchController",["$scope", "$state", "
 					providerType : providerType,
 					location : locationDefinitive
 			}
-			console.log(angular.toJson(searchLocationTypeRequest));
-			$state.go("providerListState", {"searchLocationTypeRequest" : searchLocationTypeRequest});
+			applicationContext.setSearchLocationTypeRequest(searchLocationTypeRequest);
+			$state.go("providerListState");
 		}
 		
 		$scope.search = {}; //para que funcionen los combos en un child controller.
@@ -63,7 +72,8 @@ mieventoControllers.controller("ProviderSearchController",["$scope", "$state", "
 						streetAddress : $scope.search.streetAddress
 					}
 			}
-			$state.go("providerListState", {"searchLocationTypeRequest" : searchLocationTypeRequest});
+			applicationContext.setSearchLocationTypeRequest(searchLocationTypeRequest);
+			$state.go("providerListState");
 		}
 		
 		$scope.toAdvancedSearch = function(){
@@ -100,29 +110,36 @@ mieventoControllers.controller("LocationSearchComboController",["$scope", "count
 
 
 
-mieventoControllers.controller("ProviderDetailController",["$scope","applicationContext",function($scope, applicationContext){
+mieventoControllers.controller("ProviderDetailController",["$scope","applicationContext", 
+                                                           function($scope, applicationContext){
 		
 		$scope.provider = applicationContext.getProviderContext().getDetailProvider();
 		$scope.user = applicationContext.getUserContext().getLoggedUser();
-
-		$scope.getStars = function(review){
+		
+		var description = applicationContext.getProviderContext().getLocationToStringProvider();
+		$scope.centerMap = { lat: $scope.provider.lat, lng: $scope.provider.lng };
+		$scope.markerMap = { lat : $scope.provider.lat ,lng : $scope.provider.lng , title : $scope.provider.businessName ,description : description};
+		
+		$scope.getStars = function(review){	
 			return 	_.range(0,review.rating);
 		}
 		
 		$scope.getEmptyStars = function(review){
 			return 	_.range(review.rating,5);
 		}
+		
+	
 }]);
 
 
 
-mieventoControllers.controller("ProviderListController",["$rootScope", "$scope", "$state", "$stateParams", 
+mieventoControllers.controller("ProviderListController",["$rootScope", "$scope", "$state", 
          "$anchorScroll", "$filter","providerService", "userService", "applicationContext", 
-         function( $rootScope, $scope, $state, $stateParams, $anchorScroll, $filter, providerService, userService, applicationContext){
+         function( $rootScope, $scope, $state, $anchorScroll, $filter, providerService, userService, applicationContext){
 				
 				$scope.searching = true;
 				$scope.currentPage = 1;
-				$scope.itemPerPage = 5;
+				$scope.itemPerPage = 10;
 				$scope.maxSize = 5;
 				
 				getPage = function(){
@@ -134,8 +151,7 @@ mieventoControllers.controller("ProviderListController",["$rootScope", "$scope",
 					$anchorScroll();
 				}
 				
-				
-				providerService.getByLocationAndType($stateParams.searchLocationTypeRequest,function(data){
+				providerService.getByLocationAndType(applicationContext.getSearchLocationTypeRequest(),function(data){
 					$scope.searching =false;
 					$scope.providers = $filter('orderBy')(data,"estimatedPrice");
 					getPage();

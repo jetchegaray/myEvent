@@ -1,5 +1,7 @@
 package com.je.enterprise.mievento.api.dto.location;
 
+import org.apache.commons.lang3.StringUtils;
+
 
 
 public class CommercialLocation extends Location{
@@ -12,7 +14,7 @@ public class CommercialLocation extends Location{
 
 	public CommercialLocation(String placeName,CountryCode countryCode, ProvinceCode province,String city,
 			StreetAddress streetAddress) {
-		super(countryCode, province,city, streetAddress);
+		super(countryCode, province,city, streetAddress,StringUtils.EMPTY, StringUtils.EMPTY);
 		this.placeName = placeName;
 	}
 

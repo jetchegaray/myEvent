@@ -53,6 +53,7 @@ public class ProviderPlacesTransformer extends
 		BigDecimal estimatedPrice = BigDecimal.ZERO;
 		List<String> photos = detailPlace.getPhotoLocations();
 		
+		
 		if (photos.isEmpty()){
 			logger.debug("Photos vacias para el id : {}",detailPlace.getReference());
 			photos.add("../img/logo.jpg");
@@ -100,6 +101,8 @@ public class ProviderPlacesTransformer extends
 		BigDecimal number = BigDecimal.ZERO;
 		String additionalInfo = StringUtils.EMPTY;
 		String neighborhood = StringUtils.EMPTY;
+		String lng = StringUtils.EMPTY;
+		String lat = StringUtils.EMPTY;
 		
 		for (AddressComponent addressComponent : detailPlace.getAddress()) {
 			if (addressComponent.isCountry()){
@@ -126,6 +129,16 @@ public class ProviderPlacesTransformer extends
 			}
 		}
 		
+		if (detailPlace.getGeometry() != null && detailPlace.getGeometry().getLocation() != null){
+			Double placeLat = detailPlace.getGeometry().getLocation().getLatitude();
+			Double placeLng = detailPlace.getGeometry().getLocation().getLongitude();
+			
+			if (placeLat != null && placeLng != null){
+				lng = String.valueOf(placeLng);
+				lat = String.valueOf(placeLat);
+			}
+		}
+		
 		Validate.notNull(countryCode," El countrycode es null para el address"+detailPlace.getAddress());
 		Validate.notNull(province," El province es null para el address"+detailPlace.getAddress());
 		Validate.notNull(city," El city es null para el address"+detailPlace.getAddress());
@@ -133,7 +146,7 @@ public class ProviderPlacesTransformer extends
 //		logger.info(String.format(" The detail object id : %s, with addresComponent = %s DOESNT MATCH TO ANYONE IN MY MODEL. total dir from api is = %s",detailPlace.getReference(),addressComponent,detailPlace.getAddress()));
 		
 		StreetAddressEntity streetAddress = new StreetAddressEntity(street, number, additionalInfo, neighborhood);
-		return new LocationEntity(countryCode, province, city, streetAddress);
+		return new LocationEntity(countryCode, province, city, streetAddress, lat, lng);
 	}
 
 	

@@ -3,6 +3,7 @@
 mieventoContext.service("applicationContext", ["userContext", "eventContext", "exceptionContext", "providerContext", "countryContext",
                                                function(userContext, eventContext, exceptionContext, providerContext, countryContext){
 	var previousState = null;
+	var searchLocationTypeRequest = null;
 	var eventContext = eventContext;
 	var exceptionContext = exceptionContext;
 	var providerContext = providerContext;
@@ -16,6 +17,14 @@ mieventoContext.service("applicationContext", ["userContext", "eventContext", "e
 	
 	this.getPreviousState = function(){
 		return previousState;
+	}
+	
+	this.setSearchLocationTypeRequest = function(params){
+		searchLocationTypeRequest = params;
+	}
+	
+	this.getSearchLocationTypeRequest = function(){
+		return searchLocationTypeRequest;
 	}
 	
 	

@@ -40,20 +40,25 @@
 <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="../bower_components/angular-ui-select/dist/select.min.js"></script>
 <script src="../bower_components/moment/moment.js"></script>
-<script src="../bower_components/underscore/underscore.js"></script>
+<!-- <script src="../bower_components/underscore/underscore.js"></script> -->
 
 <script src="../bower_components/angular-ui-calendar/src/calendar.js"></script>
 <script src="../bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 <script src="../bower_components/fullcalendar/dist/gcal.js"></script>
 <script src="../bower_components/angular-xeditable/dist/js/xeditable.js"></script>
 <script src="../bower_components/angular-dragdrop/src/angular-dragdrop.min.js"></script>
+<script src="../bower_components/underscore/underscore.js"></script>
 <script src="../bower_components/angular-translate/angular-translate.min.js"></script>
 <script src="../bower_components/angular-translate-loader-url/angular-translate-loader-url.min.js"></script>
+
+<!-- ********************** google maps api ********************** -->
+
+<script src="//maps.googleapis.com/maps/api/js?sensor=false"></script>
+
 <!-- ********************** angular app ********************** -->
 
 <script src="../js/app.js"></script>
 <script src="../js/routes.js"></script>
-<script src="../js/directives.js"></script>
 
 
 <!-- ********************** controllers ********************** -->
@@ -85,7 +90,7 @@
 <script src="../js/contexts/providerContext.js"></script>
 <script src="../js/contexts/countryContext.js"></script>
 
-
+<!-- ********************** services and directives ********************** -->
 
 <script src="../js/services.js"></script>
 <script src="../js/filters.js"></script>
@@ -138,7 +143,7 @@
 							<li class="dropdown" dropdown><a href="#" class="dropdown-toggle" dropdown-toggle><span translate>index.services</span><span class="caret"></span></a>
 		
 								<ul class="dropdown-menu" role="menu" ng-controller="ProviderTypeController">
-									<li ng-repeat="type in types | orderBy:'toString()'"><a ui-sref="providerListState({searchLocationTypeRequest : {providerType : type}})">{{type}}</a></li>
+									<li ng-repeat="type in types | orderBy:'toString()'"><a ng-click="goToProviderList(type)">{{type}}</a></li>
 								</ul>
 							</li>
 							

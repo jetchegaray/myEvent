@@ -89,7 +89,11 @@ mieventoControllers.controller("BudgetEventController", ["$rootScope", "$scope",
 		}
 		
 		$scope.goToSearchAnotherProvider = function(provider){
-			$state.go("providerListState",{"searchLocationTypeRequest" : {"providerType" : provider.providerType }});
+			var searchLocationTypeRequest = {
+					providerType : provider.providerType
+			}
+			applicationContext.setSearchLocationTypeRequest(searchLocationTypeRequest);
+			$state.go("providerListState");
 		}
 		
 		

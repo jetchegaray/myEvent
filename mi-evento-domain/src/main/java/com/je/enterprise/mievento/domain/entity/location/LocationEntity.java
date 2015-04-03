@@ -18,13 +18,16 @@ public class LocationEntity {
 	
 	public LocationEntity() {
 	}
-	
-	public LocationEntity(CountryCode countryCode, ProvinceCode province,String city,
-			StreetAddressEntity streetAddress) {
+
+	public LocationEntity(CountryCode countryCode, ProvinceCode province,
+			String city, StreetAddressEntity streetAddress, String lat,
+			String lng) {
 		this.countryCode = countryCode;
 		this.province = province;
 		this.city = city;
 		this.streetAddress = streetAddress;
+		this.lat = lat;
+		this.lng = lng;
 	}
 
 	public CountryCode getCountryCode() {

@@ -1,5 +1,6 @@
 package com.je.enterprise.mievento.domain.transformer.impl;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,13 +23,13 @@ public class LocationTransformer extends Transformer<LocationEntity,Location> {
 	@Override
 	public Location transformDomainToApi(LocationEntity domainObject) {
 		StreetAddress streetAddress = streetAddressTransformer.transformAndValidateDomainToApi(domainObject.getStreetAddress());
-		return new Location(domainObject.getCountryCode(),domainObject.getProvince() ,domainObject.getCity(), streetAddress);
+		return new Location(domainObject.getCountryCode(),domainObject.getProvince() ,domainObject.getCity(), streetAddress, domainObject.getLat(), domainObject.getLng());
 	}
 
 	@Override
 	public LocationEntity transformApiToDomain(Location apiObject) {
 		StreetAddressEntity streetAddressEntity = streetAddressTransformer.transformAndValidateApiToDomain(apiObject.getStreetAddress());
-		return new LocationEntity(apiObject.getCountryCode(),apiObject.getProvince() ,apiObject.getCity(), streetAddressEntity);
+		return new LocationEntity(apiObject.getCountryCode(),apiObject.getProvince() ,apiObject.getCity(), streetAddressEntity, apiObject.getLat(), apiObject.getLng());
 	}
 	
 }
