@@ -117,6 +117,7 @@ mieventoControllers.controller("ProviderDetailController",["$scope","application
 		$scope.user = applicationContext.getUserContext().getLoggedUser();
 		
 		var description = applicationContext.getProviderContext().getLocationToStringProvider();
+		console.log(angular.toJson($scope.provider));
 		$scope.centerMap = { lat: $scope.provider.lat, lng: $scope.provider.lng };
 		$scope.markerMap = { lat : $scope.provider.lat ,lng : $scope.provider.lng , title : $scope.provider.businessName ,description : description};
 		
@@ -191,15 +192,24 @@ mieventoControllers.controller("ProviderListController",["$rootScope", "$scope",
 								info = {code : "2002"};
 								applicationContext.getExceptionContext().setSuccess(info);
 							}
-							$anchorScroll();
 						}else /* if (angular.equals(state.name, "eventState.providers"))*/{
-							var error = applicationContext.getEventContext().addProviderSelectedEvent(provider);
+							var error = null;
+							
+							if (provider.providerType.indexOf("Salon") > -1){
+								if (applicationContext.getEventContext().getPlaceSelectedEvent() != null){
+									error = {code : "0014"};
+									applicationContext.getExceptionContext().setWarning(error);
+									return
+								}
+								applicationContext.getEventContext().setProviderPlaceSelectedEvent(provider);
+							}else {
+								error = applicationContext.getEventContext().addProviderSelectedEvent(provider);
+							}
 							
 							if (error != null){
 								
 								error = {code : "0003"};
 								applicationContext.getExceptionContext().setWarning(error);
-								$anchorScroll();
 								return;
 							}
 							
@@ -210,7 +220,6 @@ mieventoControllers.controller("ProviderListController",["$rootScope", "$scope",
 								
 								info = {code : "2001"};
 								applicationContext.getExceptionContext().setSuccess(info);
-								$anchorScroll();
 								
 							}, function(error) {
 								applicationContext.getExceptionContext().setDanger(error.data);

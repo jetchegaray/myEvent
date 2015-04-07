@@ -15,7 +15,7 @@ public enum ProviderType {
 	VIDEO("Videos"),
 	DJ("Dj"),
 	BIRTHDAY_HALL("Salon Para Cumpleaños o Fiestas"),
-	BAR_MITZVAH_HALL("Salon Bar Mitzvah"),
+	BAT_MITZVA_HALL("Salon Bar Mitzvah"),
 	DRESSES_SUITS("Trajes y Vestidos"),
 	RINGS("Alianzas o Anillos De Compromiso"),
 	CAKES("Tortas"),
@@ -59,7 +59,7 @@ public enum ProviderType {
 	
 	
 	public static List<ProviderType> getPlaceTypes(){
-		return Arrays.asList(ProviderType.WEDDING_HALL,ProviderType.BIRTHDAY_HALL,ProviderType.BAR_MITZVAH_HALL);
+		return Arrays.asList(ProviderType.WEDDING_HALL,ProviderType.BIRTHDAY_HALL,ProviderType.BAT_MITZVA_HALL);
 	}
 
 	

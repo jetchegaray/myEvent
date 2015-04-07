@@ -75,6 +75,7 @@ mieventoControllers.controller("BudgetEventController", ["$rootScope", "$scope",
 				};
 				$scope.items.push(item);
 			});
+			console.log(angular.toJson($scope.items));
 		}	
 		
 		/*********  Start **************/

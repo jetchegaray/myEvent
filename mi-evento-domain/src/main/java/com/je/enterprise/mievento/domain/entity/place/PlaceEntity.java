@@ -14,6 +14,7 @@ public class PlaceEntity extends ProviderEntity {
 	private BigDecimal estimatedQuantityTables;
 	private BigDecimal estimatedQuantityPerson;
 	private ControlContextPlaceEntity contextPlaceEntity;
+	private Boolean owner;
 	
 	public PlaceEntity() {
 	}
@@ -22,7 +23,8 @@ public class PlaceEntity extends ProviderEntity {
 			String email, String cellPhone, String phone, BigDecimal price,
 			BigDecimal estimatedPrice, BigDecimal m2,
 			BigDecimal estimatedQuantityTables,
-			BigDecimal estimatedQuantityPerson,List<String> photos,ProviderType providerType,List<ProviderReviewEntity> reviews,ControlContextPlaceEntity contextPlaceEntity) {
+			BigDecimal estimatedQuantityPerson,List<String> photos,ProviderType providerType,
+			List<ProviderReviewEntity> reviews,ControlContextPlaceEntity contextPlaceEntity,Boolean owner) {
 		
 		super(businessId, businessName, description, location, email, cellPhone, phone,
 				price, estimatedPrice,photos,providerType,reviews);
@@ -30,11 +32,13 @@ public class PlaceEntity extends ProviderEntity {
 		this.estimatedQuantityTables = estimatedQuantityTables;
 		this.estimatedQuantityPerson = estimatedQuantityPerson;
 		this.contextPlaceEntity = contextPlaceEntity;
+		this.owner = owner;
 	}
+	
 	
 	public PlaceEntity(ProviderEntity providerEntity) {
 		this(providerEntity.getBusinessId(), providerEntity.getBusinessName(), providerEntity.getDescription(), providerEntity.getLocation(), providerEntity.getEmail(), providerEntity.getCellPhone(), providerEntity.getPhone(),
-				providerEntity.getPrice(), providerEntity.getEstimatedPrice(), null, null, null, providerEntity.getPhotos(),providerEntity.getProviderType(), providerEntity.getReviews(),null);
+				providerEntity.getPrice(), providerEntity.getEstimatedPrice(), null, null, null, providerEntity.getPhotos(),providerEntity.getProviderType(), providerEntity.getReviews(),null,Boolean.FALSE);
 	}
 
 	public BigDecimal getM2() {
@@ -67,5 +71,13 @@ public class PlaceEntity extends ProviderEntity {
 
 	public void setContextPlaceEntity(ControlContextPlaceEntity contextPlaceEntity) {
 		this.contextPlaceEntity = contextPlaceEntity;
+	}
+
+	public Boolean getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Boolean owner) {
+		this.owner = owner;
 	}
 }

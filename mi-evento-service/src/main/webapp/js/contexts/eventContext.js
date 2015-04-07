@@ -65,8 +65,17 @@ mieventoContext.service("eventContext",function(){
 	
 	this.setPlaceSelectedEvent = function(place){
 		selectedEvent.place = place;
+		selectedEvent.owner = true;
 	}
 	
+	this.setProviderPlaceSelectedEvent = function(provider){
+		selectedEvent.place = provider;
+		selectedEvent.place.owner = false;
+	}
+	
+	this.deletePlace = function(){
+		selectedEvent.place = null;
+	}
 	
 	this.getTablesPlaceSelectedEvent = function(){
 		if (selectedEvent.place == null || selectedEvent.place.controlContextPlace == null){

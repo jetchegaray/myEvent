@@ -32,7 +32,7 @@ public class PlaceTransformer extends Transformer<PlaceEntity, Place>{
 		Location location = locationTransformer.transformAndValidateDomainToApi(domainObject.getLocation());
 		List<Review> reviews = reviewTransformerList.transformDomainToApi(domainObject.getReviews());
 		ControlContextPlace contextPlace = this.contextPlaceTransformer.transformDomainToApi(domainObject.getContextPlaceEntity());
-		return new Place(domainObject.getBusinessId(), domainObject.getBusinessName(), domainObject.getDescription(), location, domainObject.getEmail(), domainObject.getCellPhone(), domainObject.getPhone(), domainObject.getPrice(), domainObject.getEstimatedPrice(), domainObject.getM2(), domainObject.getEstimatedQuantityTables(), domainObject.getEstimatedQuantityPerson(), domainObject.getPhotos(), domainObject.getProviderType(),reviews, contextPlace);
+		return new Place(domainObject.getBusinessId(), domainObject.getBusinessName(), domainObject.getDescription(), location, domainObject.getEmail(), domainObject.getCellPhone(), domainObject.getPhone(), domainObject.getPrice(), domainObject.getEstimatedPrice(), domainObject.getM2(), domainObject.getEstimatedQuantityTables(), domainObject.getEstimatedQuantityPerson(), domainObject.getPhotos(), domainObject.getProviderType(),reviews, contextPlace,domainObject.getOwner());
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class PlaceTransformer extends Transformer<PlaceEntity, Place>{
 		LocationEntity locationEntity = locationTransformer.transformAndValidateApiToDomain(apiObject.getLocation());
 		List<ProviderReviewEntity> reviewEntities = reviewTransformerList.transformApiToDomain(apiObject.getReviews());
 		ControlContextPlaceEntity contextPlaceEntity = this.contextPlaceTransformer.transformApiToDomain(apiObject.getControlContextPlace());
-		return new PlaceEntity(apiObject.getBusinessId(), apiObject.getBusinessName(), apiObject.getDescription(), locationEntity, apiObject.getEmail(), apiObject.getCellPhone(), apiObject.getPhone(), apiObject.getPrice(), apiObject.getEstimatedPrice(), apiObject.getM2(), apiObject.getEstimatedQuantityTables(), apiObject.getEstimatedQuantityPerson(), apiObject.getPicture(), apiObject.getProviderType(),reviewEntities,contextPlaceEntity);
+		return new PlaceEntity(apiObject.getBusinessId(), apiObject.getBusinessName(), apiObject.getDescription(), locationEntity, apiObject.getEmail(), apiObject.getCellPhone(), apiObject.getPhone(), apiObject.getPrice(), apiObject.getEstimatedPrice(), apiObject.getM2(), apiObject.getEstimatedQuantityTables(), apiObject.getEstimatedQuantityPerson(), apiObject.getPicture(), apiObject.getProviderType(),reviewEntities,contextPlaceEntity,apiObject.getOwner());
 	}
 	
 

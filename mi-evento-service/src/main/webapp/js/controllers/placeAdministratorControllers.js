@@ -1,8 +1,12 @@
 
-//21 Tables = 30px T y 10px G
-//8 tables = 80px T y 40px G 
 mieventoControllers.controller("PlaceAdministratorController", ["$scope", "$state", "userService", "applicationContext",
                 function($scope, $state, userService, applicationContext) {
+		$scope.place = applicationContext.getEventContext().getSelectedPlace();
+		if ($scope.place == null){
+			warning = {code : "0013"};
+			applicationContext.getExceptionContext().setWarning(warning);
+			return;
+		};
 			
 		calculateSizePxTables = function(){
 			if ($scope.amountTables <= 8){

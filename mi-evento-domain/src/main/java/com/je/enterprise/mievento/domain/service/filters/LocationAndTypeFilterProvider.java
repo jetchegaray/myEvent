@@ -11,7 +11,6 @@ public class LocationAndTypeFilterProvider implements CriteriaFilterProvider{
 	
 	private LocationEntity location;
 	private ProviderType type;
-	public static final Integer LIMIT  = 25;
 	
 	public LocationAndTypeFilterProvider(ProviderType type, LocationEntity location) {
 		this.location = location;
