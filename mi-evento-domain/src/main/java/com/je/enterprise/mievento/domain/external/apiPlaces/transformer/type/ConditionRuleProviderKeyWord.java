@@ -77,8 +77,12 @@ public enum ConditionRuleProviderKeyWord {
 		Set<String> keyWords = Sets.newLinkedHashSet();
 		
 		for (ConditionRuleProviderKeyWord rule : ConditionRuleProviderKeyWord.values()) {
-			keyWords.add(rule.arguments.getLeft());
-			keyWords.add(rule.arguments.getRight());
+			if (!StringUtils.isEmpty(rule.arguments.getLeft())){
+				keyWords.add(rule.arguments.getLeft());
+			}
+			if (!StringUtils.isEmpty(rule.arguments.getRight())){
+				keyWords.add(rule.arguments.getRight());
+			}
 		}
 		
 		return Sets.newLinkedHashSet(UtilsCollections.shuffle(keyWords));

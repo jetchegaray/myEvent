@@ -42,20 +42,20 @@ mieventoControllers.controller("ProviderSearchController",["$scope", "$state", "
 		});
 		
 		$scope.search = function(providerType){
-			var locationOwn = applicationContext.getEventContext().getPlaceSelectedEvent();
-			var providers = applicationContext.getEventContext().getProvidersSelectedEvent();
+			var place = applicationContext.getEventContext().getPlaceSelectedEvent();
+//			var providers = applicationContext.getEventContext().getProvidersSelectedEvent();
 			
-			var placeProvider = _.filter(providers, function(provider){ return provider.providerType.indexOf("Salon") > -1}); 
-			var locationDefinitive = null;
-			if (locationOwn != null){
-				locationDefinitive = locationOwn;
-			}else if (placeProvider != null && !angular.isUndefined(placeProvider) && _.size(placeProvider) != 0) {
-				locationDefinitive = placeProvider[0].location;
-			}
-			
+//			var placeProvider = _.filter(providers, function(provider){ return provider.providerType.indexOf("Salon") > -1}); 
+//			var locationDefinitive = null;
+//			if (locationOwn != null){
+//				locationDefinitive = locationOwn;
+//			}else if (placeProvider != null && !angular.isUndefined(placeProvider) && _.size(placeProvider) != 0) {
+//				locationDefinitive = placeProvider[0].location;
+//			}
+//			
 			var searchLocationTypeRequest = {
 					providerType : providerType,
-					location : locationDefinitive
+					location : place.location
 			}
 			applicationContext.setSearchLocationTypeRequest(searchLocationTypeRequest);
 			$state.go("providerListState");
@@ -117,9 +117,8 @@ mieventoControllers.controller("ProviderDetailController",["$scope","application
 		$scope.user = applicationContext.getUserContext().getLoggedUser();
 		
 		var description = applicationContext.getProviderContext().getLocationToStringProvider();
-		console.log(angular.toJson($scope.provider));
-		$scope.centerMap = { lat: $scope.provider.lat, lng: $scope.provider.lng };
-		$scope.markerMap = { lat : $scope.provider.lat ,lng : $scope.provider.lng , title : $scope.provider.businessName ,description : description};
+		$scope.centerMap = { lat: $scope.provider.location.lat, lng: $scope.provider.location.lng };
+		$scope.markerMap = { lat : $scope.provider.location.lat ,lng : $scope.provider.location.lng , title : $scope.provider.businessName ,description : description};
 		
 		$scope.getStars = function(review){	
 			return 	_.range(0,review.rating);

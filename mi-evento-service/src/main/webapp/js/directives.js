@@ -24,8 +24,6 @@ mieventoApp.directive('mieventoMap', function() {
 	        link: function(scope, element, attrs) {
 		        var map, infoWindow;
 		        var markers = [];
-		        console.log(angular.toJson(scope.centerMap));
-		        console.log(angular.toJson(scope.markerMap));
 		        // map config
 		        var mapOptions = {
 		            center: new google.maps.LatLng(scope.centerMap.lat,scope.centerMap.lng),
