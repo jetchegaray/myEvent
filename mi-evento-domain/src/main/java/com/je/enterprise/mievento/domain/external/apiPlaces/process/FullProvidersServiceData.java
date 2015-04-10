@@ -53,7 +53,7 @@ public class FullProvidersServiceData {
 
 	
 	//couta 1k request/day
-//	@Scheduled(cron = "* */5 * * * ?")
+	@Scheduled(cron = "* */5 * * * ?")
 	public void serviceProcessData() {
 		
 		List<DetailPlace> places = this.getData();
@@ -93,11 +93,11 @@ public class FullProvidersServiceData {
 							return detailPlaces;
 						}
 						
-						DetailPlace detailPlace = responseDetail.getData();
 						if (! responseDetail.getStatus().equals(StatusResponse.OK.getName())){
 							continue;
 						}
 						
+						DetailPlace detailPlace = responseDetail.getData();
 						List<String> locationsPhotos = Lists.newArrayList();
 						if (detailPlace.getPhotoReferences() != null){
 							for (String reference : detailPlace.getPhotoReferences()) {

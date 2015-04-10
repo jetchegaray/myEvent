@@ -16,6 +16,7 @@ public enum ConditionRuleProviderKeyWord {
 	AND_BIRTH_HALL(Pair.of("salon","cumpleaño")),
 	AND_BIRTH_HALL_2(Pair.of("salon","infantil")),
 	AND_PARTY_HALL(Pair.of("salon","fiestas")),
+	AND_EVENT_HALL(Pair.of("salon","evento")),
 //	AND_PARTY_HALL_2(Pair.of("salon","infantil")),
 	AND_BAT_HALL(Pair.of("salon","mitzva")),
 	AND_BAT_HALL_2(Pair.of("salon","mitzvá")),

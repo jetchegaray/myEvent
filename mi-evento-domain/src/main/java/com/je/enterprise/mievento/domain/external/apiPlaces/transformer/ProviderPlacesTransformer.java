@@ -56,7 +56,7 @@ public class ProviderPlacesTransformer extends
 		
 		if (photos.isEmpty()){
 			logger.debug("Photos vacias para el id : {}",detailPlace.getReference());
-			photos.add("../img/logo.jpg");
+			photos.add("../img/noimage.jpg");
 		}
 		
 		List<ProviderReviewEntity> reviews = this.getReviews(detailPlace.getReviews(),detailPlace.getRating());
