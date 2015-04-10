@@ -27,8 +27,8 @@ mieventoControllers.controller("EventListController", ["$rootScope", "$scope", "
 } ]);
 
 
-mieventoControllers.controller("DetailEventController", [ "$scope", "$state", "userService", "eventService", "applicationContext",
-		function($scope, $state, userService, eventService, applicationContext) {
+mieventoControllers.controller("DetailEventController", [ "$rootScope", "$scope", "$state", "userService", "eventService", "applicationContext",
+		function($rootScope, $scope, $state, userService, eventService, applicationContext) {
 
 			eventService.getAllEventTypes(function(data) {
 				$scope.eventTypes = data;

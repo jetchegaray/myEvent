@@ -50,3 +50,21 @@ mieventoServices.factory("eventService",["$resource", function($resource){
 				getAllProvinces: {method : "GET",params : { requestMapping : "provinces"}, isArray:true}
 			});	
 }])
+
+
+mieventoServices.factory("countryService",["$resource", function($resource){
+		return $resource("/mievento/country/:requestMapping",{requestMapping : "@requestMapping"},
+			{
+				getAll : {method : "GET",params : { requestMapping : "all"}, isArray : true},
+			});	
+}])
+
+
+mieventoServices.factory('UrlLanguageStorage', ['$location', function($location) {
+    return {
+        set: function (name, value) {},
+        get: function (name) {
+            return $location.search()['lang']
+        }
+    };
+}]);

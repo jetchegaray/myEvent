@@ -2,6 +2,8 @@ package com.je.enterprise.mievento.domain.transformer;
 
 import java.util.List;
 
+import org.apache.commons.lang3.Validate;
+
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 
@@ -19,10 +21,15 @@ public class TransformerList<D, A> {
 		try {
 			Preconditions.checkNotNull(domainObjects);
 			for (D d : domainObjects) {
-				apiObjects.add(transformer.transformDomainToApi(d));
+				try{	
+					A a = transformer.transformDomainToApi(d);
+					Validate.notNull(d);
+					apiObjects.add(a);
+				}catch(Exception e){
+					continue;
+				}
 			}
-			return apiObjects;
-
+		return apiObjects;
 		} catch (NullPointerException ex) {
 			return apiObjects;
 		}
@@ -34,7 +41,13 @@ public class TransformerList<D, A> {
 			Preconditions.checkNotNull(domainObjects);
 
 			for (A a : apiObjects) {
-				domainObjects.add(transformer.transformApiToDomain(a));
+				try{
+					D d = transformer.transformApiToDomain(a);
+					Validate.notNull(d);
+					domainObjects.add(d);
+				}catch(Exception e){
+					continue;
+				}
 			}
 			return domainObjects;
 

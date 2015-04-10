@@ -5,8 +5,8 @@ import com.je.enterprise.mievento.api.dto.provider.ProviderType;
 
 public class SearchLocationTypeRequest {
 
-	ProviderType providerType;
-	Location location;
+	private ProviderType providerType;
+	private Location location;
 	
 	public SearchLocationTypeRequest() {
 	}

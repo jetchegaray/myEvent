@@ -32,9 +32,6 @@ mieventoContext.service("eventContext",function(){
 	//***********GUESTS EVENT **********
 	
 	this.getGuestsSelectedEvent = function(){
-		if (selectedEvent == null){
-			selectedEvent.guests = [];
-		}
 		if (selectedEvent.guests == null){
 			selectedEvent.guests = [];
 		}
@@ -58,29 +55,42 @@ mieventoContext.service("eventContext",function(){
 	
 	
 	
-	this.getEventLocationSelectedEvent = function(){
+	this.getPlaceSelectedEvent = function(){
 		if (selectedEvent == null){
 			return null;
 		}
 		
-		return selectedEvent.eventLocation;
+		return selectedEvent.place;
 	}
 	
-	this.setEventLocationSelectedEvent = function(place){
-		selectedEvent.eventLocation = toProviderPlaceToCommercialLocation(place);
+	this.setPlaceSelectedEvent = function(place){
+		selectedEvent.place = place;
+		selectedEvent.owner = true;
 	}
 	
-	toProviderPlaceToCommercialLocation = function(place){
-		var eventLocation = {};
-		eventLocation.placeName = place.businessName;
-		eventLocation.location = place.location;
-//		eventLocation.city
-//		eventLocation.countryCode
-//		eventLocation.streetAddress.street
-//		eventLocation.streetAddress.number
-//		eventLocation.streetAddress.additionalInfo 
-//		eventLocation.streetAddress.neighborhood
-		return eventLocation;
+	this.setProviderPlaceSelectedEvent = function(provider){
+		selectedEvent.place = provider;
+		selectedEvent.place.owner = false;
+	}
+	
+	this.deletePlace = function(){
+		selectedEvent.place = null;
+	}
+	
+	this.getTablesPlaceSelectedEvent = function(){
+		if (selectedEvent.place == null || selectedEvent.place.controlContextPlace == null){
+			return [];
+		}
+		
+		return selectedEvent.place.controlContextPlace.controlContextTables;
+	}
+	
+	this.setTablesPlaceSelectedEvent = function(tables){
+		selectedEvent.place = {
+				 controlContextPlace : {
+					 controlContextTables : tables
+				 } 
+		 }
 	}
 	
 	
@@ -111,7 +121,7 @@ mieventoContext.service("eventContext",function(){
 		if (selectedEvent.providers != null){
 			var foundIt = _.find(selectedEvent.providers,function(provider){ return provider.businessId == newProvider.businessId});
 			if (! angular.isUndefined(foundIt)){
-				 return error = {code : 0007, description : "El proveedor ya se ha agregado !"};
+				 return error = {code : "0004"};
 			}
 		}
 		return null;
@@ -139,7 +149,7 @@ mieventoContext.service("eventContext",function(){
 		if (selectedEvent == null || selectedEvent.providers == null){
 			return 0;
 		}
-		return _.reduce(selectedEvent.providers, function(memo, provider){ return memo + provider.estimatedPrice; }, 0);
+		return _.reduce(selectedEvent.providers, function(memo, provider){ return parseInt(memo) + parseInt(provider.estimatedPrice); }, 0);
 	}
 	
 	//**********PROVIDERS TO COMPARE IN EVENT ***********
@@ -159,7 +169,7 @@ mieventoContext.service("eventContext",function(){
 		if (selectedEvent.providersToCompare != null){
 			var foundIt = _.find(selectedEvent.providersToCompare,function(provider){ return provider.businessId == providerToCompare.businessId});
 			if (! angular.isUndefined(foundIt)){
-				 return error = {code : 0006, description : "El proveedor ya se ha agregado para comparar !"};
+				 return error = {code : "0005"};
 			}
 		}else{
 			selectedEvent.providersToCompare = [];
@@ -182,6 +192,23 @@ mieventoContext.service("eventContext",function(){
 	this.deleteTaskFromEvent = function(task){
 		var index = selectedEvent.tasks.indexOf(task);
 		selectedEvent.tasks.splice(index, 1);
+	}
+	
+	
+	//**********PRESENTS******************************
+	
+	this.getPresents = function(){
+		if (selectedEvent.presents == null){
+			selectedEvent.presents =  [];
+		}
+		return selectedEvent.presents;
+	}
+	
+	this.addPresent = function(present){
+		if (selectedEvent.presents == null){
+			selectedEvent.presents = [];
+		}
+		selectedEvent.presents.push(present);	
 	}
 	
 });

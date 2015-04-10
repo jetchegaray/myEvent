@@ -7,6 +7,7 @@ public class SearchPlace {
 
 	private String id;
 	private String reference;
+	private String name;
 	
 	public SearchPlace() {
 	}
@@ -25,6 +26,14 @@ public class SearchPlace {
 
 	public void setReference(String reference) {
 		this.reference = reference;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }

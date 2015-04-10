@@ -213,8 +213,8 @@ mieventoControllers.controller("DeleteCalendarEventInstanceController", ["$scope
 mieventoControllers.controller("AddEventInstanceController", ["$scope", "$modalInstance", "selectedDay", function($scope, $modalInstance, selectedDay) {
 	
 		$scope.task = {
-				initialDate : selectedDay,
-				finalDate : selectedDay	
+				initialDate : moment(selectedDay).hour(0),
+				finalDate : moment(selectedDay).hour(23)
 		}
 		
 		$scope.ok = function() {

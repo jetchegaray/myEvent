@@ -25,7 +25,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.je.enterprise.mievento.api.dto.event.Event;
-import com.je.enterprise.mievento.api.dto.event.wedding.Wedding;
+import com.je.enterprise.mievento.api.dto.event.eventWithplace.EventWithPlaceAndPresent;
 import com.je.enterprise.mievento.api.dto.provider.ProviderType;
 import com.je.enterprise.mievento.api.dto.user.User;
 import com.je.enterprise.mievento.service.request.ProviderTypesRequest;
@@ -57,7 +57,7 @@ public class UserControllerTest {
     public void update_ok() throws Exception {
  
         User user = new User();
-		user.setEvents(Arrays.asList(new Event(),new Wedding()));
+		user.setEvents(Arrays.asList(new Event(),new EventWithPlaceAndPresent()));
 		
 		MappingJackson2HttpMessageConverter converter = (MappingJackson2HttpMessageConverter)webApplicationContext.getBean("jsonMessageConverter");
 		ObjectMapper mapper = converter.getObjectMapper();

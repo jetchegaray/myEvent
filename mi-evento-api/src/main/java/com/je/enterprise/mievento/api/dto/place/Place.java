@@ -16,24 +16,31 @@ public class Place extends Provider {
 	private BigDecimal estimatedQuantityTables;
 	private BigDecimal estimatedQuantityPerson;
 	private ControlContextPlace controlContextPlace;
+	private Boolean owner;
 	
 	public Place() {
-		super();
 	}
 
 	public Place(String businessId,String businessName, String description, Location location,
 			String email, String cellPhone, String phone, BigDecimal price,
 			BigDecimal estimatedPrice, BigDecimal m2,
 			BigDecimal estimatedQuantityTables,
-			BigDecimal estimatedQuantityPerson,List<String> photos,ProviderType providerType,List<Review> reviews) {
+			BigDecimal estimatedQuantityPerson,List<String> photos,ProviderType providerType,
+			List<Review> reviews,ControlContextPlace controlContextPlace,Boolean owner) {
 		super(businessId, businessName, description, location, email, cellPhone, phone,
 				price, estimatedPrice,photos,providerType,reviews);
 		this.m2 = m2;
 		this.estimatedQuantityTables = estimatedQuantityTables;
 		this.estimatedQuantityPerson = estimatedQuantityPerson;
-
+		this.controlContextPlace = controlContextPlace;
+		this.owner = owner;
 	}
 
+	public Place(Provider provider) {
+		this(provider.getBusinessId(), provider.getBusinessName(), provider.getDescription(), provider.getLocation(), provider.getEmail(), provider.getCellPhone(), provider.getPhone(),
+				provider.getPrice(), provider.getEstimatedPrice(), null, null, null, provider.getPhotos(),provider.getProviderType(), provider.getReviews(),null,Boolean.FALSE);
+	}
+	
 	public BigDecimal getM2() {
 		return m2;
 	}
@@ -65,4 +72,13 @@ public class Place extends Provider {
 	public void setControlContextPlace(ControlContextPlace controlContextPlace) {
 		this.controlContextPlace = controlContextPlace;
 	}
+
+	public Boolean getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Boolean owner) {
+		this.owner = owner;
+	}
+
 }

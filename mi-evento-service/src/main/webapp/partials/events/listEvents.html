@@ -4,12 +4,12 @@
 			<table id="eventsTable" class="table table-hover" ng-show="events != null && events.length">
 				<thead>
 				  <tr class="text-center">
-				     <th>Name</th>
-		           	 <th>Date</th>
-		           	 <th>Type</th>
-		           	 <th>Select</th>
-		         	 <th>Edit</th>
-		             <th>Delete</th>
+				     <th><span translate>events.list.tableName<span /></th>
+		           	 <th><span translate>events.list.tableDate<span /></th>
+		           	 <th><span translate>events.list.tableType<span/></th>
+		           	 <th><span translate>events.list.tableSelect<span/></th>
+		         	 <th><span translate>events.list.tableEdit<span/></th>
+		             <th><span translate>events.list.tableDelete<span/></th>
 				  </tr>
 				</thead>
 				<tbody>
@@ -33,10 +33,10 @@
 			          			</button></p>	
 			          		</span>	
 			          	</td>
-			          	<td><p><button class="btn btn-primary btn-xs" ng-click="goToEditEvent(event)"><span class="fa fa-pencil"></span></button></p></td>
+			          	<td><p><button class="btn btn-primary btn-xs btn-outline" ng-click="goToEditEvent(event)"><span class="fa fa-pencil"></span></button></p></td>
 	    			  	<td>
 	    			  		<div ng-controller="DeleteConfirmationModalController">
-	    			  	  		<p><button class="btn btn-danger btn-xs" ng-click="openDeleteListConfirmation(events,event)"><span class="fa fa-trash"></span></button></p>
+	    			  	  		<p><button class="btn btn-danger btn-xs btn-outline" ng-click="openDeleteListConfirmation(events,event)"><span class="fa fa-trash"></span></button></p>
 	 		        	  	</div>
 	 		        	</td>	
 	 		        </tr>
@@ -46,5 +46,5 @@
 	</div>
 	
 	<div class="line"></div>
-	<button class="btn btn-primary pull-right" ng-click="goAddEvent()"><i class="fa fa-plus glyphiconSpace"></i>Add Event</button>
+	<button class="btn btn-primary pull-right btn-outline" ng-click="goAddEvent()"><i class="fa fa-plus glyphiconSpace"></i><span translate>events.list.buttonAdd<span/></button>
 </div>

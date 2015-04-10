@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
 import org.joda.time.DateTime;
 import org.junit.AfterClass;
@@ -33,9 +34,8 @@ import com.je.enterprise.mievento.domain.entity.location.CommercialLocationEntit
 import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
 import com.je.enterprise.mievento.domain.entity.location.StreetAddressEntity;
 import com.je.enterprise.mievento.domain.entity.place.PlaceEntity;
-import com.je.enterprise.mievento.domain.entity.wedding.PersonEntity;
-import com.je.enterprise.mievento.domain.entity.wedding.PresentEntity;
-import com.je.enterprise.mievento.domain.entity.wedding.WeddingEntity;
+import com.je.enterprise.mievento.domain.entity.wedding.EventWithPlaceAndPresentEntity;
+import com.je.enterprise.mievento.domain.entity.wedding.PresentsEntity;
 import com.je.enterprise.mievento.domain.service.helper.CRUDHelper;
 import com.je.enterprise.mievento.domain.service.impl.UserService;
 
@@ -106,27 +106,22 @@ public class AllEntitiesServiceIntegrationTest {
 		UserEntity user = new UserEntity("javimetal2014","a@a.com", "pass", true);
 		user.setEvents(Lists.<EventEntity>newArrayList());
 		
-		WeddingEntity wedding = new WeddingEntity();
+		EventWithPlaceAndPresentEntity wedding = new EventWithPlaceAndPresentEntity();
 		wedding.setName("Mi Segunda Boda");
 		wedding.setInitialDate(DateTime.now().plusWeeks(20).toDate());
 		wedding.setFinalDate(DateTime.now().plusWeeks(21).toDate());
 		wedding.setBudget(BigDecimal.TEN);
 		
-		LocationEntity locationHusband = new LocationEntity(CountryCode.AR,ProvinceCode.BA,"CABA",new StreetAddressEntity("callea", BigDecimal.ONE, null, "Palermo"));
-		PersonEntity husband = new PersonEntity("JJ","HH","h@gmail.com",locationHusband);
-		PersonEntity wife = new PersonEntity("JJ","HH","h@gmail.com",locationHusband);
-	
-		wedding.setHusband(husband);
-		wedding.setWife(wife);
+		LocationEntity locationHusband = new LocationEntity(CountryCode.AR,ProvinceCode.BA,"CABA",new StreetAddressEntity("callea", BigDecimal.ONE, null, "Palermo"),StringUtils.EMPTY,StringUtils.EMPTY);
 		
-		LocationEntity locationWedding = new LocationEntity(CountryCode.AR,ProvinceCode.BA,"CABA",new StreetAddressEntity("calleZ", BigDecimal.ONE, null, "Recoleta"));
-		wedding.setPlace(new PlaceEntity("id1", "Salon Pueyrredon", "El mejor salon de todos loco.Rompermos todo", locationWedding, "salonP@gmail.com", "156545787", "01144578954", BigDecimal.ONE, BigDecimal.TEN, BigDecimal.valueOf(250), BigDecimal.valueOf(19), BigDecimal.valueOf(75),Arrays.asList("http://picture2"),ProviderType.WEDDING_HALL,null));
+		LocationEntity locationWedding = new LocationEntity(CountryCode.AR,ProvinceCode.BA,"CABA",new StreetAddressEntity("calleZ", BigDecimal.ONE, null, "Recoleta"),StringUtils.EMPTY,StringUtils.EMPTY);
+		wedding.setPlace(new PlaceEntity("id1", "Salon Pueyrredon", "El mejor salon de todos loco.Rompermos todo", locationWedding, "salonP@gmail.com", "156545787", "01144578954", BigDecimal.ONE, BigDecimal.TEN, BigDecimal.valueOf(250), BigDecimal.valueOf(19), BigDecimal.valueOf(75),Arrays.asList("http://picture2"),ProviderType.WEDDING_HALL,null,null,Boolean.FALSE));
 		wedding.setGuests(Lists.<GuestEntity>newArrayList(new GuestEntity("Guest","1","g1@gmail.com",locationHusband),new GuestEntity("Guest","2","g2@gmail.com",locationHusband)));
 		
-		wedding.setPresents(Lists.<PresentEntity>newArrayList(new PresentEntity("Vajilla", false,new CommercialLocationEntity("Falabella",CountryCode.AR,ProvinceCode.BA,"CABA",new StreetAddressEntity("callePresent", BigDecimal.ONE, null, "Recoleta")))));
+		wedding.setPresents(Lists.<PresentsEntity>newArrayList(new PresentsEntity(Lists.newArrayList("Vajilla"), BigDecimal.ONE,new CommercialLocationEntity("Falabella",CountryCode.AR,ProvinceCode.BA,"CABA",new StreetAddressEntity("callePresent", BigDecimal.ONE, null, "Recoleta")),null)));
 		wedding.setProviders(Lists.<ProviderEntity>newArrayList());
 		
-		LocationEntity locationFotografo = new LocationEntity(CountryCode.AR,ProvinceCode.BA,"CABA",new StreetAddressEntity("calleZ", BigDecimal.ONE, null, "Recoleta"));
+		LocationEntity locationFotografo = new LocationEntity(CountryCode.AR,ProvinceCode.BA,"CABA",new StreetAddressEntity("calleZ", BigDecimal.ONE, null, "Recoleta"),StringUtils.EMPTY,StringUtils.EMPTY);
 		wedding.getProviders().add(new ProviderEntity("id2", "Fotografo Carlitox", "Carlitox HOOO", locationFotografo, "Fc@gmail.com", "15548798","454879865", BigDecimal.ONE, BigDecimal.TEN,Arrays.asList("http://image1"),ProviderType.PHOTOGRAPHER,null));
 		
 		user.getEvents().add(wedding);
@@ -135,13 +130,11 @@ public class AllEntitiesServiceIntegrationTest {
 		CommercialLocationEntity locationEntregaTPFinal = new CommercialLocationEntity("Facultad Ingenieria",CountryCode.AR,ProvinceCode.BA,"CABA",new StreetAddressEntity("Paseo Coloon", BigDecimal.valueOf(750), "esquina Independencia", "San Telmo"));
 		List<GuestEntity> guestsTP = Lists.<GuestEntity>newArrayList(new GuestEntity("mama","etche","mama@gmail.com",locationHusband),new GuestEntity("Abu","etche","abu@gmail.com",locationHusband));
 		List<TaskEntity> tasksTP = Arrays.asList(new TaskEntity("Conseguir libreta",DateTime.now().toDate(),DateTime.now().plusDays(10).toDate()),new TaskEntity("comprar traje",DateTime.now().plusDays(5).toDate(),DateTime.now().plusDays(15).toDate()));
-		EventEntity miJura = new EventEntity("Jura Ingeniero",DateTime.now().plusWeeks(10).toDate(),DateTime.now().plusWeeks(10).toDate(),locationEntregaTPFinal,guestsTP,tasksTP,Lists.newArrayList(new ProviderEntity("id3", "Barman batman", "Carlitox HOOO", locationFotografo, "Fc@gmail.com", "15548798","454879865", BigDecimal.ONE, BigDecimal.TEN,Arrays.asList("http://image1"),ProviderType.PHOTOGRAPHER,null)),EventType.COMMON_EVENT);
+		EventEntity miJura = new EventEntity("Jura Ingeniero",DateTime.now().plusWeeks(10).toDate(),DateTime.now().plusWeeks(10).toDate(),guestsTP,tasksTP,Lists.newArrayList(new ProviderEntity("id3", "Barman batman", "Carlitox HOOO", locationFotografo, "Fc@gmail.com", "15548798","454879865", BigDecimal.ONE, BigDecimal.TEN,Arrays.asList("http://image1"),ProviderType.PHOTOGRAPHER,null)),EventType.COMMON_EVENT);
 		
 		user.getEvents().add(miJura);
 		
 		return user;
 	}
-	
-	
 	
 }

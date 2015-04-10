@@ -22,5 +22,9 @@ public class ProviderDAO extends GenericDAO<ProviderEntity, ObjectId> {
 	public List<ProviderEntity> findBy(CriteriaFilterProvider criteriaFilterProvider) {
 		return this.find(criteriaFilterProvider.buildQueryCriteria(this)).asList();
 	}
+	
+	public Long countBy(CriteriaFilterProvider criteriaFilterProvider){
+		return this.count(criteriaFilterProvider.buildQueryCriteria(this));
+	}
 
 }

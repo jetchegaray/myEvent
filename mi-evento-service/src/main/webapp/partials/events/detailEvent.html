@@ -4,7 +4,7 @@
 			<div class="col-md-4">
 				<div class="form-group">
 					<input type="text" class="form-control" name="name"
-						placeholder="Name" ng-model="event.name" ng-required>
+						placeholder="{{'event.detail.input.name' | translate}}" ng-model="event.name" ng-required>
 				</div>
 			</div>
 			
@@ -12,11 +12,11 @@
 				<div class="col-md-4">
 					<p class="input-group">
 						<input type="text" class="form-control"
-							datepicker-popup="{{format}}" placeholder="Event Date"
+							datepicker-popup="{{format}}" placeholder="{{'event.detail.input.eventDate' | translate}}"
 							ng-model="event.initialDate" is-open="opened" min-date="minDate"
 							max-date="maxDate" datepickerOptions="dateOptions" ng-required close-text="Close" ng-change="onDateChange(event.initialDate)"/>
 							<span class="input-group-btn">
-								<button type="button" class="btn btn-default"
+								<button type="button" class="btn btn-default btn-outline"
 									ng-click="open($event)"><i class="fa fa-calendar"></i>
 								</button>
 							</span>
@@ -25,27 +25,14 @@
 			</div>
 			<div class="col-md-4">
 				<ui-select ng-model="event.type" theme="selectize">
-    				<ui-select-match placeholder="Event type">{{$select.selected}}</ui-select-match>
+    				<ui-select-match placeholder="{{'event.detail.input.eventType' | translate}}">{{$select.selected}}</ui-select-match>
     				<ui-select-choices repeat="eventType in eventTypes">{{eventType}}</ui-select-choices>
   				</ui-select>
 			</div>
 		</div>	
 		<div class="row">	
-<!-- 			<div class="col-md-4">	 -->
-<!-- 				<ui-select  ng-model="event.eventLocation.province" theme="selectize"> -->
-<!-- 				   	<ui-select-match placeholder="Province or State">{{$select.selected}}</ui-select-match> -->
-<!-- 					<ui-select-choices repeat="province in provinces">{{province}}</ui-select-choices> -->
-<!-- 		 		</ui-select> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-md-4"> -->
-<!-- 				<ui-select ng-model="event.eventLocation.countryCode" theme="selectize"> -->
-<!--     				<ui-select-match placeholder="Country place">{{$select.selected}}</ui-select-match> -->
-<!--     				<ui-select-choices repeat="country in countries">{{country}}</ui-select-choices> -->
-<!--   				</ui-select> -->
-<!-- 			</div> -->
 			<div class="col-sm-2">
-				<button class="btn btn-primary btn-block" type="submit"
-					ng-click="save()">Save</button>
+				<button class="btn btn-primary btn-block btn-outline" type="submit" ng-click="save()"><i class="fa fa-plus glyphiconSpace"></i><span translate>events.detail.buttonAdd<span /></button>
 			</div>
 		</div>		
 	</form>

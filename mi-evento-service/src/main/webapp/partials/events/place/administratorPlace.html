@@ -1,52 +1,91 @@
+<div class="row" style="margin-bottom : 2%">
+	<form name="addTableForm" role="form">
+		<span ng-show="amountTables == 0">
+			<div class="col-md-4">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Tables Amount" ng-model="formModel.amountTables" required>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<button class="btn btn-success btn-outline" ng-click="setAmountTables()" type="submit">Draw</i></button>
+			</div>
+		</span>
+		<span ng-show="amountTables != 0">
+			<div class="col-sm-4">
+				<ui-select ng-model="formModel.guestAmountPerTable" theme="selectize">
+		  				<ui-select-match placeholder="Guest Amount Per Table">{{$select.selected.number}}-'Guests per table'</ui-select-match>
+		  				<ui-select-choices class="text-center" repeat="amountGuest in amountGuests">{{amountGuest.number}} - 'Guests per table'</ui-select-choices>
+				</ui-select>
+			</div>
+			<div class="col-sm-2">
+				<button class="btn btn-primary  btn-outline" ng-click="addTable()" type="submit"><i class="fa fa-plus glyphiconSpace"></i></button>
+			</div>
+		</span>
+	</form>
+	<div class="col-md-4" ng-show="place">	
+		<span class="font-secondtitle pull-right">
+			Place : ${{place.businessName}}
+		</span>
+	</div>
+</div>	
+
 <div class="row">
 	<div class="rectangle">
-			<div class="col-md-2 col-md-offset-1 offsetTables" ng-repeat="table in tables">
-				<p><div class="droppable-table" data-drop="true" ng-model='tables' ng-show="true"
-					jqyoui-droppable="{index: {{$index}}}">
-						<div class="placeAdminTable taable"  ng-show="table.located"
+			<div class="offsetTables" ng-repeat="table in tables">
+				<p><div ng-class="selectCss.droppableTable" data-drop="true" ng-model='tables' ng-show="true"
+					jqyoui-droppable="{index: {{$index}}, onDrop:'dropTable(table)'}">
+						<div ng-class="['placeAdminTable', selectCss.placeAdminTableTaable]" ng-show="table.located"
 							data-drag="true" ng-model="tables" data-jqyoui-options="{revert: 'invalid'}"
-							jqyoui-draggable="{index: {{$index}},placeholder:true,animate:false}">
+							jqyoui-draggable="{index: {{$index}},placeholder:true,animate:false, onStart:'startDragTable(table)'}">
 							
-							    <div ng-class="['placeAdminTable', n.text]" ng-repeat="n in table.guestAmount">
+							    <div ng-class="['placeAdminTable', n.style]" ng-repeat="n in table.guestAmount">
 										<div class="droppable-guest" data-drop="true" 
 											data-jqyoui-options="{revert: 'invalid'}" ng-model="table.guests"
-											jqyoui-droppable="{index: {{$index}},animate:false, onDrop:'dropCallback'}">
-											<i ng-show="table.guests[$index].firstName" class="fa fa-user text-success"></i>
-			 								{{table.guests[$index].firstName}} {{table.guests[$index].lastName}}
+											jqyoui-droppable="{index: {{$index}},animate:false, onDrop:'dropGuestSitting(table)'}">
+											<div class="draggable-guest" data-drag="true" 
+												data-jqyoui-options="{revert: 'invalid'}" ng-model="table.guests" ng-show="table.guests[$index].firstName"
+												jqyoui-draggable="{index: {{$index}},animate:false, onStart:'startDragGuest(guest, table)'}">
+												
+													<i style="margin-left: 40%" class="fa fa-user text-success"></i>
+			 										<div style="text-align: center; color: white;">{{table.guests[$index].firstName}} {{table.guests[$index].lastName}}</div>
+			 								</div>		
 		 								</div>
 								</div>
 						</div>	
 		            </div>
 		         </p>
 		    </div> 
-	</div
+	</div>
 </div>	
-<div class="row" style="margin-top: 2%">
-		<form name="addTableForm" role="form">
-				<div class="col-sm-2">
-					<ui-select ng-model="formModel.guestAmountPerTable" theme="selectize">
-			  				<ui-select-match placeholder="Guest Amount">{{$select.selected.number}}-{{$select.selected.text}}</ui-select-match>
-			  				<ui-select-choices class="text-center" repeat="amountGuest in amountGuests">{{amountGuest.number}} - {{amountGuest.text}}</ui-select-choices>
-					</ui-select>
-				</div>
-				<div class="col-sm-2">
-					<button class="btn btn-primary" ng-click="addTable()" type="submit"><i class="fa fa-plus glyphiconSpace"></i></button>
-				</div>
-		</form>
-	<div class="col-sm-6 col-md-offset-2 well">
+<div class="row" style="margin-top: 2%;margin-left: 0.1%">
+	
+		<div style="height: 200px;" class="col-sm-4 well dropTable-space" data-drop="true" ng-model='tables'
+			  jqyoui-droppable="{onDrop:'dropDeleteTable(table)'}">
+		</div>			
+	
+	
+	<div class="col-sm-6 well col-sm-offset-1" style="height: 100px;display: block;">
 <!-- 		<div class="navbar-inner"> -->
-<!-- 			<div class="container form-inline text-center"> -->
-<!-- 				<div class="btn droppable-guest" style="border: 1px;" ng-repeat="guest in guests" data-drop="true" ng-model='guests' -->
-<!-- 					jqyoui-droppable="{index: {{$index}}}"> -->
-						<div class="draggable-guest" data-drag="true" ng-repeat="guest in guests"
+			<div class="container">
+				<div class="droppable-btn-guest" data-drop="true" ng-model='guests' ng-repeat="guest in guests"
+					jqyoui-droppable="{index: {{$index}},animate:false}">
+						<div class="draggable-guest" data-drag="true" 
 							data-jqyoui-options="{revert: 'invalid'}" ng-model="guests"
-							jqyoui-draggable="{index: {{$index}},animate:false, onStart:'startCallback(guest, $index)'}">
-								<i class="fa fa-user text-success"></i>
-		 						{{guest.firstName}} {{guest.lastName}}
+							jqyoui-draggable="{index: {{$index}},animate:false, onStart:'startDragGuest(guest, $index)'}">
+								<span>
+								<i style="margin-left: 40%" class="fa fa-user text-success"></i>
+		 						<div style="text-align: center;">{{guest.firstName}} {{guest.lastName}}</div>
+		 						</span>
 						</div>
-<!-- 				</div> -->
-<!-- 			</div> -->
+				</div>
+			</div>
 <!-- 		</div> -->
 	</div>
-
 </div>
+<div class="row" style="margin-top: 2%">
+	<form name="saveTableForm" role="form">
+			<div class="col-sm-4">
+				<button class="btn btn-primary btn-outline" ng-click="save()" type="submit"><i class="fa fa-plus glyphiconSpace"></i><span translate>place.administrator.buttonSave<span/></button>
+			</div>
+	</form>
+</div>	

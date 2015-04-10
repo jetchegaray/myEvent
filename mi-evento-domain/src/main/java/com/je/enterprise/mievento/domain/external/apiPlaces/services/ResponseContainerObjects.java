@@ -10,7 +10,13 @@ public class ResponseContainerObjects<Model> {
 
 	private String status;
 	@JsonProperty("results")
-	private List<Model> results;
+	private List<Model> data;
+	@JsonProperty("next_page_token")
+	private String nextPage;
+	
+	public ResponseContainerObjects() {
+	}
+	
 	
 	public String getStatus() {
 		return status;
@@ -19,10 +25,16 @@ public class ResponseContainerObjects<Model> {
 		this.status = status;
 	}
 	public List<Model> getData() {
-		return results;
+		return data;
 	}
 	public void setData(List<Model> data) {
-		this.results = data;
+		this.data = data;
+	}
+	public String getNextPage() {
+		return nextPage;
+	}
+	public void setNextPage(String nextPage) {
+		this.nextPage = nextPage;
 	}
 	
 	

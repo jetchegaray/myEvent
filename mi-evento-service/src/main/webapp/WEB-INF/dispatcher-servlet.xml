@@ -2,7 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:beans="http://www.springframework.org/schema/beans"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
         http://www.springframework.org/schema/context
@@ -13,7 +13,7 @@
 	<import resource="classpath:application-context.xml" />
 	<context:component-scan base-package="com.je.enterprise.mievento.service.controller" />
 	<mvc:annotation-driven />
-
+	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
@@ -35,27 +35,41 @@
 		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
 		<property name="prefixJson" value="true" />
 		<property name="supportedMediaTypes" value="application/json" />
-		<property name="objectMapper">
-			<bean class="com.fasterxml.jackson.databind.ObjectMapper">
-				<property name="serializationInclusion" value="NON_NULL" />
-			</bean>
-		</property>
+		<property name="objectMapper" ref="objectMapperBean"/>
 	</bean>
 	
-     
-
-<!-- 	<bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper" /> -->
-<!-- 	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean"> -->
-<!-- 		<property name="targetObject" ref="jacksonObjectMapper" /> -->
-<!-- 		<property name="targetMethod" value="configure" /> -->
-<!-- 		<property name="arguments"> -->
-<!-- 			<list> -->
-<!-- 				<value type="com.fasterxml.jackson.databind.DeserializationFeature">FAIL_ON_UNKNOWN_PROPERTIES</value> -->
-<!-- 				<value>false</value> -->
-<!-- 			</list> -->
-<!-- 		</property> -->
-<!-- 	</bean> -->
-
+ 	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<mvc:resources mapping="/partials/**" location="/WEB-INF/partials/" />
+	
+<!--     <bean id="messageSource" -->
+<!--         class="org.springframework.context.support.ReloadableResourceBundleMessageSource"> -->
+<!--         <property name="basename" value="classpath:messages/messages" /> -->
+<!--         <property name="defaultEncoding" value="UTF-8" /> -->
+<!--     </bean> -->
+	
+	
+	<bean id="messageSource" class="com.je.enterprise.mievento.service.utils.SerializableResourceBundleMessageSource">
+	  <property name="basename" value="classpath:messages/messages" />
+	  <property name="defaultEncoding" value="UTF-8" />
+	</bean>
+    
+<!--     <bean id="localeResolver" -->
+<!--         class="org.springframework.web.servlet.i18n.SessionLocaleResolver"> -->
+<!--         <property name="defaultLocale" value="en" /> -->
+<!--     </bean> -->
+ <beans:bean id="localeResolver"
+        class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+        <beans:property name="defaultLocale" value="en" />
+        <beans:property name="cookieName" value="mieventoLocaleCookie"></beans:property>
+        <beans:property name="cookieMaxAge" value="3600"></beans:property>
+    </beans:bean>
+    
+    <mvc:interceptors>
+       <beans:bean
+           class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+           <beans:property name="paramName" value="lang" />
+       </beans:bean>
+   </mvc:interceptors>
 
 
 </beans>

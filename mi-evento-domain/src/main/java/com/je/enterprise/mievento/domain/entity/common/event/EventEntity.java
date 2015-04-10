@@ -18,8 +18,6 @@ public class EventEntity {
 	private Date initialDate;
 	private Date finalDate;
 	@Embedded
-	private CommercialLocationEntity eventLocation;
-	@Embedded
 	private List<GuestEntity> guests = Lists.<GuestEntity>newArrayList();
 	@Embedded
 	private List<TaskEntity> tasks = Lists.<TaskEntity>newArrayList();
@@ -31,24 +29,15 @@ public class EventEntity {
 	public EventEntity() {
 	}
 	
-	public EventEntity(String name, Date initialDate,Date finalDate, CommercialLocationEntity eventLocation,
+	public EventEntity(String name, Date initialDate,Date finalDate,
 			List<GuestEntity> guests, List<TaskEntity> tasks, List<ProviderEntity> providers, EventType type) {
 		this.name = name;
 		this.initialDate = initialDate;
 		this.finalDate = finalDate;
-		this.eventLocation = eventLocation;
 		this.guests = guests;
 		this.tasks = tasks;
 		this.providers = providers;
 		this.type = type;
-	}
-
-	public CommercialLocationEntity getEventLocation() {
-		return eventLocation;
-	}
-
-	public void setEventLocation(CommercialLocationEntity eventLocation) {
-		this.eventLocation = eventLocation;
 	}
 
 	public List<GuestEntity> getGuests() {

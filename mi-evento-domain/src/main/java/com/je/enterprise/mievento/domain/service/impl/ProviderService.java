@@ -3,6 +3,7 @@ package com.je.enterprise.mievento.domain.service.impl;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -11,10 +12,16 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
+import com.je.enterprise.mievento.api.dto.location.CountryCode;
 import com.je.enterprise.mievento.domain.dao.impl.ProviderDAO;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderReviewEntity;
+import com.je.enterprise.mievento.domain.entity.geo.CityEntity;
 import com.je.enterprise.mievento.domain.exception.customize.NotExistanceProvidersException;
+import com.je.enterprise.mievento.domain.service.filters.CitiesFilterProvider;
 import com.je.enterprise.mievento.domain.service.filters.CriteriaFilterProvider;
 import com.je.enterprise.mievento.domain.service.helper.CRUDHelper;
 
@@ -83,5 +90,30 @@ public class ProviderService {
 		}catch(Exception ex){
 			logger.error(ExceptionUtils.getStackTrace(ex));
 		}
+	}
+	
+	
+	public Set<CityEntity> getAllCitiesThereProviders(CountryCode country){
+		List<ProviderEntity> providers = this.getBy(new CitiesFilterProvider(country));
+		
+		Set<CityEntity> cities = Sets.<CityEntity>newLinkedHashSet(Iterables.transform(providers, new Function<ProviderEntity, CityEntity>() {
+			@Override
+			public CityEntity apply(ProviderEntity input) {
+				return new CityEntity(input.getLocation().getCity(), null, null);
+			}
+		}));
+		
+		return cities;
+	}
+	
+
+	public void create(ProviderEntity providerEntity) {
+		this.crudHelper.create(providerEntity);
+	}
+	
+	public Long totalCount(CriteriaFilterProvider criteriaFilterProvider){
+		ProviderDAO providerDAO = (ProviderDAO)this.crudHelper.getDao();
+		Long count = Long.valueOf(providerDAO.countBy(criteriaFilterProvider));
+		return count;
 	}
 }

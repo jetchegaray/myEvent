@@ -19,6 +19,11 @@ mieventoContext.service("userContext", function(){
 	}
 	
 	this.addUserEvent = function(event){
+		if (event.type == "Boda o Casamiento" || event.type.indexOf("Cumplea") != -1 || event.type === "Fiesta" || event.type === "Bar Mitzvah"){
+			event.clazz="EventWithPlaceAndPresent"
+		}else{
+			event.clazz="Event"
+		}
 		loggedUser.events.push(event);
 	}
 	

@@ -2,17 +2,17 @@ package com.je.enterprise.mievento.domain.transformer.impl;
 
 import java.math.BigDecimal;
 
+
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import com.je.enterprise.mievento.api.dto.event.Event;
 import com.je.enterprise.mievento.api.dto.event.Guest;
-import com.je.enterprise.mievento.api.dto.event.InvitationStatus;
 import com.je.enterprise.mievento.api.dto.event.GuestStatusType;
+import com.je.enterprise.mievento.api.dto.event.InvitationStatus;
 import com.je.enterprise.mievento.api.dto.event.Task;
 import com.je.enterprise.mievento.api.dto.location.CommercialLocation;
 import com.je.enterprise.mievento.api.dto.location.CountryCode;
@@ -29,6 +29,9 @@ import com.je.enterprise.mievento.domain.entity.location.CommercialLocationEntit
 import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
 import com.je.enterprise.mievento.domain.entity.location.StreetAddressEntity;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
+import com.je.enterprise.mievento.domain.transformer.impl.events.StrategyApiVisitor;
+import com.je.enterprise.mievento.domain.transformer.impl.events.TransformerEventList;
+import com.je.enterprise.mievento.domain.transformer.impl.events.VisitorTransformerEvent;
 
 public class TransformersImplTest {
 
@@ -44,16 +47,15 @@ public class TransformersImplTest {
 	public void setUp(){
 		
 		StreetAddressTransformer streetAddressTransformer = new StreetAddressTransformer();
-		this.commercialLocationTransformer = new CommercialLocationTransformer(streetAddressTransformer);
 		this.locationTransformer = new LocationTransformer(streetAddressTransformer);
 		this.guestTransformer = new GuestTransformer(locationTransformer,new InvitationStatusTransformer());
 		TransformerList<TaskEntity, Task> taskTransformerList = new TransformerList<TaskEntity, Task>(taskTransformer);
 		TransformerList<GuestEntity, Guest> guestTransformerList = new TransformerList<GuestEntity, Guest>(guestTransformer);
 		TransformerList<ProviderEntity, Provider> providerTransformerList = new TransformerList<ProviderEntity, Provider>(providerTransformer);
 		
-		this.eventTransformer = new EventTransformer(commercialLocationTransformer, guestTransformerList,taskTransformerList,providerTransformerList);
+		this.eventTransformer = new EventTransformer(guestTransformerList,taskTransformerList,providerTransformerList);
 		
-		userTransformer = new UserTransformer(new TransformerList<EventEntity, Event>(eventTransformer));
+		userTransformer = new UserTransformer(new TransformerEventList(new VisitorTransformerEvent(), new StrategyApiVisitor()));
 	}
 	
 
@@ -153,16 +155,11 @@ public class TransformersImplTest {
 	public void event_ok(){
 		Event event =  new Event();
 		Guest guest = new Guest();
-		CommercialLocation commercialLocation = new CommercialLocation();
 		
 		Assert.assertNull(this.eventTransformer.transformAndValidateApiToDomain(null));
 		
 		event.setName("evento");
 		Assert.assertNotNull(this.eventTransformer.transformAndValidateApiToDomain(event));
-		
-		commercialLocation.setCity("Cordoba");
-		event.setEventLocation(commercialLocation);
-		Assert.assertNotNull(this.eventTransformer.transformAndValidateApiToDomain(event));	
 		
 		event.setGuests(Lists.<Guest>newArrayList(guest));
 		Assert.assertNotNull(this.eventTransformer.transformAndValidateApiToDomain(event));
@@ -170,16 +167,11 @@ public class TransformersImplTest {
 		
 		EventEntity eventEntity =  new EventEntity();
 		GuestEntity guestEntity = new GuestEntity();
-		CommercialLocationEntity commercialLocationEntity = new CommercialLocationEntity();
 		
 		Assert.assertNull(this.eventTransformer.transformAndValidateDomainToApi(null));
 		
 		eventEntity.setName("evento");
 		Assert.assertNotNull(this.eventTransformer.transformAndValidateDomainToApi(eventEntity));
-		
-		commercialLocation.setCity("Cordoba");
-		eventEntity.setEventLocation(commercialLocationEntity);
-		Assert.assertNotNull(this.eventTransformer.transformAndValidateDomainToApi(eventEntity));	
 		
 		eventEntity.setGuests(Lists.<GuestEntity>newArrayList(guestEntity));
 		Assert.assertNotNull(this.eventTransformer.transformAndValidateDomainToApi(eventEntity));

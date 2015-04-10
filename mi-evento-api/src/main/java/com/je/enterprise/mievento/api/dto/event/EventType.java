@@ -1,14 +1,19 @@
 package com.je.enterprise.mievento.api.dto.event;
 
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.common.collect.Sets;
 
 public enum EventType {
 
 	WEDDING("Boda o Casamiento"),
 	BIRTHDAY("Cumpleaños"),
 	PARTY("Fiesta"),
-	BAR_MITZVAH("Bar Mitzvah"),
+	BAR_MITZVAH("Bat Mitzva"),
+	BAPTISM("Bautismo"),
+	COMMUNION("Comunion"),
 	COMMON_EVENT("Otro Evento");
 	
 	private String name;
@@ -35,6 +40,10 @@ public enum EventType {
 	@Override
 	public String toString() {
 		return getName();
+	}
+	
+	public static Set<EventType> withPosiblesPlaces(){
+		return Sets.newHashSet(EventType.WEDDING,EventType.PARTY,EventType.BIRTHDAY,EventType.BAR_MITZVAH);
 	}
 	
 }

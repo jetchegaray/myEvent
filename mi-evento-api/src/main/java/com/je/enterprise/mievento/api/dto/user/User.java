@@ -2,9 +2,10 @@ package com.je.enterprise.mievento.api.dto.user;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.je.enterprise.mievento.api.dto.event.Event;
 
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 
 	//FIXME deberia ir en un objeto diferente. con una base diferente

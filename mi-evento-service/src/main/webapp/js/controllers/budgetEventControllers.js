@@ -75,6 +75,7 @@ mieventoControllers.controller("BudgetEventController", ["$rootScope", "$scope",
 				};
 				$scope.items.push(item);
 			});
+			console.log(angular.toJson($scope.items));
 		}	
 		
 		/*********  Start **************/
@@ -89,7 +90,11 @@ mieventoControllers.controller("BudgetEventController", ["$rootScope", "$scope",
 		}
 		
 		$scope.goToSearchAnotherProvider = function(provider){
-			$state.go("providerListState",{"searchLocationTypeRequest" : {"providerType" : provider.providerType }});
+			var searchLocationTypeRequest = {
+					providerType : provider.providerType
+			}
+			applicationContext.setSearchLocationTypeRequest(searchLocationTypeRequest);
+			$state.go("providerListState");
 		}
 		
 		

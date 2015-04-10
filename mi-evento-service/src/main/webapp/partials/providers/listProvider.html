@@ -3,16 +3,16 @@
 		<div class="container" ng-controller="ProviderListController">
 			<div class="centered-message" ng-show="searching"><i class="fa fa-spinner fa-spin fa-5x"></i></div>
 			<div class="centered-message" class="row" ng-show="!searching && (providers == null || providers.length == 0)">
-				<span class="font-noResult"> No Providers for the search. Try to another Location.</span>
+				<span class="font-noResult"><span translate>provider.list.notthere<span /></span>
 			</div>
 			
-			<div class="row oneElement" ng-repeat="provider in providers">
+			<div class="row oneElement" ng-repeat="provider in providersPagination  |  orderBy:-estimatedPrice ">
 				<div class="media">
-					<a class="pull-left" ng-click="	" href="#">
-					  <div  ng-controller="providerCarouselCtrl" ng-init="init(provider)" class="media-object" style=" width: 300px; height: 150px; margin: 0 auto;">
+					<a class="pull-left" ng-click="	" href>
+					  <div  ng-controller="providerCarouselCtrl" ng-init="init(provider)" class="media-object" style=" width: 200px; height: 150px; margin: auto;">
 							<carousel interval="interval" disable-animation="true"> 
 								<slide ng-repeat="slide in slides" active="slide.active"> 
-									<img ng-src="{{slide.image}}"  >
+									<img ng-src="{{slide.image}}" style=" width: 300px; height: 150px; margin: auto;">
 								</slide> 
 							</carousel>
 						</div>
@@ -38,17 +38,20 @@
 					</div>
 					<hr class="divide"/>
 					<span class="price">
-						<small>Precio Desde : </small>
+						<small><span translate>provider.list.priceSince<span /></small>
 						<i class="fa fa-money glyphiconSpace"><strong> ${{provider.estimatedPrice}}</strong></i>
 					</span>	
 				     <span class="pull-right buttons">
-	                   	<button class="btn btn-sm btn-default" ng-click="goToDetail(provider)"><i class="fa fa-eye"></i> Detail</button>
-	                   	<button class="btn btn-sm btn-primary" ng-click="addProvider(provider)"><i class="fa fa-plus"></i> Add</button>
+	                   	<button class="btn btn-sm btn-default btn-outline" ng-click="goToDetail(provider)"><i class="fa fa-eye"></i> <span translate>provider.list.buttonDetail<span /></button>
+	                   	<button class="btn btn-sm btn-primary btn-outline" ng-click="addProvider(provider)"><i class="fa fa-plus"></i> <span translate>provider.list.buttonAdd<span /></button>
 	         	     </span>	 
 				</div>    
 				<hr class="divide"/>
 			</div>
-		
+			<div ng-show="providers "= null && providers.length != 0" class="row">
+				<pagination total-items="totalItems" items-per-page="itemPerPage" ng-model="currentPage" ng-change="pageChanged()" max-size="maxSize" class="pagination-sm" boundary-links="true" direction-links="false" rotate="false"></pagination>
+			</div>
 		</div>
+		
 	</div>
 </div>	 

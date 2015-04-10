@@ -4,25 +4,25 @@
 			<div class="col-md-4">
 				<div class="form-group">
 					<input type="text" class="form-control" name="firstName"
-						placeholder="First Name" ng-model="guest.firstName" ng-required>
+						placeholder="{{'guest.input.firstName' | translate}}" ng-model="guest.firstName" required>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
 					<input type="text" class="form-control" name="lastName"
-						placeholder="Last Name" ng-model="guest.lastName">
+						placeholder="{{'guest.input.lastName' | translate}}" ng-model="guest.lastName" >
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
 					<input type="email" class="form-control" name="email"
-						placeholder="Email" ng-model="guest.email" required>
+						placeholder="{{'guest.input.email' | translate}}" ng-model="guest.email" required>
 				</div>
 			</div>
 
 			<div class="col-md-4">
 				<ui-select ng-model="guest.invitationStatus.status" theme="selectize">
-    				<ui-select-match placeholder="Invitation Status">{{$select.selected}}</ui-select-match>
+    				<ui-select-match placeholder="{{'guest.input.invitationStatus' | translate}}">{{$select.selected}}</ui-select-match>
     				<ui-select-choices repeat="status in statusTypes">{{status}}</ui-select-choices>
   				</ui-select>
 			</div>
@@ -30,11 +30,11 @@
 				<div class="col-md-4">
 					<p class="input-group">
 						<input type="text" class="form-control"
-							datepicker-popup="{{format}}" placeholder="Confirmation Date"
+							datepicker-popup="{{format}}" placeholder="{{'guest.input.confirmationDate' | translate}}"
 							ng-model="guest.invitationStatus.updateStatusDate" is-open="opened" min-date="minDate"
 							max-date="maxDate" datepickerOptions="dateOptions" ng-required close-text="Close"/>
 							<span class="input-group-btn">
-								<button type="button" class="btn btn-default"
+								<button type="button" class="btn btn-default btn-outline"
 									ng-click="open($event)"><i class="fa fa-calendar"></i>
 								</button>
 							</span>
@@ -44,7 +44,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-4">
-				<button class="btn btn-primary btn-block" type="submit" ng-click="save()">Save</button>
+				<button class="btn btn-primary btn-block btn-outline" type="submit" ng-click="save()"><span translate>guest.buttonSave<span/></button>
 			</div>
 		</div>
 	</form>

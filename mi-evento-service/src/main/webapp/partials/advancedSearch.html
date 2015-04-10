@@ -1,91 +1,50 @@
-<div > 
+<div class="container"> 
+<div class="row"> 
 	<form name="advancedSearchForm" role="form">
 		<div class="row">
 			<div class="col-md-4">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Place Name" ng-model="search.businessName" required>
+					<input type="text" class="form-control" placeholder="{{'advancedSearch.input.placeName' | translate}}" ng-model="search.businessName" required>
 				</div>
 			</div>
-			<div class="col-md-4">	
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Price" ng-model="place.price">
-				</div>
+ 			<div class="col-sm-4">
+				<ui-select ng-model="search.providerType" theme="selectize">
+	   				<ui-select-match placeholder="{{'advancedSearch.input.providerType' | translate}}">{{$select.selected}}</ui-select-match>
+	   				<ui-select-choices repeat="type in types">{{type}}</ui-select-choices>
+	 			</ui-select>
 			</div>	
-		</div>	
-		<div class="row">
-			<div class="col-md-4 font-secondtitle">
-				How long ?
-			</div>
-		</div>	
-		<div class="line"></div>
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Estimated Quantity Tables" ng-model="place.estimatedQuantityTables">
-				</div>
-			</div>	
-			<div class="col-md-4">	
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Estimated Quantity Persons" ng-model="place.estimatedQuantityPerson">
-				</div>
-			</div>	
-		</div>		
-		<div class="row">
-			<div class="col-md-4 font-secondtitle">
-				Where ?
-			</div>
-		</div>	
-		<div class="line"></div>
-		<div class="row">
-			<div class="col-md-4">	 
-				<ui-select  ng-model="place.location.province" theme="selectize">
-				   	<ui-select-match placeholder="Province or State">{{$select.selected}}</ui-select-match>
-					<ui-select-choices repeat="province in provinces">{{province}}</ui-select-choices>
-		 		</ui-select>
-			</div>
-			<div class="col-md-4">
-				<ui-select ng-model="place.location.countryCode" theme="selectize">
-	   				<ui-select-match placeholder="Country place">{{$select.selected}}</ui-select-match>
-	   				<ui-select-choices repeat="country in countries">{{country}}</ui-select-choices>
-	 				</ui-select>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<input type="email" class="form-control" name="city"
-						placeholder="city" ng-model="place.location.city">
-				</div>
-			</div>
-		</div>
-		<div class="row">
 			<div class="col-md-3">	
 				<div class="form-group">
 					<input type="text" class="form-control" name="neighborhood"
-						placeholder="neighborhood" ng-model="place.location.streetAddress.neighborhood">
+						placeholder="{{'advancedSearch.input.neighborhood' | translate}}" ng-model="search.streetAddress.neighborhood">
 				</div>
 			</div>	
-			<div class="col-md-3">
-				<div class="form-group">
-					<input type="text" class="form-control" name="street"
-						placeholder="Street" ng-model="place.location.streetAddress.street">
-				</div>
-			</div>	
-			<div class="col-md-3">	
-				<div class="form-group">
-					<input type="text" class="form-control" name="number"
-						placeholder="Number" ng-model="place.location.streetAddress.number">
-				</div>
-			</div>	
-			<div class="col-md-3">	
-				<div class="form-group">
-					<input type="text" class="form-control" name="city"
-						placeholder="Ej : 6° B" ng-model="place.location.streetAddress.additionalInfo">
-				</div>
+		</div>	
+		<div class="row" ng-controller="LocationSearchComboController">
+			<div class="col-md-4">
+				<ui-select  ng-change="loadStates()" ng-model="search.country" theme="selectize">
+	   				<ui-select-match placeholder="{{'advancedSearch.input.country' | translate}}">{{$select.selected.name}}</ui-select-match>
+	   				<ui-select-choices repeat="country in countries">{{country.name}}</ui-select-choices>
+	 			</ui-select>
+			</div>
+			<div class="col-sm-4">
+				<ui-select ng-change="loadCities()" ng-model="search.state" theme="selectize">
+	   				<ui-select-match placeholder="{{'advancedSearch.input.state' | translate}}">{{$select.selected.name}}</ui-select-match>
+	   				<ui-select-choices repeat="state in states">{{state.name}}</ui-select-choices>
+	 			</ui-select>
+			</div>
+			<div class="col-md-4">
+				<ui-select ng-model="search.city" theme="selectize">
+	   				<ui-select-match placeholder="{{'advancedSearch.input.city' | translate}}">{{$select.selected.name}}</ui-select-match>
+	   				<ui-select-choices repeat="city in cities">{{city.name}}</ui-select-choices>
+	 			</ui-select>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-4">
-				<button type="button" class="btn btn-primary" ng-click="save()">Save</button>
+				<button type="button" class="btn btn-primary btn-outline" ng-click="advancedSearch()"><i class="fa fa-search"></i><span translate>advancedSearch.button<span /></button>
 			</div>
 		</div>		
 	</form>
+</div>
 </div>

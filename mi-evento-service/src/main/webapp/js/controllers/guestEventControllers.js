@@ -56,6 +56,10 @@ mieventoControllers.controller("InvitationsGuestEventController", ["$scope", "ev
 mieventoControllers.controller("DetailGuestEventController", ["$scope", "$state", "userService", "eventGuestService", "applicationContext", 
              function($scope, $state, userService, eventGuestService, applicationContext) {
 			
+			if ($scope.guestForm.$invalid){
+				return;
+			}
+	
 			//FIXME unificar en un solo lugar
 			eventGuestService.getAllStatusTypes(function(data) {
 				$scope.statusTypes = data;

@@ -1,11 +1,20 @@
-mieventoControllers.controller("ProviderTypeController",["$scope", "providerService", "applicationContext", 
-                                                         function($scope, providerService,applicationContext){
+mieventoControllers.controller("ProviderTypeController",["$scope", "$state", "providerService", "applicationContext", 
+                                                         function($scope, $state, providerService,applicationContext){
 			
 			providerService.getAllTypes(function(data){
 				$scope.types = data;
 			}, function(error) {
 				applicationContext.getExceptionContext().setDanger(error.data);
 			});
+			
+			
+			$scope.goToProviderList = function(type){
+				var searchLocationTypeRequest = {
+						providerType : type
+				}
+				applicationContext.setSearchLocationTypeRequest(searchLocationTypeRequest);
+				$state.go("providerListState");
+			}
 					
 }]);
 
@@ -22,52 +31,131 @@ mieventoControllers.controller("ProviderPlaceTypesController",["$scope", "provid
 }]);
 
 
-mieventoControllers.controller("ProviderSearchController",["$scope", "providerService", "applicationContext",
-                                                               function($scope, providerService,applicationContext){
+mieventoControllers.controller("ProviderSearchController",["$scope", "$state", "countryService","providerService", "applicationContext",
+                                                               function($scope, $state, countryService, providerService,applicationContext){
 			
+		
+		providerService.getAllTypes(function(data){
+			$scope.types = data;
+		}, function(error) {
+			applicationContext.getExceptionContext().setDanger(error.data);
+		});
+		
 		$scope.search = function(providerType){
-			var locationOwn = applicationContext.getEventContext().getEventLocationSelectedEvent();
-			var providers = applicationContext.getEventContext().getProvidersSelectedEvent();
+			var place = applicationContext.getEventContext().getPlaceSelectedEvent();
+//			var providers = applicationContext.getEventContext().getProvidersSelectedEvent();
 			
-			var placeProvider = _.filter(function(provider){ return provider.providerType.indexOf("Salon") > -1}); 
-			
-			var locationDefinitive = (locationOwn != null) ? locationOwn : placeProvider.location;
-			
+//			var placeProvider = _.filter(providers, function(provider){ return provider.providerType.indexOf("Salon") > -1}); 
+//			var locationDefinitive = null;
+//			if (locationOwn != null){
+//				locationDefinitive = locationOwn;
+//			}else if (placeProvider != null && !angular.isUndefined(placeProvider) && _.size(placeProvider) != 0) {
+//				locationDefinitive = placeProvider[0].location;
+//			}
+//			
 			var searchLocationTypeRequest = {
 					providerType : providerType,
-					location : locationDefinitive
+					location : place.location
 			}
-			$state.go("providerListState", {"searchLocationTypeRequest" : searchLocationTypeRequest});
+			applicationContext.setSearchLocationTypeRequest(searchLocationTypeRequest);
+			$state.go("providerListState");
 		}
+		
+		$scope.search = {}; //para que funcionen los combos en un child controller.
+		$scope.advancedSearch = function(){
+			var searchLocationTypeRequest = {
+					providerType : $scope.search.providerType,
+					location : {
+						countryCode : $scope.search.country.name,
+						province : $scope.search.state.name,
+						city : $scope.search.city.name,
+						streetAddress : $scope.search.streetAddress
+					}
+			}
+			applicationContext.setSearchLocationTypeRequest(searchLocationTypeRequest);
+			$state.go("providerListState");
+		}
+		
+		$scope.toAdvancedSearch = function(){
+			$state.go("providerAdvancedSearch");
+		}
+		
 		
 }]);
 
 
-mieventoControllers.controller("ProviderDetailController",["$scope","applicationContext",function($scope, applicationContext){
+mieventoControllers.controller("LocationSearchComboController",["$scope", "countryService", "applicationContext",
+                                                           function($scope, countryService, applicationContext){
+	
+	$scope.countries = applicationContext.getCountryContext().getAllCountries();
+	if ($scope.countries == null){
+		countryService.getAll(function(data) {
+			$scope.countries = data;
+			applicationContext.getCountryContext().setAllCountries(data);
+		}, function(error) {
+			applicationContext.getExceptionContext().setDanger(error.data);
+		});	
+	}
+	
+	$scope.loadStates = function(search){
+		$scope.states = $scope.search.country.states;
+		$scope.search.state = ""; 
+	}
+	$scope.loadCities = function(search){
+		$scope.cities = $scope.search.state.cities;
+		$scope.search.city = ""; 
+	}
+}]);
+
+
+
+
+mieventoControllers.controller("ProviderDetailController",["$scope","applicationContext", 
+                                                           function($scope, applicationContext){
 		
 		$scope.provider = applicationContext.getProviderContext().getDetailProvider();
 		$scope.user = applicationContext.getUserContext().getLoggedUser();
-
-		$scope.getStars = function(review){
+		
+		var description = applicationContext.getProviderContext().getLocationToStringProvider();
+		$scope.centerMap = { lat: $scope.provider.location.lat, lng: $scope.provider.location.lng };
+		$scope.markerMap = { lat : $scope.provider.location.lat ,lng : $scope.provider.location.lng , title : $scope.provider.businessName ,description : description};
+		
+		$scope.getStars = function(review){	
 			return 	_.range(0,review.rating);
 		}
 		
 		$scope.getEmptyStars = function(review){
 			return 	_.range(review.rating,5);
 		}
+		
+	
 }]);
 
 
 
-mieventoControllers.controller("ProviderListController",["$rootScope", "$scope", "$state", "$stateParams", 
-         "providerService", "userService", "applicationContext", 
-         function( $rootScope, $scope, $state, $stateParams, providerService, userService, applicationContext){
-				$scope.searching = true;
+mieventoControllers.controller("ProviderListController",["$rootScope", "$scope", "$state", 
+         "$anchorScroll", "$filter","providerService", "userService", "applicationContext", 
+         function( $rootScope, $scope, $state, $anchorScroll, $filter, providerService, userService, applicationContext){
 				
-				providerService.getByLocationAndType($stateParams.searchLocationTypeRequest,function(data){
-					$scope.searching =false;
-					$scope.providers = data;
+				$scope.searching = true;
+				$scope.currentPage = 1;
+				$scope.itemPerPage = 10;
+				$scope.maxSize = 5;
+				
+				getPage = function(){
+					$scope.totalItems = _.size($scope.providers);
 					
+					var begin = (($scope.currentPage - 1) * $scope.itemPerPage);
+					var end = begin + $scope.itemPerPage;
+					$scope.providersPagination = $scope.providers.slice(begin, end);
+					$anchorScroll();
+				}
+				
+				providerService.getByLocationAndType(applicationContext.getSearchLocationTypeRequest(),function(data){
+					$scope.searching =false;
+					$scope.providers = $filter('orderBy')(data,"estimatedPrice");
+					getPage();
+		
 				}, function(error) {
 					applicationContext.getExceptionContext().setDanger(error.data);
 				});
@@ -100,14 +188,26 @@ mieventoControllers.controller("ProviderListController",["$rootScope", "$scope",
 							if (info != null){
 								applicationContext.getExceptionContext().setInfo(info);
 							}else{
-								error = {code : 0005,description : "El proveedor para comparar fue agregado con exito !"};
-								applicationContext.getExceptionContext().setSuccess(error);
+								info = {code : "2002"};
+								applicationContext.getExceptionContext().setSuccess(info);
 							}
 						}else /* if (angular.equals(state.name, "eventState.providers"))*/{
-							var error = applicationContext.getEventContext().addProviderSelectedEvent(provider);
+							var error = null;
+							
+							if (provider.providerType.indexOf("Salon") > -1){
+								if (applicationContext.getEventContext().getPlaceSelectedEvent() != null){
+									error = {code : "0014"};
+									applicationContext.getExceptionContext().setWarning(error);
+									return
+								}
+								applicationContext.getEventContext().setProviderPlaceSelectedEvent(provider);
+							}else {
+								error = applicationContext.getEventContext().addProviderSelectedEvent(provider);
+							}
 							
 							if (error != null){
-								error.description = "El proveedor ya existe para el evento !";
+								
+								error = {code : "0003"};
 								applicationContext.getExceptionContext().setWarning(error);
 								return;
 							}
@@ -117,7 +217,7 @@ mieventoControllers.controller("ProviderListController",["$rootScope", "$scope",
 								//actualizo la vista del budget 
 								$rootScope.$broadcast(TAG_SUMMARY_VIEW_BUDGET_UPDATE);
 								
-								info = {code : 0004,description : "El proveedor fue agregado con exito !"};
+								info = {code : "2001"};
 								applicationContext.getExceptionContext().setSuccess(info);
 								
 							}, function(error) {
@@ -125,10 +225,6 @@ mieventoControllers.controller("ProviderListController",["$rootScope", "$scope",
 							});
 						}
 					}
-						
-						
-				
-//						$state.go(state.name);
 				}
 				
 				$scope.goToDetail = function(provider){
@@ -156,8 +252,11 @@ mieventoControllers.controller("ProviderListController",["$rootScope", "$scope",
 				getRatingReview = function(reviews){
 					var sumRating =  _.chain(reviews).map(function(review){ return review.rating;}).reduce(function(memo, rating){ return memo + rating; },0).value();
 					return Math.round(sumRating / reviews.length);
-				}
+				} 
 				
+				$scope.pageChanged = function() {
+		            getPage(); 
+				}; 
 }]);
 
 

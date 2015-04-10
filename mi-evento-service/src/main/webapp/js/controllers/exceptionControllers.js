@@ -1,11 +1,13 @@
-mieventoControllers.controller("ExceptionController", ["$scope", "$timeout", "applicationContext", function($scope, $timeout, applicationContext){
+mieventoControllers.controller("ExceptionController", ["$scope", "$timeout", "$anchorScroll", "applicationContext", function($scope, $timeout, $anchorScroll, applicationContext){
 	
 	$scope.$on(TAG_ERROR_UPDATE, function() {
 		var exceptionContext = applicationContext.getExceptionContext();
 		var description = exceptionContext.getErrorDescription();
 		var type = exceptionContext.getErrorType();
+		var code = exceptionContext.getErrorCode();
 		$scope.alert = 
 		   {
+			   "code" : code,
 		       "type": type,
 		       "msg": description,
 		       "show":true
@@ -19,6 +21,8 @@ mieventoControllers.controller("ExceptionController", ["$scope", "$timeout", "ap
 	$scope.closeAlert = function() {
 		$scope.alert = null;
 	};
+	
+	$anchorScroll();
 	
 	
 	

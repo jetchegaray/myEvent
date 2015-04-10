@@ -2,6 +2,9 @@ package com.je.enterprise.mievento.api.dto.place;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ControlContextPlace {
 
 	private List<ControlContextTable> controlContextTables;

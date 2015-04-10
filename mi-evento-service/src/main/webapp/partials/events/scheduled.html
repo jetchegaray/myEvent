@@ -4,23 +4,34 @@
 	         <table class="table table-condensed table-bordered">
 	             <thead>
 	                 <tr>
-	                     <th>Date</th>
-	                     <th>Time</th>
-	                     <th>Event or Task</th>
+	                     <th><span translate>scheduled.date<span /></th>
+	                     <th><span translate>scheduled.time<span /></th>
+	                     <th><span translate>scheduled.eventtask<span /></th>
 	                 </tr>
 	             </thead>
 	             <tbody>
 	                 <!-- Single event in a single day -->
-	                 <tr ng-repeat="item in items">
-	                     <td class="agenda-date" class="active" rowspan="item.names.lenght">
+	                 <tr  ng-repeat-start="item in items">
+	                     <td class="agenda-date" class="active" >
 	                         <div class="dayofmonth">{{item.date | date:'dd'}}</div>
 	                         <div class="dayofweek">{{item.date | date:'EEEE'}}</div>
-	                         <div class="shortdate text-muted">{{item.date | date:'MMMM,yyyy '}}</div>
+	                         <div class="shortdate text-muted">{{item.date | date:'MMMM,yyyy'}}</div>
+	                     </td>	
+	                     <td  class="agenda-time" rowspan="{{item.dayEvent[0].events.length}}">
+	                         {{item.dayEvent[0].hour | date:'h:mm a' || '0:00 AM'}}
 	                     </td>
-	                     <td ng-repeat="hour in item.hours" class="agenda-time">
-	                         {{hour | date:'h:mm a'}}
+	                     <td class="agenda-events">
+	                         <div class="agenda-event">
+	                             <i class="fa fa-tasks text-muted"></i> 
+	                             	{{item.dayEvent[0].events[0]}}
+	                         </div>
 	                     </td>
-	                     <td ng-repeat="name in item.names" class="agenda-events">
+	                 </tr>	 
+	                 <tr ng-repeat-end ng-repeat="day in item.dayEvent" > 
+	                     <td ng-show="day.events.length != 1 && !$first" class="agenda-time" rowspan="{{day.events.length-1}}">
+	                         {{day.hour | date:'h:mm a' || '0:00 AM'}}
+	                     </td>
+	                     <td ng-show="day.events.length != 1 && !$first" ng-repeat="name in day.events" class="agenda-events">
 	                         <div class="agenda-event">
 	                             <i class="fa fa-tasks text-muted"></i> 
 	                             {{name}}

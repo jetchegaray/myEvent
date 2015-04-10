@@ -4,23 +4,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.je.enterprise.mievento.api.dto.event.Event;
-import com.je.enterprise.mievento.api.dto.event.wedding.Wedding;
+import com.je.enterprise.mievento.api.dto.event.eventWithplace.EventWithPlaceAndPresent;
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
-import com.je.enterprise.mievento.domain.entity.wedding.WeddingEntity;
+import com.je.enterprise.mievento.domain.entity.wedding.EventWithPlaceAndPresentEntity;
 import com.je.enterprise.mievento.domain.transformer.impl.EventTransformer;
-import com.je.enterprise.mievento.domain.transformer.impl.WeddingTransformer;
+import com.je.enterprise.mievento.domain.transformer.impl.EventWithPlaceAndPresentTransformer;
 
 @Component
 public class VisitorTransformerEvent implements VisitorTransformer{
 	
 	
 	private EventTransformer eventTransformer;
-	private WeddingTransformer weddingTransformer;
+	private EventWithPlaceAndPresentTransformer eventWithPlaceAndPresentTransformer;
 
 	@Autowired
-	public void visitTransformer(EventTransformer eventTransformer,WeddingTransformer weddingTransformer) {
+	public void visitTransformer(EventTransformer eventTransformer,EventWithPlaceAndPresentTransformer eventWithPlaceAndPresentTransformer) {
 		this.eventTransformer = eventTransformer;
-		this.weddingTransformer = weddingTransformer;
+		this.eventWithPlaceAndPresentTransformer = eventWithPlaceAndPresentTransformer;
 	}
 
 	@Override
@@ -29,8 +29,8 @@ public class VisitorTransformerEvent implements VisitorTransformer{
 	}
 
 	@Override
-	public WeddingEntity visitTransformer(Wedding wedding) {
-		return this.weddingTransformer.transformApiToDomain(wedding);
+	public EventWithPlaceAndPresentEntity visitTransformer(EventWithPlaceAndPresent eventWithPlaceAndPresent) {
+		return this.eventWithPlaceAndPresentTransformer.transformApiToDomain(eventWithPlaceAndPresent);
 	}
 
 	@Override
@@ -39,8 +39,8 @@ public class VisitorTransformerEvent implements VisitorTransformer{
 	}
 
 	@Override
-	public Wedding visitTransformer(WeddingEntity weddingEntity) {
-		return this.weddingTransformer.transformAndValidateDomainToApi(weddingEntity);
+	public EventWithPlaceAndPresent visitTransformer(EventWithPlaceAndPresentEntity eventWithPlaceAndPresentEntity) {
+		return this.eventWithPlaceAndPresentTransformer.transformAndValidateDomainToApi(eventWithPlaceAndPresentEntity);
 	}
 	
 	

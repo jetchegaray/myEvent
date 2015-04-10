@@ -28,10 +28,12 @@ public class DetailPlace {
 	
 	private List<Photo> photos;
 	private List<String> types;	
+	//se agregan al convertir las referencias.
+	private List<String> photoLocations;	
 	
 	private Geometry geometry;
 	private Double rating;
-	private List<Review> reviews;
+	private List<DetailPlaceReview> reviews;
 	
 	public DetailPlace() {
 	}
@@ -116,11 +118,11 @@ public class DetailPlace {
 		this.rating = rating;
 	}
 
-	public List<Review> getReviews() {
+	public List<DetailPlaceReview> getReviews() {
 		return reviews;
 	}
 
-	public void setReviews(List<Review> reviews) {
+	public void setReviews(List<DetailPlaceReview> reviews) {
 		this.reviews = reviews;
 	}
 	
@@ -136,6 +138,14 @@ public class DetailPlace {
 				return input.getReference();
 			}
 		});
+	}
+
+	public List<String> getPhotoLocations() {
+		return photoLocations;
+	}
+
+	public void setPhotoLocations(List<String> photoLocations) {
+		this.photoLocations = photoLocations;
 	}
 	
 	

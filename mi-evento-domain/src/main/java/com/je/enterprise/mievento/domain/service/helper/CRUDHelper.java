@@ -38,5 +38,4 @@ public class CRUDHelper<T extends BaseEntity, K extends Serializable> {
 	}
 	
 	
-	
 }
