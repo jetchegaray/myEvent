@@ -60,7 +60,7 @@ public class FullProvidersServiceData {
 		List<ProviderEntity> entities = processData(places);
 		saveData(entities);
 	}
-
+	
 	
 	
 	private List<DetailPlace> getData() {

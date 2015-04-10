@@ -295,7 +295,7 @@
 				        	    <includeArtifactIds>newrelic-agent</includeArtifactIds>
 				        	    <stripVersion>true</stripVersion>
 			        	  	</configuration>
-			     		</execution>
+			     	</execution>
 					</executions>
 				</plugin>
 				<plugin>

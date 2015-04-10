@@ -2,7 +2,6 @@ package com.je.enterprise.mievento.domain.transformer.impl;
 
 import java.math.BigDecimal;
 
-
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Before;
@@ -14,7 +13,6 @@ import com.je.enterprise.mievento.api.dto.event.Guest;
 import com.je.enterprise.mievento.api.dto.event.GuestStatusType;
 import com.je.enterprise.mievento.api.dto.event.InvitationStatus;
 import com.je.enterprise.mievento.api.dto.event.Task;
-import com.je.enterprise.mievento.api.dto.location.CommercialLocation;
 import com.je.enterprise.mievento.api.dto.location.CountryCode;
 import com.je.enterprise.mievento.api.dto.location.Location;
 import com.je.enterprise.mievento.api.dto.location.StreetAddress;
@@ -25,7 +23,6 @@ import com.je.enterprise.mievento.domain.entity.common.event.GuestEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.TaskEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.UserEntity;
-import com.je.enterprise.mievento.domain.entity.location.CommercialLocationEntity;
 import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
 import com.je.enterprise.mievento.domain.entity.location.StreetAddressEntity;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
@@ -88,35 +85,6 @@ public class TransformersImplTest {
 		Assert.assertNotNull(this.locationTransformer.transformAndValidateDomainToApi(locationEntity));	
 	}
 	
-	
-	@Test
-	public void commerciallocation_ok(){
-		StreetAddress address = new StreetAddress();
-		CommercialLocation commercialLocation = new CommercialLocation();
-		
-		Assert.assertNull(this.commercialLocationTransformer.transformAndValidateApiToDomain(null));
-		
-		commercialLocation.setCountryCode(CountryCode.AR);
-		commercialLocation.setStreetAddress(null);
-		Assert.assertNotNull(this.commercialLocationTransformer.transformAndValidateApiToDomain(commercialLocation));
-		
-		address.setNumber(BigDecimal.ONE);
-		commercialLocation.setStreetAddress(address);
-		Assert.assertNotNull(this.commercialLocationTransformer.transformAndValidateApiToDomain(commercialLocation));	
-		
-		StreetAddressEntity addressEntity = new StreetAddressEntity();
-		CommercialLocationEntity commercialLocationEntity = new CommercialLocationEntity();
-		
-		Assert.assertNull(this.commercialLocationTransformer.transformAndValidateDomainToApi(null));
-		
-		commercialLocationEntity.setCountryCode(CountryCode.AR);
-		commercialLocationEntity.setStreetAddress(null);
-		Assert.assertNotNull(this.commercialLocationTransformer.transformAndValidateDomainToApi(commercialLocationEntity));
-		
-		addressEntity.setNumber(BigDecimal.ONE);
-		commercialLocationEntity.setStreetAddress(addressEntity);
-		Assert.assertNotNull(this.commercialLocationTransformer.transformAndValidateDomainToApi(commercialLocationEntity));	
-	}
 	
 	
 	
