@@ -9,11 +9,12 @@ mieventoControllers.controller("ProviderTypeController",["$scope", "$state", "pr
 			
 			
 			$scope.goToProviderList = function(type){
+				console.log(type);
 				var searchLocationTypeRequest = {
 						providerType : type
 				}
 				applicationContext.setSearchLocationTypeRequest(searchLocationTypeRequest);
-				$state.go("providerListState");
+				$state.go("providerListState", {}, {reload: true});
 			}
 					
 }]);
@@ -136,7 +137,7 @@ mieventoControllers.controller("ProviderDetailController",["$scope","application
 mieventoControllers.controller("ProviderListController",["$rootScope", "$scope", "$state", 
          "$anchorScroll", "$filter","providerService", "userService", "applicationContext", 
          function( $rootScope, $scope, $state, $anchorScroll, $filter, providerService, userService, applicationContext){
-				
+	console.log("aAAAAAAAAAAA");
 				$scope.searching = true;
 				$scope.currentPage = 1;
 				$scope.itemPerPage = 10;
@@ -150,8 +151,9 @@ mieventoControllers.controller("ProviderListController",["$rootScope", "$scope",
 					$scope.providersPagination = $scope.providers.slice(begin, end);
 					$anchorScroll();
 				}
-				
+				console.log("aAAAAAAAAAAA");
 				providerService.getByLocationAndType(applicationContext.getSearchLocationTypeRequest(),function(data){
+					console.log(angular.toJson(data));
 					$scope.searching =false;
 					$scope.providers = $filter('orderBy')(data,"estimatedPrice");
 					getPage();
@@ -173,7 +175,7 @@ mieventoControllers.controller("ProviderListController",["$rootScope", "$scope",
 						if (selectedEvent == null){
 							$state.go("eventState.events");
 						}
-						state = applicationContext.getPreviousState();
+						var state = applicationContext.getPreviousState();
 						
 						if (angular.equals(state.name, "eventState.budget")){
 							

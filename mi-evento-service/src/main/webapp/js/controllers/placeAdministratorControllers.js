@@ -1,11 +1,12 @@
 
 mieventoControllers.controller("PlaceAdministratorController", ["$scope", "$state", "userService", "applicationContext",
                 function($scope, $state, userService, applicationContext) {
-		$scope.place = applicationContext.getEventContext().getSelectedPlace();
+		$scope.place = applicationContext.getEventContext().getPlaceSelectedEvent();
 		if ($scope.place == null){
 			warning = {code : "0013"};
 			applicationContext.getExceptionContext().setWarning(warning);
-			return;
+			var goBack = applicationContext.getPreviousState();
+			$state.go(goBack);
 		};
 			
 		calculateSizePxTables = function(){

@@ -4,9 +4,15 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.je.enterprise.mievento.api.dto.location.Location;
+import com.je.enterprise.mievento.api.dto.place.Place;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "clazz", visible = true)
+@JsonSubTypes({ @Type(value = Place.class, name = "Place")})
 public class Provider {
 
 	private String businessId;

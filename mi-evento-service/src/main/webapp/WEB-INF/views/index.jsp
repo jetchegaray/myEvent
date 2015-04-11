@@ -162,7 +162,7 @@
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li id="nav-login-btn" ng-show="$root.loggedUser == null">
-								<a ui-sref="loginState"> <span translate>index.login</span><span class="fa fa-user text-primary glyphiconSpace"></span></a></li>
+								<a ui-sref="loginState"> <span translate>index.login</span><span class="fa fa-user text-primary faSpace"></span></a></li>
 							<li id="nav-login-btn" class="dropdown"  dropdown ng-show="$root.loggedUser != null">
 								<a href="#" class="dropdown-toggle" dropdown-toggle>
 									{{$root.loggedUser.email}} <i class="fa fa-user text-success glyphiconSpace"></i>
