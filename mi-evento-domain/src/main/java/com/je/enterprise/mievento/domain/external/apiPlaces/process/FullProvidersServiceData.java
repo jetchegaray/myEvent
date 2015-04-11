@@ -54,7 +54,7 @@ public class FullProvidersServiceData {
 	
 	//couta 1k request/day
 //	@Scheduled(cron = "0 0  * * ?")
-	@Scheduled(cron = "0 32 12 * * ?")
+	@Scheduled(cron = "0 40 12 * * ?")
 	public void serviceProcessData() {
 		
 		List<DetailPlace> places = this.getData();
