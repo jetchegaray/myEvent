@@ -54,7 +54,7 @@ public class FullProvidersServiceData {
 	
 	//couta 1k request/day
 //	@Scheduled(cron = "0 0  * * ?")
-	@Scheduled(cron = "0 55 12 * * ?")
+	@Scheduled(cron = "0 25 13 * * ?")
 	public void serviceProcessData() {
 		
 		List<DetailPlace> places = this.getData();
@@ -93,7 +93,9 @@ public class FullProvidersServiceData {
 						if (response.getStatus().equalsIgnoreCase(StatusResponse.OVER_QUERY_LIMIT.getName())){
 							return detailPlaces;
 						}
-						
+						if (responseDetail == null){
+							continue;	
+						}
 						if (! responseDetail.getStatus().equals(StatusResponse.OK.getName())){
 							continue;
 						}
