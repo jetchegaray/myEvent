@@ -79,6 +79,9 @@ public class FullProvidersServiceData {
 				for (String keyWord : keyWords) {
 					
 					ResponseContainerObjects<SearchPlace> response = apiPlacesServicies.getPlaces(latlng, keyWord);
+					if (response == null){
+						continue;
+					}
 					if (response.getStatus().equalsIgnoreCase(StatusResponse.OVER_QUERY_LIMIT.getName())){
 						return detailPlaces;
 					}
