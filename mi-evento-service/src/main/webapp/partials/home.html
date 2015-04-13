@@ -4,16 +4,16 @@
 	        <div class="panel panel-default">
 	            <div class="panel-heading"><span translate>home.searchLabel</span></div>
 	            <div class="panel-body">
-	               <form role="form" style="margin: 25px;">
+	               <form role="homeSearchForm" style="margin: 25px;">
 	                	<div class="form-group" ng-controller="LocationSearchComboController">
 			                 <div class="col-sm-4">
-								<ui-select ng-model="search.providerType" theme="selectize">
+								<ui-select ng-model="search.providerType" theme="selectize"  ng-required="true">
 					   				<ui-select-match placeholder="{{'home.input.providerType' | translate}}">{{$select.selected}}</ui-select-match>
 					   				<ui-select-choices repeat="provider in providerTypes">{{provider}}</ui-select-choices>
 					 			</ui-select>
 							</div>
 							<div class="col-sm-3">
-								<ui-select  ng-change="loadStates()" ng-model="search.country" theme="selectize">
+								<ui-select  ng-change="loadStates()" ng-model="search.country" theme="selectize"  ng-required="true">
 					   				<ui-select-match placeholder="{{'home.input.country' | translate}}">{{$select.selected.name}}</ui-select-match>
 					   				<ui-select-choices repeat="country in countries">{{country.name}}</ui-select-choices>
 					 			</ui-select>

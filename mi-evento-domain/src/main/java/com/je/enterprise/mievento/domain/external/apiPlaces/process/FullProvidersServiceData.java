@@ -32,18 +32,20 @@ import com.je.enterprise.mievento.domain.external.apiPlaces.transformer.type.Con
 import com.je.enterprise.mievento.domain.service.impl.CountryService;
 import com.je.enterprise.mievento.domain.service.impl.ProviderService;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
+import com.je.enterprise.mievento.domain.utils.UtilsCollections;
 
 @Service
 public class FullProvidersServiceData {
 
 	private static final Logger logger = Logger.getLogger(FullProvidersServiceData.class);
 
-	private static final int PARTITION_CITIES = 50;
+	private static final int PARTITION_CITIES = 100;
 	
 	private ApiPlacesServicies apiPlacesServicies;
 	private ProviderService providerService;
 	private TransformerList<ProviderEntity, DetailPlace> providerPlacesTransformerList;
 	private CountryService countryService;
+	private List<CityEntity> citiesBlackList;
 	
 	@Autowired
 	public FullProvidersServiceData(ApiPlacesServicies apiPlacesServicies,ProviderService providerService,
@@ -52,12 +54,13 @@ public class FullProvidersServiceData {
 		this.providerPlacesTransformerList = providerPlacesTransformerList;
 		this.providerService = providerService;
 		this.countryService = countryService;
+		this.citiesBlackList = Lists.newArrayList();
 	}
 
 	
 	//couta 1k request/day
 //	@Scheduled(cron = "0 0  * * ?")
-	@Scheduled(cron = "* */40 * * * ?")
+	@Scheduled(cron = "* */30 * * * ?")
 	public void serviceProcessData() {
 		
 		List<DetailPlace> places = this.getData();
@@ -73,11 +76,15 @@ public class FullProvidersServiceData {
 		Set<String> keyWords = ConditionRuleProviderKeyWord.getKeyWords();
 		
 		Set<CityEntity> cities = countryService.getAllCitiesInCountry(CountryCode.AR);
-		Set<CityEntity> alredyCity = this.providerService.getAllCitiesThereProviders(CountryCode.AR);
+		Set<CityEntity> citiesBlackList = Sets.newLinkedHashSet(this.citiesBlackList);
+		Set<CityEntity> excludedCities = this.providerService.getAllCitiesThereProviders(CountryCode.AR);
 		
-		Set<CityEntity> definitiveCities = Sets.difference(cities, alredyCity);
+		excludedCities.addAll(citiesBlackList);
+		Set<CityEntity> definitiveCities = Sets.newLinkedHashSet(UtilsCollections.shuffle(Sets.difference(cities, excludedCities)));
 		List<CityEntity> citiesPartitionInitial = Iterables.partition(definitiveCities, PARTITION_CITIES).iterator().next();
+	
 		for (CityEntity city : citiesPartitionInitial) {
+				logger.info("CITY PROCESS : "+city.getName());
 				String latlng = city.getLatLongToSearch();
 				for (String keyWord : keyWords) {
 					
@@ -119,6 +126,9 @@ public class FullProvidersServiceData {
 						}
 						detailPlaces.add(detailPlace);
 					}
+				}
+				if (detailPlaces.isEmpty()){
+					this.citiesBlackList.add(city);
 				}
 		}
 		return detailPlaces;

@@ -62,7 +62,7 @@ public class CountryService {
 		for (StateEntity stateEntity : selectedCountry.getStates()) {
 			cities.addAll(stateEntity.getCities());
 		}
-		return Sets.newLinkedHashSet(UtilsCollections.shuffle(cities));
+		return Sets.newLinkedHashSet(cities);
 	}
 	
 	

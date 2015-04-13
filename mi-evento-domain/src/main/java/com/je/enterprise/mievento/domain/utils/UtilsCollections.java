@@ -7,7 +7,7 @@ import com.google.common.collect.Lists;
 
 public class UtilsCollections {
 
-	public static <T> List<T> shuffle(Iterable<T> iterable)
+	public static <T> Iterable<T> shuffle(Iterable<T> iterable)
     {
         List<T> list = Lists.newArrayList(iterable);
         Collections.shuffle(list);

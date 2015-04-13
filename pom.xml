@@ -25,6 +25,7 @@
 		<codehaus.version>1.7.5</codehaus.version>
 		<fasterxml.version>2.4.1</fasterxml.version>
 		<commonLang.version>3.1</commonLang.version>
+		<commonConfig.version>1.6</commonConfig.version>
 		<jodaTime.version>2.4</jodaTime.version>
 		<thymeleaf.version>2.1.3.RELEASE</thymeleaf.version>
 		<mail.version>1.4.3</mail.version>
@@ -182,6 +183,12 @@
 				<artifactId>commons-lang3</artifactId>
 				<version>${commonLang.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>commons-configuration</groupId>
+				<artifactId>commons-configuration</artifactId>
+				<version>${commonConfig.version}</version>
+			</dependency>
+			
 
 			<!-- DATABASE MONGO -->
 
