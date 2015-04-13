@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.je.enterprise.mievento.api.dto.location.CountryCode;
@@ -36,6 +37,8 @@ import com.je.enterprise.mievento.domain.transformer.TransformerList;
 public class FullProvidersServiceData {
 
 	private static final Logger logger = Logger.getLogger(FullProvidersServiceData.class);
+
+	private static final int PARTITION_CITIES = 50;
 	
 	private ApiPlacesServicies apiPlacesServicies;
 	private ProviderService providerService;
@@ -54,7 +57,7 @@ public class FullProvidersServiceData {
 	
 	//couta 1k request/day
 //	@Scheduled(cron = "0 0  * * ?")
-	@Scheduled(cron = "0 25 17 * * ?")
+	@Scheduled(cron = "* */40 * * * ?")
 	public void serviceProcessData() {
 		
 		List<DetailPlace> places = this.getData();
@@ -72,9 +75,9 @@ public class FullProvidersServiceData {
 		Set<CityEntity> cities = countryService.getAllCitiesInCountry(CountryCode.AR);
 		Set<CityEntity> alredyCity = this.providerService.getAllCitiesThereProviders(CountryCode.AR);
 		
-		Set<CityEntity> defintiveCities = Sets.difference(cities, alredyCity);
-
-		for (CityEntity city : defintiveCities) {
+		Set<CityEntity> definitiveCities = Sets.difference(cities, alredyCity);
+		List<CityEntity> citiesPartitionInitial = Iterables.partition(definitiveCities, PARTITION_CITIES).iterator().next();
+		for (CityEntity city : citiesPartitionInitial) {
 				String latlng = city.getLatLongToSearch();
 				for (String keyWord : keyWords) {
 					
