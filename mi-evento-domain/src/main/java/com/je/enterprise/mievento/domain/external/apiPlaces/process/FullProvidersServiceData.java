@@ -60,7 +60,7 @@ public class FullProvidersServiceData {
 	
 	//couta 1k request/day
 //	@Scheduled(cron = "0 0  * * ?")
-	@Scheduled(cron = "* */30 * * * ?")
+	@Scheduled(cron = "* * */2 * * ?")
 	public void serviceProcessData() {
 		
 		List<DetailPlace> places = this.getData();
@@ -75,11 +75,11 @@ public class FullProvidersServiceData {
 		List<DetailPlace> detailPlaces = Lists.<DetailPlace>newArrayList();
 		Set<String> keyWords = ConditionRuleProviderKeyWord.getKeyWords();
 		
-		Set<CityEntity> cities = countryService.getAllCitiesInCountry(CountryCode.AR);
-		Set<CityEntity> citiesBlackList = Sets.newLinkedHashSet(this.citiesBlackList);
-		Set<CityEntity> excludedCities = this.providerService.getAllCitiesThereProviders(CountryCode.AR);
+		Set<CityEntity> cities = countryService.getAllCitiesInCountry(CountryCode.UY);
+//		Set<CityEntity> citiesBlackList = Sets.newLinkedHashSet(this.citiesBlackList);
+		Set<CityEntity> excludedCities = this.providerService.getAllCitiesThereProviders(CountryCode.UY);
 		
-		excludedCities.addAll(citiesBlackList);
+//		excludedCities.addAll(citiesBlackList);
 		Set<CityEntity> definitiveCities = Sets.newLinkedHashSet(UtilsCollections.shuffle(Sets.difference(cities, excludedCities)));
 		List<CityEntity> citiesPartitionInitial = Iterables.partition(definitiveCities, PARTITION_CITIES).iterator().next();
 	
@@ -127,9 +127,9 @@ public class FullProvidersServiceData {
 						detailPlaces.add(detailPlace);
 					}
 				}
-				if (detailPlaces.isEmpty()){
-					this.citiesBlackList.add(city);
-				}
+//				if (detailPlaces.isEmpty()){
+//					this.citiesBlackList.add(city);
+//				}
 		}
 		return detailPlaces;
 	}
