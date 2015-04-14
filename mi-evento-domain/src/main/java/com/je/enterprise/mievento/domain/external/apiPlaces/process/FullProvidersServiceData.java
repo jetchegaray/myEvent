@@ -75,9 +75,9 @@ public class FullProvidersServiceData {
 		List<DetailPlace> detailPlaces = Lists.<DetailPlace>newArrayList();
 		Set<String> keyWords = ConditionRuleProviderKeyWord.getKeyWords();
 		
-		Set<CityEntity> cities = countryService.getAllCitiesInCountry(CountryCode.UY);
+		Set<CityEntity> cities = countryService.getAllCitiesInCountry(CountryCode.CL);
 //		Set<CityEntity> citiesBlackList = Sets.newLinkedHashSet(this.citiesBlackList);
-		Set<CityEntity> excludedCities = this.providerService.getAllCitiesThereProviders(CountryCode.UY);
+		Set<CityEntity> excludedCities = this.providerService.getAllCitiesThereProviders(CountryCode.CL);
 		
 //		excludedCities.addAll(citiesBlackList);
 		Set<CityEntity> definitiveCities = Sets.newLinkedHashSet(UtilsCollections.shuffle(Sets.difference(cities, excludedCities)));
