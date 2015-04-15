@@ -9,7 +9,6 @@ mieventoControllers.controller("ProviderTypeController",["$scope", "$state", "pr
 			
 			
 			$scope.goToProviderList = function(type){
-				console.log(type);
 				var searchLocationTypeRequest = {
 						providerType : type
 				}
@@ -113,7 +112,7 @@ mieventoControllers.controller("LocationSearchComboController",["$scope", "count
 
 mieventoControllers.controller("ProviderDetailController",["$scope","applicationContext", 
                                                            function($scope, applicationContext){
-		
+	
 		$scope.provider = applicationContext.getProviderContext().getDetailProvider();
 		$scope.user = applicationContext.getUserContext().getLoggedUser();
 		
@@ -128,8 +127,6 @@ mieventoControllers.controller("ProviderDetailController",["$scope","application
 		$scope.getEmptyStars = function(review){
 			return 	_.range(review.rating,5);
 		}
-		
-	
 }]);
 
 
@@ -137,7 +134,6 @@ mieventoControllers.controller("ProviderDetailController",["$scope","application
 mieventoControllers.controller("ProviderListController",["$rootScope", "$scope", "$state", 
          "$anchorScroll", "$filter","providerService", "userService", "applicationContext", 
          function( $rootScope, $scope, $state, $anchorScroll, $filter, providerService, userService, applicationContext){
-	console.log("aAAAAAAAAAAA");
 				$scope.searching = true;
 				$scope.currentPage = 1;
 				$scope.itemPerPage = 10;
@@ -151,9 +147,8 @@ mieventoControllers.controller("ProviderListController",["$rootScope", "$scope",
 					$scope.providersPagination = $scope.providers.slice(begin, end);
 					$anchorScroll();
 				}
-				console.log("aAAAAAAAAAAA");
 				providerService.getByLocationAndType(applicationContext.getSearchLocationTypeRequest(),function(data){
-					console.log(angular.toJson(data));
+				
 					$scope.searching =false;
 					$scope.providers = $filter('orderBy')(data,"estimatedPrice");
 					getPage();

@@ -14,7 +14,7 @@
 			</div>
 			<div class="col-md-4">	
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="{{'place.input.price' | translate}}" ng-model="place.price" ng-required>
+					<input type="text" class="form-control" placeholder="{{'place.input.price' | translate}}" ng-model="place.estimatedPrice" ng-required>
 				</div>
 			</div>	
 		</div>	
@@ -38,7 +38,7 @@
 		</div>		
 		<div class="row">
 			<div class="col-md-4 font-secondtitle">
-				<span translate>place.title.<span/>
+				<span translate>place.title.3<span/>
 			</div>
 		</div>	
 		<div class="line"></div>
@@ -46,19 +46,19 @@
 			<div class="col-md-4">
 				<ui-select  ng-change="loadStates()" ng-model="search.country" theme="selectize" ng-required>
 	   				<ui-select-match placeholder="{{'advancedSearch.input.country' | translate}}">{{$select.selected.name}}</ui-select-match>
-	   				<ui-select-choices repeat="country in countries">{{country.name}}</ui-select-choices>
+	   				<ui-select-choices repeat="country in countries | filter: $select.search">{{country.name}}</ui-select-choices>
 	 			</ui-select>
 			</div>
 			<div class="col-sm-4">
 				<ui-select ng-change="loadCities()" ng-model="search.state" theme="selectize" ng-required>
 	   				<ui-select-match placeholder="{{'advancedSearch.input.state' | translate}}">{{$select.selected.name}}</ui-select-match>
-	   				<ui-select-choices repeat="state in states">{{state.name}}</ui-select-choices>
+	   				<ui-select-choices repeat="state in states | filter: $select.search">{{state.name}}</ui-select-choices>
 	 			</ui-select>
 			</div>
 			<div class="col-md-4">
 				<ui-select ng-model="search.city" theme="selectize" ng-required>
 	   				<ui-select-match placeholder="{{'advancedSearch.input.city' | translate}}">{{$select.selected.name}}</ui-select-match>
-	   				<ui-select-choices repeat="city in cities">{{city.name}}</ui-select-choices>
+	   				<ui-select-choices repeat="city in cities | filter: $select.search">{{city.name}}</ui-select-choices>
 	 			</ui-select>
 			</div>
 		</div>

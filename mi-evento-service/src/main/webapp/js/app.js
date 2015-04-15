@@ -71,7 +71,8 @@ mieventoApp.run([ "$rootScope", "$cookies", "$state", "editableOptions", "userSe
 				 $state.go('loginState');
 				 error = {code : "0001"};
 				 applicationContext.getExceptionContext().setInfo(error);
-			 }else if (!angular.equals(to.name,"eventState.eventCreate") && !angular.equals(to.name,"eventState.events")){
+			 }else if (!angular.equals(to.name,"eventState.eventCreate") && !angular.equals(to.name,"eventState.eventEdit") 
+					 && !angular.equals(to.name,"eventState.events")){
 				 var eventSelected = applicationContext.getEventContext().getSelectedEvent();
 				 if (eventSelected == null){
 					 error = {code : "0002"};

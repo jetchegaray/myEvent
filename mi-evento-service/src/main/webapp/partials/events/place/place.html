@@ -23,7 +23,7 @@
 									</tr>
 									<tr>
 										<td>
-											<h6><i class="fa fa-money glyphiconSpace"></i>$ {{placeSelected.estimatedPrice}}</h6>
+											<h6><i class="fa fa-money glyphiconSpace"></i>$ {{placeSelected.estimatedPrice  || '0'}}</h6>
 										</td>
 									</tr>
 								</tbody>
@@ -37,7 +37,7 @@
 							<i class="fa fa-pencil"></i>
 						</a>
 						<span ng-controller="DeleteConfirmationModalController">
-		    			  	 <button class="btn btn-sm btn-danger btn-outline" ng-click="openDeleteElementConfirmation(placeSelected)"><span class="fa fa-trash"></span></button>
+		    			  	 <button class="btn btn-sm btn-danger btn-outline" ng-click="openDeleteElementPlaceConfirmation()"><span class="fa fa-trash"></span></button>
 		 		       	</span>
 					</span>
 				</div>

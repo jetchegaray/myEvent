@@ -18,8 +18,13 @@ mieventoControllers.controller("EventListController", ["$rootScope", "$scope", "
 			};
 			
 			$scope.setSelectEvent = function(event){
-				$scope.selectedEvent = event;
-				applicationContext.getEventContext().setSelectedEvent(event);
+				if (angular.equals($scope.selectedEvent,event)){
+					$scope.selectedEvent = null;
+				}else{
+					$scope.selectedEvent = event;
+				}
+			
+				applicationContext.getEventContext().setSelectedEvent($scope.selectedEvent);
 				$rootScope.$broadcast(TAG_SELECTED_EVENT_UPDATE);
 				$rootScope.$broadcast(TAG_SUMMARY_VIEW_BUDGET_UPDATE);
 			};
@@ -35,17 +40,11 @@ mieventoControllers.controller("DetailEventController", [ "$rootScope", "$scope"
 			}, function(error) {
 				applicationContext.getExceptionContext().setDanger(error.data);
 			});
-			
-			eventService.getAllCountries(function(data) {
-				$scope.countries = data;
-			}, function(error) {
-				applicationContext.getExceptionContext().setDanger(error.data);
-			});
-			
 		
 			$scope.save = function() {
+				
 				if ($scope.eventForm.$invalid){
-					return;
+					return false;
 				}
 				
 				applicationContext.getUserContext().addUserEvent($scope.event);
@@ -77,10 +76,6 @@ mieventoControllers.controller("EditEventController", [ "$scope", "$state", "use
 		});
 		
 		$scope.save = function() {
-			
-			if ($scope.eventForm.$invalid){
-				return;
-			}
 			
 			userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
 				applicationContext.getEventContext().setSelectedEvent(event);

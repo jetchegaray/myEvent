@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.je.enterprise.mievento.api.dto.event.EventType;
-import com.je.enterprise.mievento.api.dto.location.CountryCode;
-import com.je.enterprise.mievento.api.dto.location.ProvinceCode;
 import com.je.enterprise.mievento.domain.service.impl.EventService;
 import com.je.enterprise.mievento.domain.transformer.impl.EventTransformer;
 
@@ -29,16 +27,5 @@ public class EventController {
 	public List<EventType> getAllStatusTypes(){
 		return Arrays.asList(EventType.values());
 	}
-	
-	@ResponseBody
-	@RequestMapping(value={"/countries"},method = RequestMethod.GET)
-	public List<CountryCode> getAllCountries(){
-		return Arrays.asList(CountryCode.values());
-	}
-	
-	@ResponseBody
-	@RequestMapping(value={"/provinces"},method = RequestMethod.GET)
-	public List<ProvinceCode> getAllProvinces(){
-		return Arrays.asList(ProvinceCode.values());
-	}
+		
 }

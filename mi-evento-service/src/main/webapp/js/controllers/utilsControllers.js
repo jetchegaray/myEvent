@@ -59,6 +59,24 @@ mieventoControllers.controller("DeleteConfirmationModalController", ["$rootScope
 				});
 			};
 
+			
+			$scope.openDeleteElementPlaceConfirmation = function(element) {
+
+				var modalInstance = $modal.open({
+					templateUrl : 'deleteConfirmation.html',
+					controller : "deleteConfirmationInstanceController"
+				});
+
+				modalInstance.result.then(function() {
+					
+					applicationContext.getEventContext().deletePlace();
+					
+					userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
+					}, function(error) {
+						applicationContext.getExceptionContext().setDanger(error.data);
+					})
+				});
+			};
 }]);
 
 

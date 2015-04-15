@@ -3,13 +3,12 @@ package com.je.enterprise.mievento.domain.entity.location;
 import org.mongodb.morphia.annotations.Embedded;
 
 import com.je.enterprise.mievento.api.dto.location.CountryCode;
-import com.je.enterprise.mievento.api.dto.location.ProvinceCode;
 
 public class LocationEntity {
 
 	@Embedded
 	protected CountryCode countryCode;
-	protected ProvinceCode province;
+	protected String province;
 	protected String city;
 	@Embedded
 	protected StreetAddressEntity streetAddress;
@@ -19,7 +18,7 @@ public class LocationEntity {
 	public LocationEntity() {
 	}
 
-	public LocationEntity(CountryCode countryCode, ProvinceCode province,
+	public LocationEntity(CountryCode countryCode, String province,
 			String city, StreetAddressEntity streetAddress, String lat,
 			String lng) {
 		this.countryCode = countryCode;
@@ -38,11 +37,11 @@ public class LocationEntity {
 		this.countryCode = countryCode;
 	}
 
-	public ProvinceCode getProvince() {
+	public String getProvince() {
 		return province;
 	}
 
-	public void setProvince(ProvinceCode province) {
+	public void setProvince(String province) {
 		this.province = province;
 	}
 
