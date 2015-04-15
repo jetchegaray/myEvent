@@ -12,10 +12,10 @@ mieventoControllers.controller("HomeController", ["$scope", "$state", "providerS
 		$scope.search = function(){
 			
 			if ($scope.homeSearchForm.$invalid){
-				return;
+				return false;
 			}
 			
-			var provinceName = ($scope.search.province.name != null) ? $scope.search.province.name : "";
+			var provinceName = ($scope.search.province != null) ? $scope.search.province.name : "";
 			var searchLocation = {
 					countryCode : $scope.search.country.code,
 					province : provinceName

@@ -20,7 +20,7 @@ public class LocationFilterProvider implements CriteriaFilterProvider{
 		Query<ProviderEntity> query = providerDAO.createQuery().disableValidation().enableSnapshotMode();
 		
 		query.and(query.criteria("countryCode").containsIgnoreCase(location.getCountryCode().getName()));
-		query.and(query.criteria("province").containsIgnoreCase(location.getProvince().getName()));
+		query.and(query.criteria("province").containsIgnoreCase(location.getProvince()));
 		query.and(query.criteria("neighborhood").containsIgnoreCase(location.getStreetAddress().getNeighborhood()));
 		
 		return query;

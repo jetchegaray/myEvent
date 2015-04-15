@@ -45,9 +45,7 @@ mieventoServices.factory("eventGuestService",["$resource", function($resource){
 mieventoServices.factory("eventService",["$resource", function($resource){
 		return $resource("/mievento/event/:requestMapping",{requestMapping : "@requestMapping"},
 			{
-				getAllEventTypes : {method : "GET",params : { requestMapping : "eventTypes"}, isArray : true},
-				getAllCountries: {method : "GET",params : { requestMapping : "countries"}, isArray:true},
-				getAllProvinces: {method : "GET",params : { requestMapping : "provinces"}, isArray:true}
+				getAllEventTypes : {method : "GET",params : { requestMapping : "eventTypes"}, isArray : true}
 			});	
 }])
 

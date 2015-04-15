@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Location {
 	
 	private CountryCode countryCode;
-	private ProvinceCode province;
+	private String province;
 	private String city;
 	private StreetAddress streetAddress;
 	private String  lat;
@@ -17,7 +17,7 @@ public class Location {
 	public Location() {
 	}
 	
-	public Location(CountryCode countryCode, ProvinceCode province,
+	public Location(CountryCode countryCode, String province,
 			String city, StreetAddress streetAddress, String lat, String lng) {
 		this.countryCode = countryCode;
 		this.province = province;
@@ -35,11 +35,11 @@ public class Location {
 		this.countryCode = countryCode;
 	}
 
-	public ProvinceCode getProvince() {
+	public String getProvince() {
 		return province;
 	}
 
-	public void setProvince(ProvinceCode province) {
+	public void setProvince(String province) {
 		this.province = province;
 	}
 

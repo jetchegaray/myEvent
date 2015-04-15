@@ -4,7 +4,6 @@ mieventoControllers.controller("PlaceEventController", [ "$scope","$state", "app
                                 function($scope, $state, applicationContext) {
 		
 		$scope.placeSelected = applicationContext.getEventContext().getPlaceSelectedEvent();
-		console.log(angular.toJson($scope.placeSelected));
 		if ($scope.placeSelected == null){
 			$state.go("eventState.myPlace");
 		}
@@ -25,7 +24,7 @@ mieventoControllers.controller("MyPlaceEventController", [ "$scope", "$state" ,"
                                function($scope, $state, eventService, userService, applicationContext) {
 	
 		$scope.place = applicationContext.getEventContext().getPlaceSelectedEvent();
-		
+		console.log(angular.toJson($scope.place));
 		if ($scope.place != null){
 			error = {code : "0015"};
 			applicationContext.getExceptionContext().setWarning(error);
@@ -44,13 +43,18 @@ mieventoControllers.controller("MyPlaceEventController", [ "$scope", "$state" ,"
 			applicationContext.getExceptionContext().setDanger(error.data);
 		});
 		
-		$scope.search = {};
+		$scope.search = {}; //no borrar no me reconoce el scope child.
 		$scope.save = function(){
 			if ($scope.placeForm.$invalid){
 				return;
 			}
+			$scope.place.location.countryCode = $scope.search.country.name;
+			$scope.place.location.province = $scope.search.state.name;
+			$scope.place.location.city = $scope.search.city.name;
 			applicationContext.getEventContext().setPlaceSelectedEvent($scope.place);
+		
 			var user = applicationContext.getUserContext().getLoggedUser();
+			console.log(angular.toJson(user));
 			userService.update(user, function() {
 				applicationContext.getUserContext().setLoggedUser(user);
 				$state.go("eventState.place");

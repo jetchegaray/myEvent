@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 
 import com.google.common.collect.Lists;
 import com.je.enterprise.mievento.api.dto.location.CountryCode;
-import com.je.enterprise.mievento.api.dto.location.ProvinceCode;
 import com.je.enterprise.mievento.api.dto.provider.ProviderType;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderReviewEntity;
@@ -95,7 +94,7 @@ public class ProviderPlacesTransformer extends
 	private LocationEntity getLocation(DetailPlace detailPlace) {
 		
 		CountryCode countryCode = null;
-		ProvinceCode province = null;
+		String province = null;
 		String city = StringUtils.EMPTY;
 		String street = StringUtils.EMPTY;
 		BigDecimal number = BigDecimal.ZERO;
@@ -112,11 +111,7 @@ public class ProviderPlacesTransformer extends
 				city = addressComponent.getLongName();
 			}
 			if (addressComponent.isProvince()){
-				try{
-					province = ProvinceCode.valueOf(addressComponent.getShortName());
-				}catch(Exception ex){
-					province = ProvinceCode.getByName(addressComponent.getShortName());
-				}
+				province = addressComponent.getLongName();
 			}
 			if (addressComponent.isStreet()){
 				street = addressComponent.getLongName();
