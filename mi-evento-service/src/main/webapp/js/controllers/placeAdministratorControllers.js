@@ -67,11 +67,19 @@ mieventoControllers.controller("PlaceAdministratorController", ["$scope", "$stat
 
 			calculateSizePxTables();
 			
-			for (i = 0; i < $scope.amountTables ;i++){
-				if ($scope.tables[i] == null){
+			if ($scope.tables == null){
+				$scope.tables = [];
+				for (i = 0; i < $scope.amountTables ;i++){
 					$scope.tables.push({ id : i,located : false});
 				}
+			}else{
+				for (i = 0; i < $scope.amountTables ;i++){
+					if ($scope.tables[i] == null){
+						$scope.tables.push({ id : i,located : false});
+					}
+				}
 			}
+			
 		}
 	
 		$scope.addTable = function(){
