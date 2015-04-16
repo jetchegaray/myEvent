@@ -1,5 +1,6 @@
 package com.je.enterprise.mievento.domain.service.filters;
 
+import org.apache.commons.lang3.StringUtils;
 import org.mongodb.morphia.query.Query;
 
 import com.je.enterprise.mievento.api.dto.provider.ProviderType;
@@ -29,15 +30,15 @@ public class LocationAndTypeFilterProvider implements CriteriaFilterProvider{
 			if (location.getCountryCode() != null){
 				query.and(query.criteria("location.countryCode").equal(location.getCountryCode()));
 			}
-			if (location.getProvince() != null){
+			if (StringUtils.isNotBlank(location.getProvince())){
 				query.and(query.criteria("location.province").equal(location.getProvince()));
 			}
-			if (location.getCity() != null){
+			if (StringUtils.isNotBlank(location.getCity())){
 				query.and(query.criteria("location.city").containsIgnoreCase(location.getCity()));
 			}
 			
 			if (location.getStreetAddress() != null){
-				if (location.getStreetAddress().getNeighborhood() != null){
+				if (StringUtils.isNotBlank(location.getStreetAddress().getNeighborhood())){
 					query.and(query.criteria("location.streetAddress.neighborhood").containsIgnoreCase(location.getStreetAddress().getNeighborhood()));
 				}
 			}

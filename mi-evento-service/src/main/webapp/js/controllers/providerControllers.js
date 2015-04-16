@@ -105,6 +105,18 @@ mieventoControllers.controller("LocationSearchComboController",["$scope", "count
 		$scope.cities = $scope.search.state.cities;
 		$scope.search.city = ""; 
 	}
+	
+	if ($scope.$parent.getCountrySelected != ""){
+		$scope.search.country = _.find($scope.countries,function(country){ country.name == $scope.$parent.getCountrySelected});
+		
+		if ($scope.$parent.getStateSelected != ""){
+			$scope.search.state = _.find($scope.search.country.states,function(state){ state.name == $scope.$parent.getStateSelected});
+			
+			if ($scope.$parent.getCitySelected != ""){
+				$scope.search.city = _.find($scope.search.state.cities,function(city){ city.name == $scope.$parent.getCitySelected});
+			}
+		}
+	}
 }]);
 
 

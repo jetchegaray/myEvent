@@ -134,7 +134,6 @@ mieventoControllers.controller("PlaceAdministratorController", ["$scope", "$stat
 			 //reset table	
 			 $scope.tables = _.filter($scope.tables, function(table){ return table.id != $scope.draggedTable.id});
 			 $scope.tables = _.filter($scope.tables, function(table){ return !angular.isUndefined(table.id);});
-			 console.log($scope.draggedTable.id);
 			 $scope.tables.push({ id : $scope.draggedTable.id,located : false});
 		 };
 		 

@@ -11,8 +11,8 @@ import com.je.enterprise.mievento.api.dto.location.Location;
 import com.je.enterprise.mievento.api.dto.place.Place;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "clazz", visible = true)
-@JsonSubTypes({ @Type(value = Place.class, name = "Place")})
+//@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "clazz", visible = true)
+//@JsonSubTypes({ @Type(value = Place.class, name = "Place")})
 public class Provider {
 
 	private String businessId;

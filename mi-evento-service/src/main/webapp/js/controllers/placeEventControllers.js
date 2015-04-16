@@ -30,21 +30,25 @@ mieventoControllers.controller("MyPlaceEventController", [ "$scope", "$state" ,"
 			applicationContext.getExceptionContext().setWarning(error);
 			return
 		}
-		//IMPROVEMENT
-		var country = {
-			name : $scope.place.location.countryCode,
+		//IMPROVEMENT take from the children and set combos.
+		$scope.getCountrySelected = ""
+		$scope.getStateSelected = ""
+		$scope.getCitySelected = ""
+		if ($scope.place!= null && $scope.place.location.countryCode != null){
+			$scope.getCountrySelected = $scope.place.location.countryCode;
 		}
-		var state = {
-				name : $scope.place.location.province,
+		if ($scope.place!= null && $scope.place.location.province != null){
+			$scope.getStateSelected = $scope.place.location.province;
 		}
-		var city = {
-				name : $scope.place.location.city
+		if ($scope.place!= null && $scope.place.location.city != null){
+			$scope.getCitySelected = $scope.place.location.city;
 		}
-	
+		
+		
 		$scope.search = {
-				country : country,
-				state : state,
-				city : city
+				country : $scope.getCountrySelected,
+				state : $scope.getStateSelected,
+				city : $scope.getCitySelected
 				
 		}; //no borrar no me reconoce el scope child.
 		

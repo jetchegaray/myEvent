@@ -17,8 +17,8 @@ mieventoControllers.controller("accordionCtrl", ["$scope", function($scope){
 }]);
 
 
-mieventoControllers.controller("DeleteConfirmationModalController", ["$rootScope", "$scope","$modal","userService","applicationContext",
-		function($rootScope, $scope, $modal, userService, applicationContext) {
+mieventoControllers.controller("DeleteConfirmationModalController", ["$rootScope", "$scope", "$state", "$modal","userService","applicationContext",
+		function($rootScope, $scope, $state, $modal, userService, applicationContext) {
 
 			$scope.openDeleteListConfirmation = function(list,element) {
 
@@ -40,31 +40,12 @@ mieventoControllers.controller("DeleteConfirmationModalController", ["$rootScope
 				});
 			};
 			
-			
-			$scope.openDeleteElementConfirmation = function(element) {
-
-				var modalInstance = $modal.open({
-					templateUrl : 'deleteConfirmation.html',
-					controller : "deleteConfirmationInstanceController"
-				});
-
-				modalInstance.result.then(function() {
-					
-					applicationContext.getEventContext().setSelectedEvent(null);
-					
-					userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
-					}, function(error) {
-						applicationContext.getExceptionContext().setDanger(error.data);
-					})
-				});
-			};
-
-			
+						
 			$scope.openDeleteElementPlaceConfirmation = function(element) {
 
 				var modalInstance = $modal.open({
 					templateUrl : 'deleteConfirmation.html',
-					controller : "deleteConfirmationInstanceController"
+					controller : "DeleteConfirmationInstanceController"
 				});
 
 				modalInstance.result.then(function() {
@@ -72,6 +53,7 @@ mieventoControllers.controller("DeleteConfirmationModalController", ["$rootScope
 					applicationContext.getEventContext().deletePlace();
 					
 					userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
+						$state.go("eventState.myPlace");
 					}, function(error) {
 						applicationContext.getExceptionContext().setDanger(error.data);
 					})
