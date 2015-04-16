@@ -36,7 +36,7 @@ public class EventService {
 		}catch(HttpEventException exception){
 			throw exception;
 		}catch (Exception e) {
-			logger.info(e.getStackTrace());
+			e.getStackTrace();
 		}
 		
 	}

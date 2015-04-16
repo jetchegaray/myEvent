@@ -1,6 +1,7 @@
 
 mieventoControllers.controller("PlaceAdministratorController", ["$scope", "$state", "userService", "applicationContext",
                 function($scope, $state, userService, applicationContext) {
+		
 		$scope.place = applicationContext.getEventContext().getPlaceSelectedEvent();
 		if ($scope.place == null){
 			warning = {code : "0013"};
@@ -38,10 +39,10 @@ mieventoControllers.controller("PlaceAdministratorController", ["$scope", "$stat
 		$scope.guests = angular.copy(applicationContext.getEventContext().getGuestsSelectedEvent());
 		$scope.tables = applicationContext.getEventContext().getTablesPlaceSelectedEvent();
 		
-		
 		if ($scope.tables == null){
 			$scope.amountTables = 0;
 		}else{
+			//guests are not sitting.
 			$scope.amountTables = _.size($scope.tables);
 			calculateSizePxTables();
 			_.each($scope.tables,function(table, index){table.id = index; table.located = true; table.guestAmount = $scope.amountGuests.slice(0, _.size(table.guests));});
@@ -76,6 +77,11 @@ mieventoControllers.controller("PlaceAdministratorController", ["$scope", "$stat
 		$scope.addTable = function(){
 			var guestsInTable = $scope.amountGuests.slice(0, $scope.formModel.guestAmountPerTable.number);
 			
+			var guests = [];
+			for (i = 0; i < $scope.guestsInTable ;i++){
+				guests.push({});
+			}
+				
 			for (i = 0; i < $scope.amountTables ;i++){
 				if ($scope.tables[i].located == false){
 					
