@@ -43,8 +43,8 @@ public class LoadGeoNames extends AbstractJUnit4SpringContextTests{
 //		RestTemplate template = new RestTemplate();
 //		this.geoServicies = new GEOServicies(template);
 //		
-		CountryHelper countryServicies = new CountryHelper();
-		this.countryGeoId = countryServicies.getCountryGeoId();
+		CountryHelper countryHelper = new CountryHelper();
+		this.countryGeoId = countryHelper.getCountryGeoId();
 		
 		this.citiesGeoTransformer = new TransformerList<CityEntity, GEOExternalWrapper>(this.cityGeoTransformer); 
 //		this.stateGeoTransformer = new StateGeoTransformer();
@@ -65,7 +65,7 @@ public class LoadGeoNames extends AbstractJUnit4SpringContextTests{
 			for (GEOExternalWrapper geoState : statesById) {
 				
 				List<GEOExternalWrapper> citiesById = geoServicies.getChildrenById(geoState.getGeonameId());
-				if (citiesById.size() == 1){ //capital city.
+				if (citiesById.size() == 1 && countryEntity.getCountryCodeISOTwoLetter().equals("AR")){ //capital city.
 					String id = citiesById.get(0).getGeonameId();
 					citiesById = geoServicies.getChildrenById(id);
 				}
