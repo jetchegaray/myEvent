@@ -24,26 +24,30 @@ mieventoControllers.controller("MyPlaceEventController", [ "$scope", "$state" ,"
                                function($scope, $state, eventService, userService, applicationContext) {
 	
 		$scope.place = applicationContext.getEventContext().getPlaceSelectedEvent();
-		console.log(angular.toJson($scope.place));
+	
 		if ($scope.place != null){
 			error = {code : "0015"};
 			applicationContext.getExceptionContext().setWarning(error);
 			return
 		}
+		//IMPROVEMENT
+		var country = {
+			name : $scope.place.location.countryCode,
+		}
+		var state = {
+				name : $scope.place.location.province,
+		}
+		var city = {
+				name : $scope.place.location.city
+		}
+	
+		$scope.search = {
+				country : country,
+				state : state,
+				city : city
+				
+		}; //no borrar no me reconoce el scope child.
 		
-		eventService.getAllCountries(function(data) {
-			$scope.countries = data;
-		}, function(error) {
-			applicationContext.getExceptionContext().setDanger(error.data);
-		});
-		
-		eventService.getAllProvinces(function(data) {
-			$scope.provinces = data;
-		}, function(error) {
-			applicationContext.getExceptionContext().setDanger(error.data);
-		});
-		
-		$scope.search = {}; //no borrar no me reconoce el scope child.
 		$scope.save = function(){
 			if ($scope.placeForm.$invalid){
 				return;

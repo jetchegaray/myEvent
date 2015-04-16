@@ -16,7 +16,6 @@ public class ContextPlaceTransformer extends Transformer<ControlContextPlaceEnti
 	
 	public ContextPlaceTransformer(
 			TransformerList<ControlContextTableEntity, ControlContextTable> contextTableTransformerList) {
-		super();
 		this.contextTableTransformerList = contextTableTransformerList;
 	}
 

@@ -24,7 +24,7 @@
 	</form>
 	<div class="col-md-4" ng-show="place">	
 		<span class="font-secondtitle pull-right">
-			Place : ${{place.businessName}}
+			Place : {{place.businessName}}
 		</span>
 	</div>
 </div>	
@@ -59,27 +59,26 @@
 </div>	
 <div class="row" style="margin-top: 2%;margin-left: 0.1%">
 	
-		<div style="height: 200px;" class="col-sm-4 well dropTable-space" data-drop="true" ng-model='tables'
-			  jqyoui-droppable="{onDrop:'dropDeleteTable(table)'}">
-		</div>			
+	<div style="height: 200px;" class="col-sm-4 well dropTable-space" data-drop="true" ng-model='tables'
+		  jqyoui-droppable="{onDrop:'dropDeleteTable(table)'}">
+	</div>			
 	
 	
 	<div class="col-sm-6 well col-sm-offset-1" style="height: 100px;display: block;">
 <!-- 		<div class="navbar-inner"> -->
-			<div class="container">
+			<div>
 				<div class="droppable-btn-guest" data-drop="true" ng-model='guests' ng-repeat="guest in guests"
 					jqyoui-droppable="{index: {{$index}},animate:false}">
 						<div class="draggable-guest" data-drag="true" 
 							data-jqyoui-options="{revert: 'invalid'}" ng-model="guests"
 							jqyoui-draggable="{index: {{$index}},animate:false, onStart:'startDragGuest(guest, $index)'}">
-								<span>
 								<i style="margin-left: 40%" class="fa fa-user text-success"></i>
-		 						<div style="text-align: center;">{{guest.firstName}} {{guest.lastName}}</div>
-		 						</span>
-						</div>
+		 						<div style="text-align: center">{{guest.firstName}} {{guest.lastName}}</div>
+		 				</div>
 				</div>
-			</div>
+			</	>
 <!-- 		</div> -->
+			</div>
 	</div>
 </div>
 <div class="row" style="margin-top: 2%">

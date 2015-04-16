@@ -81,7 +81,7 @@ mieventoContext.service("eventContext",function(){
 	
 	this.getTablesPlaceSelectedEvent = function(){
 		if (selectedEvent.place == null || selectedEvent.place.controlContextPlace == null){
-			return [];
+			return null;
 		}
 		
 		return selectedEvent.place.controlContextPlace.controlContextTables;

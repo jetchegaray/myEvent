@@ -28,7 +28,7 @@ mieventoControllers.controller("GuestsEventController", ["$scope", "$state", "$m
 				eventGuestService.sendInvitation(params,function(data){
 					
 					var info = applicationContext.getExceptionContext().getError();
-					info.description = "La Invitacion fue enviada Correctamente";
+					info.description = {code : "2003"};
 					applicationContext.getExceptionContext().setInfo(info);
 					
 				}, function(error){
@@ -56,10 +56,7 @@ mieventoControllers.controller("InvitationsGuestEventController", ["$scope", "ev
 mieventoControllers.controller("DetailGuestEventController", ["$scope", "$state", "userService", "eventGuestService", "applicationContext", 
              function($scope, $state, userService, eventGuestService, applicationContext) {
 			
-			if ($scope.guestForm.$invalid){
-				return;
-			}
-	
+			
 			//FIXME unificar en un solo lugar
 			eventGuestService.getAllStatusTypes(function(data) {
 				$scope.statusTypes = data;
@@ -68,6 +65,11 @@ mieventoControllers.controller("DetailGuestEventController", ["$scope", "$state"
 			});
 			
 			$scope.save = function() {
+				
+				if ($scope.guestForm.$invalid){
+					return false;
+				}
+				
 				applicationContext.getEventContext().addGuestSelectedEvent($scope.guest);
 				
 				if ($scope.guestForm.$invalid){
