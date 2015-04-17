@@ -24,34 +24,29 @@ mieventoControllers.controller("MyPlaceEventController", [ "$scope", "$state" ,"
                                function($scope, $state, eventService, userService, applicationContext) {
 	
 		$scope.place = applicationContext.getEventContext().getPlaceSelectedEvent();
-	
-		if ($scope.place != null){
+
+		if ($scope.place != null && !$scope.place.owner){
 			error = {code : "0015"};
 			applicationContext.getExceptionContext().setWarning(error);
-			return
+			return;
 		}
 		//IMPROVEMENT take from the children and set combos.
-		$scope.getCountrySelected = ""
-		$scope.getStateSelected = ""
-		$scope.getCitySelected = ""
+		$scope.countrySelected = "";
+		$scope.stateSelected = "";
+		$scope.citySelected = "";
 		if ($scope.place!= null && $scope.place.location.countryCode != null){
-			$scope.getCountrySelected = $scope.place.location.countryCode;
+			$scope.countrySelected = $scope.place.location.countryCode;
 		}
 		if ($scope.place!= null && $scope.place.location.province != null){
-			$scope.getStateSelected = $scope.place.location.province;
+			$scope.stateSelected = $scope.place.location.province;
 		}
 		if ($scope.place!= null && $scope.place.location.city != null){
-			$scope.getCitySelected = $scope.place.location.city;
+			$scope.citySelected = $scope.place.location.city;
 		}
 		
+		$scope.search = {}; 
 		
-		$scope.search = {
-				country : $scope.getCountrySelected,
-				state : $scope.getStateSelected,
-				city : $scope.getCitySelected
-				
-		}; //no borrar no me reconoce el scope child.
-		
+
 		$scope.save = function(){
 			if ($scope.placeForm.$invalid){
 				return;
@@ -62,7 +57,7 @@ mieventoControllers.controller("MyPlaceEventController", [ "$scope", "$state" ,"
 			applicationContext.getEventContext().setPlaceSelectedEvent($scope.place);
 		
 			var user = applicationContext.getUserContext().getLoggedUser();
-			console.log(angular.toJson(user));
+		
 			userService.update(user, function() {
 				applicationContext.getUserContext().setLoggedUser(user);
 				$state.go("eventState.place");

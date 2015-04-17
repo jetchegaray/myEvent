@@ -104,7 +104,7 @@ public class EventWithPlaceAndPresentTransformer extends Transformer<EventWithPl
 			apiObject.setPlace(new Place(providerPlace));
 		}
 		
-		PlaceEntity placeEntity = this.placeTransformer.transformApiToDomain(apiObject
+		PlaceEntity placeEntity = this.placeTransformer.transformAndValidateApiToDomain(apiObject
 				.getPlace());
 
 		return new EventWithPlaceAndPresentEntity(apiObject.getName(), apiObject.getInitialDate(), apiObject.getFinalDate(),

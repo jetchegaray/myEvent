@@ -72,6 +72,8 @@ public class UserService {
 			crudHelper.update(userEntity);
 			
 		} catch (NullPointerException ex) {
+			ex.getStackTrace();
+		}catch (Exception e){
 			throw new UserDoesNotExistException();
 		}
 		

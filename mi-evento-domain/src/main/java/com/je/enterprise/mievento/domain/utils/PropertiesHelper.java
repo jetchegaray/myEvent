@@ -33,8 +33,13 @@ public class PropertiesHelper {
 		try {
 			properties.store(output,null);
 			output.flush();
-	//	output.close();
 		} catch (IOException e) {
+			try {
+				output.close();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		}
 	}

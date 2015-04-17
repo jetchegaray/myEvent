@@ -45,16 +45,17 @@ public class FullProvidersServiceData {
 	private ProviderService providerService;
 	private TransformerList<ProviderEntity, DetailPlace> providerPlacesTransformerList;
 	private CountryService countryService;
-	private List<CityEntity> citiesBlackList;
+	private CitiesBlackList citiesBlackList;
 	
 	@Autowired
 	public FullProvidersServiceData(ApiPlacesServicies apiPlacesServicies,ProviderService providerService,
-			TransformerList<ProviderEntity, DetailPlace> providerPlacesTransformerList,CountryService countryService) {
+			TransformerList<ProviderEntity, DetailPlace> providerPlacesTransformerList,CountryService countryService,
+			CitiesBlackList citiesBlackList) {
 		this.apiPlacesServicies = apiPlacesServicies;
 		this.providerPlacesTransformerList = providerPlacesTransformerList;
 		this.providerService = providerService;
 		this.countryService = countryService;
-		this.citiesBlackList = Lists.newArrayList();
+		this.citiesBlackList = citiesBlackList;
 	}
 
 	
@@ -75,12 +76,13 @@ public class FullProvidersServiceData {
 		List<DetailPlace> detailPlaces = Lists.<DetailPlace>newArrayList();
 		Set<String> keyWords = ConditionRuleProviderKeyWord.getKeyWords();
 		
-		Set<CityEntity> cities = countryService.getAllCitiesInCountry(CountryCode.CL);
-//		Set<CityEntity> citiesBlackList = Sets.newLinkedHashSet(this.citiesBlackList);
-		Set<CityEntity> excludedCities = this.providerService.getAllCitiesThereProviders(CountryCode.CL);
+		CountryCode countrySelected = CountryCode.CL;
+		Set<CityEntity> cities = countryService.getAllCitiesInCountry(countrySelected);
+		Set<CityEntity> citiesBlackList = Sets.newLinkedHashSet(this.citiesBlackList.getAllCitiesNoResult(countrySelected));
+		Set<CityEntity> excludedCities = this.providerService.getAllCitiesThereProviders(countrySelected);
 		
-//		excludedCities.addAll(citiesBlackList);
-		Set<CityEntity> definitiveCities = Sets.newLinkedHashSet(UtilsCollections.shuffle(Sets.difference(cities, excludedCities)));
+		excludedCities.addAll(citiesBlackList);
+		Set<CityEntity> definitiveCities = Sets.difference(cities, excludedCities);
 		List<CityEntity> citiesPartitionInitial = Iterables.partition(definitiveCities, PARTITION_CITIES).iterator().next();
 	
 		for (CityEntity city : citiesPartitionInitial) {
@@ -127,9 +129,9 @@ public class FullProvidersServiceData {
 						detailPlaces.add(detailPlace);
 					}
 				}
-//				if (detailPlaces.isEmpty()){
-//					this.citiesBlackList.add(city);
-//				}
+				if (detailPlaces.isEmpty()){
+					this.citiesBlackList.setCityNoResult(countrySelected, city);
+				}
 		}
 		return detailPlaces;
 	}

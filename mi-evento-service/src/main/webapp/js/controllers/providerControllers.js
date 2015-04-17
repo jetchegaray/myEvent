@@ -9,8 +9,13 @@ mieventoControllers.controller("ProviderTypeController",["$scope", "$state", "pr
 			
 			
 			$scope.goToProviderList = function(type){
+				var place = applicationContext.getEventContext().getPlaceSelectedEvent();
+				
+				var location = (place != null)? place.location : null;
+				
 				var searchLocationTypeRequest = {
-						providerType : type
+						providerType : type,
+						location : location
 				}
 				applicationContext.setSearchLocationTypeRequest(searchLocationTypeRequest);
 				$state.go("providerListState", {}, {reload: true});
@@ -41,25 +46,17 @@ mieventoControllers.controller("ProviderSearchController",["$scope", "$state", "
 			applicationContext.getExceptionContext().setDanger(error.data);
 		});
 		
-		$scope.search = function(providerType){
-			var place = applicationContext.getEventContext().getPlaceSelectedEvent();
-//			var providers = applicationContext.getEventContext().getProvidersSelectedEvent();
-			
-//			var placeProvider = _.filter(providers, function(provider){ return provider.providerType.indexOf("Salon") > -1}); 
-//			var locationDefinitive = null;
-//			if (locationOwn != null){
-//				locationDefinitive = locationOwn;
-//			}else if (placeProvider != null && !angular.isUndefined(placeProvider) && _.size(placeProvider) != 0) {
-//				locationDefinitive = placeProvider[0].location;
-//			}
+//		$scope.search = function(providerType){
+//			var place = applicationContext.getEventContext().getPlaceSelectedEvent();
 //			
-			var searchLocationTypeRequest = {
-					providerType : providerType,
-					location : place.location
-			}
-			applicationContext.setSearchLocationTypeRequest(searchLocationTypeRequest);
-			$state.go("providerListState");
-		}
+//			var location = (place != null)? place.location : null;
+//			var searchLocationTypeRequest = {
+//					providerType : providerType,
+//					location : location
+//			}
+//			applicationContext.setSearchLocationTypeRequest(searchLocationTypeRequest);
+//			$state.go("providerListState");
+//		}
 		
 		$scope.search = {}; //para que funcionen los combos en un child controller.
 		$scope.advancedSearch = function(){
@@ -92,30 +89,35 @@ mieventoControllers.controller("LocationSearchComboController",["$scope", "count
 		countryService.getAll(function(data) {
 			$scope.countries = data;
 			applicationContext.getCountryContext().setAllCountries(data);
+		
+			if (!angular.isUndefined($scope.$parent.countrySelected) && $scope.$parent.countrySelected != ""){
+		
+				$scope.search.country = _.find($scope.countries,function(country){ return country.name == $scope.$parent.countrySelected;});
+				if ($scope.$parent.stateSelected != ""){
+					$scope.states = $scope.search.country.states;
+					$scope.search.state = _.find($scope.search.country.states,function(state){ return state.name == $scope.$parent.stateSelected});
+					
+					if ($scope.$parent.citySelected != ""){
+						$scope.cities = $scope.search.state.cities;
+						$scope.search.city = _.find($scope.search.state.cities,function(city){ return city.name == $scope.$parent.citySelected});
+					}
+				}
+			}
+		
 		}, function(error) {
 			applicationContext.getExceptionContext().setDanger(error.data);
 		});	
+
 	}
 	
 	$scope.loadStates = function(search){
 		$scope.states = $scope.search.country.states;
 		$scope.search.state = ""; 
 	}
+	
 	$scope.loadCities = function(search){
 		$scope.cities = $scope.search.state.cities;
 		$scope.search.city = ""; 
-	}
-	
-	if ($scope.$parent.getCountrySelected != ""){
-		$scope.search.country = _.find($scope.countries,function(country){ country.name == $scope.$parent.getCountrySelected});
-		
-		if ($scope.$parent.getStateSelected != ""){
-			$scope.search.state = _.find($scope.search.country.states,function(state){ state.name == $scope.$parent.getStateSelected});
-			
-			if ($scope.$parent.getCitySelected != ""){
-				$scope.search.city = _.find($scope.search.state.cities,function(city){ city.name == $scope.$parent.getCitySelected});
-			}
-		}
 	}
 }]);
 

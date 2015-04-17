@@ -12,17 +12,17 @@ import com.je.enterprise.mievento.domain.entity.geo.CityEntity;
 public class CitiesWithNoResultTest {
 
 	
-	private CitiesBlackList CitiesWithNoResult; 
+	private CitiesBlackList citiesWithNoResult; 
 	
 	@Before
 	public void setUp(){
-		this.CitiesWithNoResult = new CitiesBlackList();
-		CitiesWithNoResult.load();
+		this.citiesWithNoResult = new CitiesBlackList();
+		citiesWithNoResult.load();
 		
-		CitiesWithNoResult.setCityNoResult(CountryCode.AR, new CityEntity("Lomas del mirador", StringUtils.EMPTY, StringUtils.EMPTY));
-		CitiesWithNoResult.setCityNoResult(CountryCode.AR, new CityEntity("General Villegas", StringUtils.EMPTY, StringUtils.EMPTY));
-		CitiesWithNoResult.setCityNoResult(CountryCode.AR, new CityEntity("General Pinto", StringUtils.EMPTY, StringUtils.EMPTY));
-		CitiesWithNoResult.setCityNoResult(CountryCode.AR, new CityEntity("General Granada", StringUtils.EMPTY, StringUtils.EMPTY));
+		citiesWithNoResult.setCityNoResult(CountryCode.AR, new CityEntity("Lomas del mirador", StringUtils.EMPTY, StringUtils.EMPTY));
+		citiesWithNoResult.setCityNoResult(CountryCode.AR, new CityEntity("General Villegas", StringUtils.EMPTY, StringUtils.EMPTY));
+		citiesWithNoResult.setCityNoResult(CountryCode.AR, new CityEntity("General Pinto", StringUtils.EMPTY, StringUtils.EMPTY));
+		citiesWithNoResult.setCityNoResult(CountryCode.AR, new CityEntity("General Granada", StringUtils.EMPTY, StringUtils.EMPTY));
 	}
 	
 	@Test
