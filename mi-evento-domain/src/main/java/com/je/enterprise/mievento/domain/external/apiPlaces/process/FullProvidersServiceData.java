@@ -39,7 +39,7 @@ public class FullProvidersServiceData {
 
 	private static final Logger logger = Logger.getLogger(FullProvidersServiceData.class);
 
-	private static final int PARTITION_CITIES = 100;
+	private static final int PARTITION_CITIES = 400;
 	
 	private ApiPlacesServicies apiPlacesServicies;
 	private ProviderService providerService;
@@ -60,7 +60,7 @@ public class FullProvidersServiceData {
 	
 	//couta 1k request/day
 //	@Scheduled(cron = "0 0  * * ?")
-	@Scheduled(cron = "* */5 * * * ?")
+	@Scheduled(cron = "* * */4 * * ?")
 	public void serviceProcessData() {
 		
 		List<DetailPlace> places = this.getData();
@@ -75,9 +75,9 @@ public class FullProvidersServiceData {
 		List<DetailPlace> detailPlaces = Lists.<DetailPlace>newArrayList();
 		Set<String> keyWords = ConditionRuleProviderKeyWord.getKeyWords();
 		
-		Set<CityEntity> cities = countryService.getAllCitiesInCountry(CountryCode.CO);
+		Set<CityEntity> cities = countryService.getAllCitiesInCountry(CountryCode.PY);
 //		Set<CityEntity> citiesBlackList = Sets.newLinkedHashSet(this.citiesBlackList);
-		Set<CityEntity> excludedCities = this.providerService.getAllCitiesThereProviders(CountryCode.CO);
+		Set<CityEntity> excludedCities = this.providerService.getAllCitiesThereProviders(CountryCode.PY);
 		
 //		excludedCities.addAll(citiesBlackList);
 		Set<CityEntity> definitiveCities = Sets.newLinkedHashSet(UtilsCollections.shuffle(Sets.difference(cities, excludedCities)));
