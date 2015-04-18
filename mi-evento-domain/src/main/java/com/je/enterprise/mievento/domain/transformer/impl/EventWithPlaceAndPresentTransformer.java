@@ -1,7 +1,10 @@
 package com.je.enterprise.mievento.domain.transformer.impl;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +29,7 @@ import com.je.enterprise.mievento.domain.transformer.TransformerList;
 @Component
 public class EventWithPlaceAndPresentTransformer extends Transformer<EventWithPlaceAndPresentEntity, EventWithPlaceAndPresent> {
 
+	Logger logger = LoggerFactory.getLogger(EventWithPlaceAndPresentTransformer.class);
 	private PlaceTransformer placeTransformer;
 
 	private TransformerList<GuestEntity, Guest> guestTransformerList;
@@ -59,13 +63,17 @@ public class EventWithPlaceAndPresentTransformer extends Transformer<EventWithPl
 				.transformDomainToApi(domainObject.getPresents());
 		
 		ProviderEntity providerPlace = null;
-		if (domainObject.getProviders() != null && !domainObject.getProviders().isEmpty()){
-			providerPlace = Iterables.find(domainObject.getProviders(), new Predicate<ProviderEntity>() {
-				@Override
-				public boolean apply(ProviderEntity input) {
-					return ProviderType.getPlaceTypes().contains(input.getProviderType());
-				}
-			});
+		if (domainObject.getProviders() != null){
+			try{	
+				providerPlace = Iterables.find(domainObject.getProviders(), new Predicate<ProviderEntity>() {
+					@Override
+					public boolean apply(ProviderEntity input) {
+						return ProviderType.getPlaceTypes().contains(input.getProviderType());
+					}
+				});
+			}catch(NoSuchElementException ex){
+				logger.info("No hay proveedor de lugar para convertir");
+			}
 		}
 		// Si hay un proveedor de lugar lo seteo.
 		if (providerPlace != null && domainObject.getPlace() == null){
@@ -91,13 +99,17 @@ public class EventWithPlaceAndPresentTransformer extends Transformer<EventWithPl
 				.transformApiToDomain(apiObject.getPresents());
 		
 		Provider providerPlace = null;
-		if (apiObject.getProviders() != null && !apiObject.getProviders().isEmpty()){
-			providerPlace = Iterables.find(apiObject.getProviders(), new Predicate<Provider>() {
-				@Override
-				public boolean apply(Provider input) {
-					return ProviderType.getPlaceTypes().contains(input.getProviderType());
-				}
-			});
+		if (apiObject.getProviders() != null){
+			try { 
+				providerPlace = Iterables.find(apiObject.getProviders(), new Predicate<Provider>() {
+					@Override
+					public boolean apply(Provider input) {
+						return ProviderType.getPlaceTypes().contains(input.getProviderType());
+					}
+				});
+			}catch(NoSuchElementException ex){
+				logger.info("No hay proveedor de lugar para convertir");
+			}
 		}
 		// Si hay un proveedor de lugar lo seteo.
 		if (providerPlace != null && apiObject.getPlace() == null){

@@ -102,7 +102,7 @@ public class ProviderController {
 		
 		LocationEntity locationEntity = this.locationTransformer.transformAndValidateApiToDomain(searchLocationTypeRequest.getLocation());
 		List<Provider> providers = providerTransformerList.transformDomainToApi(providerService.getBy(
-				new LocationAndTypeFilterProvider(searchLocationTypeRequest.getProviderType(),locationEntity)));
+				new LocationAndTypeFilterProvider(searchLocationTypeRequest.getName(), searchLocationTypeRequest.getProviderType(),locationEntity)));
 		return providers;
 	}
 	

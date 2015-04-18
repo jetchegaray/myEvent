@@ -60,15 +60,30 @@ mieventoControllers.controller("ProviderSearchController",["$scope", "$state", "
 		
 		$scope.search = {}; //para que funcionen los combos en un child controller.
 		$scope.advancedSearch = function(){
+			
+			var countryCode = null;
+			if (!angular.isUndefined($scope.search.country)){
+				countryCode = $scope.search.country.name;
+			}
+			var province = null;
+			if (!angular.isUndefined($scope.search.state)){
+				countryCode = $scope.search.state.name;
+			}
+			var city = null;
+			if (!angular.isUndefined($scope.search.city)){
+				city = $scope.search.city.name;
+			}
+			
 			var searchLocationTypeRequest = {
+					name : $scope.search.businessName,
 					providerType : $scope.search.providerType,
 					location : {
-						countryCode : $scope.search.country.name,
-						province : $scope.search.state.name,
-						city : $scope.search.city.name,
+						countryCode : countryCode,
+						province : province,
+						city : city,
 						streetAddress : $scope.search.streetAddress
 					}
-			}
+			}	
 			applicationContext.setSearchLocationTypeRequest(searchLocationTypeRequest);
 			$state.go("providerListState");
 		}

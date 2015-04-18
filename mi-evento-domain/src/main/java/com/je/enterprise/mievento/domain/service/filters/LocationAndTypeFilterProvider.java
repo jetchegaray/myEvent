@@ -12,10 +12,12 @@ public class LocationAndTypeFilterProvider implements CriteriaFilterProvider{
 	
 	private LocationEntity location;
 	private ProviderType type;
+	private String name;
 	
-	public LocationAndTypeFilterProvider(ProviderType type, LocationEntity location) {
+	public LocationAndTypeFilterProvider(String name, ProviderType type, LocationEntity location) {
 		this.location = location;
 		this.type = type;
+		this.name = name;
 	}
 
 	@Override
@@ -23,6 +25,9 @@ public class LocationAndTypeFilterProvider implements CriteriaFilterProvider{
 	
 		Query<ProviderEntity> query = providerDAO.createQuery().disableValidation().enableSnapshotMode();
 		
+		if (StringUtils.isNotBlank(this.name)){
+			query.and(query.criteria("businessName").containsIgnoreCase(this.name));
+		}
 		if (this.type != null){
 			query.and(query.criteria("providerType").equal(type));
 		}
