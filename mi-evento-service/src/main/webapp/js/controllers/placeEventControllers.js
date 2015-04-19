@@ -4,8 +4,15 @@ mieventoControllers.controller("PlaceEventController", [ "$scope","$state", "app
                                 function($scope, $state, applicationContext) {
 		
 		$scope.placeSelected = applicationContext.getEventContext().getPlaceSelectedEvent();
-		if ($scope.placeSelected == null){
+		console.log(angular.toJson($scope.placeSelected));
+		if ($scope.placeSelected == null || $scope.placeSelected.owner){
 			$state.go("eventState.myPlace");
+		}
+		
+		if (!$scope.placeSelected.owner){
+			info = {code : "0015"};
+			applicationContext.getExceptionContext().setWarning(info);
+			$state.go(applicationContext.getPreviousState());
 		}
 
 		$scope.deletePlace = function(){

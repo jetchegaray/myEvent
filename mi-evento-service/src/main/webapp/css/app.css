@@ -4,6 +4,7 @@ body { overflow-x: hidden;}
   background: url("../img/home.jpg") no-repeat center center local; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
+  height: 400px;
 }
 
 .panel-default {

@@ -46,17 +46,6 @@ mieventoControllers.controller("ProviderSearchController",["$scope", "$state", "
 			applicationContext.getExceptionContext().setDanger(error.data);
 		});
 		
-//		$scope.search = function(providerType){
-//			var place = applicationContext.getEventContext().getPlaceSelectedEvent();
-//			
-//			var location = (place != null)? place.location : null;
-//			var searchLocationTypeRequest = {
-//					providerType : providerType,
-//					location : location
-//			}
-//			applicationContext.setSearchLocationTypeRequest(searchLocationTypeRequest);
-//			$state.go("providerListState");
-//		}
 		
 		$scope.search = {}; //para que funcionen los combos en un child controller.
 		$scope.advancedSearch = function(){
@@ -226,10 +215,11 @@ mieventoControllers.controller("ProviderListController",["$rootScope", "$scope",
 									applicationContext.getExceptionContext().setWarning(error);
 									return
 								}
-								applicationContext.getEventContext().setProviderPlaceSelectedEvent(provider);
-							}else {
-								error = applicationContext.getEventContext().addProviderSelectedEvent(provider);
-							}
+//								applicationContext.getEventContext().setProviderPlaceSelectedEvent(provider);
+							}//else {
+							
+							error = applicationContext.getEventContext().addProviderSelectedEvent(provider);
+//							}
 							
 							if (error != null){
 								

@@ -53,6 +53,9 @@ mieventoControllers.controller("ReviewsEventController", ["$rootScope", "$scope"
 				$scope.providersWithoutReviews = getProvidersWithoutReviews();
 				$rootScope.$broadcast(TAG_REVIEW_UPDATE);
 				
+				success = { code : "2004"}
+				applicationContext.getExceptionContext().setSuccess(error.data);
+				
 			}, function(error) {
 				applicationContext.getExceptionContext().setDanger(error.data);
 			});

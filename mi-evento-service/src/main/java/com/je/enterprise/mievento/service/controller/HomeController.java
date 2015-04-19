@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.je.enterprise.mievento.domain.context.ContextLocale;
+
 @Controller
 public class HomeController {
 
@@ -16,6 +18,7 @@ public class HomeController {
 	@RequestMapping(value= "/",method = RequestMethod.GET)
 	public ModelAndView welcome(Locale locale){
 		 logger.info(String.format("Welcome home! The client locale is %s.", locale));
-		return new ModelAndView("index");
+		 ContextLocale.getContextLocale().setLocale(locale);
+		 return new ModelAndView("index");
 	}
 }

@@ -10,16 +10,18 @@ import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.log4j.Logger;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.je.enterprise.mievento.api.dto.location.CountryCode;
 import com.je.enterprise.mievento.api.dto.provider.ProviderType;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
+import com.je.enterprise.mievento.domain.entity.geo.BlackListCityEntity;
 import com.je.enterprise.mievento.domain.entity.geo.CityEntity;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.DetailPlace;
 import com.je.enterprise.mievento.domain.external.apiPlaces.entities.SearchPlace;
@@ -29,10 +31,10 @@ import com.je.enterprise.mievento.domain.external.apiPlaces.services.ResponseCon
 import com.je.enterprise.mievento.domain.external.apiPlaces.services.ResponseContainerObjects;
 import com.je.enterprise.mievento.domain.external.apiPlaces.transformer.type.BuilderConditionRulesProvider;
 import com.je.enterprise.mievento.domain.external.apiPlaces.transformer.type.ConditionRuleProviderKeyWord;
+import com.je.enterprise.mievento.domain.service.helper.CRUDHelper;
 import com.je.enterprise.mievento.domain.service.impl.CountryService;
 import com.je.enterprise.mievento.domain.service.impl.ProviderService;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
-import com.je.enterprise.mievento.domain.utils.UtilsCollections;
 
 @Service
 public class FullProvidersServiceData {
@@ -45,23 +47,23 @@ public class FullProvidersServiceData {
 	private ProviderService providerService;
 	private TransformerList<ProviderEntity, DetailPlace> providerPlacesTransformerList;
 	private CountryService countryService;
-	private CitiesBlackList citiesBlackList;
+	private  CRUDHelper<BlackListCityEntity, ObjectId> crudHelperBlackList;
 	
 	@Autowired
 	public FullProvidersServiceData(ApiPlacesServicies apiPlacesServicies,ProviderService providerService,
 			TransformerList<ProviderEntity, DetailPlace> providerPlacesTransformerList,CountryService countryService,
-			CitiesBlackList citiesBlackList) {
+			CRUDHelper<BlackListCityEntity, ObjectId> crudHelperBlackList) {
 		this.apiPlacesServicies = apiPlacesServicies;
 		this.providerPlacesTransformerList = providerPlacesTransformerList;
 		this.providerService = providerService;
 		this.countryService = countryService;
-		this.citiesBlackList = citiesBlackList;
+		this.crudHelperBlackList = crudHelperBlackList;
 	}
 
 	
 	//couta 1k request/day
 //	@Scheduled(cron = "0 0  * * ?")
-//	@Scheduled(cron = "* * */2 * * ?")
+//	@Scheduled(cron = "* */5 * * * ?")
 	public void serviceProcessData() {
 		
 		List<DetailPlace> places = this.getData();
@@ -78,7 +80,7 @@ public class FullProvidersServiceData {
 		
 		CountryCode countrySelected = CountryCode.CL;
 		Set<CityEntity> cities = countryService.getAllCitiesInCountry(countrySelected);
-		Set<CityEntity> citiesBlackList = Sets.newLinkedHashSet(this.citiesBlackList.getAllCitiesNoResult(countrySelected));
+		Set<CityEntity> citiesBlackList = this.getBlackCities();
 		Set<CityEntity> excludedCities = this.providerService.getAllCitiesThereProviders(countrySelected);
 		
 		excludedCities.addAll(citiesBlackList);
@@ -130,12 +132,11 @@ public class FullProvidersServiceData {
 					}
 				}
 				if (detailPlaces.isEmpty()){
-					this.citiesBlackList.setCityNoResult(countrySelected, city);
+					this.crudHelperBlackList.create(new BlackListCityEntity(city.getName(), countrySelected));
 				}
 		}
 		return detailPlaces;
 	}
-
 
 
 
@@ -205,6 +206,17 @@ public class FullProvidersServiceData {
 			 }
 		}
 		return searchRealPlaces;
+	}
+
+
+	private Set<CityEntity> getBlackCities() {
+		return Sets.newLinkedHashSet(Iterables.transform(this.crudHelperBlackList.getAll(), new Function<BlackListCityEntity, CityEntity>() {
+
+			@Override
+			public CityEntity apply(BlackListCityEntity input) {
+				return new CityEntity(input.getCityName(), StringUtils.EMPTY, StringUtils.EMPTY);
+			}
+		}));
 	}
 
 	
