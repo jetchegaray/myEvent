@@ -1,6 +1,7 @@
 package com.je.enterprise.mievento.domain.external.apiPlaces.process;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -20,6 +21,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.je.enterprise.mievento.api.dto.location.CountryCode;
 import com.je.enterprise.mievento.api.dto.provider.ProviderType;
+import com.je.enterprise.mievento.domain.context.ContextLocale;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
 import com.je.enterprise.mievento.domain.entity.geo.BlackListCityEntity;
 import com.je.enterprise.mievento.domain.entity.geo.CityEntity;
@@ -74,10 +76,11 @@ public class FullProvidersServiceData {
 	
 	private List<DetailPlace> getData() {
 		
+		ContextLocale.getContextLocale().setLocale(new Locale("en"));
 		List<DetailPlace> detailPlaces = Lists.<DetailPlace>newArrayList();
 		Set<String> keyWords = ConditionRuleProviderKeyWord.getKeyWords();
 		
-		CountryCode countrySelected = CountryCode.CL;
+		CountryCode countrySelected = CountryCode.US;
 		Set<CityEntity> cities = countryService.getAllCitiesInCountry(countrySelected);
 		Set<CityEntity> citiesBlackList = this.getBlackCities();
 		Set<CityEntity> excludedCities = this.providerService.getAllCitiesThereProviders(countrySelected);
