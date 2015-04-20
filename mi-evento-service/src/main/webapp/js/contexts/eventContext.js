@@ -65,13 +65,11 @@ mieventoContext.service("eventContext",function(){
 	
 	this.setPlaceSelectedEvent = function(place){
 		place.owner = true;
-		place.clazz = "Place";
 		selectedEvent.place = place;
 	}
 	
 	this.setProviderPlaceSelectedEvent = function(provider){
-		place.owner = false;
-		place.clazz = "Provider";
+		provider.owner = false;
 		selectedEvent.place = provider;
 	}
 	

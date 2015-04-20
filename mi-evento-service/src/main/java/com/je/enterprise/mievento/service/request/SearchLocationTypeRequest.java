@@ -7,7 +7,16 @@ public class SearchLocationTypeRequest {
 
 	private ProviderType providerType;
 	private Location location;
+	private String name;
 	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public SearchLocationTypeRequest() {
 	}
 
@@ -30,7 +39,7 @@ public class SearchLocationTypeRequest {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder("ProviderType : ").append(this.providerType);
-		builder.append(" - Location : ").append(this.location);
+		builder.append(" - Location : ").append(this.location).append(" - name : ").append(this.name);
 		return builder.toString();
 	}
 

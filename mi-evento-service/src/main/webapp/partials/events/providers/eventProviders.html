@@ -17,7 +17,7 @@
 					 	<td>{{provider.providerType}}</td>
 						<td>{{provider.businessName}}</td>
 						<td>
-							<span>{{provider.cellPhone || "No Phone"}} / {{provider.phone || "No Phone"}}</span>
+							<span>{{provider.cellPhone || "No Phone"}}</span>
 							
 						</td>
 						<td>
@@ -46,8 +46,8 @@
 	<div class="row" ng-controller="ProviderSearchController">
 		<div class="ui-group-buttons" dropdown>
              <button type="button" class="btn btn-primary dropdown-toggle btn-outline" dropdown-toggle popover="{{'event.provider.popover.bytype' | translate}}" popover-trigger="mouseenter" ><span translate>event.provider.buttonAdd</span><span class="caret faSpace"></span></button>
-	         <ul class="dropdown-menu" role="menu">
-				<li ng-repeat="type in types | orderBy:'toString()'"><a href ng-click="search(type)">{{type}}</a></li>
+	         <ul class="dropdown-menu" role="menu" ng-controller="ProviderTypeController">
+				<li ng-repeat="type in types | orderBy:'toString()'"><a href ng-click="goToProviderList(type)">{{type}}</a></li>
 			 </ul>	 
 			 <div class="or"></div>
              <button class="btn btn-success btn-outline" ng-click="toAdvancedSearch()"><span translate>advancedSearch.link</span><i class="fa fa-search faSpace"></i></button>

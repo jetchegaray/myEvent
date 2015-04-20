@@ -100,6 +100,15 @@ mieventoControllers.controller("BudgetEventController", ["$rootScope", "$scope",
 		
 		$scope.goToMoreCheaper = function(provider){
 			
+			var place = applicationContext.getEventContext().getPlaceSelectedEvent();
+			if (place == null){
+				warning = {code : "0013"};
+				applicationContext.getExceptionContext().setWarning(warning);
+				return false;
+			}
+			
+			var location = (place != null)? place.location : null;
+			
 			var params = [];
 			params.push(provider.providerType);
 			
@@ -108,6 +117,12 @@ mieventoControllers.controller("BudgetEventController", ["$rootScope", "$scope",
 			}
 	
 			providerService.getMoreCheaperByCategory(providerTypeRequest, function(data){
+				
+				if (data.length == 0){
+					info = {code : "0016"};
+					applicationContext.getExceptionContext().setInfo(info);
+					return false;
+				}
 				
 				var errorProvComp = null;
 				var errorProv = applicationContext.getEventContext().isExistsInProvider(data[0]);

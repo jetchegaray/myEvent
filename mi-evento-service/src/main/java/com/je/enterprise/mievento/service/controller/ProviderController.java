@@ -2,6 +2,7 @@ package com.je.enterprise.mievento.service.controller;
 
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.Validate;
@@ -102,7 +103,7 @@ public class ProviderController {
 		
 		LocationEntity locationEntity = this.locationTransformer.transformAndValidateApiToDomain(searchLocationTypeRequest.getLocation());
 		List<Provider> providers = providerTransformerList.transformDomainToApi(providerService.getBy(
-				new LocationAndTypeFilterProvider(searchLocationTypeRequest.getProviderType(),locationEntity)));
+				new LocationAndTypeFilterProvider(searchLocationTypeRequest.getName(), searchLocationTypeRequest.getProviderType(),locationEntity)));
 		return providers;
 	}
 	
@@ -112,10 +113,19 @@ public class ProviderController {
 	public List<Provider> mostCheaperByCategory(@RequestBody ProviderTypesRequest types){
 		logger.info(String.format("params, list of types %s",types));
 		
-		//TODO improve the query.
+		//FIXME IMPROVE THE QUERY TO DB
 		List<Provider> providers = Lists.<Provider>newArrayList();
 		for (ProviderType type : types.getTypes()) {
-			Provider provider = providerTransformer.transformDomainToApi(providerService.getMostOfAllBy(new CheaperFilterProvider(type)));
+			ProviderEntity mostCheaper = null;
+			
+			try {
+				mostCheaper = providerService.getMostOfAllBy(new CheaperFilterProvider(type,types.getLocation()));
+				Validate.notNull(mostCheaper);
+			}catch(NullPointerException ex){
+				return Collections.emptyList();
+			}
+			
+			Provider provider = providerTransformer.transformDomainToApi(mostCheaper);
 			providers.add(provider);
 		}
 		return providers;

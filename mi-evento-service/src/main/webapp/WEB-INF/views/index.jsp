@@ -114,6 +114,9 @@
 						    <a href ng-click="changeLanguage('en')">
 						        <img alt="en" title="English" src="../img/flag-us.png">
 						    </a>
+						    <a href ng-click="changeLanguage('pt')">
+						        <img alt="en" title="Portugues" src="../img/flag-br.png">
+						    </a>
 					 	</div> 	
 					 </div>		
 				</div>

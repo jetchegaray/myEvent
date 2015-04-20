@@ -4,8 +4,15 @@ mieventoControllers.controller("PlaceEventController", [ "$scope","$state", "app
                                 function($scope, $state, applicationContext) {
 		
 		$scope.placeSelected = applicationContext.getEventContext().getPlaceSelectedEvent();
-		if ($scope.placeSelected == null){
+		console.log(angular.toJson($scope.placeSelected));
+		if ($scope.placeSelected == null || $scope.placeSelected.owner){
 			$state.go("eventState.myPlace");
+		}
+		
+		if (!$scope.placeSelected.owner){
+			info = {code : "0015"};
+			applicationContext.getExceptionContext().setWarning(info);
+			$state.go(applicationContext.getPreviousState());
 		}
 
 		$scope.deletePlace = function(){
@@ -24,30 +31,29 @@ mieventoControllers.controller("MyPlaceEventController", [ "$scope", "$state" ,"
                                function($scope, $state, eventService, userService, applicationContext) {
 	
 		$scope.place = applicationContext.getEventContext().getPlaceSelectedEvent();
-	
-		if ($scope.place != null){
+
+		if ($scope.place != null && !$scope.place.owner){
 			error = {code : "0015"};
 			applicationContext.getExceptionContext().setWarning(error);
-			return
+			return;
 		}
-		//IMPROVEMENT
-		var country = {
-			name : $scope.place.location.countryCode,
+		//IMPROVEMENT take from the children and set combos.
+		$scope.countrySelected = "";
+		$scope.stateSelected = "";
+		$scope.citySelected = "";
+		if ($scope.place!= null && $scope.place.location.countryCode != null){
+			$scope.countrySelected = $scope.place.location.countryCode;
 		}
-		var state = {
-				name : $scope.place.location.province,
+		if ($scope.place!= null && $scope.place.location.province != null){
+			$scope.stateSelected = $scope.place.location.province;
 		}
-		var city = {
-				name : $scope.place.location.city
+		if ($scope.place!= null && $scope.place.location.city != null){
+			$scope.citySelected = $scope.place.location.city;
 		}
-	
-		$scope.search = {
-				country : country,
-				state : state,
-				city : city
-				
-		}; //no borrar no me reconoce el scope child.
 		
+		$scope.search = {}; 
+		
+
 		$scope.save = function(){
 			if ($scope.placeForm.$invalid){
 				return;
@@ -58,7 +64,7 @@ mieventoControllers.controller("MyPlaceEventController", [ "$scope", "$state" ,"
 			applicationContext.getEventContext().setPlaceSelectedEvent($scope.place);
 		
 			var user = applicationContext.getUserContext().getLoggedUser();
-			console.log(angular.toJson(user));
+		
 			userService.update(user, function() {
 				applicationContext.getUserContext().setLoggedUser(user);
 				$state.go("eventState.place");

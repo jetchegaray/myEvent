@@ -4,6 +4,7 @@ body { overflow-x: hidden;}
   background: url("../img/home.jpg") no-repeat center center local; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
+  height: 400px;
 }
 
 .panel-default {
@@ -301,6 +302,7 @@ input.ng-dirty.ng-invalid {
 	height: 45px;
 	margin-left: 4%;
 	float:left;
+	margin-bottom: 40px;	
 }
 
 .draggable-guest {
@@ -515,6 +517,7 @@ input.ng-dirty.ng-invalid {
 .scrollable-x{
 	width: 450px;
 	overflow-x : scroll; 
+	overflow-y : hidden;
 }
 
 .centered-message{
