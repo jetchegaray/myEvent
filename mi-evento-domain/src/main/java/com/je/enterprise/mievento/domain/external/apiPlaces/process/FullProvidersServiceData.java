@@ -13,6 +13,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.apache.log4j.Logger;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.google.common.base.Function;
@@ -64,7 +65,7 @@ public class FullProvidersServiceData {
 
 	
 	//couta 1k request/day
-//	@Scheduled(cron = "* * */2 * * ?")
+	@Scheduled(cron = "* * */1 * * ?")
 	public void serviceProcessData() {
 		
 		List<DetailPlace> places = this.getData();
