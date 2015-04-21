@@ -28,11 +28,12 @@ public enum ProviderType {
 		this.name = name;
 	}
 	
+	
 	@JsonValue
 	public String getName() {
 		return name;
 	}
-	
+		
 	
 	public static List<String> stringValues(List<ProviderType> providerTypes){
 		List<String> stringValues = Lists.<String>newArrayList();

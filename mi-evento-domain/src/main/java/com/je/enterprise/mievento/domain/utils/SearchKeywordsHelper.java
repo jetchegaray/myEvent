@@ -1,6 +1,5 @@
 package com.je.enterprise.mievento.domain.utils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
@@ -36,8 +35,9 @@ public class SearchKeywordsHelper implements LoadFile{
 	}
 
 
-	public List<String> filtering(ArrayList<String> searchKeywordsKey) {
+	public List<String> filtering(List<String> searchKeywordsKey) {
 		return Lists.newArrayList(this.filtering(Sets.newLinkedHashSet(searchKeywordsKey)));
 	}
+	
 	
 }

@@ -33,7 +33,7 @@
 							<span ng-if="provider.cellPhone == null && provider.phone != null">{{provider.phone}}</span>
 						</td>
 						<td >
-							$ <a href="#" ng-style={{provider.ngStyle}} style="font-weight: bold;" editable-text="provider.estimatedPrice" onbeforesave="checkNumber($data)" onafterSave="save($data,provider)">{{  provider.estimatedPrice || '0'}}</a>
+							$ <a href="#" ng-style={{provider.ngStyle}} style="font-weight: bold;" editable-text="provider.estimatedPrice" onbeforesave="checkNumber($data)" onafterSave="save($data,provider)" popover="{{'budget.price.help' | translate}}" popover-trigger="mouseenter">{{  provider.estimatedPrice || '0'}}</a>
 						</td>
 						<td>
 							<p>
@@ -54,12 +54,12 @@
 						</td>
 						<td>
 			          		<span ng-show="provider.selected">
-			          			<p><button class="badge btn  progress-bar-success btn-xs" ng-click="setSelectProvider(item,provider)">
+			          			<p><button class="badge btn  progress-bar-success btn-xs" ng-click="setSelectProvider(item,provider)"  popover="{{'budget.selection.help' | translate}}" popover-trigger="mouseenter" >
 			          				<i class="fa fa fa-check glyphiconSpace"></i>
 			          			</button></p>	
 			          		</span>	
 			          		<span ng-show="!provider.selected">
-			          			<p><button class="btn btn-xs badge" ng-click="setSelectProvider(item,provider)">
+			          			<p><button class="btn btn-xs badge"  ng-click="setSelectProvider(item,provider)"  popover="{{'budget.selection.help' | translate}}" popover-trigger="mouseenter" >
 			          				<i class="fa fa fa-check glyphiconSpace"></i>
 			          			</button></p>	
 			          		</span>	
