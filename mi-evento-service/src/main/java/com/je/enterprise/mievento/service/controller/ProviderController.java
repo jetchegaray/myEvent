@@ -30,6 +30,7 @@ import com.je.enterprise.mievento.domain.service.impl.ProviderService;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
 import com.je.enterprise.mievento.domain.transformer.impl.LocationTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.ProviderTransformer;
+import com.je.enterprise.mievento.domain.utils.SearchKeywordsHelper;
 import com.je.enterprise.mievento.service.request.ProviderTypesRequest;
 import com.je.enterprise.mievento.service.request.SearchLocationTypeRequest;
 
@@ -49,6 +50,7 @@ public class ProviderController {
 	private ProviderTransformer providerTransformer;
 	@Autowired
 	private LocationTransformer locationTransformer;
+	
 	
 	
 	@ResponseBody

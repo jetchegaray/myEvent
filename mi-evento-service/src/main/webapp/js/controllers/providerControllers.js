@@ -10,6 +10,14 @@ mieventoControllers.controller("ProviderTypeController",["$scope", "$state", "pr
 			
 			$scope.goToProviderList = function(type){
 				var place = applicationContext.getEventContext().getPlaceSelectedEvent();
+				var location = null;
+				
+				if (place != null){
+					location = {
+							countryCode : place.location.countryCode,
+							province : place.location.province
+					}	
+				}
 				
 				var location = (place != null)? place.location : null;
 				

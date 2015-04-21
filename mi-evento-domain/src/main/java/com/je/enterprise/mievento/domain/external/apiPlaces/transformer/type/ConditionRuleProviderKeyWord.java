@@ -79,7 +79,10 @@ public enum ConditionRuleProviderKeyWord {
 	
 	public Pair<String, String> getArguments(){
 		List<String> filtering = ConditionRuleProviderKeyWord.searchKeywordsHelper.filtering(Lists.newArrayList(this.arguments.getLeft(),this.arguments.getRight()));
-		return Pair.of(filtering.get(0), filtering.get(1)); 
+		if (filtering.size() == 2){
+			return Pair.of(filtering.get(0), filtering.get(1)); 
+		}
+		return Pair.of(filtering.get(0),"");
 	}
 
 	public boolean isAND() {

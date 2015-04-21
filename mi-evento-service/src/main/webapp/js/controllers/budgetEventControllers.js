@@ -66,7 +66,7 @@ mieventoControllers.controller("BudgetEventController", ["$rootScope", "$scope",
 					$scope.providersToCompareByType = getAllProviderByType($scope.providersToCompare, type);
 					providers = $scope.providersByType.concat($scope.providersToCompareByType);
 				}
-				var totalBudget = _.chain(providers).filter(function(provider){ return provider.selected === true;}).reduce(function(memo, provider){ return memo + provider.estimatedPrice; }, 0).value();
+				var totalBudget = _.chain(providers).filter(function(provider){ return provider.selected === true;}).reduce(function(memo, provider){ return parseInt(memo) + parseInt(provider.estimatedPrice); }, 0).value();
 				
 				item = {
 						"providerType" : type,
@@ -159,7 +159,9 @@ mieventoControllers.controller("BudgetEventController", ["$rootScope", "$scope",
 			userService.update(user, function() {
 				applicationContext.getUserContext().setLoggedUser(user);
 				minColors();
-			
+				
+				var success = {code : "2000"}
+				applicationContext.getExceptionContext().setSuccess(success);
 			}, function(error) {
 				applicationContext.getExceptionContext().setDanger(error.data);
 			});
@@ -209,6 +211,9 @@ mieventoControllers.controller("BudgetEventController", ["$rootScope", "$scope",
 				applicationContext.getUserContext().setLoggedUser(user);
 				initialize();
 				$rootScope.$broadcast(TAG_SUMMARY_VIEW_BUDGET_UPDATE);
+				
+				var success = {code : "2000"}
+				applicationContext.getExceptionContext().setSuccess(success);
 			}, function(error) {
 				applicationContext.getExceptionContext().setDanger(error.data);
 			});			
