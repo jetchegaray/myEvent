@@ -3,7 +3,6 @@ package com.je.enterprise.mievento.domain.entity.geo;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Indexed;
 
 import com.je.enterprise.mievento.api.dto.location.CountryCode;
 import com.je.enterprise.mievento.domain.dao.BaseEntity;
@@ -12,7 +11,6 @@ import com.je.enterprise.mievento.domain.dao.BaseEntity;
 public class BlackListCityEntity extends BaseEntity{
 
 	private String cityName;
-	@Indexed(unique = true)
 	private CountryCode countryCode;
 
 	public BlackListCityEntity() {
