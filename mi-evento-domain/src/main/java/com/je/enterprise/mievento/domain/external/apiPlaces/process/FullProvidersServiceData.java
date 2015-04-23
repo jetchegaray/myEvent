@@ -89,10 +89,13 @@ public class FullProvidersServiceData {
 		excludedCities.addAll(citiesBlackList);
 		Set<CityEntity> definitiveCities = Sets.difference(cities, excludedCities);
 		List<CityEntity> citiesPartitionInitial = Iterables.partition(definitiveCities, PARTITION_CITIES).iterator().next();
-	
+		
 		for (CityEntity city : citiesPartitionInitial) {
 				logger.info("CITY PROCESS : "+city.getName());
 				String latlng = city.getLatLongToSearch();
+
+				List<DetailPlace> placesSearch = Lists.<DetailPlace>newArrayList();
+				
 				for (String keyWord : keyWords) {
 					
 					ResponseContainerObjects<SearchPlace> response = apiPlacesServicies.getPlaces(latlng, keyWord);
@@ -131,12 +134,13 @@ public class FullProvidersServiceData {
 							}
 							detailPlace.setPhotoLocations(locationsPhotos);
 						}
-						detailPlaces.add(detailPlace);
+						placesSearch.add(detailPlace);
 					}
 				}
-				if (detailPlaces.isEmpty()){
+				if (placesSearch.isEmpty()){
 					this.crudHelperBlackList.create(new BlackListCityEntity(city.getName(), countrySelected));
 				}
+				detailPlaces.addAll(placesSearch);
 		}
 		return detailPlaces;
 	}

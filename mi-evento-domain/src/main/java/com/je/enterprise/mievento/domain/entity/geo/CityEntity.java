@@ -1,6 +1,5 @@
 package com.je.enterprise.mievento.domain.entity.geo;
 
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class CityEntity {
 
@@ -55,6 +54,6 @@ public class CityEntity {
 	
 	@Override
 	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
+		return this.getName().hashCode();
 	}
 }
