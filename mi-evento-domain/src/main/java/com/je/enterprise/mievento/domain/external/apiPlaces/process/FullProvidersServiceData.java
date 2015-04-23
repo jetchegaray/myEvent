@@ -44,7 +44,7 @@ public class FullProvidersServiceData {
 
 	private static final Logger logger = Logger.getLogger(FullProvidersServiceData.class);
 
-	private static final int PARTITION_CITIES = 500;
+	private static final int PARTITION_CITIES = 300;
 	
 	private ApiPlacesServicies apiPlacesServicies;
 	private ProviderService providerService;
@@ -65,7 +65,7 @@ public class FullProvidersServiceData {
 
 	
 	//couta 1k request/day
-	@Scheduled(cron = "* * */4 * * ?")
+	@Scheduled(cron = "* * */2 * * ?")
 	public void serviceProcessData() {
 		
 		List<DetailPlace> places = this.getData();
