@@ -44,7 +44,7 @@ public class FullProvidersServiceData {
 
 	private static final Logger logger = Logger.getLogger(FullProvidersServiceData.class);
 
-	private static final int PARTITION_CITIES = 500;
+	private static final int PARTITION_CITIES = 250;
 	
 	private ApiPlacesServicies apiPlacesServicies;
 	private ProviderService providerService;
@@ -65,7 +65,7 @@ public class FullProvidersServiceData {
 
 	
 	//couta 1k request/day
-	@Scheduled(cron = "* * */5 * * ?")
+	@Scheduled(cron = "* * */4 * * ?")
 	public void serviceProcessData() {
 		
 		List<DetailPlace> places = this.getData();
@@ -91,7 +91,7 @@ public class FullProvidersServiceData {
 		List<CityEntity> citiesPartitionInitial = Iterables.partition(definitiveCities, PARTITION_CITIES).iterator().next();
 		
 		for (CityEntity city : citiesPartitionInitial) {
-				logger.info("CITY PROCESS : "+city.getName());
+				logger.info("CITY PROCESS : "+city.getName())	;
 				String latlng = city.getLatLongToSearch();
 
 				List<DetailPlace> placesSearch = Lists.<DetailPlace>newArrayList();
