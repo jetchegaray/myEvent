@@ -77,11 +77,11 @@ public class FullProvidersServiceData {
 	
 	private List<DetailPlace> getData() {
 		
-		ContextLocale.getContextLocale().setLocale(new Locale("pt"));
+		ContextLocale.getContextLocale().setLocale(new Locale("es"));
 		List<DetailPlace> detailPlaces = Lists.<DetailPlace>newArrayList();
 		Set<String> keyWords = ConditionRuleProviderKeyWord.getKeyWords();
 		
-		CountryCode countrySelected = CountryCode.BR;
+		CountryCode countrySelected = CountryCode.VE;
 		Set<CityEntity> cities = countryService.getAllCitiesInCountry(countrySelected);
 		Set<CityEntity> citiesBlackList = this.getBlackCities();
 		Set<CityEntity> excludedCities = this.providerService.getAllCitiesThereProviders(countrySelected);
