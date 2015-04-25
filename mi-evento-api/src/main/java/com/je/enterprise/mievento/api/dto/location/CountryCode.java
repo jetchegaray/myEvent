@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum CountryCode {
 	AR("Argentina"),PY("Paraguay"),UY("Uruguay"),BR("Brazil"),EC("Ecuador"),VE("Venezuela"),
-	CO("Colombia"),BO("Bolivia"),PE("Peru"),CL("Chile"),MX("Mexico"),CU("Cuba"),US("Estados Unidos");
+	CO("Colombia"),BO("Bolivia"),PE("Peru"),CL("Chile"),MX("Mexico"),CU("Cuba"),US("Estados Unidos"),ES("España");
 	
 	private CountryCode(String name) {
 		this.name = name;

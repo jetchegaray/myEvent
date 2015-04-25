@@ -28,6 +28,7 @@ public class CountryHelper {
 		geoIds.put(new CountryEntity(CountryCode.MX.name(), CountryCode.MX.getName()), "3996063");
 		geoIds.put(new CountryEntity(CountryCode.CU.name(), CountryCode.CU.getName()), "3562981");
 		geoIds.put(new CountryEntity(CountryCode.US.name(), CountryCode.US.getName()), "6252001");
+		geoIds.put(new CountryEntity(CountryCode.ES.name(), CountryCode.ES.getName()), "2510769");
 		
 		return geoIds;
 	}
