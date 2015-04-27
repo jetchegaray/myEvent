@@ -75,7 +75,6 @@ mieventoControllers.controller("BudgetEventController", ["$rootScope", "$scope",
 				};
 				$scope.items.push(item);
 			});
-			console.log(angular.toJson($scope.items));
 		}	
 		
 		/*********  Start **************/
@@ -167,21 +166,6 @@ mieventoControllers.controller("BudgetEventController", ["$rootScope", "$scope",
 			});
 		}
 		
-//		$scope.changeProvidersEvent = function(newProviders){
-//			var changeProviders = _.chain(newProviders).find(function(newProviders){ return provider.selected == true})
-//			applicationContext.getEventContext().setProvidersSelectedEvent(changeProviders);
-//			var user = applicationContext.getUserContext().getLoggedUser();
-//			
-//			userService.update(user, function() {
-//				applicationContext.getUserContext().setLoggedUser(user);
-//				$rootScope.$broadcast(TAG_SUMMARY_VIEW_BUDGET_UPDATE);
-//				initialize();
-//				
-//			}, function(error) {
-//				applicationContext.getExceptionContext().setDanger(error.data);
-//			});
-//		};
-		
 		
 		$scope.setSelectProvider = function(item, provider){
 			if (provider.selected === true){
@@ -199,6 +183,13 @@ mieventoControllers.controller("BudgetEventController", ["$rootScope", "$scope",
 
 			var allProvidersSelected = [];
 			_.each($scope.items, function(item){ allProvidersSelected.push(item.providers)});
+			
+			if (!validHallsDuplicates(allProvidersSelected)){
+				var error = {code : "0017"}
+				applicationContext.getExceptionContext().setDanger(error);
+				return false;
+			}
+			
 			allProvidersSelected = _.chain(allProvidersSelected).flatten(true).filter(function(provider){ return provider.selected === true;}).value();
 			allProvidersNotSelected = _.chain(allProvidersSelected).flatten(true).filter(function(provider){ return provider.selected === false;}).value();
 		
@@ -218,6 +209,16 @@ mieventoControllers.controller("BudgetEventController", ["$rootScope", "$scope",
 				applicationContext.getExceptionContext().setDanger(error.data);
 			});			
 		}
+		
+		
+		validHallsDuplicates = function(itemProviders){
+			console.log(angular.toJson(itemProviders));
+			var size = _.chain(itemProviders).flatten(true).filter(function(provider){ return provider.providerType.indexOf("Salon") != -1 && provider.selected === true;;}).size().value();
+			console.log(size);
+			return (size > 1) ? false : true;
+		}
+		
+		
  } ]);
 
 

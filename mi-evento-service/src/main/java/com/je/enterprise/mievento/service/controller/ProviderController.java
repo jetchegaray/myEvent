@@ -23,7 +23,7 @@ import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
 import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
 import com.je.enterprise.mievento.domain.exception.customize.LocationNotValidToSearchException;
 import com.je.enterprise.mievento.domain.service.filters.CheaperFilterProvider;
-import com.je.enterprise.mievento.domain.service.filters.LocationAndTypeFilterProvider;
+import com.je.enterprise.mievento.domain.service.filters.LocationTypeNameFilterProvider;
 import com.je.enterprise.mievento.domain.service.filters.LocationFilterProvider;
 import com.je.enterprise.mievento.domain.service.filters.TypeFilterProvider;
 import com.je.enterprise.mievento.domain.service.impl.ProviderService;
@@ -105,7 +105,7 @@ public class ProviderController {
 		
 		LocationEntity locationEntity = this.locationTransformer.transformAndValidateApiToDomain(searchLocationTypeRequest.getLocation());
 		List<Provider> providers = providerTransformerList.transformDomainToApi(providerService.getBy(
-				new LocationAndTypeFilterProvider(searchLocationTypeRequest.getName(), searchLocationTypeRequest.getProviderType(),locationEntity)));
+				new LocationTypeNameFilterProvider(searchLocationTypeRequest.getName(), searchLocationTypeRequest.getProviderType(),locationEntity)));
 		return providers;
 	}
 	

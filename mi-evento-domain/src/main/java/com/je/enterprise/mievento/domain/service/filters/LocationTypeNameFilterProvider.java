@@ -8,13 +8,13 @@ import com.je.enterprise.mievento.domain.dao.impl.ProviderDAO;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
 import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
 
-public class LocationAndTypeFilterProvider implements CriteriaFilterProvider{
+public class LocationTypeNameFilterProvider implements CriteriaFilterProvider{
 	
 	private LocationEntity location;
 	private ProviderType type;
 	private String name;
 	
-	public LocationAndTypeFilterProvider(String name, ProviderType type, LocationEntity location) {
+	public LocationTypeNameFilterProvider(String name, ProviderType type, LocationEntity location) {
 		this.location = location;
 		this.type = type;
 		this.name = name;
