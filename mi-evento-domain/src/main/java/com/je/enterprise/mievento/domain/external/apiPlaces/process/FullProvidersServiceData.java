@@ -44,7 +44,7 @@ public class FullProvidersServiceData {
 
 	private static final Logger logger = Logger.getLogger(FullProvidersServiceData.class);
 
-	private static final int PARTITION_CITIES = 300;
+	private static final int PARTITION_CITIES = 250;
 	
 	private ApiPlacesServicies apiPlacesServicies;
 	private ProviderService providerService;
