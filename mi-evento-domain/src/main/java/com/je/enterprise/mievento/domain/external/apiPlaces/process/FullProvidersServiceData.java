@@ -44,7 +44,7 @@ public class FullProvidersServiceData {
 
 	private static final Logger logger = Logger.getLogger(FullProvidersServiceData.class);
 
-	private static final int PARTITION_CITIES = 150;
+	private static final int PARTITION_CITIES = 300;
 	
 	private ApiPlacesServicies apiPlacesServicies;
 	private ProviderService providerService;
@@ -81,7 +81,7 @@ public class FullProvidersServiceData {
 		List<DetailPlace> detailPlaces = Lists.<DetailPlace>newArrayList();
 		Set<String> keyWords = ConditionRuleProviderKeyWord.getKeyWords();
 		
-		CountryCode countrySelected = CountryCode.ES;
+		CountryCode countrySelected = CountryCode.CU;
 		Set<CityEntity> cities = countryService.getAllCitiesInCountry(countrySelected);
 		Set<CityEntity> citiesBlackList = this.getBlackCities();
 		Set<CityEntity> excludedCities = this.providerService.getAllCitiesThereProviders(countrySelected);
