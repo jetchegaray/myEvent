@@ -1,5 +1,6 @@
 TAG_SELECTED_EVENT_UPDATE = "selectedEventUpdated"
 TAG_SUMMARY_VIEW_BUDGET_UPDATE = "summaryViewBudgetUpdated"
+TAG_PLACE_DELETE_UPDATE= "placeDeleteUpdate"
 
 mieventoControllers.controller("EventListController", ["$rootScope", "$scope", "$state", "applicationContext",
 		function($rootScope, $scope, $state, applicationContext) {

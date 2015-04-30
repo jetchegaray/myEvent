@@ -221,7 +221,7 @@ mieventoControllers.controller("ProviderListController",["$rootScope", "$scope",
 								if (applicationContext.getEventContext().getPlaceSelectedEvent() != null){
 									error = {code : "0014"};
 									applicationContext.getExceptionContext().setWarning(error);
-									return
+									return false;
 								}
 //								applicationContext.getEventContext().setProviderPlaceSelectedEvent(provider);
 							}//else {
@@ -233,7 +233,7 @@ mieventoControllers.controller("ProviderListController",["$rootScope", "$scope",
 								
 								error = {code : "0003"};
 								applicationContext.getExceptionContext().setWarning(error);
-								return;
+								return false;
 							}
 							
 							userService.update(logged_user, function() {

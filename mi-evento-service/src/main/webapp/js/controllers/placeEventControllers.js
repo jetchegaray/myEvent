@@ -6,7 +6,7 @@ mieventoControllers.controller("PlaceEventController", [ "$scope","$state", "app
 		$scope.placeSelected = applicationContext.getEventContext().getPlaceSelectedEvent();
 		console.log(angular.toJson($scope.placeSelected));
 		if ($scope.placeSelected == null || $scope.placeSelected.owner){
-			$state.go("eventState.myPlace");
+			$state.go("eventState.place");
 		}
 		
 		if (!$scope.placeSelected.owner){
@@ -23,6 +23,17 @@ mieventoControllers.controller("PlaceEventController", [ "$scope","$state", "app
 		$scope.goToDetail = function(){
 			$state.go("eventState.myPlace");
 		}
+		
+		//Cuando se borra un proveedor de lugar, el place al que apunta tambien debe borrarse.
+		$scope.$on(TAG_PLACE_DELETE_UPDATE, function() {
+			 applicationContext.getEventContext().deletePlace();
+			 var user = applicationContext.getUserContext().getLoggedUser();
+			 userService.update(user, function() {
+				applicationContext.getUserContext().setLoggedUser(user);
+			 }, function(error) {
+				applicationContext.getExceptionContext().setDanger(error.data);
+			 });
+	    });
 
 }]);
 
