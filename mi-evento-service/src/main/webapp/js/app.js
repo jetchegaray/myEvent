@@ -48,8 +48,11 @@ mieventoApp.run([ "$rootScope", "$cookies", "$state", "editableOptions", "userSe
 	};
 
 	$rootScope.logout = function() {
+		applicationContext.getUserContext().setUnLoggedUser();
+		applicationContext.getEventContext().deselectedEvent();
 		$rootScope.token = null;
 		$rootScope.loggedUser = null;
+		
 
 		delete $cookies.token;
 		delete $cookies.logged_email;

@@ -5,6 +5,7 @@ mieventoControllers.controller("ProvidersEventController", ["$rootScope","$scope
 
 		$scope.providersToCompare = applicationContext.getEventContext().getProvidersToCompareEvent();
 		$scope.providers = applicationContext.getEventContext().getProvidersSelectedEvent();
+		console.log(angular.toJson($scope.providers));
 		
 	    $scope.goToDetailProvider = function(provider){
 			applicationContext.getProviderContext().setDetailProvider(provider);

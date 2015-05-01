@@ -99,15 +99,15 @@ mieventoControllers.controller("BudgetEventController", ["$rootScope", "$scope",
 		
 		$scope.goToMoreCheaper = function(provider){
 			
-			var place = applicationContext.getEventContext().getPlaceSelectedEvent();
-			if (place == null){
-				warning = {code : "0013"};
-				applicationContext.getExceptionContext().setWarning(warning);
-				return false;
-			}
-			
-			var location = (place != null)? place.location : null;
-			
+//			var place = applicationContext.getEventContext().getPlaceSelectedEvent();
+//			if (place == null){
+//				warning = {code : "0013"};
+//				applicationContext.getExceptionContext().setWarning(warning);
+//				return false;
+//			}
+//			
+//			var location = (place != null)? place.location : null;
+//			
 			var params = [];
 			params.push(provider.providerType);
 			
@@ -143,9 +143,6 @@ mieventoControllers.controller("BudgetEventController", ["$rootScope", "$scope",
 		
 		
 		$scope.checkNumber = function(price){
-			console.log(price);
-			console.log(price == null);
-			console.log(_.isNaN(price));
 			if (price == null || _.isNaN(price)){
 				return "Error : You must type a valid number !";
 			}
@@ -157,7 +154,7 @@ mieventoControllers.controller("BudgetEventController", ["$rootScope", "$scope",
 			var user = applicationContext.getUserContext().getLoggedUser();
 			userService.update(user, function() {
 				applicationContext.getUserContext().setLoggedUser(user);
-				minColors();
+				initialize();
 				
 				var success = {code : "2000"}
 				applicationContext.getExceptionContext().setSuccess(success);

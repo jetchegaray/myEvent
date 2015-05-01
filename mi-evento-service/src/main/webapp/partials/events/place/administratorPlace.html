@@ -3,18 +3,18 @@
 		<span ng-show="amountTables == 0">
 			<div class="col-md-4">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Tables Amount" ng-model="formModel.amountTables" required>
+					<input type="text" class="form-control" placeholder="{{'place.administrator.tablesAmount' | translate}}" ng-model="formModel.amountTables" required>
 				</div>
 			</div>
 			<div class="col-sm-4">
-				<button class="btn btn-success btn-outline" ng-click="setAmountTables()" type="submit">Draw</i></button>
+				<button class="btn btn-success btn-outline" ng-click="setAmountTables()" type="submit"><span translate>place.administrator.draw<span/></i></button>
 			</div>
 		</span>
 		<span ng-show="amountTables != 0">
 			<div class="col-sm-4">
 				<ui-select ng-model="formModel.guestAmountPerTable" theme="selectize">
-		  				<ui-select-match placeholder="Guest Amount Per Table">{{$select.selected.number}}-'Guests per table'</ui-select-match>
-		  				<ui-select-choices class="text-center" repeat="amountGuest in amountGuests">{{amountGuest.number}} - 'Guests per table'</ui-select-choices>
+		  				<ui-select-match placeholder="{{'place.administrator.guestAmountPerTable' | translate}}">{{$select.selected.number}} - <span translate>place.administrator.guestAmountPerTable<span/></ui-select-match>
+		  				<ui-select-choices class="text-center" repeat="amountGuest in amountGuests">{{amountGuest.number}} - <span translate>place.administrator.guestAmountPerTable<span/></ui-select-choices>
 				</ui-select>
 			</div>
 			<div class="col-sm-2">
