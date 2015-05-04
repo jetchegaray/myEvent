@@ -27,8 +27,7 @@ mieventoControllers.controller("GuestsEventController", ["$scope", "$state", "$m
 				
 				eventGuestService.sendInvitation(params,function(data){
 					
-					var info = applicationContext.getExceptionContext().getError();
-					info.description = {code : "2003"};
+					info = {code : "2003"};
 					applicationContext.getExceptionContext().setInfo(info);
 					
 				}, function(error){

@@ -76,5 +76,18 @@ public class LocationEntity {
 	public void setLng(String lng) {
 		this.lng = lng;
 	}
-
+	
+	@Override
+	public String toString() {
+		final String separator = " "; 
+		StringBuilder builder = new StringBuilder();
+		builder.append(this.streetAddress.getStreet()).append(separator);
+		builder.append(this.streetAddress.getNumber()).append(separator);
+		builder.append(this.streetAddress.getNeighborhood()).append(separator);
+		builder.append(this.streetAddress.getAdditionalInfo()).append(separator);
+		builder.append(this.province).append(separator);
+		builder.append(this.city).append(".");
+		
+		return builder.toString();
+	}
 }

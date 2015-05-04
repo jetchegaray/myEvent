@@ -6,12 +6,14 @@ import org.springframework.context.annotation.Configuration;
 
 import com.je.enterprise.mievento.domain.dao.impl.BlackListCityDAO;
 import com.je.enterprise.mievento.domain.dao.impl.CountryDAO;
+import com.je.enterprise.mievento.domain.dao.impl.InvitationDAO;
 import com.je.enterprise.mievento.domain.dao.impl.ProviderDAO;
 import com.je.enterprise.mievento.domain.dao.impl.UserDAO;
 import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
 import com.je.enterprise.mievento.domain.entity.common.event.UserEntity;
 import com.je.enterprise.mievento.domain.entity.geo.BlackListCityEntity;
 import com.je.enterprise.mievento.domain.entity.geo.CountryEntity;
+import com.je.enterprise.mievento.domain.entity.invitations.InvitationEntity;
 import com.je.enterprise.mievento.domain.service.helper.CRUDHelper;
 
 @Configuration
@@ -37,4 +39,8 @@ public class CRUDHelperConfiguration {
 		return new CRUDHelper<BlackListCityEntity, ObjectId>(blackListCityDAO);
 	}
 	
+	@Bean(name = "crudHelperInvitation")
+	public CRUDHelper<InvitationEntity, ObjectId> crudHelperInvitation(InvitationDAO invitationDAO){
+		return new CRUDHelper<InvitationEntity, ObjectId>(invitationDAO);
+	}
 }

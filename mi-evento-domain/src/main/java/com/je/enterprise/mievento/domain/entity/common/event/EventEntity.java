@@ -9,7 +9,6 @@ import org.mongodb.morphia.annotations.Reference;
 import com.google.common.collect.Lists;
 import com.je.enterprise.mievento.api.dto.event.Event;
 import com.je.enterprise.mievento.api.dto.event.EventType;
-import com.je.enterprise.mievento.domain.entity.location.CommercialLocationEntity;
 import com.je.enterprise.mievento.domain.transformer.impl.events.VisitorTransformer;
 
 public class EventEntity {

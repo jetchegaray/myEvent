@@ -4,6 +4,7 @@
   <head>
     <title th:remove="all">Template for HTML email with inline image</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- 	<link rel="stylesheet" type="text/css" media="all" th:href="@{${baseUrl}/bower_components/bootstrap/dist/css/bootstrap.min.css}"/> -->
   </head>
   <body>
   	<p><span>Hola !</span></p>
@@ -17,7 +18,7 @@
 		El lugar es <strong><span th:text="${placeName}"></span></strong>
 		en <strong><span th:text="${placeAddress}"></span></strong>.
 		
-		Duracion estimada de <strong><span th:text="${duration}"></span></strong>.
+		Duracion estimada de <strong><span th:text="${duration}"></span></strong> horas.
   	</p>
   	<p>
   		
@@ -28,10 +29,12 @@
 <!--   	<p> -->
 <!--       <img src="sample.png" th:src="'cid:' + ${imageResourceName}" /> -->
 <!--     </p> -->
-    <p>
+    <p>	
       Saludos, <br />
       <em>El Equipo de Mi-Evento</em>
-    </p>
+    </p>	
+    Confirmar : <p th:text="${urlConfirm}"></p>
+    Rechazar : <p th:text="${urlReject}"></p>
   </body>
 </html>
 </raw>

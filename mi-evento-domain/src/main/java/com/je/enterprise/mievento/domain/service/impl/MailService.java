@@ -7,7 +7,9 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
+import org.joda.time.Hours;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,8 @@ public class MailService {
 	private JavaMailSenderImpl mailSender;
 	private TemplateEngine templateEngine;
 	private static final Logger logger = Logger.getLogger(MailService.class);
+	@Value("${urlhost}")
+	private String urlHost;
 	
 	@Autowired
 	public MailService(JavaMailSenderImpl mailSender,TemplateEngine templateEngine) {
@@ -57,7 +61,7 @@ public class MailService {
 	}
 
 
-	public void sendInvitation(EventEntity eventEntity, String userEmail,String guestEmail)  {
+	public void sendInvitation(EventEntity eventEntity, String userEmail,String guestEmail,String key)  {
 		try {
 			String dayPattern = "dd-MM-yyyy";
 			String hourPattern = "HH:mm";
@@ -68,7 +72,12 @@ public class MailService {
 			ctx.setVariable("eventName", eventEntity.getName());
 			ctx.setVariable("initialDate", initialDate.toString(dayPattern));
 			ctx.setVariable("initialHour", initialDate.toString(hourPattern));
-			ctx.setVariable("duration", finalDate.minus(initialDate.getMillis()).toString(hourPattern));
+			ctx.setVariable("duration", Hours.hoursBetween(initialDate, finalDate).getHours());
+			ctx.setVariable("key",key);
+			ctx.setVariable("urlConfirm", this.urlHost+"guest/confirmInvitation/"+key);
+			ctx.setVariable("urlReject", this.urlHost+"guest/rejectInvitation/"+key);
+			
+			
 			if (EventType.withPosiblesPlaces().contains(eventEntity.getType()) && ((EventWithPlaceAndPresentEntity)eventEntity).getPlace() != null){
 				PlaceEntity placeEntity = ((EventWithPlaceAndPresentEntity)eventEntity).getPlace();
 				ctx.setVariable("placeName", placeEntity.getBusinessName());
@@ -82,7 +91,7 @@ public class MailService {
 			
 			final MimeMessage mimeMessage = this.mailSender.createMimeMessage();
 			final MimeMessageHelper message = new MimeMessageHelper(mimeMessage,true, "UTF-8"); // true = multipart
-			message.setSubject("Mi-Evento . You've invite to an Event");
+			message.setSubject("Mi-Evento . Has sido invitado a un evento !!");
 			message.setFrom("etchegarayjavier@gmail.com");
 			message.setTo(guestEmail);
 			 

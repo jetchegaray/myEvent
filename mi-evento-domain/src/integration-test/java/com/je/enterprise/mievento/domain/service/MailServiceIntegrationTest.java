@@ -4,8 +4,8 @@ import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.UUID;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -21,7 +21,6 @@ import org.thymeleaf.util.ClassLoaderUtils;
 
 import com.je.enterprise.mievento.api.dto.event.EventType;
 import com.je.enterprise.mievento.domain.entity.common.event.EventEntity;
-import com.je.enterprise.mievento.domain.entity.common.event.UserEntity;
 import com.je.enterprise.mievento.domain.service.impl.MailService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -41,15 +40,15 @@ public class MailServiceIntegrationTest {
 		mailService = new MailService(mailSender, templateEngine);
 	}
 	
-	@Test
-	public void sendMail_testOk(){
-		mailService.sendPassword(new UserEntity("javimetal2014","etchegarayjavier@live.com.ar", RandomStringUtils.randomAlphanumeric(12), true));
-	}
+//	@Test
+//	public void sendMail_testOk(){
+//		mailService.sendPassword(new UserEntity("javimetal2014","etchegarayjavier@live.com.ar", RandomStringUtils.randomAlphanumeric(12), true));
+//	}
 	
 	@Test
 	public void sendInvitation_testOk(){
-		EventEntity eventEntity = new EventEntity("EventoTest",DateTime.now().toDate(),DateTime.now().toDate(),null,null,null,EventType.COMMON_EVENT);
-		mailService.sendInvitation(eventEntity, "aa@gmail.com", "etchegarayjavier@gmail.com");
+		EventEntity eventEntity = new EventEntity("EventoTest",DateTime.now().toDate(),DateTime.now().plusHours(5).toDate(),null,null,null,EventType.COMMON_EVENT);
+		mailService.sendInvitation(eventEntity, "aa@gmail.com", "etchegarayjavier@gmail.com",UUID.randomUUID().toString());
 	}
 	
 	@Ignore

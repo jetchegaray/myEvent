@@ -29,6 +29,15 @@ public class CountryHelper {
 		geoIds.put(new CountryEntity(CountryCode.CU.name(), CountryCode.CU.getName()), "3562981");
 		geoIds.put(new CountryEntity(CountryCode.US.name(), CountryCode.US.getName()), "6252001");
 		geoIds.put(new CountryEntity(CountryCode.ES.name(), CountryCode.ES.getName()), "2510769");
+		geoIds.put(new CountryEntity(CountryCode.PA.name(), CountryCode.PA.getName()), "3703430");
+		geoIds.put(new CountryEntity(CountryCode.CR.name(), CountryCode.CR.getName()), "3624060");
+		geoIds.put(new CountryEntity(CountryCode.NI.name(), CountryCode.NI.getName()), "3617476");
+		geoIds.put(new CountryEntity(CountryCode.HN.name(), CountryCode.HN.getName()), "3608932");
+		geoIds.put(new CountryEntity(CountryCode.SV.name(), CountryCode.SV.getName()), "3585968");
+		geoIds.put(new CountryEntity(CountryCode.GT.name(), CountryCode.GT.getName()), "3595528");
+		geoIds.put(new CountryEntity(CountryCode.PR.name(), CountryCode.PR.getName()), "4566966");
+		geoIds.put(new CountryEntity(CountryCode.DM.name(), CountryCode.DM.getName()), "3575830");
+		
 		
 		return geoIds;
 	}

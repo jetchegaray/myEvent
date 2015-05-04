@@ -6,7 +6,7 @@
 				<span class="font-noResult"><span translate>provider.list.notthere<span /></span>
 			</div>
 			
-			<div class="row oneElement" ng-repeat="provider in providersPagination  |  orderBy:-estimatedPrice ">
+			<div class="row oneElement" ng-repeat="provider in providersPagination  |  orderBy:+estimatedPrice ">
 				<div class="media">
 					<a class="pull-left" ng-click="	" href>
 					  <div  ng-controller="providerCarouselCtrl" ng-init="init(provider)" class="media-object" style=" width: 200px; height: 150px; margin: auto;">
@@ -37,9 +37,13 @@
 	                    </span>
 					</div>
 					<hr class="divide"/>
-					<span class="price">
+					<span class="price" ng-show="provider.estimatedPrice != 0">
 						<small><span translate>provider.list.priceSince<span /></small>
 						<i class="fa fa-money glyphiconSpace"><strong> ${{provider.estimatedPrice}}</strong></i>
+					</span>	
+					<span class="price" ng-show="provider.estimatedPrice == 0">
+						<small><span translate>provider.list.priceSince<span /></small>
+						<strong> {{'provider.price.noEstimated' | translate	}}</strong>
 					</span>	
 				     <span class="pull-right buttons">
 	                   	<button class="btn btn-sm btn-default btn-outline" ng-click="goToDetail(provider)"><i class="fa fa-eye"></i> <span translate>provider.list.buttonDetail<span /></button>
@@ -47,7 +51,7 @@
 	         	     </span>	 
 				</div>    
 				<hr class="divide"/>
-			</div>
+			</div>	
 			<div ng-show="providers "= null && providers.length != 0" class="row">
 				<pagination total-items="totalItems" items-per-page="itemPerPage" ng-model="currentPage" ng-change="pageChanged()" max-size="maxSize" class="pagination-sm" boundary-links="true" direction-links="false" rotate="false"></pagination>
 			</div>
