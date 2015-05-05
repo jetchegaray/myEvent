@@ -38,15 +38,15 @@ public class LocationTypeNameFilterProvider implements CriteriaFilterProvider{
 			if (StringUtils.isNotBlank(location.getProvince())){
 				query.and(query.criteria("location.province").equal(location.getProvince()));
 			}
-			if (StringUtils.isNotBlank(location.getCity())){
-				query.and(query.criteria("location.city").containsIgnoreCase(location.getCity()));
-			}
+//			if (StringUtils.isNotBlank(location.getCity())){
+//				query.and(query.criteria("location.city").containsIgnoreCase(location.getCity()));
+//			}
 			
-			if (location.getStreetAddress() != null){
-				if (StringUtils.isNotBlank(location.getStreetAddress().getNeighborhood())){
-					query.and(query.criteria("location.streetAddress.neighborhood").containsIgnoreCase(location.getStreetAddress().getNeighborhood()));
-				}
-			}
+//			if (location.getStreetAddress() != null){
+//				if (StringUtils.isNotBlank(location.getStreetAddress().getNeighborhood())){
+//					query.and(query.criteria("location.streetAddress.neighborhood").containsIgnoreCase(location.getStreetAddress().getNeighborhood()));
+//				}
+//			}
 		}
 		return query;
 	}

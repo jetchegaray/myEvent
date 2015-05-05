@@ -11,8 +11,8 @@ var mieventoServices = angular.module("mieventoServices",["ngResource"]);
 mieventoApp.config(function ($translateProvider) {
 	$translateProvider.useUrlLoader('/mievento/messageBundle');
 //    $translateProvider.useStorage('UrlLanguageStorage');
-	$translateProvider.preferredLanguage('en');
-	$translateProvider.fallbackLanguage('en');
+	$translateProvider.preferredLanguage('es');
+	$translateProvider.fallbackLanguage('es');
 });
 
 mieventoApp.run([ "$rootScope", "$cookies", "$state", "editableOptions", "userService", "applicationContext",

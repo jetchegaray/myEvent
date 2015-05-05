@@ -23,14 +23,13 @@ import com.je.enterprise.mievento.domain.entity.common.event.ProviderEntity;
 import com.je.enterprise.mievento.domain.entity.location.LocationEntity;
 import com.je.enterprise.mievento.domain.exception.customize.LocationNotValidToSearchException;
 import com.je.enterprise.mievento.domain.service.filters.CheaperFilterProvider;
-import com.je.enterprise.mievento.domain.service.filters.LocationTypeNameFilterProvider;
 import com.je.enterprise.mievento.domain.service.filters.LocationFilterProvider;
+import com.je.enterprise.mievento.domain.service.filters.LocationTypeNameFilterProvider;
 import com.je.enterprise.mievento.domain.service.filters.TypeFilterProvider;
 import com.je.enterprise.mievento.domain.service.impl.ProviderService;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
 import com.je.enterprise.mievento.domain.transformer.impl.LocationTransformer;
 import com.je.enterprise.mievento.domain.transformer.impl.ProviderTransformer;
-import com.je.enterprise.mievento.domain.utils.SearchKeywordsHelper;
 import com.je.enterprise.mievento.service.request.ProviderTypesRequest;
 import com.je.enterprise.mievento.service.request.SearchLocationTypeRequest;
 

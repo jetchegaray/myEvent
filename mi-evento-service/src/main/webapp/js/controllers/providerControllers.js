@@ -60,11 +60,11 @@ mieventoControllers.controller("ProviderSearchController",["$scope", "$state", "
 			
 			var countryCode = null;
 			if (!angular.isUndefined($scope.search.country)){
-				countryCode = $scope.search.country.name;
+				countryCode = $scope.search.country.code;
 			}
 			var province = null;
 			if (!angular.isUndefined($scope.search.state)){
-				countryCode = $scope.search.state.name;
+				province = $scope.search.province.name;
 			}
 			var city = null;
 			if (!angular.isUndefined($scope.search.city)){
@@ -81,6 +81,7 @@ mieventoControllers.controller("ProviderSearchController",["$scope", "$state", "
 						streetAddress : $scope.search.streetAddress
 					}
 			}	
+			console.log(angular.toJson(searchLocationTypeRequest));
 			applicationContext.setSearchLocationTypeRequest(searchLocationTypeRequest);
 			$state.go("providerListState");
 		}

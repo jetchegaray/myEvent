@@ -28,7 +28,7 @@
 	 			</ui-select>
 			</div>
 			<div class="col-sm-4">
-				<ui-select ng-change="loadCities()" ng-model="search.state" theme="selectize">
+				<ui-select ng-change="loadCities()" ng-model="search.province" theme="selectize">
 	   				<ui-select-match placeholder="{{'advancedSearch.input.state' | translate}}">{{$select.selected.name}}</ui-select-match>
 	   				<ui-select-choices repeat="state in states | filter: $select.search">{{state.name}}</ui-select-choices>
 	 			</ui-select>
