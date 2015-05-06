@@ -2,7 +2,6 @@
 mieventoControllers.controller("providerCarouselCtrl", [ "$scope", function($scope) {
 	$scope.init = function(provider)
 	{
-		// providers -> photos
 		$scope.interval = 5000;
 		$scope.slides = _.map(provider.photos, function(photo){ return { image : photo}; });
 	}
@@ -32,8 +31,10 @@ mieventoControllers.controller("DeleteConfirmationModalController", ["$rootScope
 					var index = list.indexOf(element)
 					list.splice(index, 1);
 					userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
+						if (!angular.isUndefined(element.providerType) && element.providerType.indexOf("Salon") > -1){
+							$rootScope.$broadcast(TAG_PLACE_DELETE_UPDATE);
+						}
 						// si elimina proveedores. actualizo el budget.
-						$rootScope.$broadcast(TAG_PLACE_DELETE_UPDATE);
 						$rootScope.$broadcast(TAG_SUMMARY_VIEW_BUDGET_UPDATE);
 					}, function(error) {
 						applicationContext.getExceptionContext().setDanger(error.data);

@@ -101,7 +101,7 @@ mieventoControllers.controller("SelectedEventController", [ "$scope", "applicati
 } ]);
 
 
-mieventoControllers.controller("SummaryViewEventController", [ "$scope", "applicationContext", function($scope, applicationContext) {
+mieventoControllers.controller("SummaryViewEventController", [ "$scope", "userService","applicationContext", function($scope,userService, applicationContext) {
 	
 	$scope.summaryViewEvent = applicationContext.getEventContext().getSelectedEvent();
 	$scope.summaryViewBudget = applicationContext.getEventContext().getTotalBudgetSelectedEvent();
@@ -114,5 +114,16 @@ mieventoControllers.controller("SummaryViewEventController", [ "$scope", "applic
 	$scope.$on(TAG_SUMMARY_VIEW_BUDGET_UPDATE, function() {
 		$scope.summaryViewBudget = applicationContext.getEventContext().getTotalBudgetSelectedEvent();
 	});
+	
+	//Cuando se borra un proveedor de lugar, el place al que apunta tambien debe borrarse.
+	$scope.$on(TAG_PLACE_DELETE_UPDATE, function() {
+		 applicationContext.getEventContext().deletePlace();
+		 var user = applicationContext.getUserContext().getLoggedUser();
+		 userService.update(user, function() {
+			applicationContext.getUserContext().setLoggedUser(user);
+		 }, function(error) {
+			applicationContext.getExceptionContext().setDanger(error.data);
+		 });
+    });
 } ]);
 
