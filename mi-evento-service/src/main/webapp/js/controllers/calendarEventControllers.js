@@ -19,7 +19,7 @@ mieventoControllers.controller("CalendarEventController", ["$scope", "$state", "
 	    			if (guest.lastName != null){
 	    				name += " "+guest.lastName;
 	    			}
-	    			calendarEvents.push(newTaskEvent(name+" should confirm.", new Date(guest.invitationStatus.updateStatusDate),
+	    			calendarEvents.push(newTaskEvent(name+" debe confirmar asistencia. ", new Date(guest.invitationStatus.updateStatusDate),
 	    					new Date(guest.invitationStatus.updateStatusDate), "Guest Invited confirm this day", 'openSesame'));
 	    		});
 	    	

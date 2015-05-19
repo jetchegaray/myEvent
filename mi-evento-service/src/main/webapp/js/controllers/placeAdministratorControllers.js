@@ -47,7 +47,9 @@ mieventoControllers.controller("PlaceAdministratorController", ["$scope", "$stat
 			calculateSizePxTables();
 			_.each($scope.tables,function(table, index){table.id = index; table.located = true; table.guestAmount = $scope.amountGuests.slice(0, _.size(table.guests));});
 			var guestsSitting = _.chain($scope.tables).pluck("guests").flatten().filter(function(guest){return guest.firstName != null && guest.lastName != null}).value();
-			$scope.guests = _.difference(_.pluck($scope.guests,"email"),_.pluck(guestsSitting,"email"));
+			var guestsMail = _.difference(_.pluck($scope.guests,"email"),_.pluck(guestsSitting,"email"));
+			$scope.guests = _.filter($scope.guests,function(guest){ return _.contains(guestsMail,guest.email) == true;})
+				
 		}
 		
 		

@@ -46,8 +46,6 @@ mieventoControllers.controller("ReviewsEventController", ["$rootScope", "$scope"
 			providerUpdated.reviews.push(providerUpdated.newReview);
 			providerUpdated.estimatedPrice = providerUpdated.newEstimatedPrice;
 			
-			console.log(angular.toJson(providerUpdated));
-			
 			userService.update(user, function() {
 				applicationContext.getUserContext().setLoggedUser(user);
 				$scope.providersWithoutReviews = getProvidersWithoutReviews();
