@@ -86,11 +86,10 @@ mieventoContext.service("eventContext",function(){
 	}
 	
 	this.setTablesPlaceSelectedEvent = function(tables){
-		selectedEvent.place = {
-				 controlContextPlace : {
-					 controlContextTables : tables
-				 } 
-		 }
+		var controlContextPlace = {
+			 controlContextTables : tables
+		 } 
+		selectedEvent.place.controlContextPlace = controlContextPlace;
 	}
 	
 	
