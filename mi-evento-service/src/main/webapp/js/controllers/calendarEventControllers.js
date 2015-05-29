@@ -100,11 +100,10 @@ mieventoControllers.controller("CalendarEventController", ["$scope", "$state", "
 	        
 	        modalInstance.result.then(function (selectedTask) {
 	        	applicationContext.getEventContext().deleteTaskFromEvent(selectedTask);
-	        	var user = applicationContext.getUserContext().getLoggedUser();
 	        	
-	        	userService.update(user, function() {
-					applicationContext.getUserContext().setLoggedUser(user);
-				}, function(error) {
+	        	userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
+	        		calendarEventBuilder();
+	        	}, function(error) {
 					applicationContext.getExceptionContext().setDanger(error.data);
 				});
 	        	
@@ -130,11 +129,10 @@ mieventoControllers.controller("CalendarEventController", ["$scope", "$state", "
 	        
 	        modalInstance.result.then(function (selectedTask) {
 	        	applicationContext.getEventContext().addTaskToEvent(selectedTask);
-	        	var user = applicationContext.getUserContext().getLoggedUser();
-	 
-	        	userService.update(user, function() {
-					applicationContext.getUserContext().setLoggedUser(user);
-				}, function(error) {
+	        
+	        	userService.update(applicationContext.getUserContext().getLoggedUser(), function() {
+	        		calendarEventBuilder();
+	        	}, function(error) {
 					console.log("ERROR");
 					applicationContext.getExceptionContext().setDanger(error.data);
 				});
