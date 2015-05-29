@@ -9,6 +9,9 @@ mieventoControllers.controller("ReviewsPendingController", ["$scope", "applicati
 			var notReviewsSize = _.chain(events).map(function(event){ return event.providers;}).flatten().filter(function(provider){ return (provider.reviews == null || provider.reviews.length == 0);}).size().value();
 			
 			//FIXME
+			if (events == null){
+				return 0;
+			}
 			var count = 0;
 			for (i = 0; i < events.length; i++) { 
 				if (events[i].providers != null && events[i].providers.length != 0){
