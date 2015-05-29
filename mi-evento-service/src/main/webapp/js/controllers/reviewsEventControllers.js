@@ -5,7 +5,31 @@ mieventoControllers.controller("ReviewsPendingController", ["$scope", "applicati
 	
 		getPendingReviews = function(){
 			var events = applicationContext.getUserContext().getLoggedUserEvents();
-			return _.chain(events).map(function(event){ return event.providers;}).flatten().filter(function(provider){ return (provider.reviews == null || provider.reviews.length == 0);}).size().value();
+			var user = applicationContext.getUserContext().getLoggedUser();
+			var notReviewsSize = _.chain(events).map(function(event){ return event.providers;}).flatten().filter(function(provider){ return (provider.reviews == null || provider.reviews.length == 0);}).size().value();
+			
+			//FIXME
+			var count = 0;
+			for (i = 0; i < events.length; i++) { 
+				if (events[i].providers != null && events[i].providers.length != 0){
+					for (j = 0; j < events[i].providers.length; j++) { 
+						var hasMe = false;
+						if (events[i].providers[j].reviews != null && events[i].providers[j].reviews.length != 0){
+							for (k = 0; k < events[i].providers[j].reviews.length; k++) { 
+			
+								if (events[i].providers[j].reviews[k].userName == user.nickName){
+									hasMe = true;
+								}
+							}
+							if (!hasMe){
+								count++;
+							}
+						}
+						
+					}
+				}
+			}
+			return notReviewsSize + count;
 		}
 		
 		$scope.pendingReviews = getPendingReviews();
@@ -22,7 +46,29 @@ mieventoControllers.controller("ReviewsEventController", ["$rootScope", "$scope"
 		
 		getProvidersWithoutReviews = function(){
 			var events = applicationContext.getUserContext().getLoggedUserEvents();
+			var user = applicationContext.getUserContext().getLoggedUser();
 			var providersWRe = _.chain(events).map(function(event){ return event.providers;}).flatten().filter(function(provider){ return (provider.reviews == null || provider.reviews.length == 0);}).value();
+		
+			//FIXME
+			for (i = 0; i < events.length; i++) { 
+				if (events[i].providers != null && events[i].providers.length != 0){
+					for (j = 0; j < events[i].providers.length; j++) { 
+						var hasMe = false;
+						if (events[i].providers[j].reviews != null && events[i].providers[j].reviews.length != 0){
+							for (k = 0; k < events[i].providers[j].reviews.length; k++) { 
+			
+								if (events[i].providers[j].reviews[k].userName == user.nickName){
+									hasMe = true;
+								}
+							}
+							if (!hasMe){
+								providersWRe.push(events[i].providers[j]);
+							}
+						}
+						
+					}
+				}
+			}
 			
 			angular.forEach(providersWRe,function(prov){
 				prov.isReviewOK = false;
