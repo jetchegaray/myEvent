@@ -6,7 +6,7 @@ mieventoControllers.controller("ReviewsPendingController", ["$scope", "applicati
 		getPendingReviews = function(){
 			var events = applicationContext.getUserContext().getLoggedUserEvents();
 			var user = applicationContext.getUserContext().getLoggedUser();
-			var notReviewsSize = _.chain(events).map(function(event){ return event.providers;}).flatten().filter(function(provider){ return (provider.reviews == null || provider.reviews.length == 0);}).size().value();
+			var notReviewsSize = _.chain(events).map(function(event){ return event.providers;}).flatten().filter(function(provider){ if (provider != null){ return (provider.reviews == null || provider.reviews.length == 0);} return false;}).size().value();
 			
 			//FIXME
 			if (events == null){
