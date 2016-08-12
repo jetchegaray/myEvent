@@ -65,7 +65,7 @@ public class FullProvidersServiceData {
 
 	
 	//couta 1k request/day
-//	@Scheduled(cron = "* * */3 * * ?")
+	@Scheduled(cron = "* * */1 * * ?")
 	public void serviceProcessData() {
 		
 		List<DetailPlace> places = this.getData();
@@ -81,7 +81,7 @@ public class FullProvidersServiceData {
 		List<DetailPlace> detailPlaces = Lists.<DetailPlace>newArrayList();
 		Set<String> keyWords = ConditionRuleProviderKeyWord.getKeyWords();
 		
-		CountryCode countrySelected = CountryCode.DM;
+		CountryCode countrySelected = CountryCode.AR;
 		Set<CityEntity> cities = countryService.getAllCitiesInCountry(countrySelected);
 		Set<CityEntity> citiesBlackList = this.getBlackCities();
 		Set<CityEntity> excludedCities = this.providerService.getAllCitiesThereProviders(countrySelected);
