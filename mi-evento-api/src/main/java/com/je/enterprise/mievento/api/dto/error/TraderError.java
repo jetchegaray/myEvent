@@ -1,6 +1,6 @@
 package com.je.enterprise.mievento.api.dto.error;
 
-public class EventError {
+public class TraderError {
 
 	private Long code;
 	private Integer httpStatus;
@@ -8,7 +8,7 @@ public class EventError {
 	private String moreInfoURL;
 	
 	
-	public EventError(Long code, Integer httpStatus, String description,String moreInfoURL) {
+	public TraderError(Long code, Integer httpStatus, String description,String moreInfoURL) {
 		this.code = code;
 		this.httpStatus = httpStatus;
 		this.description = description;

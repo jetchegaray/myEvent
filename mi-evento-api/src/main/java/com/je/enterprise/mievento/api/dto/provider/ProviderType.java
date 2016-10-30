@@ -9,18 +9,21 @@ import com.google.common.collect.Lists;
 
 public enum ProviderType {
 
-	CATERING("Catering"),
-	WEDDING_HALL("Salon de Bodas"),
-	PHOTOGRAPHER("fotografos"),
-	VIDEO("Videos"),
-	DJ("Dj"),
-	BIRTHDAY_HALL("Salon Para Cumpleaños o Fiestas"),
-	BAT_MITZVA_HALL("Salon Bar Mitzvah"),
-	DRESSES_SUITS("Trajes y Vestidos"),
-	RINGS("Alianzas o Anillos De Compromiso"),
-	CAKES("Tortas"),
-	DECORATION("Decoracion"),
-	BARMAN("Barman");
+	ALQUILER("ALQUILER"),
+	AUTOESCUELA("AUTOESCUELA"),
+	AUXILIO("AUXILIO"),
+	CONCESIONARIA("CONCESIONARIA"),
+	ES_SERVICIO("Estacion servicio"),
+	ESTACIONAMIENTO("ESTACIONAMIENTO"),
+	ESTETICA("ESTETICA automotor"),
+	GESTORIA("GESTORIA"),
+	MERCHAND("MERCHANDasing"),
+	PARABRISAS_CRISTALES("PARABRISAS_CRISTALES"),
+	REPUESTOS("REPUESTOS"),
+	REVISACION("REVISACION"),
+	SEGUROS("SEGUROS"),
+	VTV("VTV"),
+	TALLER_MECANICO("TALLER_MECANICO");
 	
 	private String name;
 	
@@ -60,7 +63,7 @@ public enum ProviderType {
 	
 	
 	public static List<ProviderType> getPlaceTypes(){
-		return Arrays.asList(ProviderType.WEDDING_HALL,ProviderType.BIRTHDAY_HALL,ProviderType.BAT_MITZVA_HALL);
+		return Arrays.asList();
 	}
 
 	

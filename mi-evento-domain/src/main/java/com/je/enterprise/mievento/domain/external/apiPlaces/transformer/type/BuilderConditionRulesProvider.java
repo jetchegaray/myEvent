@@ -24,7 +24,7 @@ public class BuilderConditionRulesProvider {
 		rulesByProvider.put(ProviderType.GESTORIA, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAT_12));
         rulesByProvider.put(ProviderType.MERCHAND, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAT_13));
 		rulesByProvider.put(ProviderType.PARABRISAS_CRISTALES, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAT_14));
-		rulesByProvider.put(ProviderType.RESPUESTOS, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAT_17,ConditionRuleProviderKeyWord.AND_CAT_18));
+		rulesByProvider.put(ProviderType.REPUESTOS, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAT_17,ConditionRuleProviderKeyWord.AND_CAT_18));
 		rulesByProvider.put(ProviderType.REVISACION, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAT_5));
 		rulesByProvider.put(ProviderType.SEGUROS, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAT_19));
 		rulesByProvider.put(ProviderType.TALLER_MECANICO, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAT_20));

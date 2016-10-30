@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.je.enterprise.mievento.api.dto.error.EventError;
+import com.je.enterprise.mievento.api.dto.error.TraderError;
 import com.je.enterprise.mievento.domain.exception.HttpEventException;
 import com.je.enterprise.mievento.domain.transformer.impl.EventErrorTransformer;
 
@@ -23,8 +23,8 @@ public class ErrorController {
 	@ExceptionHandler(HttpEventException.class)
 	@ResponseStatus (HttpStatus.INTERNAL_SERVER_ERROR)
 	@ResponseBody
-	public EventError handleException(HttpEventException exception, HttpServletResponse response) {
-		EventError error = this.eventErrorTransformer.transformAndValidateDomainToApi(exception);
+	public TraderError handleException(HttpEventException exception, HttpServletResponse response) {
+		TraderError error = this.eventErrorTransformer.transformAndValidateDomainToApi(exception);
 		return error;
 	}	
 	

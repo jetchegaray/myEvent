@@ -69,6 +69,8 @@ public class FullProvidersServiceData {
 	public void serviceProcessData() {
 		
 		List<DetailPlace> places = this.getData();
+		logger.info("places from GOOGLE API : "+places.size())	;
+		
 		List<ProviderEntity> entities = processData(places);
 		saveData(entities);
 	}
@@ -87,8 +89,11 @@ public class FullProvidersServiceData {
 		Set<CityEntity> excludedCities = this.providerService.getAllCitiesThereProviders(countrySelected);
 		
 		excludedCities.addAll(citiesBlackList);
+		
 		Set<CityEntity> definitiveCities = Sets.difference(cities, excludedCities);
-		List<CityEntity> citiesPartitionInitial = Iterables.partition(definitiveCities, PARTITION_CITIES).iterator().next();
+		logger.info("definitiveCities : "+definitiveCities)	;
+		
+		List<CityEntity> citiesPartitionInitial = Iterables.partition(cities, PARTITION_CITIES).iterator().next();
 		
 		for (CityEntity city : citiesPartitionInitial) {
 				logger.info("CITY PROCESS : "+city.getName())	;
