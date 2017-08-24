@@ -27,7 +27,7 @@ public class ApiPlacesServicies {
 
 	private static final Logger logger = Logger.getLogger(ApiPlacesServicies.class);
 
-	private static final String API_KEY = "AIzaSyDMHF86vmPixcJ2cWbSYOgIPRC8617EY0k";
+	private static final String API_KEY = "AIzaSyBg2-QcPo9pOLKnRXuN2eCn2xNi8oCwaac";
 	private static final String RADIUS = "50000";
 	private static final String SENSOR = BooleanUtils.toStringTrueFalse(Boolean.FALSE);
 	private static final Integer PHOTO_MAX_WIDTH = 1600;
@@ -55,8 +55,6 @@ public class ApiPlacesServicies {
 		ResponseEntity<ResponseContainerObjects<SearchPlace>> response = null;
 		
 		try {
-			logger.info("Rest Template Call to: "+builder.build().toUri().toString());
-			
 			response = restTemplate.exchange(builder.build().toUri(), HttpMethod.GET, entity, new ParameterizedTypeReference<ResponseContainerObjects<SearchPlace>>() {});
 	
 			if (response.getBody().equals(HttpEntity.EMPTY)) {

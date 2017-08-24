@@ -81,7 +81,7 @@ public class UserControllerTest {
 		MappingJackson2HttpMessageConverter converter = (MappingJackson2HttpMessageConverter)webApplicationContext.getBean("jsonMessageConverter");
 		ObjectMapper mapper = converter.getObjectMapper();
 		
-		ProviderTypesRequest request = new ProviderTypesRequest(Arrays.asList(ProviderType.ALQUILER),null);
+		ProviderTypesRequest request = new ProviderTypesRequest(Arrays.asList(ProviderType.PHOTOGRAPHER),null);
 		
 		String json = mapper.writeValueAsString(request);
 		
