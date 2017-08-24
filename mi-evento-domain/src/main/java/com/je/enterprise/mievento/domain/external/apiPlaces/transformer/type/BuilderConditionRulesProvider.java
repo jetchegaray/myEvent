@@ -13,23 +13,19 @@ public class BuilderConditionRulesProvider {
 	public static  Map<ProviderType, List<ConditionRuleProviderKeyWord>> getRules(){
 		Map<ProviderType, List<ConditionRuleProviderKeyWord>> rulesByProvider = Maps.newLinkedHashMap();
 		
-		rulesByProvider.put(ProviderType.ALQUILER, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAT));
-		rulesByProvider.put(ProviderType.AUTOESCUELA, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAT_2));
-		rulesByProvider.put(ProviderType.AUXILIO, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAT_3));
-		rulesByProvider.put(ProviderType.CONCESIONARIA, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAT_6,ConditionRuleProviderKeyWord.AND_CAT_7));
-//		rulesByProvider.put(ProviderType.ENTRETENIMIENTO, Arrays.asList(ConditionRuleProviderKeyWord.AND_DJ));
-		rulesByProvider.put(ProviderType.ES_SERVICIO, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAT_8));
-		rulesByProvider.put(ProviderType.ESTACIONAMIENTO, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAT_9,ConditionRuleProviderKeyWord.AND_CAT_10));
-		rulesByProvider.put(ProviderType.ESTETICA, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAT_11));
-		rulesByProvider.put(ProviderType.GESTORIA, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAT_12));
-        rulesByProvider.put(ProviderType.MERCHAND, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAT_13));
-		rulesByProvider.put(ProviderType.PARABRISAS_CRISTALES, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAT_14));
-		rulesByProvider.put(ProviderType.RESPUESTOS, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAT_17,ConditionRuleProviderKeyWord.AND_CAT_18));
-		rulesByProvider.put(ProviderType.REVISACION, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAT_5));
-		rulesByProvider.put(ProviderType.SEGUROS, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAT_19));
-		rulesByProvider.put(ProviderType.TALLER_MECANICO, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAT_20));
-		rulesByProvider.put(ProviderType.VTV, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAT_21));
-        	
+		rulesByProvider.put(ProviderType.CATERING, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAT,ConditionRuleProviderKeyWord.AND_CAT_2,ConditionRuleProviderKeyWord.AND_CAT_3,ConditionRuleProviderKeyWord.AND_CAT_4,ConditionRuleProviderKeyWord.AND_CAT_5));
+		rulesByProvider.put(ProviderType.WEDDING_HALL, Arrays.asList(ConditionRuleProviderKeyWord.AND_WEDD_HALL,ConditionRuleProviderKeyWord.AND_WEDD_HALL_2,ConditionRuleProviderKeyWord.AND_PARTY_HALL,ConditionRuleProviderKeyWord.AND_EVENT_HALL));
+		rulesByProvider.put(ProviderType.PHOTOGRAPHER, Arrays.asList(ConditionRuleProviderKeyWord.AND_FOT));
+		rulesByProvider.put(ProviderType.VIDEO, Arrays.asList(ConditionRuleProviderKeyWord.AND_VID,ConditionRuleProviderKeyWord.AND_VID_2,ConditionRuleProviderKeyWord.AND_VID_3,ConditionRuleProviderKeyWord.AND_VID_4,ConditionRuleProviderKeyWord.AND_VID_5));
+		rulesByProvider.put(ProviderType.DJ, Arrays.asList(ConditionRuleProviderKeyWord.AND_DJ));
+		rulesByProvider.put(ProviderType.BIRTHDAY_HALL, Arrays.asList(ConditionRuleProviderKeyWord.AND_BIRTH_HALL,ConditionRuleProviderKeyWord.AND_BIRTH_HALL_2,ConditionRuleProviderKeyWord.AND_PARTY_HALL,ConditionRuleProviderKeyWord.AND_PARTY_HALL));
+		rulesByProvider.put(ProviderType.BAT_MITZVA_HALL, Arrays.asList(ConditionRuleProviderKeyWord.AND_BAT_HALL,ConditionRuleProviderKeyWord.AND_BAT_HALL_2,ConditionRuleProviderKeyWord.AND_BAT_HALL_3,ConditionRuleProviderKeyWord.AND_BAT_HALL_4));
+		rulesByProvider.put(ProviderType.DRESSES_SUITS, Arrays.asList(ConditionRuleProviderKeyWord.AND_DRESS,ConditionRuleProviderKeyWord.AND_DRESS_2,ConditionRuleProviderKeyWord.AND_DRESS_3,ConditionRuleProviderKeyWord.AND_SUIT,ConditionRuleProviderKeyWord.AND_SUIT_2,ConditionRuleProviderKeyWord.AND_SUIT_3,ConditionRuleProviderKeyWord.OR_SUIT_4));
+		rulesByProvider.put(ProviderType.RINGS, Arrays.asList(ConditionRuleProviderKeyWord.AND_RINGS,ConditionRuleProviderKeyWord.AND_RINGS_2,ConditionRuleProviderKeyWord.AND_RINGS_3,ConditionRuleProviderKeyWord.AND_ALIZ,ConditionRuleProviderKeyWord.AND_ALIZ_2,ConditionRuleProviderKeyWord.AND_ALIZ_3,ConditionRuleProviderKeyWord.AND_ALIZ_4));
+		rulesByProvider.put(ProviderType.CAKES, Arrays.asList(ConditionRuleProviderKeyWord.AND_CAKE,ConditionRuleProviderKeyWord.AND_CAKE_2,ConditionRuleProviderKeyWord.AND_CAKE_3,ConditionRuleProviderKeyWord.AND_CAKE_4));
+		rulesByProvider.put(ProviderType.BARMAN, Arrays.asList(ConditionRuleProviderKeyWord.AND_BARMAN,ConditionRuleProviderKeyWord.AND_BARMAN_2,ConditionRuleProviderKeyWord.AND_BARMAN_3,ConditionRuleProviderKeyWord.AND_BARMAN_4,ConditionRuleProviderKeyWord.AND_BARMAN_5));
+		rulesByProvider.put(ProviderType.DECORATION, Arrays.asList(ConditionRuleProviderKeyWord.AND_DECORATION,ConditionRuleProviderKeyWord.AND_DECORATION_2,ConditionRuleProviderKeyWord.AND_DECORATION_3));
+			
 		return rulesByProvider;
 	}
 }
