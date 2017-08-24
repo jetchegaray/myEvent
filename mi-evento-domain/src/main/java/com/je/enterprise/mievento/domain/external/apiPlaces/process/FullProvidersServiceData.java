@@ -65,11 +65,7 @@ public class FullProvidersServiceData {
 
 	
 	//couta 1k request/day
-<<<<<<< HEAD
-//	@Scheduled(cron = "* * */1 * * ?")
-=======
 //	@Scheduled(cron = "* * */3 * * ?")
->>>>>>> parent of 3a1fa2f... for autominuto
 	public void serviceProcessData() {
 		
 		List<DetailPlace> places = this.getData();
