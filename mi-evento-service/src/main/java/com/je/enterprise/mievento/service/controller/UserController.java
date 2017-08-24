@@ -47,12 +47,12 @@ public class UserController {
 		
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/email",method = RequestMethod.PUT)
-	public void forgottenPassword(@RequestBody User user) throws HttpEventException{
-		this.userService.sendMail(user.getEmail());
-	}
-	
+//	@ResponseBody
+//	@RequestMapping(value = "/email",method = RequestMethod.PUT)
+//	public void forgottenPassword(@RequestBody User user) throws HttpEventException{
+//		this.userService.sendMail(user.getEmail());
+//	}
+//	
 	
 	@ResponseBody
 	@RequestMapping(value = "/update",method = RequestMethod.POST)

@@ -2,14 +2,12 @@ package com.je.enterprise.mievento.domain.dao;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Id;
-import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Version;
 
 public class BaseEntity{
 	
 	@Id
-	@Indexed(unique = true)
     @Property("id")
     protected ObjectId id;
  

@@ -37,7 +37,7 @@ public class MailServiceIntegrationTest {
 	
 	@Before
 	public void setUp(){
-		mailService = new MailService(mailSender, templateEngine);
+//		mailService = new MailService(mailSender, templateEngine);
 	}
 	
 //	@Test
@@ -48,7 +48,7 @@ public class MailServiceIntegrationTest {
 	@Test
 	public void sendInvitation_testOk(){
 		EventEntity eventEntity = new EventEntity("EventoTest",DateTime.now().toDate(),DateTime.now().plusHours(5).toDate(),null,null,null,EventType.COMMON_EVENT);
-		mailService.sendInvitation(eventEntity, "aa@gmail.com", "etchegarayjavier@gmail.com",UUID.randomUUID().toString());
+//		mailService.sendInvitation(eventEntity, "aa@gmail.com", "etchegarayjavier@gmail.com",UUID.randomUUID().toString());
 	}
 	
 	@Ignore

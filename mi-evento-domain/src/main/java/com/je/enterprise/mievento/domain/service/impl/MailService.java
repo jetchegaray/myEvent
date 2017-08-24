@@ -32,79 +32,79 @@ public class MailService {
 	@Value("${urlhost}")
 	private String urlHost;
 	
-	@Autowired
-	public MailService(JavaMailSenderImpl mailSender,TemplateEngine templateEngine) {
-		this.mailSender = mailSender;
-		this.templateEngine = templateEngine;
-	}
+//	@Autowired
+//	public MailService(JavaMailSenderImpl mailSender,TemplateEngine templateEngine) {
+//		this.mailSender = mailSender;
+//		this.templateEngine = templateEngine;
+//	}
 
 
-	public void sendPassword(UserEntity userEntity) {
-		try {
-			final Context ctx = new Context(Locale.ROOT);
-			ctx.setVariable("newPassword", userEntity.getPassword());
-	//		ctx.setVariable("imageResourceName", "");
-			  
-			final MimeMessage mimeMessage = this.mailSender.createMimeMessage();
-			final MimeMessageHelper message = new MimeMessageHelper(mimeMessage,true, "UTF-8"); // true = multipart
-			message.setSubject("Mi-Evento . New Password");
-			message.setFrom("etchegarayjavier@gmail.com");
-			message.setTo(userEntity.getEmail());
-			 
-			final String htmlContent = this.templateEngine.process("forgottPasswordTemplate.html", ctx);
-			message.setText(htmlContent,true); // true = isHtml
-			 
-			this.mailSender.send(mimeMessage);
-		} catch (MessagingException ex) {
-			logger.error("The mail Fail !!." ,ex);
-		}
-	}
-
-
-	public void sendInvitation(EventEntity eventEntity, String userEmail,String guestEmail,String key)  {
-		try {
-			String dayPattern = "dd-MM-yyyy";
-			String hourPattern = "HH:mm";
-			DateTime initialDate = new DateTime(eventEntity.getInitialDate());
-			DateTime finalDate = new DateTime(eventEntity.getFinalDate());
-			
-			final Context ctx = new Context(Locale.ROOT);
-			ctx.setVariable("eventName", eventEntity.getName());
-			ctx.setVariable("initialDate", initialDate.toString(dayPattern));
-			ctx.setVariable("initialHour", initialDate.toString(hourPattern));
-			ctx.setVariable("duration", Hours.hoursBetween(initialDate, finalDate).getHours());
-			ctx.setVariable("key",key);
-			ctx.setVariable("urlConfirm", this.urlHost+"guest/confirmInvitation/"+key);
-			ctx.setVariable("urlReject", this.urlHost+"guest/rejectInvitation/"+key);
-			
-			
-			if (EventType.withPosiblesPlaces().contains(eventEntity.getType()) && ((EventWithPlaceAndPresentEntity)eventEntity).getPlace() != null){
-				PlaceEntity placeEntity = ((EventWithPlaceAndPresentEntity)eventEntity).getPlace();
-				ctx.setVariable("placeName", placeEntity.getBusinessName());
-				ctx.setVariable("placeAddress", placeEntity.getLocation().toString());
-			}else{
-				ctx.setVariable("placeName", "No hay lugar confirmado aún");
-				ctx.setVariable("placeAddress", "");
-			}
-			ctx.setVariable("userEmail", userEmail);
-			
-			
-			final MimeMessage mimeMessage = this.mailSender.createMimeMessage();
-			final MimeMessageHelper message = new MimeMessageHelper(mimeMessage,true, "UTF-8"); // true = multipart
-			message.setSubject("Mi-Evento . Has sido invitado a un evento !!");
-			message.setFrom("etchegarayjavier@gmail.com");
-			message.setTo(guestEmail);
-			 
-			final String htmlContent = this.templateEngine.process("invitationTemplate.html", ctx);
-			message.setText(htmlContent,true); // true = isHtml
-			 
-			this.mailSender.send(mimeMessage);
-			
-		} catch (MessagingException ex) {
-			throw new FailedSendInvitationException(guestEmail);
-		}
-		
-	}
+//	public void sendPassword(UserEntity userEntity) {
+//		try {
+//			final Context ctx = new Context(Locale.ROOT);
+//			ctx.setVariable("newPassword", userEntity.getPassword());
+//	//		ctx.setVariable("imageResourceName", "");
+//			  
+//			final MimeMessage mimeMessage = this.mailSender.createMimeMessage();
+//			final MimeMessageHelper message = new MimeMessageHelper(mimeMessage,true, "UTF-8"); // true = multipart
+//			message.setSubject("Mi-Evento . New Password");
+//			message.setFrom("etchegarayjavier@gmail.com");
+//			message.setTo(userEntity.getEmail());
+//			 
+//			final String htmlContent = this.templateEngine.process("forgottPasswordTemplate.html", ctx);
+//			message.setText(htmlContent,true); // true = isHtml
+//			 
+//			this.mailSender.send(mimeMessage);
+//		} catch (MessagingException ex) {
+//			logger.error("The mail Fail !!." ,ex);
+//		}
+//	}
+//
+//
+//	public void sendInvitation(EventEntity eventEntity, String userEmail,String guestEmail,String key)  {
+//		try {
+//			String dayPattern = "dd-MM-yyyy";
+//			String hourPattern = "HH:mm";
+//			DateTime initialDate = new DateTime(eventEntity.getInitialDate());
+//			DateTime finalDate = new DateTime(eventEntity.getFinalDate());
+//			
+//			final Context ctx = new Context(Locale.ROOT);
+//			ctx.setVariable("eventName", eventEntity.getName());
+//			ctx.setVariable("initialDate", initialDate.toString(dayPattern));
+//			ctx.setVariable("initialHour", initialDate.toString(hourPattern));
+//			ctx.setVariable("duration", Hours.hoursBetween(initialDate, finalDate).getHours());
+//			ctx.setVariable("key",key);
+//			ctx.setVariable("urlConfirm", this.urlHost+"guest/confirmInvitation/"+key);
+//			ctx.setVariable("urlReject", this.urlHost+"guest/rejectInvitation/"+key);
+//			
+//			
+//			if (EventType.withPosiblesPlaces().contains(eventEntity.getType()) && ((EventWithPlaceAndPresentEntity)eventEntity).getPlace() != null){
+//				PlaceEntity placeEntity = ((EventWithPlaceAndPresentEntity)eventEntity).getPlace();
+//				ctx.setVariable("placeName", placeEntity.getBusinessName());
+//				ctx.setVariable("placeAddress", placeEntity.getLocation().toString());
+//			}else{
+//				ctx.setVariable("placeName", "No hay lugar confirmado aún");
+//				ctx.setVariable("placeAddress", "");
+//			}
+//			ctx.setVariable("userEmail", userEmail);
+//			
+//			
+//			final MimeMessage mimeMessage = this.mailSender.createMimeMessage();
+//			final MimeMessageHelper message = new MimeMessageHelper(mimeMessage,true, "UTF-8"); // true = multipart
+//			message.setSubject("Mi-Evento . Has sido invitado a un evento !!");
+//			message.setFrom("etchegarayjavier@gmail.com");
+//			message.setTo(guestEmail);
+//			 
+//			final String htmlContent = this.templateEngine.process("invitationTemplate.html", ctx);
+//			message.setText(htmlContent,true); // true = isHtml
+//			 
+//			this.mailSender.send(mimeMessage);
+//			
+//		} catch (MessagingException ex) {
+//			throw new FailedSendInvitationException(guestEmail);
+//		}
+//		
+//	}
 
 	
 }

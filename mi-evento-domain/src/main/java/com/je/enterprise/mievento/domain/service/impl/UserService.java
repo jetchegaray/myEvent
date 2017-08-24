@@ -93,15 +93,15 @@ public class UserService {
 	
 	}
 
-	public void sendMail(String email) {
-		UserEntity userEntity = this.findByMail(email);
-
-		String newPassword = RandomStringUtils.randomAlphanumeric(12);
-		userEntity.setPassword(newPassword);
-		userEntity.setActivate(false);
-		this.update(userEntity);
-
-		this.mailService.sendPassword(userEntity);
-	}
+//	public void sendMail(String email) {
+//		UserEntity userEntity = this.findByMail(email);
+//
+//		String newPassword = RandomStringUtils.randomAlphanumeric(12);
+//		userEntity.setPassword(newPassword);
+//		userEntity.setActivate(false);
+//		this.update(userEntity);
+//
+//		this.mailService.sendPassword(userEntity);
+//	}
 
 }

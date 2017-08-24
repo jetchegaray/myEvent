@@ -41,7 +41,7 @@ public class EventService {
 		
 		try{
 			UUID key = UUID.randomUUID();
-			mailService.sendInvitation(eventEntity, userEmail, guestEmail,key.toString());
+//			mailService.sendInvitation(eventEntity, userEmail, guestEmail,key.toString());
 			crudHelperInvitation.update(new InvitationEntity(eventEntity.getName(), userEmail, guestEmail, key.toString()));
 		}catch(HttpEventException exception){
 			throw exception;
