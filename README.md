@@ -3,7 +3,7 @@
 MiParty is a project that you could find all your necessities for you weeding, birthday party, friend party, martz mitzvah ..  whatever party you want . you would have to choose your calendar, send invitations , organize invitations, organize guesses status invitations, pick a place to do your party, customize your tables , places of your guesses at the tables, manage your budget, pick your providers, your gifts and much more !
 
 
-**features **
+**Features**
 
 You can search a different providers of all your needs. this Beta version loads all the providers from Google places by Rest API 
 you can see a demo here https://youtu.be/5QKZjFuhEPs. 
@@ -19,7 +19,7 @@ you can see a demo here https://youtu.be/5QKZjFuhEPs.
    - Locales supported en_US, es_ES, pt_BR
 
 
-**how to run it** 
+**How to run it** 
 
    -  go to https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/main/java/com/je/enterprise/mievento/domain/external/apiPlaces/services/ApiPlacesServicies.java
    switch the value API_KEY for you api key of google places.
@@ -42,10 +42,9 @@ you can see a demo here https://youtu.be/5QKZjFuhEPs.
    - an background process will start to download all the providers from google places by type , the class that controls over that is https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/main/java/com/je/enterprise/mievento/domain/external/apiPlaces/process/FullProvidersServiceData.java
 
     
-**
-How was it implemented **
+**How was it implemented**
 
-**Arquitecture **
+**Arquitecture**
 
 This project uses MVC pattern using spring-boot & Java, is was splitted up in three modules, domain, api and service, using maven like I did, with a central xml config which keeps all the versions an dependencies in one place and then heritage form the rest of the modules just the dependencies that I need, you can upload this modules to your local company repository independently of each other. 
 
@@ -59,7 +58,7 @@ Define the POJOS for model objects, and DAO objects to access the database, it c
 Define the controllers represented by the front controller pattern of springs, it manages the security of the API, and it uses the API objects like an response of the controllers and the domain module to call the next layer in the application. 
 Web Application is within this module. The Deployable module with angularJS, bower, and spring MVC with thymeleaf
 
-**Testing **
+**Testing**
 
    Junit & Integration Tests::
       Black box and white box :::
@@ -97,7 +96,7 @@ Web Application is within this module. The Deployable module with angularJS, bow
    - GeoNames for lat and long to allow mongo execute its radial search. https://www.geonames.org/export/ 
    - GooglePlaces for populate the database https://developers.google.com/maps/documentation/places/web-service/overview  
 
-**Important files :: **
+**Important files ::**
    - Configurations of Beans for dependency Injection -->  https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/main/java/com/je/enterprise/mievento/domain/configuration 
    - Customize Exceptions -->  https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/main/java/com/je/enterprise/mievento/domain/exception
    - customize annotations for customize exceptions  --->  https://github.com/jetchegaray/myEvent/blob/master/mi-evento-service/src/main/java/com/je/enterprise/mievento/service/error/AnnotatedExceptionResolver.java 
