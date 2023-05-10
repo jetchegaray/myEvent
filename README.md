@@ -15,6 +15,7 @@ you can see a demo here https://youtu.be/5QKZjFuhEPs.
    - ( Beta ) Customize the phisical place to set up your tables and where your guess will be seated.  
    - Manage Task for your party
    - Calendar for your party
+   - Locales supported en_US, es_ES, pt_BR
 
 
 **how to run it** 
