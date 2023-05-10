@@ -68,9 +68,8 @@ Testing
       -  https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/integration-test/java/com/je/enterprise/mievento/domain/service/AllEntitiesServiceIntegrationTest.java
       -  https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/integration-test/java/com/je/enterprise/mievento/domain/service/UserServiceIntegrationTest.java
       -  https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/integration-test/java/com/je/enterprise/mievento/domain/LoadContextTest.java
-      -  https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/integration-test/java/com/je/enterprise/mievento/domain/MongoClientUtilsTest.java
-         
-      -  https://github.com/jetchegaray/myEvent/blob/master/mi-evento-service/src/test/java/com/je/enterprise/mievento/service/controller/UserControllerTest.java
+      -  https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/integration-test/java/com/je/enterprise/mievento/domain/MongoClientUtilsTest.java 
+      - https://github.com/jetchegaray/myEvent/blob/master/mi-evento-service/src/test/java/com/je/enterprise/mievento/service/controller/UserControllerTest.java
       - config file for integration tests  https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/main/resources/com/je/enterprise/mievento/test/test-domain-context.xml 
          
          
