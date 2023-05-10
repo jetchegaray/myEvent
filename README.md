@@ -1,6 +1,6 @@
 **Intro**
 
-MiEvent is a project that you could find all your necessities for you weeding, birthday party, friend party, martz mitzvah ..  whatever party you want . you would have to choose your calendar, send invitations , organize invitations, organize guesses status invitations, pick a place to do your party, customize your tables , places of your guesses at the tables, manage your budget, pick your providers, your gifts and much more !
+MiParty is a project that you could find all your necessities for you weeding, birthday party, friend party, martz mitzvah ..  whatever party you want . you would have to choose your calendar, send invitations , organize invitations, organize guesses status invitations, pick a place to do your party, customize your tables , places of your guesses at the tables, manage your budget, pick your providers, your gifts and much more !
 
 
 **features **
@@ -8,12 +8,13 @@ MiEvent is a project that you could find all your necessities for you weeding, b
 You can search a different providers of all your needs. this Beta version loads all the providers from Google places by Rest API 
 you can see a demo here https://youtu.be/5QKZjFuhEPs. 
 
-   - Look for an specific country, province, town or city, different providers, like catering, place, video makers, bakers, etc
+   - Look for an specific country, province, town or city, different providers, like catering, place, video makers, DJs, bakers, etc
    - Add your guess and send invitations
    - Set up a place where you want to receive your gifts
    - Control bugdet with alerts and recommendations
    - ( Beta ) Customize the phisical place to set up your tables and where your guess will be seated.  
-
+   - Manage Task for your party
+   - Calendar for your party
 
 
 **how to run it** 
