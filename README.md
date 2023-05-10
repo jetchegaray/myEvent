@@ -93,7 +93,7 @@ Web Application is within this module. The Deployable module with angularJS, bow
    - slf4j for logging 
    - jodaTime & BigDecimal to handle prices and dates
    - javax.mail 
-   - GeoNames for lat and long to allow mongo execute its radial search. https://www.geonames.org/export/ 
+   - GeoNames for lat and long to allow mongo execute its geospatial queries. https://www.geonames.org/export/ 
    - GooglePlaces for populate the database https://developers.google.com/maps/documentation/places/web-service/overview  
 
 **Important files ::**
