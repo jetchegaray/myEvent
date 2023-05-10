@@ -12,7 +12,7 @@ you can see a demo here https://youtu.be/5QKZjFuhEPs.
    - Add your guess and send invitations
    - Set up a place where you want to receive your gifts
    - Control bugdet with alerts and recommendations
-   - ( Beta ) Customize the phisical place to set up your tables and where your guess will be seated.  
+   - ( Beta ) Customize the phisical place to set up your tables and where your guess will be seated. Drag a drop your guests into their tables. Next feature could be give the possibility to add the map of the place.   
    - Manage Task for your party
    - Calendar for your party
    - Leave reviews to all your providers, linked to google places
