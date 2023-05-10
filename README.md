@@ -8,13 +8,14 @@ MiParty is a project that you could find all your necessities for you weeding, b
 You can search a different providers of all your needs. this Beta version loads all the providers from Google places by Rest API 
 you can see a demo here https://youtu.be/5QKZjFuhEPs. 
 
-   - Look for an specific country, province, town or city, different providers, like catering, place, video makers, DJs, bakers, etc
+   - Search for an specific country, province, town or city, different providers, like catering, place, video makers, DJs, bakers, etc. 
    - Add your guess and send invitations
    - Set up a place where you want to receive your gifts
    - Control bugdet with alerts and recommendations
    - ( Beta ) Customize the phisical place to set up your tables and where your guess will be seated.  
    - Manage Task for your party
    - Calendar for your party
+   - Leave reviews to all your providers, linked to google places
    - Locales supported en_US, es_ES, pt_BR
 
 
