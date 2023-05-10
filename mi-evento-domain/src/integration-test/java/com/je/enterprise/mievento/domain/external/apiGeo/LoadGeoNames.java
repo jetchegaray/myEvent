@@ -22,6 +22,7 @@ import com.je.enterprise.mievento.domain.external.apiGeo.transformer.CityGeoExte
 import com.je.enterprise.mievento.domain.external.apiGeo.transformer.StateGeoExternalTransformer;
 import com.je.enterprise.mievento.domain.transformer.TransformerList;
 
+@RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration(locations = {"classpath:com/je/enterprise/mievento/test/test-domain-context.xml"})
 public class LoadGeoNames extends AbstractJUnit4SpringContextTests{
 	
@@ -31,7 +32,7 @@ public class LoadGeoNames extends AbstractJUnit4SpringContextTests{
 	private StateGeoExternalTransformer stateGeoTransformer;
 	@Autowired
 	private CityGeoExternalTransformer cityGeoTransformer;
-	@Autowired
+	@AutowiredcountriesToSave
 	private CountryDAO countryDAO;
 	
 	private TransformerList<CityEntity, GEOExternalWrapper> citiesGeoTransformer;
