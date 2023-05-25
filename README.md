@@ -1,12 +1,48 @@
-**Intro**
+## Table of Contents
 
-MiParty is a project that you could find all your necessities for you weeding, birthday party, friend party, martz mitzvah ..  whatever party you want . you would have to choose your calendar, send invitations , organize invitations, organize guesses status invitations, pick a place to do your party, customize your tables , places of your guesses at the tables, manage your budget, pick your providers, your gifts and much more !
+1. [Technology Stack](#Technology-Stack)
+1. [Description](#Description)
+2. [Demo](#Demo)
+3. [Environment variables](#Environment-variables)
+4. [Instalation & Run](#Instalation-&-Run)
+5. [Brief explanation of Arquitecture](#Brief-explanation-of-Arquitecture)
+      - [API module](#API-module)
+      - [Domain module](#Damain-module)
+      - [Service module](#Service-module)
+7. [Testing](#Testing)
 
 
-**Features**
+## Technology Stack
+ - Java 8
+ - Maven 3.2
+ - mongodb 3.2
+ - morphia 1.2.2
+ - spring 3.2.3.RELEASE 
+ - Spring secutiry 3.2.3.RELEASE
+ - thymeleaf 2.1.3
+ - bower 1.6
+ - angular 1.2
+ - angular-dragdrop 1.0.1
+ - bootstrap 3.1.0
+ - flapdoodle 1.45
+ - slf4j 1.7.5
+ - guava 14.0.1
+
+## Description
+
+MyEvent is a project that you could find all your necessities for you weeding, birthday party, friend party, martz mitzvah ..  whatever party you want . you will have to choose a day in your calendar for you next event and 
+   - pick your providers
+   - send invitations 
+   - organize invitations and following status
+   - organize guesses
+   - pick a place to do your party
+   - customize your tables 
+   - places of your guesses at the tables
+   - manage your budget
+   - your gifts and much more !
+
 
 You can search a different providers of all your needs. this Beta version loads all the providers from Google places by Rest API 
-you can see a demo here [ https://youtu.be/5QKZjFuhEPs. ](https://www.youtube.com/watch?v=5QKZjFuhEPs)
 
    - Search for an specific country, province, town or city, different providers, like catering, place, video makers, DJs, bakers, etc. 
    - Add your guess and send invitations
@@ -18,85 +54,102 @@ you can see a demo here [ https://youtu.be/5QKZjFuhEPs. ](https://www.youtube.co
    - Leave reviews to all your providers, linked to google places
    - Locales supported en_US, es_ES, pt_BR
 
+## Demo
 
-**How to run it** 
+you can see a demo here [ https://youtu.be/5QKZjFuhEPs. ](https://www.youtube.com/watch?v=5QKZjFuhEPs)
 
-   -  go to https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/main/java/com/je/enterprise/mievento/domain/external/apiPlaces/services/ApiPlacesServicies.java
+## Environment variables
+
+   local or dev this [env file](#https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/main/resources/com/je/enterprise/mievento/mongodb/dataSource-dev.properties)
+   ```
+      user=
+      pass=
+      host=localhost
+      port=27017
+      db=mi-evento
+
+      urlhost=localhost:8080/mievento/
+   ```
+   
+    prod this [env file](#https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/main/resources/com/je/enterprise/mievento/mongodb/dataSource-prod.properties
+)
+   ```
+      user=javimetal
+      pass=XXXXXX
+      host=XXXXX
+      port=51740
+      db=XXXX
+
+      urlhost=mi-evento.herokuapp.com/mievento/
+   ```
+   -  go to [API google Places](#https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/main/java/com/je/enterprise/mievento/domain/external/apiPlaces/services/ApiPlacesServicies.java)
    switch the value API_KEY for you api key of google places.
    
-   - go to https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/main/java/com/je/enterprise/mievento/domain/external/apiGeo/services/GEOServicies.java
+   - go to [GeoNames external API](#https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/main/java/com/je/enterprise/mievento/domain/external/apiGeo/services/GEOServicies.java)
     change the username . created at https://www.geonames.org/ 
 
-   - have a mongo db locally running . mi-evento is the default DB but you can change it at 
-   https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/main/resources/com/je/enterprise/mievento/mongodb/dataSource-dev.properties
+  
+## Instalation & Run
 
    - run this https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/integration-test/java/com/je/enterprise/mievento/domain/external/apiGeo/LoadGeoNames.java
     to create all the cities into the database. 
 
    - run mvn clean install at the project root 
 
-   - go to mi-evento-service and run mvn spring-boot:run -Drun.jvmArguments="-Denvironment=dev"  for you local or 
-    mvn spring-boot:run -Drun.jvmArguments="-Denvironment=prod" you might want to create a DB for prod and hitting from
-    https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/main/resources/com/je/enterprise/mievento/mongodb/dataSource-prod.properties
+   - go to mi-evento-service and run 
+      
+      local or dev
+      
+      ```
+      mvn spring-boot:run -Drun.jvmArguments="-Denvironment=dev"
+     ``` 
+     
+     Prod 
     
-   - an background process will start to download all the providers from google places by type , the class that controls over that is https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/main/java/com/je/enterprise/mievento/domain/external/apiPlaces/process/FullProvidersServiceData.java
+    ```
+      mvn spring-boot:run -Drun.jvmArguments="-Denvironment=prod" 
+    ```
+    
+   - You shuld run a background process will start to download all the providers from google places by type , the class that controls over that is [this one](#https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/main/java/com/je/enterprise/mievento/domain/external/apiPlaces/process/FullProvidersServiceData.java)
 
     
-**How was it implemented**
-
-**Arquitecture**
+## Brief explanation of Arquitecture
 
 This project uses MVC pattern using spring-boot & Java, is was splitted up in three modules, domain, api and service, using maven like I did, with a central xml config which keeps all the versions an dependencies in one place and then heritage form the rest of the modules just the dependencies that I need, you can upload this modules to your local company repository independently of each other. 
 
-*API Module*  
+### API Module  
 Expose my API, this Objects or contracts for the API, it is being used by the controllers when I need to send objects back to the client as a response of a request. If some External app should consume my controller, they will need import this module. to know about the DTO api objects or contract. 
 
-*API Domain*
+### Domain Module
 Define the POJOS for model objects, and DAO objects to access the database, it contains the communication to ORM morphia too. Transfomer generic funcionality to transform a DTO object to an DAO object 
 
-*API Service*
+### Service Module
 Define the controllers represented by the front controller pattern of springs, it manages the security of the API, and it uses the API objects like an response of the controllers and the domain module to call the next layer in the application. 
 Web Application is within this module. The Deployable module with angularJS, bower, and spring MVC with thymeleaf
 
-**Testing**
+## Testing
 
    Junit & Integration Tests::
+   
       Black box and white box :::
-      -  https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/test/java/com/je/enterprise/mievento/domain/transformer/impl/TransformersImplTest.java
-      -  https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/test/java/com/je/enterprise/mievento/domain/service/impl/ProviderServiceTest.java
-      -  https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/test/java/com/je/enterprise/mievento/domain/external/apiPlaces/process/CitiesWithNoResultTest.java
-      -  https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/test/java/com/je/enterprise/mievento/domain/external/apiPlaces/process/SearchKeywordsHelperTest.java
-      -  https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/integration-test/java/com/je/enterprise/mievento/domain/external/apiGeo/LoadGeoNames.java
-      -  https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/integration-test/java/com/je/enterprise/mievento/domain/external/apiPlaces/process/FullProvidersServiceDataTest.java
-      -  https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/integration-test/java/com/je/enterprise/mievento/domain/external/apiPlaces/services/ApiPlacesIntegrationTest.java
-      -  https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/integration-test/java/com/je/enterprise/mievento/domain/service/MailServiceIntegrationTest.java
-      -  https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/integration-test/java/com/je/enterprise/mievento/domain/service/AllEntitiesServiceIntegrationTest.java
-      -  https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/integration-test/java/com/je/enterprise/mievento/domain/service/UserServiceIntegrationTest.java
-      -  https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/integration-test/java/com/je/enterprise/mievento/domain/LoadContextTest.java
-      -  https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/integration-test/java/com/je/enterprise/mievento/domain/MongoClientUtilsTest.java 
-      - https://github.com/jetchegaray/myEvent/blob/master/mi-evento-service/src/test/java/com/je/enterprise/mievento/service/controller/UserControllerTest.java
-      - config file for integration tests  https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/main/resources/com/je/enterprise/mievento/test/test-domain-context.xml 
+      -  [TransformersImplTest](#https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/test/java/com/je/enterprise/mievento/domain/transformer/impl/TransformersImplTest.java)
+      -  [ProviderServiceTest](#https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/test/java/com/je/enterprise/mievento/domain/service/impl/ProviderServiceTest.java)
+      -  [CitiesWithNoResultTest](#https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/test/java/com/je/enterprise/mievento/domain/external/apiPlaces/process/CitiesWithNoResultTest.java)
+      -  [SearchKeywordsHelperTest](#https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/test/java/com/je/enterprise/mievento/domain/external/apiPlaces/process/SearchKeywordsHelperTest.java)
+      -  [LoadGeoNames](#https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/integration-test/java/com/je/enterprise/mievento/domain/external/apiGeo/LoadGeoNames.java)
+      -  [FullProvidersServiceDataTest](#https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/integration-test/java/com/je/enterprise/mievento/domain/external/apiPlaces/process/FullProvidersServiceDataTest.java)
+      -  [ApiPlacesIntegrationTest](#https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/integration-test/java/com/je/enterprise/mievento/domain/external/apiPlaces/services/ApiPlacesIntegrationTest.java)
+      -  [MailServiceIntegrationTest](#https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/integration-test/java/com/je/enterprise/mievento/domain/service/MailServiceIntegrationTest.java)
+      -  [AllEntitiesServiceIntegrationTest](#https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/integration-test/java/com/je/enterprise/mievento/domain/service/AllEntitiesServiceIntegrationTest.java)
+      -  [UserServiceIntegrationTest](#https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/integration-test/java/com/je/enterprise/mievento/domain/service/UserServiceIntegrationTest.java)
+      -  [LoadContextTest](#https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/integration-test/java/com/je/enterprise/mievento/domain/LoadContextTest.java)
+      -  [MongoClientUtilsTest](#https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/integration-test/java/com/je/enterprise/mievento/domain/MongoClientUtilsTest.java) 
+      - [UserControllerTest](#https://github.com/jetchegaray/myEvent/blob/master/mi-evento-service/src/test/java/com/je/enterprise/mievento/service/controller/UserControllerTest.java)
+      - [config file for integration tests](# https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/main/resources/com/je/enterprise/mievento/test/test-domain-context.xml) 
          
-         
-       
-**Technology Stack ::** 
-
-   - Java 
-   - Spring boot 
-   - MongoDB
-   - Morphia DB
-   - Spring secutiry
-   - Spring MVC to render front & thymeleaf
-   - AngularJS, Bootstrap & bower
-   - Mockito y hamcrest for testing
-   - flapdoodle for embebed mongo database in memory
-   - slf4j for logging 
-   - jodaTime & BigDecimal to handle prices and dates
-   - javax.mail 
-   - GeoNames for lat and long to allow mongo execute its geospatial queries. https://www.geonames.org/export/ 
-   - GooglePlaces for populate the database https://developers.google.com/maps/documentation/places/web-service/overview  
 
 **Important files ::**
+
    - Configurations of Beans for dependency Injection -->  https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/main/java/com/je/enterprise/mievento/domain/configuration 
    - Customize Exceptions -->  https://github.com/jetchegaray/myEvent/blob/master/mi-evento-domain/src/main/java/com/je/enterprise/mievento/domain/exception
    - customize annotations for customize exceptions  --->  https://github.com/jetchegaray/myEvent/blob/master/mi-evento-service/src/main/java/com/je/enterprise/mievento/service/error/AnnotatedExceptionResolver.java 
