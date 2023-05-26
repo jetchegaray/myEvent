@@ -120,6 +120,54 @@ This project uses MVC pattern using spring-boot & Java, is was splitted up in th
 ### API Module  
 Expose my API, this Objects or contracts for the API, it is being used by the controllers when I need to send objects back to the client as a response of a request. If some External app should consume my controller, they will need import this module. to know about the DTO api objects or contract. 
 
+ ```
+ .
+├── .env (Make sure to create this file locally and fill the env vars)
+├── pom.xml (pom inherits version from general pom at the root of the app)
+├── src
+│   ├── country (country objects)
+│   │   ├── City 
+│   │   ├── Country 
+│   │   └── State 
+│   ├── Error 
+│   │   └── EventError (Class to be mapped from EventErrorTransformer to be exposed to the outside)
+│   ├── Event (All the entities related to Event, mapped by the right transformer in the domain)
+│   │   ├── EventWithPlaces
+│   │   │    ├── EventWithPlaceANdPressent (it is a full event with all the entities inside to use it for the present screen)
+│   │   |    └── Presents 
+│   │   ├── Event
+│   │   ├── EventType 
+│   │   ├── Guest 
+│   │   ├── GuestStatusType
+│   │   ├── InvitationStatus 
+│   │   ├── Person
+│   │   └── Task
+│   ├── Location 
+│   │   ├── CommercialLocation (extends from location adding the name of the place)
+│   │   ├── CountryCode
+│   │   ├── Location (proper location, composed with streetAdress and countryCode and lat and lng)
+│   │   └── StreetAddress
+│   ├──  
+
+
+
+
+│   │   │    ├── fullCountry (Manages the comunication with the Fullcountry Firebase collection called FullCountry, country, states, cities)
+│   │   │    ├── geonames (Manages the call the GeoNames API using Axios)
+│   │   │    ├── province (Manages the call to the province and cities per country)
+│   │   │    ├── zip (Manages the same functionality than country and fullCountry but returning an snapshot of the data)
+│   │   │    └── country (Manages the comunication with the country Firebase collection called Country, second layer)
+│   │   │
+│   │   ├── entities (Contains all the entities to manage the DAO and DTO objects) 
+│   │   ├── Intefaces (Manage the behaviour of objects when it is called geonames external API)
+│   │   └── DTO (FullCountryDTO to map to the database country-states-city)
+│   │ 
+│   ├── interceptors (interceptos to manage logging and empty responses)   
+│   └── logger (module and logger service)
+└── test (Contains the end-to-end (e2e) tests)
+```
+
+
 ### Domain Module
 Define the POJOS for model objects, and DAO objects to access the database, it contains the communication to ORM morphia too. Transfomer generic funcionality to transform a DTO object to an DAO object 
 
