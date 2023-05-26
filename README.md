@@ -258,78 +258,34 @@ Web Application is within this module. The Deployable module with angularJS, bow
 
 ├── pom.xml (pom inherits version from general pom at the root of the app)
 ├── src
-│   ├── IntegrationTest (country objects)
-│   │   ├── MongoClientUtilsTest.java (Perform a tests to the DB using flapdoodle in memory) 
-│   │   ├── External
-│   │   │    ├── API GEO (LoadGeoNames to load all the countries and its states and its cities from API of Geonames into the DB)
-│   │   │    └── API Places (Test the API and the entities coming from the external endpoint)
-│   │   ├── Service 
-│   │   │   ├── AllEntitiesServiceIntegrationTestjava (test save entities structures into the DB)
-│   │   │   ├── MailServiceIntegrationTest.java (test the emailservice better a play than load the entire server to send an email for test)
-│   │   │   └── UserServiceIntegration.java (Testing the UserService e2e with mongo in memory)
-│   ├── Main (Contains all the services, repositories, transformers from DTO-DAO, etc)
-│   │   ├── Configuration (all the @Configurations for beans creators)
-│   │   │    ├── ConnectionConfiguration.java (exposes the RestTemplate to e used by the httpservice)
-│   │   |    ├── CRUDHelperConfiguration.java (conf for CRUDHelper) 
-│   │   |    ├── MongoConfiguration.java 
-│   │   |    ├── ObjectMapperConfiguration.java (Object mapper for Json Serialization )
-│   │   │    └── TransformerConfiguration.java (creates all the transformers and its dependecies)
-│   │   ├── Context (manage the locale for the website)
-│   │   ├── DAO (All the objects for represents the morphia objects of each collection on the DB)
-│   │   │    ├── GenericDAO.java (custom representation of the BasicDAO of morphia)
-│   │   │    ├── BaseEntity.java (the father of all DAOs)
-│   │   │    └── impl 
-│   │   │    │    ├── BlackListCityDAO.java (filtering cities)
-│   │   │    │    ├── CountryDAO.java
-│   │   │    │    ├── InvitationDAO.java
-│   │   │    │    └── ProviderDAO.java
-│   │   ├── Entitiy (contains all the objects for represents entities for the domain layer, these will perform the bussiness rules in the services or inside them )
-│   │   │    ├── commonn/event (all the common entities to represents an event and its characteristics)
-│   │   │    ├── geo.java (all the entities to manage external API calls)
-│   │   │    ├── Invitation.java 
-│   │   │    ├── location.java
-│   │   │    ├── place.java
-│   │   │    └── wedding.java (this type of event needs some particular neccesities to be represented, like the configuration of the place the and table distribution)
-│   │   ├── Exception (contains all the custom exception to be returned by the services, it will return an exception, a customized code and http verb code)
-│   │   │    ├── Customize (all the exceptions customized)
-│   │   │    ├── HttpEventException.java (extends from RuntimeException)
-│   │   │    ├── HttpEventExceptionCode.java (customize codes to return) 
-│   │   │    └── HttpEventExceptionHttpStatus.java (codes for the http verbs)
-│   │   ├── External (Services to manage the external calls to Geonames api and googleplaces api)
-│   │   │    ├── ApiGeo 
-│   │   │    │    ├── services (contains all the services which use an instance of RestTemplate) 
-│   │   │    │    └── transformers (contains transform the response from geonames api to entities objects) 
-│   │   │    ├── apiPlaces
-│   │   │    │    ├── entities 
-│   │   │    │    ├── process 
-│   │   │    │    │    └── FullProvidersServiceData.java (import class to manage the quota, resilient4j, and chuunks of the response and call the ApiPlacesServicies)
-│   │   │    │    ├── services 
-│   │   │    │    │    └── ApiPlacesServicies.java (uses the Resttemplate to hit the api)
-│   │   │    │    └── transformers  (transformers to switch the response from google places api to entities objects) 
-│   │   ├── Service (Services to manage the bussiness logic which will be called by the controllers, and will the call the repositories)
-│   │   │    ├── filters (all the filters for queries to the DB)
-│   │   │    │    └── CriteriaFilterProvider.java (father class of all criterias)
-│   │   │    ├── Helper (helper to serialize/deserialize DAOs and define the contract that I need from moprhia avoiding unneccesary methods)
-│   │   │    │    └── CRUDHelper.java (generic implementation for talk to the genericDAO and the repositories) 
-│   │   │    ├── impl (contains all implemented services to call the respoitories using generics and using the CRUDHelper)
-│   │   ├── Transformer (all the classes to transform the DAO to entities and viceversa)
-│   │   │    ├── Transformer.class (abtract generic class to define the behaviour of the transformations)
-│   │   │    ├── TransformerList.class (abtract generic class to define the behaviour of the transformation lists)
-│   │   │    └── impl (contain all the implemented child classes of the transformers using the classes above)
-│   ├── Resources (Contains all the environment configuration)
-│   │   ├── domain
-│   │   │    ├── domain.context.xml  (scanner configuration to load all the classes in the configurations folder )
-│   │   │    └── email.context.xml (scanner configuration for email functionality)
-│   │   ├── mongodb (env variables for differents environments)
-│   │   │    ├── scripts (scripts of creation for testing DB with fake documents)
-│   │   │    ├── dataSource-dev.properties
-│   │   │    └──  dataSource-prod.properties
-│   │   ├── mongolab (scripts of creation for testing DB with fake documents)
-│   │   └──  test (the configurations file for the integration tests)
-│   ├── Tests (Junit tests)
-│   │   ├── external (contains all the tests for external servcies)
-│   │   ├── service (contains all the tests for services)
-│   │   └── Transformer (contains all the tests for transformers)
+│   ├── Main (Contains all the controllers and webapp to deploy)
+│   │   ├── java (contains controllers and all the classes around)
+|   │   │    ├── controller (contains all the controllers which will call the services at the domain module)
+|   │   │    ├── error 
+│   │   │    │    └── AnnotatedExceptionResolver (intercept the response in order to manage the exceptions)
+|   │   │    ├── request (Contains DTOs for the requests of the controllers) 
+|   │   │    ├── response  (Contains DTOs for the response of the controllers) 
+|   │   │    └── utils
+│   │   │    |   └──SerializableResourceBundleMessageSource.java (important for the message serialization of the servlet configuration)
+│   │   ├── resources (manage the locale for the website)
+|   │   │    ├── application.context.xml  (link to the IOC of the domain)
+|   │   │    ├── log4j.properties
+|   │   │    └── messages (files .properties for locales for different languages)
+│   │   ├── webapp (Contains the folder to deploy and the frontend in angularjs)
+|   │   │    ├── bower.json  
+|   │   │    ├── css 
+|   │   │    ├── img
+|   │   │    ├── JS 
+│   │   │    │    ├── contexts (contains all the contexts for angular)
+│   │   │    │    ├── controllers  (contians all the angular controllers)
+│   │   │    │    ├── directives.js
+│   │   │    │    ├── filters.js
+│   │   │    │    ├── routes.js
+│   │   │    │    └── services.js
+|   │   │    ├── partials (contains all the htmls views)
+|   │   │    └── test (contains junit test on the angular controllers)
+│   ├── Tests (e2e tests)
+│   │   └── UserControllerTest.java (e2e test of usercontroller)
 └──
 ```
 
