@@ -23,7 +23,7 @@
 		<servlet.version>3.1.0</servlet.version>
 		<slf4j.version>1.7.5</slf4j.version>
 		<codehaus.version>1.7.5</codehaus.version>
-		<fasterxml.version>2.4.1</fasterxml.version>
+		<fasterxml.version>2.12.1</fasterxml.version>
 		<commonLang.version>3.1</commonLang.version>
 		<commonConfig.version>1.6</commonConfig.version>
 		<jodaTime.version>2.4</jodaTime.version>
