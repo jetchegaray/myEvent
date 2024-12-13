@@ -15,7 +15,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring.version>3.2.3.RELEASE</spring.version>
+		<spring.version>5.2.22.RELEASE</spring.version>
 		<guava.version>14.0.1</guava.version>
 		<junit.version>4.13.1</junit.version>
 		<morphia.version>1.2.2</morphia.version>
